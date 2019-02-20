@@ -1,8 +1,8 @@
 ;(function ($) {
   var api = {
-    baseURL: '//quq.cat',
-    get: '/api/like?action=get',
-    add: '/api/like?action=add',
+    baseURL: '//api.kitekii.pw',
+    get: '/like?action=get',
+    add: '/like?action=add',
   }
 
   $.getJSON(api.baseURL + api.get, function (data) {

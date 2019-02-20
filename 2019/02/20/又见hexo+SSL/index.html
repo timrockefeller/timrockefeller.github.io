@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="外野">
 <meta property="og:description" content="前文将hexo部署在了vps上，使用nodejs执行$ hexo s以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。 既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。 Hexo 本地部署在_config.yml中设置好depl">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-20T15:10:11.821Z">
+<meta property="og:updated_time" content="2019-02-20T15:27:35.388Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="又见hexo+SSL">
 <meta name="twitter:description" content="前文将hexo部署在了vps上，使用nodejs执行$ hexo s以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。 既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。 Hexo 本地部署在_config.yml中设置好depl">
@@ -119,7 +119,7 @@
       
       <div id="search-form-wrap">
 
-  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Buscar"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://kitekii.pw"></form>
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://kitekii.pw"></form>
 
 </div>
 
@@ -139,7 +139,7 @@
         
         <td>
           
-  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Buscar"><input type="hidden" name="sitesearch" value="http://kitekii.pw"></form> -->
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://kitekii.pw"></form> -->
 
 
         </td>
@@ -160,16 +160,16 @@
       <h3 id="title">Technic Artist</h3>
       <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
       <span id="bio">Brain power up!!!</span>
-      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">SEGUIR</a>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
         19
-        <span>Entradas</span>
+        <span>posts</span>
       </div>
       <div class="article-info-block">
         10
-        <span>Etiquetas</span>
+        <span>tags</span>
       </div>
     </div>
       
@@ -221,7 +221,7 @@
       
       <section id="main"><article id="post-又见hexo+SSL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
+    <!-- 
       <div class="background"></div>
       <script>
         ;!(function($) {
@@ -230,7 +230,7 @@
           $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
         })(jQuery)
       </script>
-    
+     -->
     
     
       <header class="article-header">
@@ -291,6 +291,9 @@
 <p>暂用Let’s Encrypt（逃），概不细述~~</p>
 <p>添加对<code>listen 443 ssl http2;</code>的监听即可。</p>
 </li>
+<li><p>api允许跨域</p>
+<p>在nginx配置的location项中添加<code>add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;</code>即可实现。</p>
+</li>
 </ol>
 <h3 id="手贱"><a href="#手贱" class="headerlink" title="手贱"></a>手贱</h3><p>千万不要把443绑到其他地方去了！！当初就不该跟着教程走，无意间将443绑给了科学上网服务……虽然当时确实能躲避某种操作，可现在看来已无卵用orz。</p>
 
@@ -304,7 +307,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/02/20/又见hexo+SSL/" data-id="cjsdc3v58000dhwhyxkrp8ym4" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+  <a data-url="http://kitekii.pw/2019/02/20/又见hexo+SSL/" data-id="cjsdcwyny000c58hyh8d7kan3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -383,7 +386,7 @@
   
   
     <a href="/2018/12/22/Rust Windows环境搭建/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Más viejo</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Rust Windows环境搭建</div>
     </a>
   
@@ -408,7 +411,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recientes</h3>
+    <h3 class="widget-title">recent</h3>
     <div class="widget">
       <ul id="recent-post" class>
         
@@ -518,7 +521,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archivos</h3>
+    <h3 class="widget-title">archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
@@ -528,7 +531,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Etiquetas</h3>
+    <h3 class="widget-title">tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding-nodejs/">coding nodejs</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding-wacom/">coding wacom</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a><span class="tag-list-count">2</span></li></ul>
     </div>
@@ -538,7 +541,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nube de etiquetas</h3>
+    <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/coding-nodejs/" style="font-size: 10px;">coding nodejs</a> <a href="/tags/coding-wacom/" style="font-size: 10px;">coding wacom</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
     </div>
@@ -548,7 +551,7 @@
   
     
   <div class="widget-wrap widget-list">
-    <h3 class="widget-title">Links</h3>
+    <h3 class="widget-title">links</h3>
     <div class="widget">
       <ul>
         

@@ -131,6 +131,10 @@ a {
 a:visited {
   color: #38b7ea;
 }
+*::selection {
+  background-color: #db7093;
+  color: #fff;
+}
 code {
   margin: 0 2px;
   color: #e96900;

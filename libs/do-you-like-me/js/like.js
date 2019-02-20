@@ -1,6 +1,6 @@
 ;(function ($) {
   var api = {
-    baseURL: '//api.kitekii.pw',
+    baseURL: 'http://api.kitekii.pw',
     get: '/like?action=get',
     add: '/like?action=add',
   }

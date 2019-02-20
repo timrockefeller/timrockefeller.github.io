@@ -3,73 +3,216 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-
-  
-  <title>外野</title>
+  <title>外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="外野">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://kitekii.pw/index.html">
 <meta property="og:site_name" content="外野">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="外野">
   
-    <link rel="alternate" href="/atom.xml" title="外野" type="application/atom+xml">
   
   
-    <link rel="icon" href="/favicon.png">
+
   
+    <link rel="icon" href="https://miao.su/images/2019/02/20/favicon590a2.png">
+    <link rel="apple-touch-icon" href="https://miao.su/images/2019/02/20/favicon590a2.png">
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css">
+  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//cdn.bootcss.com/csshake/1.5.2/csshake.min.css">
+  <link rel="stylesheet" href="/libs/open-sans/styles.css">
+
   <link rel="stylesheet" href="/css/style.css">
+
+  <script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+  <script src="//cdn.bootcss.com/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/lightgallery/1.6.0/css/lightgallery.min.css">
+  
+  
+    <link rel="stylesheet" href="//cdn.bootcss.com/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+  
+  
+  
+  
+  
+  
+
+
 </head>
 </html>
 <body>
   <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">外野</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        <i class="logo"></i>
+        <span class="site-title">外野</span>
+      </a>
       <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
         
-          <a class="main-nav-link" href="/">Home</a>
+          <a class="main-nav-link" href="/.">首页</a>
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">分类</a>
+        
+          <a class="main-nav-link" href="/tags">标签</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
         
       </nav>
-      <nav id="sub-nav">
+      
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="https://miao.su/images/2019/02/20/banch502x502bc560.jpg">
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
       <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Rechercher"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://kitekii.pw"></form>
+
+</div>
+
     </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/.">首页</a></td>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">分类</a></td>
+        
+          <td><a class="main-nav-link" href="/tags">标签</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Rechercher"><input type="hidden" name="sitesearch" value="http://kitekii.pw"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
   </div>
 </header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-Rust Windows环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/12/22/Rust Windows环境搭建/" class="article-date">
-  <time datetime="2018-12-22T02:22:11.000Z" itemprop="datePublished">2018-12-22</time>
-</a>
-    
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="https://miao.su/images/2019/02/20/banch502x502bc560.jpg">
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Beijing, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">SUIVRE</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        16
+        <span>Articles</span>
+      </div>
+      <div class="article-info-block">
+        8
+        <span>Tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://github.com/timrockefeller" target="_blank" title="github" class="tooltip">
+                <i class="fa fa-github"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://twitter.com/timrockefeller" target="_blank" title="twitter" class="tooltip">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class="tooltip">
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://wpa.qq.com/msgrd?V=3&Uin=489343302" target="_blank" title="qq" class="tooltip">
+                <i class="fa fa-qq"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
   </div>
+  
+  
+</aside>
+
+      
+      <section id="main">
+  <article id="post-Rust Windows环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -80,11 +223,37 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/12/22/Rust Windows环境搭建/">
+      <time datetime="2018-12-22T02:22:11.000Z" itemprop="datePublished">2018-12-22</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/coding/">coding</a>
+  </div>
+
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
+    
       
-        <p>该文章主要讲述在windows10+vscode下如何构建一个完整的rust编译调试环境，以及过程中可能出现的问题。</p>
+      <p>该文章主要讲述在windows10+vscode下如何构建一个完整的rust编译调试环境，以及过程中可能出现的问题。</p>
 <h2 id="Rust构造"><a href="#Rust构造" class="headerlink" title="Rust构造"></a>Rust构造</h2><p>rust 官方提供了一系列版本、包安装管理工具，如rustup和cargo。</p>
 <h2 id="基本组件"><a href="#基本组件" class="headerlink" title="基本组件"></a>基本组件</h2><h3 id="rustup"><a href="#rustup" class="headerlink" title="rustup"></a>rustup</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>从<a href="https://rustup.rs/" target="_blank" rel="noopener">rustup.rs</a>官网下载<em>rustup-init.exe</em>（其他平台同理），这个软件是一个初始配置包，会帮助你下载选择版本的rustup和cargo。</p>
 <p>打开软件后会显示如下信息：</p>
@@ -174,13 +343,86 @@
 <figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">    <span class="attr">"configurations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"Debug"</span>,</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"gdb"</span>,</span><br><span class="line">            <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">            <span class="attr">"preLaunchTask"</span>: <span class="string">"cargo build"</span>,</span><br><span class="line">            <span class="attr">"target"</span>: <span class="string">"$&#123;workspaceRoot&#125;\\target\\debug\\optimvsc.exe"</span>,</span><br><span class="line">            <span class="attr">"gdbpath"</span>: <span class="string">"D:\\env\\gdb-tdm64\\bin\\gdb.exe"</span>,</span><br><span class="line">            <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceRoot&#125;"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>快快创建断点测试一下吧！</p>
 
-      
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/22/Rust Windows环境搭建/" data-id="cjscxvno4000s58hywi4yuunv" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/12/22/Rust Windows环境搭建/" data-id="cjscybru3000szohyxh2vzrwj" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li></ul>
+  
+
 
     </footer>
   </div>
@@ -188,15 +430,11 @@
 </article>
 
 
-  
-    <article id="post-Permission denied when git push" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/12/15/Permission denied when git push/" class="article-date">
-  <time datetime="2018-12-15T14:53:00.000Z" itemprop="datePublished">2018-12-15</time>
-</a>
-    
-  </div>
+
+
+  <article id="post-Permission denied when git push" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -207,11 +445,37 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/12/15/Permission denied when git push/">
+      <time datetime="2018-12-15T14:53:00.000Z" itemprop="datePublished">2018-12-15</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/coding/">coding</a>
+  </div>
+
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
+    
       
-        <p>在很长一段时间没有使用git push 后，你的sshkey可能会过期：</p>
+      <p>在很长一段时间没有使用git push 后，你的sshkey可能会过期：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Permission denied(publickey).</span><br><span class="line">fatal: Could not read from remote repository</span><br><span class="line">Please make sure you have the correct access rights and the repository exists.</span><br></pre></td></tr></table></figure>
 <p>解决方案：</p>
 <ol>
@@ -226,13 +490,86 @@
 <p>Hi —! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
 </blockquote>
 
-      
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/15/Permission denied when git push/" data-id="cjscxvnnn000558hyw02jhwxx" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjscybrsp0004zohyr4ymr1hn" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li></ul>
+  
+
 
     </footer>
   </div>
@@ -240,15 +577,11 @@
 </article>
 
 
-  
-    <article id="post-Keras-Intro" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/21/Keras-Intro/" class="article-date">
-  <time datetime="2018-10-21T14:06:16.000Z" itemprop="datePublished">2018-10-21</time>
-</a>
-    
-  </div>
+
+
+  <article id="post-Keras-Intro" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -259,11 +592,32 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/10/21/Keras-Intro/">
+      <time datetime="2018-10-21T14:06:16.000Z" itemprop="datePublished">2018-10-21</time>
+    </a>
+  </div>
+
+
+            
+
+            
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
+    
       
-        <h2 id="Sequential-Module模型"><a href="#Sequential-Module模型" class="headerlink" title="Sequential-Module模型"></a>Sequential-Module模型</h2><h3 id="常用层"><a href="#常用层" class="headerlink" title="常用层"></a>常用层</h3><h4 id="Dense全连接"><a href="#Dense全连接" class="headerlink" title="Dense全连接"></a>Dense全连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">keras.layers.core.Dense(units,</span><br><span class="line">						activation = <span class="keyword">None</span>,</span><br><span class="line">						use_bias = <span class="keyword">True</span>,</span><br><span class="line">						kernel_initializer = <span class="string">'glorot_uniform'</span>, </span><br><span class="line">						bias_initializer = <span class="string">'zeros'</span>,</span><br><span class="line">						kernel_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						bias_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						activity_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						kernel_constraint = <span class="keyword">None</span>,</span><br><span class="line">						bias_constraint = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+      <h2 id="Sequential-Module模型"><a href="#Sequential-Module模型" class="headerlink" title="Sequential-Module模型"></a>Sequential-Module模型</h2><h3 id="常用层"><a href="#常用层" class="headerlink" title="常用层"></a>常用层</h3><h4 id="Dense全连接"><a href="#Dense全连接" class="headerlink" title="Dense全连接"></a>Dense全连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">keras.layers.core.Dense(units,</span><br><span class="line">						activation = <span class="keyword">None</span>,</span><br><span class="line">						use_bias = <span class="keyword">True</span>,</span><br><span class="line">						kernel_initializer = <span class="string">'glorot_uniform'</span>, </span><br><span class="line">						bias_initializer = <span class="string">'zeros'</span>,</span><br><span class="line">						kernel_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						bias_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						activity_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						kernel_constraint = <span class="keyword">None</span>,</span><br><span class="line">						bias_constraint = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
 <p>Dense就是常用的全连接层，所实现的运算是<code>output = activation(dot(input, kernel)+bias)</code>。其中<code>activation</code>是逐元素计算的激活函数，<code>kernel</code>是本层的权值矩阵，<code>bias</code>为偏置向量，只有当<code>use_bias=True</code>才会添加。<br>参数说明</p>
 <ul>
 <li>units：大于0的整数，代表该层的输出<strong>维度</strong>。</li>
@@ -278,27 +632,98 @@
 <li>bias_constraints：施加在偏置上的约束项，为Constraints对象</li>
 </ul>
 
-      
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/21/Keras-Intro/" data-id="cjscxvnnj000358hym15nh3hl" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/10/21/Keras-Intro/" data-id="cjscybrsc0000zohy4n0dysid" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
+  
+
+
     </footer>
   </div>
   
 </article>
 
 
-  
-    <article id="post-SKLearn玄学操作" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/20/SKLearn玄学操作/" class="article-date">
-  <time datetime="2018-10-20T08:54:00.000Z" itemprop="datePublished">2018-10-20</time>
-</a>
-    
-  </div>
+
+
+  <article id="post-SKLearn玄学操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -309,11 +734,37 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/10/20/SKLearn玄学操作/">
+      <time datetime="2018-10-20T08:54:00.000Z" itemprop="datePublished">2018-10-20</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/coding/">coding</a>, <a class="tag-link" href="/tags/machine-learning/">machine learning</a>
+  </div>
+
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
+    
       
-        <h3 id="分离数据集"><a href="#分离数据集" class="headerlink" title="分离数据集"></a>分离数据集</h3><p><a href="https://blog.csdn.net/kyriehe/article/details/77507473" target="_blank" rel="noopener"><strong>train_test_split</strong></a>是交叉验证中常用的函数，功能是从样本中随机的按比例选取train data和test data，形式为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train,X_test, y_train, y_test = cross_validation.train_test_split(train_data, train_target, test_size=<span class="number">0.4</span>, random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+      <h3 id="分离数据集"><a href="#分离数据集" class="headerlink" title="分离数据集"></a>分离数据集</h3><p><a href="https://blog.csdn.net/kyriehe/article/details/77507473" target="_blank" rel="noopener"><strong>train_test_split</strong></a>是交叉验证中常用的函数，功能是从样本中随机的按比例选取train data和test data，形式为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train,X_test, y_train, y_test = cross_validation.train_test_split(train_data, train_target, test_size=<span class="number">0.4</span>, random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>train_data：所要划分的样本特征集 </li>
 <li>train_target：所要划分的样本结果 </li>
@@ -324,13 +775,86 @@
 <p><a href="https://blog.csdn.net/tengyuan93/article/details/78930285" target="_blank" rel="noopener">OneHot编码知识点</a></p>
 <p><a href="https://blog.csdn.net/o4dc8ojo7zl6/article/details/78431750" target="_blank" rel="noopener">机器学习零基础？手把手教你用TensorFlow搭建图像分类器</a></p>
 
-      
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/20/SKLearn玄学操作/" data-id="cjscxvnno000758hytrx5lknl" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/10/20/SKLearn玄学操作/" data-id="cjscybrsq0005zohy76dey12u" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/machine-learning/">machine learning</a></li></ul>
+  
+
 
     </footer>
   </div>
@@ -338,15 +862,11 @@
 </article>
 
 
-  
-    <article id="post-OpenCV-Intro-基本图像操作" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/20/OpenCV-Intro-基本图像操作/" class="article-date">
-  <time datetime="2018-10-20T03:37:00.000Z" itemprop="datePublished">2018-10-20</time>
-</a>
-    
-  </div>
+
+
+  <article id="post-OpenCV-Intro-基本图像操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -357,11 +877,36 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">
+      <time datetime="2018-10-20T03:37:00.000Z" itemprop="datePublished">2018-10-20</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/coding/">coding</a>, <a class="tag-link" href="/tags/opencv/">opencv </a>
+  </div>
+
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
-      
-        <p>Open Computer Vision 万物起源。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># OpenCV本体</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 数学库</span></span><br></pre></td></tr></table></figure></p>
+    
+      <p></p><p>Open Computer Vision 万物起源。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># OpenCV本体</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 数学库</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="图像基本操作"><a href="#图像基本操作" class="headerlink" title="图像基本操作"></a>图像基本操作</h2><h3 id="读取、显示、保存"><a href="#读取、显示、保存" class="headerlink" title="读取、显示、保存"></a>读取、显示、保存</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IMG_PATH = <span class="string">"/path/to/img"</span></span><br><span class="line"><span class="comment"># 此处图片链接可能不支持中文</span></span><br><span class="line">img = cv2.imread(IMG_PATH,cv2.IMREAD_COLOR)</span><br></pre></td></tr></table></figure>
 <p>opencv支持以下三种读入方式：</p>
 <ul>
@@ -369,19 +914,90 @@
 <li>cv2.IMREAD_<strong>GRATSCALE</strong>: 灰度</li>
 <li>cv2.IMREAD_<strong>UNCHANGED</strong>: 包括<strong>(R,G,B,A)</strong>通道</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">"WindowName"</span>,img)</span><br><span class="line"><span class="comment"># 创建一个名字为WindowName的窗口，把之前imread读入的照片以yuanchicun显示在窗口上。</span></span><br><span class="line">cv2.waitKey()</span><br><span class="line"><span class="comment"># Press Any Key To Continue...</span></span><br><span class="line">cv2.imwrite(<span class="string">"/Path/to/CopiedPic"</span>,img)</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/#more">Read More</a>
-          </p>
-        
-      
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">"WindowName"</span>,img)</span><br><span class="line"><span class="comment"># 创建一个名字为WindowName的窗口，把之前imread读入的照片以yuanchicun显示在窗口上。</span></span><br><span class="line">cv2.waitKey()</span><br><span class="line"><span class="comment"># Press Any Key To Continue...</span></span><br><span class="line">cv2.imwrite(<span class="string">"/Path/to/CopiedPic"</span>,img)</span><br></pre></td></tr></table></figure><p></p>
+      <p class="article-more-link">
+        <a href="/2018/10/20/OpenCV-Intro-基本图像操作/#more">Read More</a>
+      </p>
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/20/OpenCV-Intro-基本图像操作/" data-id="cjscxvnn8000058hygyzwr95r" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/10/20/OpenCV-Intro-基本图像操作/" data-id="cjscybrsl0002zohywfm9lhnu" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv </a></li></ul>
+  
+
 
     </footer>
   </div>
@@ -389,15 +1005,11 @@
 </article>
 
 
-  
-    <article id="post-Test-post-from-hexo-admin-ehc" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/10/16/Test-post-from-hexo-admin-ehc/" class="article-date">
-  <time datetime="2018-10-16T06:29:00.000Z" itemprop="datePublished">2018-10-16</time>
-</a>
-    
-  </div>
+
+
+  <article id="post-Test-post-from-hexo-admin-ehc" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -408,11 +1020,32 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/10/16/Test-post-from-hexo-admin-ehc/">
+      <time datetime="2018-10-16T06:29:00.000Z" itemprop="datePublished">2018-10-16</time>
+    </a>
+  </div>
+
+
+            
+
+            
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
+    
       
-        <p>施工中……</p>
+      <p>施工中……</p>
 <h2 id="音符同步"><a href="#音符同步" class="headerlink" title="音符同步"></a>音符同步</h2><p><a href="http://gad.qq.com/article/detail/34880" target="_blank" rel="noopener">senator</a></p>
 <p>你需要<code>[RequireComponent(typeof(AudioSource))]</code>来规定该元件可被作为音游元件。</p>
 <ol>
@@ -457,27 +1090,98 @@
 <p>每个音符到达<strong>dspTime - CHECK_MISS</strong>时触发miss判定<br>南梦宫所提出的判定方案是</p>
 <h2 id="视觉反馈"><a href="#视觉反馈" class="headerlink" title="视觉反馈"></a>视觉反馈</h2><h2 id="额外音效"><a href="#额外音效" class="headerlink" title="额外音效"></a>额外音效</h2><p>processing</p>
 
-      
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/10/16/Test-post-from-hexo-admin-ehc/" data-id="cjscxvnnl000458hy6nvhfxc7" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/10/16/Test-post-from-hexo-admin-ehc/" data-id="cjscybrsr0006zohyssdxjowi" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
+  
+
+
     </footer>
   </div>
   
 </article>
 
 
-  
-    <article id="post-JavaS/TicTacToe" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/22/JavaS/TicTacToe/" class="article-date">
-  <time datetime="2018-05-22T14:39:00.000Z" itemprop="datePublished">2018-05-22</time>
-</a>
-    
-  </div>
+
+
+  <article id="post-JavaS/TicTacToe" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -488,24 +1192,120 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/05/22/JavaS/TicTacToe/">
+      <time datetime="2018-05-22T14:39:00.000Z" itemprop="datePublished">2018-05-22</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/coding/">coding</a>, <a class="tag-link" href="/tags/java/">java</a>
+  </div>
+
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
-      
-        <p>为了巩固类、数组等知识，下来一个Assignment，定睛一看，居然是个四子棋！没想到人在江湖，也会遇上如此困难之题，随缘写个备注以防自己忘记。</p>
-<p>完整代码已上传至 <a href="https://github.com/timrockefeller/ExplotionEuler/blob/master/src/TicTacToe.java" target="_blank" rel="noopener">timrockefeller/ExplotionEuler</a>。</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/05/22/JavaS/TicTacToe/#more">Read More</a>
-          </p>
-        
-      
+    
+      <p></p><p>为了巩固类、数组等知识，下来一个Assignment，定睛一看，居然是个四子棋！没想到人在江湖，也会遇上如此困难之题，随缘写个备注以防自己忘记。</p>
+<p>完整代码已上传至 <a href="https://github.com/timrockefeller/ExplotionEuler/blob/master/src/TicTacToe.java" target="_blank" rel="noopener">timrockefeller/ExplotionEuler</a>。</p><p></p>
+      <p class="article-more-link">
+        <a href="/2018/05/22/JavaS/TicTacToe/#more">Read More</a>
+      </p>
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/22/JavaS/TicTacToe/" data-id="cjscxvnos001f58hylfdil23p" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/05/22/JavaS/TicTacToe/" data-id="cjscybrvu001gzohy663w84ji" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+  
+
 
     </footer>
   </div>
@@ -513,15 +1313,11 @@
 </article>
 
 
-  
-    <article id="post-JavaS/ゼロから始めるJAVA世界生活-03" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" class="article-date">
-  <time datetime="2018-05-13T06:30:00.000Z" itemprop="datePublished">2018-05-13</time>
-</a>
-    
-  </div>
+
+
+  <article id="post-JavaS/ゼロから始めるJAVA世界生活-03" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -532,23 +1328,119 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/">
+      <time datetime="2018-05-13T06:30:00.000Z" itemprop="datePublished">2018-05-13</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/coding/">coding</a>, <a class="tag-link" href="/tags/java/">java</a>, <a class="tag-link" href="/tags/oracle/">oracle</a>
+  </div>
+
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于数组、函数的碎片知识。<br>
-        
-          </p><p class="article-more-link">
-            <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/#more">Read More</a>
-          </p>
-        
-      
+    
+      <p></p><p>关于数组、函数的碎片知识。<br></p>
+      <p class="article-more-link">
+        <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/#more">Read More</a>
+      </p>
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjscxvnok000x58hy7gxq7q8q" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjscybrv5000xzohyp9hd31q5" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oracle/">oracle</a></li></ul>
+  
+
 
     </footer>
   </div>
@@ -556,15 +1448,11 @@
 </article>
 
 
-  
-    <article id="post-JavaS/ゼロから始めるJAVA世界生活-02" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" class="article-date">
-  <time datetime="2018-04-28T13:00:28.000Z" itemprop="datePublished">2018-04-28</time>
-</a>
-    
-  </div>
+
+
+  <article id="post-JavaS/ゼロから始めるJAVA世界生活-02" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -575,25 +1463,121 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/">
+      <time datetime="2018-04-28T13:00:28.000Z" itemprop="datePublished">2018-04-28</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/coding/">coding</a>, <a class="tag-link" href="/tags/java/">java</a>, <a class="tag-link" href="/tags/oracle/">oracle</a>
+  </div>
+
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
-      
-        <hr>
-<p>很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。</p>
-<h2 id="判别结构"><a href="#判别结构" class="headerlink" title="判别结构"></a>判别结构</h2><h3 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式为true将执行的语句</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(布尔表达式 <span class="number">1</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 1的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">2</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 2的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">3</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 3的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment">//如果以上布尔表达式都不为true执行代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-        
-          <p class="article-more-link">
-            <a href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/#more">Read More</a>
-          </p>
-        
-      
+    
+      <p><hr>
+</p><p>很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。</p>
+<h2 id="判别结构"><a href="#判别结构" class="headerlink" title="判别结构"></a>判别结构</h2><h3 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式为true将执行的语句</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(布尔表达式 <span class="number">1</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 1的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">2</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 2的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">3</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 3的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment">//如果以上布尔表达式都不为true执行代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p></p>
+      <p class="article-more-link">
+        <a href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/#more">Read More</a>
+      </p>
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="cjscxvnol001058hyogevy2yp" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="cjscybrv3000uzohyyg3cp48d" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oracle/">oracle</a></li></ul>
+  
+
 
     </footer>
   </div>
@@ -601,15 +1585,11 @@
 </article>
 
 
-  
-    <article id="post-艺类笔记/机械卷轴：概念设计中的心理暗示" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" class="article-date">
-  <time datetime="2018-04-22T14:50:00.000Z" itemprop="datePublished">2018-04-22</time>
-</a>
-    
-  </div>
+
+
+  <article id="post-艺类笔记/机械卷轴：概念设计中的心理暗示" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
+    
     
     
       <header class="article-header">
@@ -620,28 +1600,124 @@
     </h1>
   
 
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/">
+      <time datetime="2018-04-22T14:50:00.000Z" itemprop="datePublished">2018-04-22</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/illustrate/">illustrate</a>, <a class="tag-link" href="/tags/艺类/">艺类</a>
+  </div>
+
+
+          </div>
+        
       </header>
     
+    
+
     <div class="article-entry" itemprop="articleBody">
-      
-        <p>谈科幻设计</p>
+    
+      <p></p><p>谈科幻设计</p>
 <h2 id="符号化设计"><a href="#符号化设计" class="headerlink" title="符号化设计"></a>符号化设计</h2><p>脑洞 + 凭感觉   （头脑风暴）</p>
 <blockquote>
 <p>一款急速的飞行器，你会如何画？</p>
 </blockquote>
-<p>符号对不同设计倾向的引导。</p>
-        
-          <p class="article-more-link">
-            <a href="/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/#more">Read More</a>
-          </p>
-        
-      
+<p>符号对不同设计倾向的引导。</p><p></p>
+      <p class="article-more-link">
+        <a href="/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/#more">Read More</a>
+      </p>
+    
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" data-id="cjscxvnon001258hycgzto8d0" class="article-share-link">Share</a>
       
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" data-id="cjscybrv80011zohy46vccy3d" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
+  
+
 
     </footer>
   </div>
@@ -649,113 +1725,203 @@
 </article>
 
 
-  
 
 
   <nav id="page-nav">
-    
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Suiv &raquo;</a>
   </nav>
 
 </section>
+      
         
-          <aside id="sidebar">
-  
-    
-
+<aside id="sidebar">
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Récents</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
-    </div>
-  </div>
-
-
+      <ul id="recent-post" class>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2018/12/22/Rust Windows环境搭建/" class="thumbnail">
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
-    </div>
-  </div>
-
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
-    </div>
-  </div>
-
-
+    <span class="thumbnail-image thumbnail-none"></span>
   
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2018/12/22/Rust Windows环境搭建/" class="title">Rust Windows环境搭建</a></p>
+              <p class="item-date"><time datetime="2018-12-22T02:22:11.000Z" itemprop="datePublished">2018-12-22</time></p>
+            </div>
           </li>
         
           <li>
-            <a href="/2018/12/15/Permission denied when git push/">Permission denied when git push</a>
+            
+            <div class="item-thumbnail">
+              <a href="/2018/12/15/Permission denied when git push/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2018/12/15/Permission denied when git push/" class="title">Permission denied when git push</a></p>
+              <p class="item-date"><time datetime="2018-12-15T14:53:00.000Z" itemprop="datePublished">2018-12-15</time></p>
+            </div>
           </li>
         
           <li>
-            <a href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+            
+            <div class="item-thumbnail">
+              <a href="/2018/10/21/Keras-Intro/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2018/10/21/Keras-Intro/" class="title">Keras Intro : 基本模型保存</a></p>
+              <p class="item-date"><time datetime="2018-10-21T14:06:16.000Z" itemprop="datePublished">2018-10-21</time></p>
+            </div>
           </li>
         
           <li>
-            <a href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+            
+            <div class="item-thumbnail">
+              <a href="/2018/10/20/SKLearn玄学操作/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2018/10/20/SKLearn玄学操作/" class="title">SKLearn玄学操作</a></p>
+              <p class="item-date"><time datetime="2018-10-20T08:54:00.000Z" itemprop="datePublished">2018-10-20</time></p>
+            </div>
           </li>
         
           <li>
-            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
+            
+            <div class="item-thumbnail">
+              <a href="/2018/10/20/OpenCV-Intro-基本图像操作/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2018/10/20/OpenCV-Intro-基本图像操作/" class="title">OpenCV Intro : 基本图像操作</a></p>
+              <p class="item-date"><time datetime="2018-10-20T03:37:00.000Z" itemprop="datePublished">2018-10-20</time></p>
+            </div>
           </li>
         
       </ul>
     </div>
   </div>
 
+
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a><span class="tag-list-count">11</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de tags</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">Liens</h3>
+    <div class="widget">
+      <ul>
+        
+      </ul>
+    </div>
+  </div>
+
+
   
 </aside>
-        
-      </div>
-      <footer id="footer">
-  
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
   <div class="outer">
     <div id="footer-info" class="inner">
-      &copy; 2019 Kitekii<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      &copy; 2019 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="https://github.com/MoeFE/Hexo-Theme-MoeIcarus" target="_blank">MoeIcarus</a><br>
+      
     </div>
   </div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+  
+    <script src="//cdn.bootcss.com/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+  
+  
+    <script src="//cdn.bootcss.com/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+  
+  
+  
+  
+  
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
-
-<script src="/js/script.js"></script>
-
-
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
 
   </div>
 </body>

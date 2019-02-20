@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Rust Windows环境搭建 | 外野</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="该文章主要讲述在windows10+vscode下如何构建一个完整的rust编译调试环境，以及过程中可能出现的问题。 Rust构造rust 官方提供了一系列版本、包安装管理工具，如rustup和cargo。 基本组件rustup初始化从rustup.rs官网下载rustup-init.exe（其他平台同理），这个软件是一个初始配置包，会帮助你下载选择版本的rustup和cargo。 打开软件后会显">
+<meta name="keywords" content="coding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust Windows环境搭建">
+<meta property="og:url" content="http://yoursite.com/2018/12/22/Rust Windows环境搭建/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="该文章主要讲述在windows10+vscode下如何构建一个完整的rust编译调试环境，以及过程中可能出现的问题。 Rust构造rust 官方提供了一系列版本、包安装管理工具，如rustup和cargo。 基本组件rustup初始化从rustup.rs官网下载rustup-init.exe（其他平台同理），这个软件是一个初始配置包，会帮助你下载选择版本的rustup和cargo。 打开软件后会显">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="https://i.loli.net/2018/12/22/5c1dd8fc37d34.png">
+<meta property="og:image" content="https://i.loli.net/2018/12/22/5c1de12ec95aa.png">
+<meta property="og:updated_time" content="2018-12-22T07:02:28.280Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Rust Windows环境搭建">
+<meta name="twitter:description" content="该文章主要讲述在windows10+vscode下如何构建一个完整的rust编译调试环境，以及过程中可能出现的问题。 Rust构造rust 官方提供了一系列版本、包安装管理工具，如rustup和cargo。 基本组件rustup初始化从rustup.rs官网下载rustup-init.exe（其他平台同理），这个软件是一个初始配置包，会帮助你下载选择版本的rustup和cargo。 打开软件后会显">
+<meta name="twitter:image" content="https://i.loli.net/2018/12/22/5c1dd8fc37d34.png">
+  
+    <link rel="alternate" href="/atom.xml" title="外野" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">外野</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Rust Windows环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/22/Rust Windows环境搭建/" class="article-date">
+  <time datetime="2018-12-22T02:22:11.000Z" itemprop="datePublished">2018-12-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Rust Windows环境搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>该文章主要讲述在windows10+vscode下如何构建一个完整的rust编译调试环境，以及过程中可能出现的问题。</p>
+<h2 id="Rust构造"><a href="#Rust构造" class="headerlink" title="Rust构造"></a>Rust构造</h2><p>rust 官方提供了一系列版本、包安装管理工具，如rustup和cargo。</p>
+<h2 id="基本组件"><a href="#基本组件" class="headerlink" title="基本组件"></a>基本组件</h2><h3 id="rustup"><a href="#rustup" class="headerlink" title="rustup"></a>rustup</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>从<a href="https://rustup.rs/" target="_blank" rel="noopener">rustup.rs</a>官网下载<em>rustup-init.exe</em>（其他平台同理），这个软件是一个初始配置包，会帮助你下载选择版本的rustup和cargo。</p>
+<p>打开软件后会显示如下信息：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Rust!</span><br><span class="line"></span><br><span class="line">This will download and install the official compiler <span class="keyword">for</span> the Rust programming</span><br><span class="line">language, and its package manager, Cargo.</span><br><span class="line"></span><br><span class="line">It will add the cargo, rustc, rustup and other commands to Cargo<span class="string">'s bin</span></span><br><span class="line"><span class="string">directory, located at:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  ~\.cargo\bin</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">This path will then be added to your PATH environment variable by modifying the</span></span><br><span class="line"><span class="string">HKEY_CURRENT_USER/Environment/PATH registry key.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">You can uninstall at any time with rustup self uninstall and these changes will</span></span><br><span class="line"><span class="string">be reverted.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Current installation options:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   default host triple: x86_64-pc-windows-msvc</span></span><br><span class="line"><span class="string">     default toolchain: stable</span></span><br><span class="line"><span class="string">  modify PATH variable: yes</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">1) Proceed with installation (default)</span></span><br><span class="line"><span class="string">2) Customize installation</span></span><br><span class="line"><span class="string">3) Cancel installation</span></span><br><span class="line"><span class="string">&gt; _</span></span><br></pre></td></tr></table></figure>
+<p>默认安装于<strong>用户目录</strong>下。</p>
+<blockquote>
+<p>该软件默认检查环境变量<code>CARGO_HOME</code>、<code>RUSTUP_HOME</code>，分别为<code>.cargo</code>、<code>.rustup</code>设置目录，按需修改（需要注意的是后期包的累积可能会占用巨量的存储空间）。</p>
+</blockquote>
+<p>安装过程中请选择第二项 <strong>“Customize installation”</strong> ！注意到<code>default host triple</code>中设置的是<code>x86_64-pc-windows-msvc</code>，本文所使用的调试器是GDB，故需要修改为<code>x86_64-pc-windows-gnu</code>。<code>default toolchain</code>请选择<code>stable</code>，即稳定版。<code>nightly</code>为前瞻版，’beta’为测试版，实际使用时我们仍需使用到<code>nightly</code>版，后文会提到。</p>
+<p>下载完成后可在<code>path</code>中检查添加<code>.cargo/bin</code>以使用各种命令。</p>
+<p>输入<code>rustup --version</code>以检查是否安装成功。</p>
+<h4 id="setting-toml"><a href="#setting-toml" class="headerlink" title="setting.toml"></a>setting.toml</h4><blockquote>
+<p>TOML(Tom’s Obvious Minimal Language) 是一个想要打败yuml的标注语言，caogo项目也有使用。</p>
+</blockquote>
+<p>该文件位于<code>.rustup/</code>下。</p>
+<ul>
+<li><code>default_host_triple</code>: 第一次安装时设置，只能对该文件进行修改以改变默认值。</li>
+<li><code>default_toolchain</code> : 默认使用的toolchain，可由<code>rustup default &lt;toolchain name&gt;</code>进行修改。</li>
+</ul>
+<h4 id="rustup命令"><a href="#rustup命令" class="headerlink" title="rustup命令"></a>rustup命令</h4><p>以下列出rustup的部分命令：</p>
+<ul>
+<li><code>&gt; rsutup show</code> : 列出现在使用的和已安装的rust版本。</li>
+<li><code>&gt; rustup update</code> : 更新所有已安装版本，由于<code>nightly</code>偶尔会爆肝日更，所以谨慎更新。</li>
+<li><code>&gt; rustup default</code>: 设置将要使用的版本。</li>
+<li><code>&gt; rustup component &lt;sub&gt;</code> : 检查(list)、安装(add)、移除(remove)组建。</li>
+</ul>
+<h4 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h4><p>此处使用科大源为例，修改PATH如下：</p>
+<ul>
+<li><code>RUSTUP_DIST_SERVER</code> : <code>https://mirrors.ustc.edu.cn/rust-static</code></li>
+<li><code>RUSTUP_UPDATE_ROOT</code> : <code>https://mirrors.ustc.edu.cn/rust-static/rustup</code></li>
+</ul>
+<p>将同时加速cargo和rust，下载慢的可以体验一下w。</p>
+<h3 id="Cargo"><a href="#Cargo" class="headerlink" title="Cargo"></a>Cargo</h3><p>cargo既是一个类似于npm、pip的包管理软件，又是一个像marven一样的项目框架。一个<code>&gt; cargo help</code>可以让你懂得它有多nb。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">build       Compile the current package</span><br><span class="line">check       Analyze the current package and report errors, but don&apos;t build object files</span><br><span class="line">clean       Remove the target directory</span><br><span class="line">doc         Build this package&apos;s and its dependencies&apos; documentation</span><br><span class="line">new         Create a new cargo package</span><br><span class="line">init        Create a new cargo package in an existing directory</span><br><span class="line">run         Build and execute src/main.rs</span><br><span class="line">test        Run the tests</span><br><span class="line">bench       Run the benchmarks</span><br><span class="line">update      Update dependencies listed in Cargo.lock</span><br><span class="line">search      Search registry for crates</span><br><span class="line">publish     Package and upload this package to the registry</span><br><span class="line">install     Install a Rust binary. Default location is $HOME/.cargo/bin</span><br><span class="line">uninstall   Uninstall a Rust binary</span><br></pre></td></tr></table></figure>
+<p>更详细的介绍……<a href="http://wiki.jikexueyuan.com/project/rust-primer/cargo-projects-manager/cargo-projects-manager.html" target="_blank" rel="noopener">点❤我❤看❤文</a>。</p>
+<h2 id="集成于VS-Code"><a href="#集成于VS-Code" class="headerlink" title="集成于VS Code"></a>集成于VS Code</h2><p>再此之前，先设置一遍可能用到的环境变量。</p>
+<ul>
+<li><code>RUST</code> : 某toolchain的目录，如<code>%USER%\.rust\toolchains\stable-x86_64-pc-windows-gnu</code>。</li>
+<li><code>RUST_SRC_PATH</code> : 改版本rust的源码目录，如<code>%RUST%\lib\rustlib\src\rust\src</code>，若你的<code>rustlib</code>中没有<code>src</code>，请执行<code>&gt; rustup cpmponent add rust-src</code>。</li>
+<li><code>RUSTBINPATH</code> : <code>%CARGO_PATH%\bin</code>。</li>
+</ul>
+<p>好，打开VS Code!</p>
+<h3 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h3><p><img src="https://i.loli.net/2018/12/22/5c1dd8fc37d34.png" alt="sp181222_141230"></p>
+<p>商店搜索前两个就是几十万人下载的工具，两个都装上吧？前者是官方的包括rls在内的综合插件。后者虽然是第三方，但功能不比官方少。</p>
+<p>你需要在settings.json文件中选择性键入以下内容(为第三方插件配置而不是官方)：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">"rust.mode": "legacy",</span><br><span class="line">"rust.cargoHomePath": "%CARGO_HOME%",</span><br><span class="line">"rust.cargoPath":"%RUSTBINPATH%\\cargo.exe",</span><br><span class="line">"rust.racerPath":"%RUSTBINPATH%\\racer.exe",</span><br><span class="line">"rust.rls":"%RUSTBINPATH%\\rls.exe",</span><br><span class="line">"rust.rustfmtPath":"%RUSTBINPATH%\\rustfmt.exe",</span><br><span class="line">"rust.rustup":"%RUSTBINPATH%\\rustup.exe",</span><br><span class="line">"rust.rustLangSrcPath": "%RUST_SRC_PATH%",</span><br><span class="line">"rust.executeCargoCommandInTerminal": true,</span><br></pre></td></tr></table></figure>
+<p>很巧妙的是官方插件会为你提示是否提供权限安装nightly，请选择允许，并把你的default toolchain设置为<strong>nightly</strong>。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; rustup default nightly</span><br><span class="line">&gt; rustup update</span><br><span class="line">...</span><br><span class="line">&gt; rustup component add rust-analysis</span><br></pre></td></tr></table></figure>
+<p><strong>漫长</strong>的安装完成后，写一个小程序试一试。</p>
+<p><em>main.rs</em></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>()&#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"fa ♂"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，基本能实现实时提示错误、高亮、用户片段。</p>
+<h4 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h4><ol>
+<li><p>官方插件提示 RLS could not set RUST_SRC_PATH for Racer because it could not read the Rust sysroot.</p>
+<p>尝试使用以下方法：</p>
+<ul>
+<li>使用管理员模式启动Vs Code。</li>
+<li>确定各path位置正确。</li>
+<li>添加setting.json条目<code>&quot;rust-client.channel&quot;: &quot;stable&quot;,</code>或nightly。</li>
+<li>重新使用cargo建立一个项目</li>
+</ul>
+<p>错误原因如下</p>
+<p><a href="https://stackoverflow.com/questions/48978766/visual-studio-code-warning-rls-could-not-set-rust-src-path-for-racer-because-it" target="_blank" rel="noopener">stackoverflow</a>:</p>
+<blockquote>
+<p>该插件 readme文件列出了如下依赖:</p>
+<ul>
+<li>Rustup,</li>
+<li>一个toolchain (插件会在获得权限后自动安装),</li>
+<li>RLS, rust-src, rust-analysis组件.</li>
+</ul>
+</blockquote>
+</li>
+<li><p>待补充</p>
+</li>
+</ol>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>LLDB很棒，但是有请我们的TDM-GDB出场（打扰了）。</p>
+<p>从<a href="https://sourceforge.net/projects/tdm-gcc/files/GDB" target="_blank" rel="noopener">sourceforge</a>上下载后，解压得到bin、gdb64、share至某目录（我的是<code>D:\env</code>）。</p>
+<h5 id="配置rust-gdb"><a href="#配置rust-gdb" class="headerlink" title="配置rust-gdb"></a>配置rust-gdb</h5><p>之前下载的rust源码（<code>%rust%\lib\rustlib</code>）提供了一套gdb配置。</p>
+<p>修改<code>gdb64\bin</code>目录下的gdbinit文件，在末尾添加以下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"><span class="keyword">print</span> <span class="string">"-- loading rust pretty-printers --"</span></span><br><span class="line">sys.path.insert(<span class="number">0</span>,<span class="string">'%rust%/lib/rustlib/etc'</span>)</span><br><span class="line"><span class="keyword">import</span> gdb_rust_pretty_printing</span><br><span class="line">gdb_rust_pretty_printing.register_printer(gdb)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>执行（<code>&gt; bin\gdb.exe</code>），若能输出”– loading rust pretty-printers –“并没有报错，说明gdb工具配置成功。</p>
+<h5 id="配置Vs-Code"><a href="#配置Vs-Code" class="headerlink" title="配置Vs Code"></a>配置Vs Code</h5><p>安装Native Debug插件（<code>ext install debug</code>）。</p>
+<p>用Vs Code打开你的Cargo工程，添加调试配置GDB，将target指向生成的exe文件，将gdbpath设置为刚刚配置的gdb.exe。</p>
+<p>添加一个task，选择<code>cargo build</code>，设置为<code>preLaunchTask</code>。</p>
+<p><img src="https://i.loli.net/2018/12/22/5c1de12ec95aa.png" alt="task"></p>
+<p>这时你的launch.json大致如下</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">    <span class="attr">"configurations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"Debug"</span>,</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"gdb"</span>,</span><br><span class="line">            <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">            <span class="attr">"preLaunchTask"</span>: <span class="string">"cargo build"</span>,</span><br><span class="line">            <span class="attr">"target"</span>: <span class="string">"$&#123;workspaceRoot&#125;\\target\\debug\\optimvsc.exe"</span>,</span><br><span class="line">            <span class="attr">"gdbpath"</span>: <span class="string">"D:\\env\\gdb-tdm64\\bin\\gdb.exe"</span>,</span><br><span class="line">            <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceRoot&#125;"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>快快创建断点测试一下吧！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/22/Rust Windows环境搭建/" data-id="cjscxvno4000s58hywi4yuunv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/12/15/Permission denied when git push/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Permission denied when git push</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/15/Permission denied when git push/">Permission denied when git push</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Kitekii<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

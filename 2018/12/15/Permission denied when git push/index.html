@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>Permission denied when git push | 外野</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在很长一段时间没有使用git push 后，你的sshkey可能会过期： 123Permission denied(publickey).fatal: Could not read from remote repositoryPlease make sure you have the correct access rights and the repository exists. 解决方案：  1">
+<meta name="keywords" content="coding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Permission denied when git push">
+<meta property="og:url" content="http://yoursite.com/2018/12/15/Permission denied when git push/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="在很长一段时间没有使用git push 后，你的sshkey可能会过期： 123Permission denied(publickey).fatal: Could not read from remote repositoryPlease make sure you have the correct access rights and the repository exists. 解决方案：  1">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-15T14:56:00.267Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Permission denied when git push">
+<meta name="twitter:description" content="在很长一段时间没有使用git push 后，你的sshkey可能会过期： 123Permission denied(publickey).fatal: Could not read from remote repositoryPlease make sure you have the correct access rights and the repository exists. 解决方案：  1">
+  
+    <link rel="alternate" href="/atom.xml" title="外野" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">外野</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-Permission denied when git push" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/12/15/Permission denied when git push/" class="article-date">
+  <time datetime="2018-12-15T14:53:00.000Z" itemprop="datePublished">2018-12-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Permission denied when git push
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在很长一段时间没有使用git push 后，你的sshkey可能会过期：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Permission denied(publickey).</span><br><span class="line">fatal: Could not read from remote repository</span><br><span class="line">Please make sure you have the correct access rights and the repository exists.</span><br></pre></td></tr></table></figure>
+<p>解决方案：</p>
+<ol>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br><span class="line">ssh -v git@github.com</span><br><span class="line">ssh-agent  -s</span><br><span class="line"># eval `ssh-agent  -s`</span><br><span class="line">ssh-add ~/.ssh/id_rsa  </span><br><span class="line">cat  ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><em>注意，上述<a href="mailto:youremail@example.com" target="_blank" rel="noopener">youremail@example.com</a>是指github账户的注册邮箱</em></p>
+<p>上述命令执行后id_rsa.pub文件内容将输出到终端，复制里面的密钥（内容一般是以ssh-rsa 开头，以github账号的注册邮箱结尾的，全部复制下来）至github设置中的ssh-keys。</p>
+<p>最后运行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Hi —! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/12/15/Permission denied when git push/" data-id="cjscxvnnn000558hyw02jhwxx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/12/22/Rust Windows环境搭建/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Rust Windows环境搭建
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/21/Keras-Intro/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Keras Intro : 基本模型保存</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/15/Permission denied when git push/">Permission denied when git push</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Kitekii<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

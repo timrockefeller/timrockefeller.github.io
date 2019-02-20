@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ゼロから始めるJAVA世界生活 02 | 外野</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。 判别结构if-else12345678910111213if(布尔表达式)&amp;#123;   //如果布尔表达式为true将执行的语句&amp;#125;if(布尔表达式 1)&amp;#123;   //如果布尔表达式 1的值为true执行代码&amp;#125;else if(布尔表达式 2)&amp;#123;   //如果布尔表达式">
+<meta name="keywords" content="coding,oracle,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ゼロから始めるJAVA世界生活 02">
+<meta property="og:url" content="http://yoursite.com/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。 判别结构if-else12345678910111213if(布尔表达式)&amp;#123;   //如果布尔表达式为true将执行的语句&amp;#125;if(布尔表达式 1)&amp;#123;   //如果布尔表达式 1的值为true执行代码&amp;#125;else if(布尔表达式 2)&amp;#123;   //如果布尔表达式">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-15T11:57:05.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ゼロから始めるJAVA世界生活 02">
+<meta name="twitter:description" content="很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。 判别结构if-else12345678910111213if(布尔表达式)&amp;#123;   //如果布尔表达式为true将执行的语句&amp;#125;if(布尔表达式 1)&amp;#123;   //如果布尔表达式 1的值为true执行代码&amp;#125;else if(布尔表达式 2)&amp;#123;   //如果布尔表达式">
+  
+    <link rel="alternate" href="/atom.xml" title="外野" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">外野</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaS/ゼロから始めるJAVA世界生活-02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" class="article-date">
+  <time datetime="2018-04-28T13:00:28.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ゼロから始めるJAVA世界生活 02
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。</p>
+<h2 id="判别结构"><a href="#判别结构" class="headerlink" title="判别结构"></a>判别结构</h2><h3 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式为true将执行的语句</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(布尔表达式 <span class="number">1</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 1的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">2</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 2的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">3</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 3的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment">//如果以上布尔表达式都不为true执行代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>嵌套是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式 <span class="number">1</span>)&#123;</span><br><span class="line">   <span class="comment">////如果布尔表达式 1的值为true执行代码</span></span><br><span class="line">   <span class="keyword">if</span>(布尔表达式 <span class="number">2</span>)&#123;</span><br><span class="line">      <span class="comment">////如果布尔表达式 2的值为true执行代码</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="switch-case"><a href="#switch-case" class="headerlink" title="switch-case"></a>switch-case</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(expression)&#123;</span><br><span class="line">    <span class="keyword">case</span> value :</span><br><span class="line">       <span class="comment">//语句</span></span><br><span class="line">       <span class="keyword">break</span>; <span class="comment">//可选</span></span><br><span class="line">    <span class="keyword">case</span> value :</span><br><span class="line">       <span class="comment">//语句</span></span><br><span class="line">       <span class="keyword">break</span>; <span class="comment">//可选</span></span><br><span class="line">    <span class="comment">//你可以有任意数量的case语句</span></span><br><span class="line">    <span class="keyword">default</span> : <span class="comment">//可选</span></span><br><span class="line">       <span class="comment">//语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>switch 语句有如下规则：</p>
+<ul>
+<li>switch 语句中的变量类型可以是： byte、short、int 或者 char。从 Java SE 7 开始，switch 支持字符串类型了，同时 case 标签必须为字符串常量或字面量。</li>
+<li>switch 语句可以拥有多个 case 语句。每个 case 后面跟一个要比较的值和冒号。</li>
+<li>case 语句中的值的数据类型必须与变量的数据类型相同，而且只能是常量或者字面常量。</li>
+<li>当变量的值与 case 语句的值相等时，那么 case 语句之后的语句开始执行，直到 break 语句出现才会跳出 switch 语句。</li>
+<li>当遇到 break 语句时，switch 语句终止。程序跳转到 switch 语句后面的语句执行。case 语句不必须要包含 break 语句。如果没有 break 语句出现，程序会继续执行下一条 case 语句，直到出现 break 语句。</li>
+<li>switch 语句可以包含一个 default 分支，该分支必须是 switch 语句的最后一个分支。default 在没有 case 语句的值和变量值相等的时候执行。default 分支不需要 break 语句。<h2 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h2></li>
+</ul>
+<h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><p>while是最简单的循环</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>( 布尔表达式 ) &#123;</span><br><span class="line">  <span class="comment">//循环内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="do-while"><a href="#do-while" class="headerlink" title="do-while"></a>do-while</h3><p>对于 while 语句而言，如果不满足条件，则不能进入循环。但有时候我们需要即使不满足条件，也至少执行一次。</p>
+<p>do…while 循环和 while 循环相似，不同的是，do…while 循环至少会执行一次。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">       <span class="comment">//代码语句</span></span><br><span class="line">&#125;<span class="keyword">while</span>(布尔表达式);</span><br></pre></td></tr></table></figure>
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>虽然所有循环结构都可以用<code>while</code>或者<code>do...while</code>表示，但Java提供了另一种语句循环，使一些循环结构变得更加简单。</p>
+<p>for循环执行的次数是在执行前就确定的。语法格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(初始化; 布尔表达式; 更新) &#123;</span><br><span class="line">    <span class="comment">//代码语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于 for 循环有以下几点说明：</p>
+<ul>
+<li>最先执行初始化步骤。可以声明一种类型，但可初始化一个或多个循环控制变量，也可以是空语句。</li>
+<li>然后，检测布尔表达式的值。如果为<code>true</code>，循环体被执行。如果为<code>false</code>，循环终止，开始执行循环体后面的语句。</li>
+<li>执行一次循环后，更新循环控制变量。</li>
+<li>再次检测布尔表达式。循环执行上面的过程。</li>
+</ul>
+<h3 id="upgraded-for"><a href="#upgraded-for" class="headerlink" title="upgraded for"></a>upgraded for</h3><p>java1.5版本以上加入了一个诡谲的for方式，先看代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(声明语句 : 表达式)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//YCH</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>表达式里填的是<strong>数组名称</strong>，这个for语句能<strong>遍历</strong>对应数组内的所有元素，包括所有类型。</p>
+<h2 id="结构的跳出"><a href="#结构的跳出" class="headerlink" title="结构的跳出"></a>结构的跳出</h2><p>有的时候我们需要让一个体系提前中断，或是直接进入下一个循环，Java提供了两个关键词帮助我们<del>重新做人</del>。</p>
+<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p><code>break</code>主要用在<strong>循环语句</strong>或者<strong>switch语句</strong>中，用来跳出整个语句块。亦可言跳出最里层的循环，并且继续执行该循环下面的语句。</p>
+<p>当然，在函数层级上，<code>return</code>永远是最强的跳水运动员。</p>
+<h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p>continue 适用于任何循环控制结构中。作用是让程序立刻跳转到下一次循环的迭代。</p>
+<p>在<strong>for</strong>循环中，<strong>continue</strong>语句使程序立即跳转到更新语句。</p>
+<p>在<strong>while</strong>或者<strong>do…while</strong>循环中，程序立即跳转到布尔表达式的判断语句。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="cjscxvnol001058hyogevy2yp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oracle/">oracle</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ゼロから始めるJAVA世界生活 03
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">机械卷轴：概念设计中的心理暗示</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/15/Permission denied when git push/">Permission denied when git push</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Kitekii<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

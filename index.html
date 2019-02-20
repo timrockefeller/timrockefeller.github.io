@@ -62,10 +62,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-test" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Rust Windows环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/20/test/" class="article-date">
-  <time datetime="2019-02-20T08:19:39.000Z" itemprop="datePublished">2019-02-20</time>
+    <a href="/2018/12/22/Rust Windows环境搭建/" class="article-date">
+  <time datetime="2018-12-22T02:22:11.000Z" itemprop="datePublished">2018-12-22</time>
 </a>
     
   </div>
@@ -76,7 +76,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/20/test/">test</a>
+      <a class="article-title" href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
     </h1>
   
 
@@ -84,13 +84,104 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>该文章主要讲述在windows10+vscode下如何构建一个完整的rust编译调试环境，以及过程中可能出现的问题。</p>
+<h2 id="Rust构造"><a href="#Rust构造" class="headerlink" title="Rust构造"></a>Rust构造</h2><p>rust 官方提供了一系列版本、包安装管理工具，如rustup和cargo。</p>
+<h2 id="基本组件"><a href="#基本组件" class="headerlink" title="基本组件"></a>基本组件</h2><h3 id="rustup"><a href="#rustup" class="headerlink" title="rustup"></a>rustup</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>从<a href="https://rustup.rs/" target="_blank" rel="noopener">rustup.rs</a>官网下载<em>rustup-init.exe</em>（其他平台同理），这个软件是一个初始配置包，会帮助你下载选择版本的rustup和cargo。</p>
+<p>打开软件后会显示如下信息：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">Welcome to Rust!</span><br><span class="line"></span><br><span class="line">This will download and install the official compiler <span class="keyword">for</span> the Rust programming</span><br><span class="line">language, and its package manager, Cargo.</span><br><span class="line"></span><br><span class="line">It will add the cargo, rustc, rustup and other commands to Cargo<span class="string">'s bin</span></span><br><span class="line"><span class="string">directory, located at:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  ~\.cargo\bin</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">This path will then be added to your PATH environment variable by modifying the</span></span><br><span class="line"><span class="string">HKEY_CURRENT_USER/Environment/PATH registry key.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">You can uninstall at any time with rustup self uninstall and these changes will</span></span><br><span class="line"><span class="string">be reverted.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">Current installation options:</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">   default host triple: x86_64-pc-windows-msvc</span></span><br><span class="line"><span class="string">     default toolchain: stable</span></span><br><span class="line"><span class="string">  modify PATH variable: yes</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">1) Proceed with installation (default)</span></span><br><span class="line"><span class="string">2) Customize installation</span></span><br><span class="line"><span class="string">3) Cancel installation</span></span><br><span class="line"><span class="string">&gt; _</span></span><br></pre></td></tr></table></figure>
+<p>默认安装于<strong>用户目录</strong>下。</p>
+<blockquote>
+<p>该软件默认检查环境变量<code>CARGO_HOME</code>、<code>RUSTUP_HOME</code>，分别为<code>.cargo</code>、<code>.rustup</code>设置目录，按需修改（需要注意的是后期包的累积可能会占用巨量的存储空间）。</p>
+</blockquote>
+<p>安装过程中请选择第二项 <strong>“Customize installation”</strong> ！注意到<code>default host triple</code>中设置的是<code>x86_64-pc-windows-msvc</code>，本文所使用的调试器是GDB，故需要修改为<code>x86_64-pc-windows-gnu</code>。<code>default toolchain</code>请选择<code>stable</code>，即稳定版。<code>nightly</code>为前瞻版，’beta’为测试版，实际使用时我们仍需使用到<code>nightly</code>版，后文会提到。</p>
+<p>下载完成后可在<code>path</code>中检查添加<code>.cargo/bin</code>以使用各种命令。</p>
+<p>输入<code>rustup --version</code>以检查是否安装成功。</p>
+<h4 id="setting-toml"><a href="#setting-toml" class="headerlink" title="setting.toml"></a>setting.toml</h4><blockquote>
+<p>TOML(Tom’s Obvious Minimal Language) 是一个想要打败yuml的标注语言，caogo项目也有使用。</p>
+</blockquote>
+<p>该文件位于<code>.rustup/</code>下。</p>
+<ul>
+<li><code>default_host_triple</code>: 第一次安装时设置，只能对该文件进行修改以改变默认值。</li>
+<li><code>default_toolchain</code> : 默认使用的toolchain，可由<code>rustup default &lt;toolchain name&gt;</code>进行修改。</li>
+</ul>
+<h4 id="rustup命令"><a href="#rustup命令" class="headerlink" title="rustup命令"></a>rustup命令</h4><p>以下列出rustup的部分命令：</p>
+<ul>
+<li><code>&gt; rsutup show</code> : 列出现在使用的和已安装的rust版本。</li>
+<li><code>&gt; rustup update</code> : 更新所有已安装版本，由于<code>nightly</code>偶尔会爆肝日更，所以谨慎更新。</li>
+<li><code>&gt; rustup default</code>: 设置将要使用的版本。</li>
+<li><code>&gt; rustup component &lt;sub&gt;</code> : 检查(list)、安装(add)、移除(remove)组建。</li>
+</ul>
+<h4 id="加速"><a href="#加速" class="headerlink" title="加速"></a>加速</h4><p>此处使用科大源为例，修改PATH如下：</p>
+<ul>
+<li><code>RUSTUP_DIST_SERVER</code> : <code>https://mirrors.ustc.edu.cn/rust-static</code></li>
+<li><code>RUSTUP_UPDATE_ROOT</code> : <code>https://mirrors.ustc.edu.cn/rust-static/rustup</code></li>
+</ul>
+<p>将同时加速cargo和rust，下载慢的可以体验一下w。</p>
+<h3 id="Cargo"><a href="#Cargo" class="headerlink" title="Cargo"></a>Cargo</h3><p>cargo既是一个类似于npm、pip的包管理软件，又是一个像marven一样的项目框架。一个<code>&gt; cargo help</code>可以让你懂得它有多nb。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">build       Compile the current package</span><br><span class="line">check       Analyze the current package and report errors, but don&apos;t build object files</span><br><span class="line">clean       Remove the target directory</span><br><span class="line">doc         Build this package&apos;s and its dependencies&apos; documentation</span><br><span class="line">new         Create a new cargo package</span><br><span class="line">init        Create a new cargo package in an existing directory</span><br><span class="line">run         Build and execute src/main.rs</span><br><span class="line">test        Run the tests</span><br><span class="line">bench       Run the benchmarks</span><br><span class="line">update      Update dependencies listed in Cargo.lock</span><br><span class="line">search      Search registry for crates</span><br><span class="line">publish     Package and upload this package to the registry</span><br><span class="line">install     Install a Rust binary. Default location is $HOME/.cargo/bin</span><br><span class="line">uninstall   Uninstall a Rust binary</span><br></pre></td></tr></table></figure>
+<p>更详细的介绍……<a href="http://wiki.jikexueyuan.com/project/rust-primer/cargo-projects-manager/cargo-projects-manager.html" target="_blank" rel="noopener">点❤我❤看❤文</a>。</p>
+<h2 id="集成于VS-Code"><a href="#集成于VS-Code" class="headerlink" title="集成于VS Code"></a>集成于VS Code</h2><p>再此之前，先设置一遍可能用到的环境变量。</p>
+<ul>
+<li><code>RUST</code> : 某toolchain的目录，如<code>%USER%\.rust\toolchains\stable-x86_64-pc-windows-gnu</code>。</li>
+<li><code>RUST_SRC_PATH</code> : 改版本rust的源码目录，如<code>%RUST%\lib\rustlib\src\rust\src</code>，若你的<code>rustlib</code>中没有<code>src</code>，请执行<code>&gt; rustup cpmponent add rust-src</code>。</li>
+<li><code>RUSTBINPATH</code> : <code>%CARGO_PATH%\bin</code>。</li>
+</ul>
+<p>好，打开VS Code!</p>
+<h3 id="插件配置"><a href="#插件配置" class="headerlink" title="插件配置"></a>插件配置</h3><p><img src="https://i.loli.net/2018/12/22/5c1dd8fc37d34.png" alt="sp181222_141230"></p>
+<p>商店搜索前两个就是几十万人下载的工具，两个都装上吧？前者是官方的包括rls在内的综合插件。后者虽然是第三方，但功能不比官方少。</p>
+<p>你需要在settings.json文件中选择性键入以下内容(为第三方插件配置而不是官方)：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">"rust.mode": "legacy",</span><br><span class="line">"rust.cargoHomePath": "%CARGO_HOME%",</span><br><span class="line">"rust.cargoPath":"%RUSTBINPATH%\\cargo.exe",</span><br><span class="line">"rust.racerPath":"%RUSTBINPATH%\\racer.exe",</span><br><span class="line">"rust.rls":"%RUSTBINPATH%\\rls.exe",</span><br><span class="line">"rust.rustfmtPath":"%RUSTBINPATH%\\rustfmt.exe",</span><br><span class="line">"rust.rustup":"%RUSTBINPATH%\\rustup.exe",</span><br><span class="line">"rust.rustLangSrcPath": "%RUST_SRC_PATH%",</span><br><span class="line">"rust.executeCargoCommandInTerminal": true,</span><br></pre></td></tr></table></figure>
+<p>很巧妙的是官方插件会为你提示是否提供权限安装nightly，请选择允许，并把你的default toolchain设置为<strong>nightly</strong>。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt; rustup default nightly</span><br><span class="line">&gt; rustup update</span><br><span class="line">...</span><br><span class="line">&gt; rustup component add rust-analysis</span><br></pre></td></tr></table></figure>
+<p><strong>漫长</strong>的安装完成后，写一个小程序试一试。</p>
+<p><em>main.rs</em></p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">fn</span> <span class="title">main</span></span>()&#123;</span><br><span class="line">    <span class="built_in">println!</span>(<span class="string">"fa ♂"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此，基本能实现实时提示错误、高亮、用户片段。</p>
+<h4 id="常见错误"><a href="#常见错误" class="headerlink" title="常见错误"></a>常见错误</h4><ol>
+<li><p>官方插件提示 RLS could not set RUST_SRC_PATH for Racer because it could not read the Rust sysroot.</p>
+<p>尝试使用以下方法：</p>
+<ul>
+<li>使用管理员模式启动Vs Code。</li>
+<li>确定各path位置正确。</li>
+<li>添加setting.json条目<code>&quot;rust-client.channel&quot;: &quot;stable&quot;,</code>或nightly。</li>
+<li>重新使用cargo建立一个项目</li>
+</ul>
+<p>错误原因如下</p>
+<p><a href="https://stackoverflow.com/questions/48978766/visual-studio-code-warning-rls-could-not-set-rust-src-path-for-racer-because-it" target="_blank" rel="noopener">stackoverflow</a>:</p>
+<blockquote>
+<p>该插件 readme文件列出了如下依赖:</p>
+<ul>
+<li>Rustup,</li>
+<li>一个toolchain (插件会在获得权限后自动安装),</li>
+<li>RLS, rust-src, rust-analysis组件.</li>
+</ul>
+</blockquote>
+</li>
+<li><p>待补充</p>
+</li>
+</ol>
+<h3 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h3><p>LLDB很棒，但是有请我们的TDM-GDB出场（打扰了）。</p>
+<p>从<a href="https://sourceforge.net/projects/tdm-gcc/files/GDB" target="_blank" rel="noopener">sourceforge</a>上下载后，解压得到bin、gdb64、share至某目录（我的是<code>D:\env</code>）。</p>
+<h5 id="配置rust-gdb"><a href="#配置rust-gdb" class="headerlink" title="配置rust-gdb"></a>配置rust-gdb</h5><p>之前下载的rust源码（<code>%rust%\lib\rustlib</code>）提供了一套gdb配置。</p>
+<p>修改<code>gdb64\bin</code>目录下的gdbinit文件，在末尾添加以下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line"><span class="keyword">print</span> <span class="string">"-- loading rust pretty-printers --"</span></span><br><span class="line">sys.path.insert(<span class="number">0</span>,<span class="string">'%rust%/lib/rustlib/etc'</span>)</span><br><span class="line"><span class="keyword">import</span> gdb_rust_pretty_printing</span><br><span class="line">gdb_rust_pretty_printing.register_printer(gdb)</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+<p>执行（<code>&gt; bin\gdb.exe</code>），若能输出”– loading rust pretty-printers –“并没有报错，说明gdb工具配置成功。</p>
+<h5 id="配置Vs-Code"><a href="#配置Vs-Code" class="headerlink" title="配置Vs Code"></a>配置Vs Code</h5><p>安装Native Debug插件（<code>ext install debug</code>）。</p>
+<p>用Vs Code打开你的Cargo工程，添加调试配置GDB，将target指向生成的exe文件，将gdbpath设置为刚刚配置的gdb.exe。</p>
+<p>添加一个task，选择<code>cargo build</code>，设置为<code>preLaunchTask</code>。</p>
+<p><img src="https://i.loli.net/2018/12/22/5c1de12ec95aa.png" alt="task"></p>
+<p>这时你的launch.json大致如下</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">    <span class="attr">"configurations"</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="attr">"name"</span>: <span class="string">"Debug"</span>,</span><br><span class="line">            <span class="attr">"type"</span>: <span class="string">"gdb"</span>,</span><br><span class="line">            <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">            <span class="attr">"preLaunchTask"</span>: <span class="string">"cargo build"</span>,</span><br><span class="line">            <span class="attr">"target"</span>: <span class="string">"$&#123;workspaceRoot&#125;\\target\\debug\\optimvsc.exe"</span>,</span><br><span class="line">            <span class="attr">"gdbpath"</span>: <span class="string">"D:\\env\\gdb-tdm64\\bin\\gdb.exe"</span>,</span><br><span class="line">            <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceRoot&#125;"</span></span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>快快创建断点测试一下吧！</p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/20/test/" data-id="cjscxs2gk0000twhy1i1k4hez" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/22/Rust Windows环境搭建/" data-id="cjscxvno4000s58hywi4yuunv" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li></ul>
+
     </footer>
   </div>
   
@@ -98,10 +189,10 @@
 
 
   
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Permission denied when git push" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/20/hello-world/" class="article-date">
-  <time datetime="2019-02-20T08:17:56.992Z" itemprop="datePublished">2019-02-20</time>
+    <a href="/2018/12/15/Permission denied when git push/" class="article-date">
+  <time datetime="2018-12-15T14:53:00.000Z" itemprop="datePublished">2018-12-15</time>
 </a>
     
   </div>
@@ -112,7 +203,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/20/hello-world/">Hello World</a>
+      <a class="article-title" href="/2018/12/15/Permission denied when git push/">Permission denied when git push</a>
     </h1>
   
 
@@ -120,20 +211,77 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+        <p>在很长一段时间没有使用git push 后，你的sshkey可能会过期：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Permission denied(publickey).</span><br><span class="line">fatal: Could not read from remote repository</span><br><span class="line">Please make sure you have the correct access rights and the repository exists.</span><br></pre></td></tr></table></figure>
+<p>解决方案：</p>
+<ol>
+<li><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</span><br><span class="line">ssh -v git@github.com</span><br><span class="line">ssh-agent  -s</span><br><span class="line"># eval `ssh-agent  -s`</span><br><span class="line">ssh-add ~/.ssh/id_rsa  </span><br><span class="line">cat  ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><em>注意，上述<a href="mailto:youremail@example.com" target="_blank" rel="noopener">youremail@example.com</a>是指github账户的注册邮箱</em></p>
+<p>上述命令执行后id_rsa.pub文件内容将输出到终端，复制里面的密钥（内容一般是以ssh-rsa 开头，以github账号的注册邮箱结尾的，全部复制下来）至github设置中的ssh-keys。</p>
+<p>最后运行以下命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>Hi —! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
+</blockquote>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/20/hello-world/" data-id="cjscxs2gq0001twhy5hrpqql8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/15/Permission denied when git push/" data-id="cjscxvnnn000558hyw02jhwxx" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Keras-Intro" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/21/Keras-Intro/" class="article-date">
+  <time datetime="2018-10-21T14:06:16.000Z" itemprop="datePublished">2018-10-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Sequential-Module模型"><a href="#Sequential-Module模型" class="headerlink" title="Sequential-Module模型"></a>Sequential-Module模型</h2><h3 id="常用层"><a href="#常用层" class="headerlink" title="常用层"></a>常用层</h3><h4 id="Dense全连接"><a href="#Dense全连接" class="headerlink" title="Dense全连接"></a>Dense全连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">keras.layers.core.Dense(units,</span><br><span class="line">						activation = <span class="keyword">None</span>,</span><br><span class="line">						use_bias = <span class="keyword">True</span>,</span><br><span class="line">						kernel_initializer = <span class="string">'glorot_uniform'</span>, </span><br><span class="line">						bias_initializer = <span class="string">'zeros'</span>,</span><br><span class="line">						kernel_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						bias_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						activity_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						kernel_constraint = <span class="keyword">None</span>,</span><br><span class="line">						bias_constraint = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<p>Dense就是常用的全连接层，所实现的运算是<code>output = activation(dot(input, kernel)+bias)</code>。其中<code>activation</code>是逐元素计算的激活函数，<code>kernel</code>是本层的权值矩阵，<code>bias</code>为偏置向量，只有当<code>use_bias=True</code>才会添加。<br>参数说明</p>
+<ul>
+<li>units：大于0的整数，代表该层的输出<strong>维度</strong>。</li>
+<li>activation：激活函数，为预定义的激活函数名（参考激活函数），或逐元素（element-wise）的Theano函数。如果不指定该参数，将不会使用任何激活函数（即使用线性激活函数：a(x)=x）</li>
+<li>use_bias: 布尔值，是否使用<strong>偏置项</strong></li>
+<li>kernel_initializer：权值初始化方法，为预定义初始化方法名的字符串，或用于初始化权重的初始化器。参考initializers</li>
+<li>bias_initializer：偏置向量初始化方法，为预定义初始化方法名的字符串，或用于初始化偏置向量的初始化器。参考initializers</li>
+<li>kernel_regularizer：施加在权重上的正则项，为Regularizer对象</li>
+<li>bias_regularizer：施加在偏置向量上的正则项，为Regularizer对象</li>
+<li>activity_regularizer：施加在输出上的正则项，为Regularizer对象</li>
+<li>kernel_constraints：施加在权重上的约束项，为Constraints对象</li>
+<li>bias_constraints：施加在偏置上的约束项，为Constraints对象</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/21/Keras-Intro/" data-id="cjscxvnnj000358hym15nh3hl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -143,7 +291,371 @@
 
 
   
+    <article id="post-SKLearn玄学操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/20/SKLearn玄学操作/" class="article-date">
+  <time datetime="2018-10-20T08:54:00.000Z" itemprop="datePublished">2018-10-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+    </h1>
+  
 
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="分离数据集"><a href="#分离数据集" class="headerlink" title="分离数据集"></a>分离数据集</h3><p><a href="https://blog.csdn.net/kyriehe/article/details/77507473" target="_blank" rel="noopener"><strong>train_test_split</strong></a>是交叉验证中常用的函数，功能是从样本中随机的按比例选取train data和test data，形式为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train,X_test, y_train, y_test = cross_validation.train_test_split(train_data, train_target, test_size=<span class="number">0.4</span>, random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>train_data：所要划分的样本特征集 </li>
+<li>train_target：所要划分的样本结果 </li>
+<li>test_size：样本占比，如果是整数的话就是样本的数量 </li>
+<li>random_state：是随机数的种子。</li>
+</ul>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.cnblogs.com/lianyingteng/p/7811126.html" target="_blank" rel="noopener">ML神器：sklearn的快速使用</a></p>
+<p><a href="https://blog.csdn.net/tengyuan93/article/details/78930285" target="_blank" rel="noopener">OneHot编码知识点</a></p>
+<p><a href="https://blog.csdn.net/o4dc8ojo7zl6/article/details/78431750" target="_blank" rel="noopener">机器学习零基础？手把手教你用TensorFlow搭建图像分类器</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/20/SKLearn玄学操作/" data-id="cjscxvnno000758hytrx5lknl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/machine-learning/">machine learning</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-OpenCV-Intro-基本图像操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/20/OpenCV-Intro-基本图像操作/" class="article-date">
+  <time datetime="2018-10-20T03:37:00.000Z" itemprop="datePublished">2018-10-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Open Computer Vision 万物起源。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># OpenCV本体</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 数学库</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="图像基本操作"><a href="#图像基本操作" class="headerlink" title="图像基本操作"></a>图像基本操作</h2><h3 id="读取、显示、保存"><a href="#读取、显示、保存" class="headerlink" title="读取、显示、保存"></a>读取、显示、保存</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IMG_PATH = <span class="string">"/path/to/img"</span></span><br><span class="line"><span class="comment"># 此处图片链接可能不支持中文</span></span><br><span class="line">img = cv2.imread(IMG_PATH,cv2.IMREAD_COLOR)</span><br></pre></td></tr></table></figure>
+<p>opencv支持以下三种读入方式：</p>
+<ul>
+<li>cv2.IMREAD_<strong>COLOR</strong>: 默认，仅<strong>(R,G,B)</strong>通道</li>
+<li>cv2.IMREAD_<strong>GRATSCALE</strong>: 灰度</li>
+<li>cv2.IMREAD_<strong>UNCHANGED</strong>: 包括<strong>(R,G,B,A)</strong>通道</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">"WindowName"</span>,img)</span><br><span class="line"><span class="comment"># 创建一个名字为WindowName的窗口，把之前imread读入的照片以yuanchicun显示在窗口上。</span></span><br><span class="line">cv2.waitKey()</span><br><span class="line"><span class="comment"># Press Any Key To Continue...</span></span><br><span class="line">cv2.imwrite(<span class="string">"/Path/to/CopiedPic"</span>,img)</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/20/OpenCV-Intro-基本图像操作/" data-id="cjscxvnn8000058hygyzwr95r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv </a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-Test-post-from-hexo-admin-ehc" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/16/Test-post-from-hexo-admin-ehc/" class="article-date">
+  <time datetime="2018-10-16T06:29:00.000Z" itemprop="datePublished">2018-10-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/16/Test-post-from-hexo-admin-ehc/">节奏游戏开发时的万般阻难</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>施工中……</p>
+<h2 id="音符同步"><a href="#音符同步" class="headerlink" title="音符同步"></a>音符同步</h2><p><a href="http://gad.qq.com/article/detail/34880" target="_blank" rel="noopener">senator</a></p>
+<p>你需要<code>[RequireComponent(typeof(AudioSource))]</code>来规定该元件可被作为音游元件。</p>
+<ol>
+<li><p>使用<code>AudioSettings.dspTime</code> 跟踪歌曲的位置，而不是使用    <code>Time.timeSinceLevelLoad</code>。</p>
+</li>
+<li><p>使用歌曲的<strong>位置</strong>来更新移动。</p>
+</li>
+<li><p>不要通过每帧的时差来更新音符。</p>
+</li>
+</ol>
+<h4 id="位置跟踪"><a href="#位置跟踪" class="headerlink" title="位置跟踪"></a>位置跟踪</h4><p>在所有节奏游戏中，我们必须跟踪歌曲位置，以确定是否应该生成音符。如下所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">float songPosition;</span><br><span class="line">// 节拍当前位置</span><br><span class="line">float songPosInBeats;</span><br><span class="line">// 节拍的持续时间</span><br><span class="line">float secPerBeat;</span><br><span class="line">float dsptimesong;</span><br><span class="line">// We initialize these fields in the Start() function:</span><br><span class="line">void Start() &#123;</span><br><span class="line">    secPerBeat = 60f / bpm;</span><br><span class="line">    dsptimesong = (float) AudioSettings.dspTime;</span><br><span class="line">    // 开始播放音乐</span><br><span class="line">    GetComponent&lt;AudioSource&gt;().Play();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们转换<code>bpm</code>到<code>secPerBeat</code>后面方便使用。<code>secPerBeat</code>将用于计算节拍中的歌曲位置，这对音符生成非常重要。</p>
+<p>我们用<code>dsptimesong</code>记录歌曲的开始时间。使用<code>AudioSettings.dspTime</code>跟踪歌曲的位置，而不是使用<code>Time.timeSinceLevelLoad</code>。因为<code>Time.timeSinceLevelLoad</code>只在每个帧中更新，而<code>AudioSettings.dspTime</code>更新频率更高，因为它是音频系统的定时器。为了保持歌曲的速度，我们必须使用音频系统的定时器来避免帧更新和音频更新之间的时间差引起的延迟。</p>
+<p>在<code>Update()</code>函数中，我们通过<code>AudioSettings.dspTime</code>计算歌曲的位置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">void Update()</span><br><span class="line">&#123;</span><br><span class="line">    songPosition = (float) (AudioSettings.dspTime - dsptimesong);</span><br><span class="line">    songPosInBeats = songPosition / secPerBeat;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="歌曲信息"><a href="#歌曲信息" class="headerlink" title="歌曲信息"></a>歌曲信息</h4><p>移动到我们记录歌曲信息的字段：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">float bpm;</span><br><span class="line">float [] notes;</span><br><span class="line">int nextIndex = 0;</span><br></pre></td></tr></table></figure>
+<p>为了简单起见，我演示的歌曲只有一个轨迹的音符。</p>
+<p><code>bpm</code>是一首歌的每分钟的节拍数。正如我们所看到的，<code>secPerBeat</code>为了方便起见被转换了。</p>
+<p><code>notes</code>是一个数组，保持歌曲中音符的位置。例如，<code>notes</code>将初始化为<code>{1f，2f， 2.5f， 3f，3.5f， 4.5f}</code></p>
+<h4 id="产生音符"><a href="#产生音符" class="headerlink" title="产生音符"></a>产生音符</h4><p>我们确定是否应该在<code>Update()</code>函数中产生一个音符前。但我们应该首先确定显示节拍的数量。</p>
+<p>例如曲谱中，当前的歌曲position-in-beats为1，但是节拍3已经产生，意味着提前显示3个节拍。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">songPosInBeats = songPosition / secPerBeat;, add the following lines:</span><br><span class="line">if (nextIndex &lt; notes.Length &amp;&amp; notes[nextIndex] &lt; songPosInBeats beatsShownInAdvance)</span><br><span class="line">&#123;</span><br><span class="line">    Instantiate( /* Music Note Prefab */ );</span><br><span class="line">    nextIndex ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>我们首先检查歌曲（<code>nextIndex &lt; notes.Length</code>）中是否已经没有音符，如果还有音符，那么我们再看看歌曲是否到达要播放下一个音符的节奏（<code>notes[nextIndex] &lt; songPosInBeats + beatsShownInAdvance</code>）。如果满足条件，产生音符，<code>nextIndex</code>自增，以便<code>nextIndex</code>保持下一个音符的产生。</p>
+<h4 id="移动音符"><a href="#移动音符" class="headerlink" title="移动音符"></a>移动音符</h4><p>最后，如何按照这首歌来移动我们产生的音符。不要通过帧的时差来移动它们。</p>
+<p>始终按照歌曲的位置更新移动，因为</p>
+<ol>
+<li><p>音频定时器与帧定时器有时差</p>
+</li>
+<li><p>节拍可能在两帧中间</p>
+</li>
+</ol>
+<p>那么，怎么移动音符呢？插入法！为了简单起见，我将把所有的代码放在<code>MusicNote</code>类上，并且只在<code>Update()</code>移动我们的音符：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void Update() &#123;</span><br><span class="line">    transform.position = Vector2.Lerp(</span><br><span class="line">        SpawnPos,</span><br><span class="line">        RemovePos,</span><br><span class="line">        (BeatsShownInAdvance - (beatOfThisNote - songPosInBeats) ) / BeatsShownInAdvance</span><br><span class="line">    );    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="判定提前"><a href="#判定提前" class="headerlink" title="判定提前"></a>判定提前</h2><p>姑且定义以下几种判定时间点:</p>
+<ul>
+<li>CHECK_PERFECT</li>
+<li>CHECK_GREAT</li>
+<li>CHECK_MISS</li>
+</ul>
+<p>每个音符到达<strong>dspTime - CHECK_MISS</strong>时触发miss判定<br>南梦宫所提出的判定方案是</p>
+<h2 id="视觉反馈"><a href="#视觉反馈" class="headerlink" title="视觉反馈"></a>视觉反馈</h2><h2 id="额外音效"><a href="#额外音效" class="headerlink" title="额外音效"></a>额外音效</h2><p>processing</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/16/Test-post-from-hexo-admin-ehc/" data-id="cjscxvnnl000458hy6nvhfxc7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JavaS/TicTacToe" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/22/JavaS/TicTacToe/" class="article-date">
+  <time datetime="2018-05-22T14:39:00.000Z" itemprop="datePublished">2018-05-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/22/JavaS/TicTacToe/">Tic Tac Toe “我也不知道是什么”算法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>为了巩固类、数组等知识，下来一个Assignment，定睛一看，居然是个四子棋！没想到人在江湖，也会遇上如此困难之题，随缘写个备注以防自己忘记。</p>
+<p>完整代码已上传至 <a href="https://github.com/timrockefeller/ExplotionEuler/blob/master/src/TicTacToe.java" target="_blank" rel="noopener">timrockefeller/ExplotionEuler</a>。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/05/22/JavaS/TicTacToe/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/22/JavaS/TicTacToe/" data-id="cjscxvnos001f58hylfdil23p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JavaS/ゼロから始めるJAVA世界生活-03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" class="article-date">
+  <time datetime="2018-05-13T06:30:00.000Z" itemprop="datePublished">2018-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/">ゼロから始めるJAVA世界生活 03</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于数组、函数的碎片知识。<br>
+        
+          </p><p class="article-more-link">
+            <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjscxvnok000x58hy7gxq7q8q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oracle/">oracle</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-JavaS/ゼロから始めるJAVA世界生活-02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" class="article-date">
+  <time datetime="2018-04-28T13:00:28.000Z" itemprop="datePublished">2018-04-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/">ゼロから始めるJAVA世界生活 02</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<p>很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。</p>
+<h2 id="判别结构"><a href="#判别结构" class="headerlink" title="判别结构"></a>判别结构</h2><h3 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式为true将执行的语句</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(布尔表达式 <span class="number">1</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 1的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">2</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 2的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">3</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 3的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment">//如果以上布尔表达式都不为true执行代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="cjscxvnol001058hyogevy2yp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oracle/">oracle</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-艺类笔记/机械卷轴：概念设计中的心理暗示" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" class="article-date">
+  <time datetime="2018-04-22T14:50:00.000Z" itemprop="datePublished">2018-04-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/">机械卷轴：概念设计中的心理暗示</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>谈科幻设计</p>
+<h2 id="符号化设计"><a href="#符号化设计" class="headerlink" title="符号化设计"></a>符号化设计</h2><p>脑洞 + 凭感觉   （头脑风暴）</p>
+<blockquote>
+<p>一款急速的飞行器，你会如何画？</p>
+</blockquote>
+<p>符号对不同设计倾向的引导。</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" data-id="cjscxvnon001258hycgzto8d0" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+  </nav>
 
 </section>
         
@@ -153,15 +665,29 @@
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
     </div>
   </div>
 
@@ -174,11 +700,23 @@
       <ul>
         
           <li>
-            <a href="/2019/02/20/test/">test</a>
+            <a href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
           </li>
         
           <li>
-            <a href="/2019/02/20/hello-world/">Hello World</a>
+            <a href="/2018/12/15/Permission denied when git push/">Permission denied when git push</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
           </li>
         
       </ul>

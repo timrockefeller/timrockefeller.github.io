@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ゼロから始めるJAVA世界生活 03 | 外野</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="关于数组、函数的碎片知识。">
+<meta name="keywords" content="coding,oracle,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ゼロから始めるJAVA世界生活 03">
+<meta property="og:url" content="http://yoursite.com/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="关于数组、函数的碎片知识。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-15T11:57:05.524Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ゼロから始めるJAVA世界生活 03">
+<meta name="twitter:description" content="关于数组、函数的碎片知识。">
+  
+    <link rel="alternate" href="/atom.xml" title="外野" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">外野</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-JavaS/ゼロから始めるJAVA世界生活-03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" class="article-date">
+  <time datetime="2018-05-13T06:30:00.000Z" itemprop="datePublished">2018-05-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ゼロから始めるJAVA世界生活 03
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>关于数组、函数的碎片知识。<br><a id="more"></a></p>
+<h2 id="数组定义"><a href="#数组定义" class="headerlink" title="数组定义"></a>数组定义</h2><p>数组这个东西十分有趣，它的定义是<strong>相同类型</strong>的一组数据集变量。<br>在Java中，它能够这样被定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> n = <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> a[] = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line"><span class="keyword">int</span> []b = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br></pre></td></tr></table></figure></p>
+<p>c++中了解到，数组的本质是<strong>指针</strong>，而Java里面并没有指针的<strong>强类型概念</strong>，但分配空间的规则仍旧是一样的。即当定义一个数组时需要：</p>
+<pre><code>* 数据类型（int）
+* 数组名称（a）
+* 数组 ~长度~ （n=5）
+</code></pre><p>我们在使用数组时，用下标来获取、赋予内容，如<code>a[0]=a[1]===a[n-4]?a[4]:a[0];</code></p>
+<h2 id="一些算法"><a href="#一些算法" class="headerlink" title="一些算法"></a>一些算法</h2><p>算法问题是个 ~玄学~ ，希望哪天也能写出一段连自己都不知道怎么回事的代码并标上<code>//神奇代码，勿动</code>。<br>查找</p>
+<h3 id="二分查找（binary-search）"><a href="#二分查找（binary-search）" class="headerlink" title="二分查找（binary search）"></a>二分查找（binary search）</h3><p>需要<strong>已排序</strong>的数组array。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">biSearch</span><span class="params">(<span class="keyword">int</span> [] array, <span class="keyword">int</span> a)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> lo = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> hi = array.length - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> mid;</span><br><span class="line">    <span class="keyword">while</span>(lo &lt;= hi)&#123;</span><br><span class="line">        mid = (lo + hi) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span>(array[mid] == a)&#123;</span><br><span class="line">            <span class="keyword">return</span> mid + <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(array[mid] &lt; a)&#123;</span><br><span class="line">            lo=mid + <span class="number">1</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            hi=mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="冒泡排序（bubble-sorting）"><a href="#冒泡排序（bubble-sorting）" class="headerlink" title="冒泡排序（bubble sorting）"></a>冒泡排序（bubble sorting）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BubbleSorting</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;array.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;array.length-<span class="number">1</span>-i;j++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(array[j]&gt;array[j+<span class="number">1</span>])&#123;</span><br><span class="line">            <span class="keyword">int</span> temp=array[j];</span><br><span class="line">            array[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">            array[j+<span class="number">1</span>]=temp;</span><br><span class="line">        &#125;</span><br><span class="line">　　&#125;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="API有话说"><a href="#API有话说" class="headerlink" title="API有话说"></a>API有话说</h2><p>JDK API几乎把所有的Java自带特性讲了个遍，这里需要了解一个名词：<strong>重载</strong>。函数重载可使函数的 ~参数~ 变得更多样。<br>上文提及的算法大部分都能由Java Utility Package中Arrays类的 ~静态函数~ 更加快速、低占用地实现。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Arrays.binarySearch(T[] origin, T key); <span class="comment">//return the key number</span></span><br><span class="line">Arrays.sort(T[] origin);</span><br></pre></td></tr></table></figure></p>
+<p>以及Array类型的数据自带一些属性，著名的是<code>·length</code>。</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>参阅<a href="https://www.cnblogs.com/AlanLee/p/6627949.html" target="_blank" rel="noopener">作用域</a>。<br>一个函数会构建一个AO作用域，为其分配 ~独立~ 空间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[public|private] &lt;static&gt; T arg(..T args)&#123;</span><br><span class="line">    //do something </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面这就是一个挂在类里面的函数，可以闭包、重用。<br>最近好像<strong>函数式编程</strong>挺火的，可以了解一下。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjscxvnok000x58hy7gxq7q8q" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oracle/">oracle</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/22/JavaS/TicTacToe/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Tic Tac Toe “我也不知道是什么”算法
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ゼロから始めるJAVA世界生活 02</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/15/Permission denied when git push/">Permission denied when git push</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Kitekii<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

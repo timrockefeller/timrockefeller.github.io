@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>OpenCV Intro : 基本图像操作 | 外野</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Open Computer Vision 万物起源。1234import cv2# OpenCV本体import numpy as np# 数学库 图像基本操作读取、显示、保存123IMG_PATH = &quot;/path/to/img&quot;# 此处图片链接可能不支持中文img = cv2.imread(IMG_PATH,cv2.IMREAD_COLOR) opencv支持以下三种读入方式：  cv2.IM">
+<meta name="keywords" content="opencv ,coding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenCV Intro : 基本图像操作">
+<meta property="og:url" content="http://yoursite.com/2018/10/20/OpenCV-Intro-基本图像操作/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="Open Computer Vision 万物起源。1234import cv2# OpenCV本体import numpy as np# 数学库 图像基本操作读取、显示、保存123IMG_PATH = &quot;/path/to/img&quot;# 此处图片链接可能不支持中文img = cv2.imread(IMG_PATH,cv2.IMREAD_COLOR) opencv支持以下三种读入方式：  cv2.IM">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-12-15T11:57:05.520Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OpenCV Intro : 基本图像操作">
+<meta name="twitter:description" content="Open Computer Vision 万物起源。1234import cv2# OpenCV本体import numpy as np# 数学库 图像基本操作读取、显示、保存123IMG_PATH = &quot;/path/to/img&quot;# 此处图片链接可能不支持中文img = cv2.imread(IMG_PATH,cv2.IMREAD_COLOR) opencv支持以下三种读入方式：  cv2.IM">
+  
+    <link rel="alternate" href="/atom.xml" title="外野" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">外野</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-OpenCV-Intro-基本图像操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/10/20/OpenCV-Intro-基本图像操作/" class="article-date">
+  <time datetime="2018-10-20T03:37:00.000Z" itemprop="datePublished">2018-10-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OpenCV Intro : 基本图像操作
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Open Computer Vision 万物起源。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># OpenCV本体</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 数学库</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="图像基本操作"><a href="#图像基本操作" class="headerlink" title="图像基本操作"></a>图像基本操作</h2><h3 id="读取、显示、保存"><a href="#读取、显示、保存" class="headerlink" title="读取、显示、保存"></a>读取、显示、保存</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IMG_PATH = <span class="string">"/path/to/img"</span></span><br><span class="line"><span class="comment"># 此处图片链接可能不支持中文</span></span><br><span class="line">img = cv2.imread(IMG_PATH,cv2.IMREAD_COLOR)</span><br></pre></td></tr></table></figure>
+<p>opencv支持以下三种读入方式：</p>
+<ul>
+<li>cv2.IMREAD_<strong>COLOR</strong>: 默认，仅<strong>(R,G,B)</strong>通道</li>
+<li>cv2.IMREAD_<strong>GRATSCALE</strong>: 灰度</li>
+<li>cv2.IMREAD_<strong>UNCHANGED</strong>: 包括<strong>(R,G,B,A)</strong>通道</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">cv2.imshow(<span class="string">"WindowName"</span>,img)</span><br><span class="line"><span class="comment"># 创建一个名字为WindowName的窗口，把之前imread读入的照片以yuanchicun显示在窗口上。</span></span><br><span class="line">cv2.waitKey()</span><br><span class="line"><span class="comment"># Press Any Key To Continue...</span></span><br><span class="line">cv2.imwrite(<span class="string">"/Path/to/CopiedPic"</span>,img)</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="窗口创建与销毁"><a href="#窗口创建与销毁" class="headerlink" title="窗口创建与销毁"></a>窗口创建与销毁</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cv2.namedWindow(<span class="string">"WindowName0"</span>,cv2.WINDOW_AUTOSIZE)</span><br><span class="line"><span class="comment"># 根据图片大小自动调整</span></span><br><span class="line">cv2.namedWindow(<span class="string">"WindowName1"</span>,cv2.WINDOW_NORMAL)</span><br><span class="line"><span class="comment"># 窗口大小可调整</span></span><br><span class="line">cv2.destroyAllWindows(..<span class="string">"WindowName"</span>) <span class="comment"># 可不填参数</span></span><br><span class="line"><span class="comment"># 关闭全部(指定名称)窗口</span></span><br></pre></td></tr></table></figure>
+<h3 id="宽高、通道数"><a href="#宽高、通道数" class="headerlink" title="宽高、通道数"></a>宽高、通道数</h3><p><code>img.shape</code>返回图像<strong>高</strong>(图像矩阵的行数)、<strong>宽</strong>(图像矩阵的列数)、<strong>通道数</strong>三个属性组成的元组。<br>若图像是非彩色的，则只返回<strong>高、宽</strong>组成的元组。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">"/path/to/img"</span>)</span><br><span class="line">imgGrey = cv2.imread(<span class="string">"/path/to/img"</span>,cv2.IMREAD_GRATSCALE)</span><br><span class="line"></span><br><span class="line">sp1 = img.shape <span class="comment"># (h,w,4)</span></span><br><span class="line">sp2 = imgGrey.shape <span class="comment"># (h,w)</span></span><br></pre></td></tr></table></figure>
+<p>图像总像素数和数据类型分别由<code>img.size</code>和<code>img.dtype</code>保存。一般情况下，图像的数据类型是uint8。</p>
+<h3 id="生成指定大小的空图像"><a href="#生成指定大小的空图像" class="headerlink" title="生成指定大小的空图像"></a>生成指定大小的空图像</h3><p>使用numpy创建uint8格式的矩阵模型。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">imgZero = np.zeros(img.shape, np.uint8)</span><br><span class="line">imgFix  = np.zeros((<span class="number">300</span>,<span class="number">500</span>,<span class="number">3</span>), np.uint8)</span><br><span class="line"><span class="comment"># imgFix = np.zeros((300,500), np.uint8) # 灰度</span></span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">"imgZero"</span>,imgZero)</span><br><span class="line">cv2.imshow(<span class="string">"imgFix"</span>,imgFix)</span><br></pre></td></tr></table></figure></p>
+<h3 id="像素获取、修改"><a href="#像素获取、修改" class="headerlink" title="像素获取、修改"></a>像素获取、修改</h3><p>可由坐标键值直接访问<strong>(B,G,R)</strong>元组。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">numb = img[50,100]</span><br><span class="line">img[50,100] = (0,0,255) # red</span><br></pre></td></tr></table></figure></p>
+<p>也能分开访问每一个通道。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">img[0:100,100:200,0] = 255 # G</span><br><span class="line"># 在原图片上覆盖了一个矩形</span><br></pre></td></tr></table></figure></p>
+<h3 id="分离通道"><a href="#分离通道" class="headerlink" title="分离通道"></a>分离通道</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b,g,r = cv2.split(img)</span><br><span class="line">merged = cv2.merge([b,g,r])</span><br></pre></td></tr></table></figure>
+<h3 id="添加文本"><a href="#添加文本" class="headerlink" title="添加文本"></a>添加文本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cv2.putText(img,                    # 图源</span><br><span class="line">            text,                   # 文本</span><br><span class="line">            org,                    # 起点坐标</span><br><span class="line">            fontFace,               # 字体</span><br><span class="line">            fontScale,              # 字体大小</span><br><span class="line">            color,                  # 字体颜色</span><br><span class="line">            thickness=None,         # 加粗</span><br><span class="line">            lineType=None,</span><br><span class="line">            bottomLeftOrigin=None)</span><br></pre></td></tr></table></figure>
+<h3 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">imgg = cv2.resize(img, (300,100))</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>不知道拉伸的时候是失真还是像素重复</p>
+</blockquote>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/10/20/OpenCV-Intro-基本图像操作/" data-id="cjscxvnn8000058hygyzwr95r" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/opencv/">opencv </a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/20/SKLearn玄学操作/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          SKLearn玄学操作
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/10/16/Test-post-from-hexo-admin-ehc/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">节奏游戏开发时的万般阻难</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/15/Permission denied when git push/">Permission denied when git push</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Kitekii<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

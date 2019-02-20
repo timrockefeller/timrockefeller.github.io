@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>ゼロから始めるJAVA世界生活 01 | 外野</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="环境搭建接下来将介绍如何建立环境并支持VSCode。  从官网下载jdk  等待一段时间安装完成  在系统的环境变量设置中，全局变量里添加JAVA_HOME并将值设置为C:\Program Files\Java\jdk-*\，即jdk根目录。  变量中的PATH添加值%JAVA_HOME%\jre\，%JAVA_HOME%\lib\和%JAVA_HOME%\bin\，此时测试以下命令  12$">
+<meta name="keywords" content="coding,oracle,java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ゼロから始めるJAVA世界生活 01">
+<meta property="og:url" content="http://yoursite.com/2018/04/17/ゼロから始めるJAVA世界生活-01/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="环境搭建接下来将介绍如何建立环境并支持VSCode。  从官网下载jdk  等待一段时间安装完成  在系统的环境变量设置中，全局变量里添加JAVA_HOME并将值设置为C:\Program Files\Java\jdk-*\，即jdk根目录。  变量中的PATH添加值%JAVA_HOME%\jre\，%JAVA_HOME%\lib\和%JAVA_HOME%\bin\，此时测试以下命令  12$">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-04-21T01:22:59.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ゼロから始めるJAVA世界生活 01">
+<meta name="twitter:description" content="环境搭建接下来将介绍如何建立环境并支持VSCode。  从官网下载jdk  等待一段时间安装完成  在系统的环境变量设置中，全局变量里添加JAVA_HOME并将值设置为C:\Program Files\Java\jdk-*\，即jdk根目录。  变量中的PATH添加值%JAVA_HOME%\jre\，%JAVA_HOME%\lib\和%JAVA_HOME%\bin\，此时测试以下命令  12$">
+  
+    <link rel="alternate" href="/atom.xml" title="外野" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">外野</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-ゼロから始めるJAVA世界生活-01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/04/17/ゼロから始めるJAVA世界生活-01/" class="article-date">
+  <time datetime="2018-04-17T12:20:06.000Z" itemprop="datePublished">2018-04-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ゼロから始めるJAVA世界生活 01
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>接下来将介绍如何建立环境并支持<strong>VSCode</strong>。</p>
+<ol>
+<li><p>从<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">官网</a>下载jdk</p>
+</li>
+<li><p>等待一段时间安装完成</p>
+</li>
+<li><p>在系统的环境变量设置中，全局变量里添加<code>JAVA_HOME</code>并将值设置为<code>C:\Program Files\Java\jdk-*\</code>，即jdk根目录。</p>
+</li>
+<li><p>变量中的<code>PATH</code>添加值<code>%JAVA_HOME%\jre\</code>，<code>%JAVA_HOME%\lib\</code>和<code>%JAVA_HOME%\bin\</code>，此时测试以下命令</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ javac -version</span><br><span class="line">$ java -version</span><br></pre></td></tr></table></figure>
+<p> 若能成功显示版本号则安装成功。</p>
+</li>
+</ol>
+<a id="more"></a>
+<h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><p>安装 VSCode 后，添加插件<code>Java Extension Pack</code>。</p>
+<p>在首选项中覆盖以下条目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;files.autoGuessEncoding&quot; : true,</span><br><span class="line">&quot;java.home&quot; : &quot;%JAVA_HOME%&quot;</span><br></pre></td></tr></table></figure></p>
+<p>环境变量中添加<code>JDK_HOME</code>，值与<code>JAVA_HOME</code>相同。</p>
+<h4 id="项目文件目录"><a href="#项目文件目录" class="headerlink" title="项目文件目录"></a>项目文件目录</h4><pre><code>├── .classpath
+├── .project
+├── .vscode
+│   └── launch.json
+├── bin
+└── src
+</code></pre><h4 id="创建-project和-classpath文件"><a href="#创建-project和-classpath文件" class="headerlink" title="创建.project和.classpath文件"></a>创建.project和.classpath文件</h4><ul>
+<li><p>.project</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">projectDescription</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>testjava<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">comment</span>&gt;</span>Project testjava created by Buildship.<span class="tag">&lt;/<span class="name">comment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">projects</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">projects</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">buildSpec</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>org.eclipse.jdt.core.javabuilder<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arguments</span>&gt;</span> <span class="tag">&lt;/<span class="name">arguments</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>org.eclipse.buildship.core.gradleprojectbuilder<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arguments</span>&gt;</span> <span class="tag">&lt;/<span class="name">arguments</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">buildSpec</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">natures</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">nature</span>&gt;</span>org.eclipse.jdt.core.javanature<span class="tag">&lt;/<span class="name">nature</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">nature</span>&gt;</span>org.eclipse.buildship.core.gradleprojectnature<span class="tag">&lt;/<span class="name">nature</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">natures</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">projectDescription</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>.classpath</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">classpath</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">"src"</span> <span class="attr">path</span>=<span class="string">"src"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">"con"</span> <span class="attr">path</span>=<span class="string">"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">"con"</span> <span class="attr">path</span>=<span class="string">"org.eclipse.buildship.core.gradleclasspathcontainer"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">"output"</span> <span class="attr">path</span>=<span class="string">"bin"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">classpath</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>VSCode会自动识别为eclipse项目。</p>
+<h4 id="配置launch-json"><a href="#配置launch-json" class="headerlink" title="配置launch.json"></a>配置launch.json</h4><p>在此处添加classpath,cwd等信息可为编译器指定目录。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"java"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"Debug (Launch)"</span>,</span><br><span class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">      <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceFolder&#125;/bin"</span>,</span><br><span class="line">      <span class="attr">"sourcePaths"</span>: [</span><br><span class="line">        <span class="string">"$(workspaceRoot)/src"</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"classPaths"</span>: [//可导入jar包</span><br><span class="line">        <span class="string">""</span>,</span><br><span class="line">        <span class="string">"$(workspaceRoot)/bin"</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"mainClass"</span>: <span class="string">"com.coolcao.test.$&#123;fileBasenameNoExtension&#125;"</span>,</span><br><span class="line">      <span class="attr">"args"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h3><p>该软件能自动寻找jdk环境，提供<strong>GUI</strong>。</p>
+<h2 id="概念描述"><a href="#概念描述" class="headerlink" title="概念描述"></a>概念描述</h2><h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Title: Processing</span><br><span class="line">*.jar--&gt;RunTimeEnv: classPath</span><br><span class="line">*.java-&gt;*.class: $ javac</span><br><span class="line">*.class-&gt;RunTimeEnv: $ javaw</span><br><span class="line">*.java--&gt;RunTimeEnv: classname</span><br></pre></td></tr></table></figure>
+<h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>package是java的<strong>逻辑</strong>文件夹，在文件级别上，也会依据分类。</p>
+<p>package能够用<code>.</code>来连接<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> package1.package2.package3.class1 <span class="comment">//意味着将三层逻辑文件夹里的class1类声明使用</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="javadoc"><a href="#javadoc" class="headerlink" title="javadoc"></a>javadoc</h3><h4 id="usage"><a href="#usage" class="headerlink" title="usage"></a>usage</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ javadoc [options] [packagename] [sourcefiles] [@files]</span><br><span class="line">$ javadoc -d doc *.java</span><br></pre></td></tr></table></figure>
+<p>根据文档中关键词生成文档，诸如<code>@param</code>，<code>@returns</code>，<code>@throw</code>可用于方法注释。</p>
+<h4 id="format"><a href="#format" class="headerlink" title="format"></a>format</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * your note here</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@auther</span> Kitekii</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> a happy number</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="keyword">static</span> <span class="title">foo</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
+<h3 id="jar"><a href="#jar" class="headerlink" title="*.jar"></a>*.jar</h3><p>将多个class封装成一个包，可保存资源、代码等。</p>
+<h4 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h4><ol>
+<li><p>eclipse中选中package使用<strong>Export</strong>导出为jar文件。</p>
+</li>
+<li><p><code>$ jar -cvf [Export Name] [Package Name]</code></p>
+</li>
+</ol>
+<h4 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h4><p>引用时有多种方法</p>
+<ol>
+<li><p><code>$ javac -classpath ./bin &lt;javafile&gt;</code><br>这里的<code>-classpath</code>又可缩写为<code>-cp</code>。</p>
+</li>
+<li><p>eclipse中设置项目首选项。</p>
+</li>
+<li><p>手动更改.classpath文件，具体前面有写道。</p>
+</li>
+</ol>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="元件"><a href="#元件" class="headerlink" title="元件"></a>元件</h3><p>初始化变量：<code>int a = 0;</code></p>
+<p>由五个部分组成<code>**数据类型** *名称* 运算符 **初始化值** 分号</code></p>
+<h3 id="operator"><a href="#operator" class="headerlink" title="operator"></a>operator</h3><p>包括<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>=</code>,<code>==</code>,<code>!=</code>,<code>&gt;</code>,<code>&lt;</code>,<code>&gt;&gt;</code>,<code>&lt;&lt;</code>,<code>&lt;=</code>,<code>&gt;=</code>,<code>?*:</code>,<code>~</code>,<code>()</code>,<code>[]</code>,<code>{}</code>,<code>&amp;&amp;</code>,<code>||</code>,<code>^</code>在内的二元、三元运算符。</p>
+<h2 id="面向对象设计"><a href="#面向对象设计" class="headerlink" title="面向对象设计"></a>面向对象设计</h2><p>java是纯面向对象语言，风格和C#类似</p>
+<p>类 -&gt; 实例1，实例2，…</p>
+<p><code>实例1.fun();</code>，<code>类.(static)foo();</code>。</p>
+<h2 id="小作业"><a href="#小作业" class="headerlink" title="小作业"></a>小作业</h2><h3 id="1-Hello-world"><a href="#1-Hello-world" class="headerlink" title="1. Hello world"></a>1. Hello world</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @file ./HelloWorld.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-Operation"><a href="#2-Operation" class="headerlink" title="2. Operation"></a>2. Operation</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @file test.java</span></span><br><span class="line"><span class="comment">// @classpath ./bin</span></span><br><span class="line"><span class="keyword">import</span> com.oraclesdp.common.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</span><br><span class="line">        String value = SystemIn.nextLine();</span><br><span class="line">        System.out.println(value);</span><br><span class="line">        System.out.println(<span class="number">13</span>&gt;&gt;<span class="number">2</span>);<span class="comment">// 3</span></span><br><span class="line">        System.out.println(<span class="number">23</span>&amp;<span class="number">12</span>);<span class="comment">// 4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/04/17/ゼロから始めるJAVA世界生活-01/" data-id="cjscxvnnt000a58hy8ug57p0z" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/coding/">coding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oracle/">oracle</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/04/18/遇见hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          遇见hexo
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ゼロから始めるJAVA世界生活 01</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/anime/">anime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/coding/">coding</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/illustrate/">illustrate</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/machine-learning/">machine learning</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/opencv/">opencv </a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oracle/">oracle</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/艺类/">艺类</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/15/Permission denied when git push/">Permission denied when git push</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+          </li>
+        
+          <li>
+            <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 Kitekii<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

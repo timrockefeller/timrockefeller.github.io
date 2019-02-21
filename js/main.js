@@ -67,7 +67,7 @@
   var title = document.title
   var map = {
     0: { icon: link.attr('href'), title: '(/≧▽≦/)咦！又好了！' + title },
-    1: { icon: '//www.anotherhome.net/wp-content/themes/Amativeness/fail.ico', title: '(●—●)喔哟，崩溃啦！' }
+    1: { icon: '/image/failure.ico', title: '(●—●)喔哟，崩溃啦！' }
   }
   $(window).on('visibilitychange', function () {
     var data = map[+document.hidden]

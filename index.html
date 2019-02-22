@@ -159,11 +159,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        19
+        18
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        12
+        18
         <span>tags</span>
       </div>
     </div>
@@ -215,6 +215,157 @@
 
       
       <section id="main">
+  <article id="post-MNIST-with-FC-and-CNN" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      
+	
+		<a href="/2019/02/22/MNIST-with-FC-and-CNN/" itemprop="url">
+      <img src="https://miao.su/images/2019/02/21/taejune-kim-smile-taejunea2dac.jpg" class="article-banner">
+    </a>
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/02/22/MNIST-with-FC-and-CNN/">MNIST with FC and CNN</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2019/02/22/MNIST-with-FC-and-CNN/">
+      <time datetime="2019-02-22T04:50:11.000Z" itemprop="datePublished">2019-02-22</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/Keras/">Keras</a>, <a class="tag-link" href="/tags/ML/">ML</a>, <a class="tag-link" href="/tags/Tutor/">Tutor</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p></p><p>来了来了我们可亲可爱的朋友<strong>MNIST</strong>~</p>
+<p>作为一个超级初级的<strong>手写数字数据集</strong>，含有60k个<del>全损</del>低清图像作为训练集，10k个作为验证集。每个图像是<code>(28,28,1)</code>范围在[0,255]的整数数字<strong>灰阶图像</strong>，数字越大代表笔迹越重，即黑底白字。</p>
+<p>介于MNIST的特性，想来试试<strong>FC</strong>和<strong>CNN</strong>之间的区别，当然训练速度仅供参考，模型不同怎么恋爱？我这个小1060也带不动两位巨佬神仙打架。</p><p></p>
+      <p class="article-more-link">
+        <a href="/2019/02/22/MNIST-with-FC-and-CNN/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2019/02/22/MNIST-with-FC-and-CNN/" data-id="cjsfphwvp0002owhym8g1muv9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   <article id="post-又见hexo+SSL" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -308,7 +459,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/02/20/又见hexo+SSL/" data-id="cjseb031b000iqwhyysi8a5ro" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/02/20/又见hexo+SSL/" data-id="cjsfphww9000kowhyj936ncoc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -413,11 +564,16 @@
 
 
             
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/coding/">coding</a>
+    <a class="tag-link" href="/tags/init/">init</a>, <a class="tag-link" href="/tags/rust/">rust</a>
   </div>
 
 
@@ -530,7 +686,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/12/22/Rust Windows环境搭建/" data-id="cjseb031r0011qwhyzwy9z43s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/12/22/Rust Windows环境搭建/" data-id="cjsfphwwx001fowhyl31itc1n" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -635,11 +791,16 @@
 
 
             
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/coding/">coding</a>
+    <a class="tag-link" href="/tags/git/">git</a>
   </div>
 
 
@@ -677,7 +838,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjseb030t0002qwhyxbzqm2rm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjsfphwvw0008owhygxh5ra9w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -782,8 +943,18 @@
 
 
             
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
 
             
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/Keras/">Keras</a>
+  </div>
+
 
           </div>
         
@@ -819,7 +990,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/21/Keras-Intro/" data-id="cjseb030x0005qwhynwywjp77" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/21/Keras-Intro/" data-id="cjsfphwvh0000owhy166v7pj5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -924,11 +1095,16 @@
 
 
             
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/coding/">coding</a>, <a class="tag-link" href="/tags/machine-learning/">machine learning</a>
+    <a class="tag-link" href="/tags/machine-learning/">machine learning</a>, <a class="tag-link" href="/tags/sklearn/">sklearn</a>
   </div>
 
 
@@ -962,7 +1138,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/20/SKLearn玄学操作/" data-id="cjseb03100008qwhyjxj06sup" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/20/SKLearn玄学操作/" data-id="cjsfphwvy0009owhybkqsjbwu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1050,7 +1226,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro : 基本图像操作</a>
+      <a class="article-title" href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro ： 基本图像操作</a>
     </h1>
   
 
@@ -1067,11 +1243,16 @@
 
 
             
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/coding/">coding</a>, <a class="tag-link" href="/tags/opencv/">opencv </a>
+    <a class="tag-link" href="/tags/opencv/">opencv</a>
   </div>
 
 
@@ -1083,7 +1264,7 @@
 
     <div class="article-entry" itemprop="articleBody">
     
-      <p></p><p>Open Computer Vision 万物起源。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># OpenCV本体</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 数学库</span></span><br></pre></td></tr></table></figure></p>
+      <p></p><p>Open Computer Vision 万物起源。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="comment"># OpenCV本体</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np <span class="comment"># 数学库</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="图像基本操作"><a href="#图像基本操作" class="headerlink" title="图像基本操作"></a>图像基本操作</h2><h3 id="读取、显示、保存"><a href="#读取、显示、保存" class="headerlink" title="读取、显示、保存"></a>读取、显示、保存</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">IMG_PATH = <span class="string">"/path/to/img"</span></span><br><span class="line"><span class="comment"># 此处图片链接可能不支持中文</span></span><br><span class="line">img = cv2.imread(IMG_PATH,cv2.IMREAD_COLOR)</span><br></pre></td></tr></table></figure>
 <p>opencv支持以下三种读入方式：</p>
 <ul>
@@ -1105,7 +1286,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/20/OpenCV-Intro-基本图像操作/" data-id="cjseb030z0007qwhy12b5iu6t" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/20/OpenCV-Intro-基本图像操作/" data-id="cjsfphwvu0006owhy489kuza6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1184,7 +1365,7 @@
 
 
 
-  <article id="post-Test-post-from-hexo-admin-ehc" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-节奏游戏开发时的万般阻难" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -1193,7 +1374,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/16/Test-post-from-hexo-admin-ehc/">节奏游戏开发时的万般阻难</a>
+      <a class="article-title" href="/2018/10/16/节奏游戏开发时的万般阻难/">节奏游戏开发时的万般阻难</a>
     </h1>
   
 
@@ -1203,15 +1384,25 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2018/10/16/Test-post-from-hexo-admin-ehc/">
+    <a href="/2018/10/16/节奏游戏开发时的万般阻难/">
       <time datetime="2018-10-16T06:29:00.000Z" itemprop="datePublished">2018-10-16</time>
     </a>
   </div>
 
 
             
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
 
             
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/游戏开发/">游戏开发</a>
+  </div>
+
 
           </div>
         
@@ -1277,7 +1468,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/16/Test-post-from-hexo-admin-ehc/" data-id="cjseb0314000bqwhypevzpb3a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/16/节奏游戏开发时的万般阻难/" data-id="cjsfphww3000dowhy99mrzcd6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1382,11 +1573,16 @@
 
 
             
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/coding-nodejs/">coding nodejs</a>
+    <a class="tag-link" href="/tags/nodejs/">nodejs</a>
   </div>
 
 
@@ -1416,7 +1612,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/" data-id="cjseb032s0018qwhyw4gbkb1x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/" data-id="cjsfphwxr001uowhy3wer1dhb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1521,11 +1717,16 @@
 
 
             
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/coding-wacom/">coding wacom</a>
+    <a class="tag-link" href="/tags/wacom/">wacom</a>
   </div>
 
 
@@ -1564,143 +1765,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/06/oldblog/如何获取数位板压感信息？windows API似乎可解，js就别想了/" data-id="cjseb032t001aqwhytikkvf2y" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-JavaS/TicTacToe" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/22/JavaS/TicTacToe/">Tic Tac Toe “我也不知道是什么”算法</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2018/05/22/JavaS/TicTacToe/">
-      <time datetime="2018-05-22T14:39:00.000Z" itemprop="datePublished">2018-05-22</time>
-    </a>
-  </div>
-
-
-            
-
-            
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/coding/">coding</a>, <a class="tag-link" href="/tags/java/">java</a>
-  </div>
-
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      <p></p><p>为了巩固类、数组等知识，下来一个Assignment，定睛一看，居然是个四子棋！没想到人在江湖，也会遇上如此困难之题，随缘写个备注以防自己忘记。</p>
-<p>完整代码已上传至 <a href="https://github.com/timrockefeller/ExplotionEuler/blob/master/src/TicTacToe.java" target="_blank" rel="noopener">timrockefeller/ExplotionEuler</a>。</p><p></p>
-      <p class="article-more-link">
-        <a href="/2018/05/22/JavaS/TicTacToe/#more">Read More</a>
-      </p>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://kitekii.pw/2018/05/22/JavaS/TicTacToe/" data-id="cjseb0337001vqwhycu3j2typ" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/06/oldblog/如何获取数位板压感信息？windows API似乎可解，js就别想了/" data-id="cjsfphwxq001rowhys0mcfusv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1797,6 +1862,25 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2019/02/22/MNIST-with-FC-and-CNN/" class="thumbnail">
+  
+  
+    <span style="background-image:url(https://miao.su/images/2019/02/21/taejune-kim-smile-taejunea2dac.jpg)" alt="MNIST with FC and CNN" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-title"><a href="/2019/02/22/MNIST-with-FC-and-CNN/" class="title">MNIST with FC and CNN</a></p>
+              <p class="item-date"><time datetime="2019-02-22T04:50:11.000Z" itemprop="datePublished">2019-02-22</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2019/02/20/又见hexo+SSL/" class="thumbnail">
   
   
@@ -1826,7 +1910,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
               <p class="item-title"><a href="/2018/12/22/Rust Windows环境搭建/" class="title">Rust Windows环境搭建</a></p>
               <p class="item-date"><time datetime="2018-12-22T02:22:11.000Z" itemprop="datePublished">2018-12-22</time></p>
             </div>
@@ -1845,7 +1929,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
               <p class="item-title"><a href="/2018/12/15/Permission denied when git push/" class="title">Permission denied when git push</a></p>
               <p class="item-date"><time datetime="2018-12-15T14:53:00.000Z" itemprop="datePublished">2018-12-15</time></p>
             </div>
@@ -1864,28 +1948,9 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
               <p class="item-title"><a href="/2018/10/21/Keras-Intro/" class="title">Keras Intro : 基本模型保存</a></p>
               <p class="item-date"><time datetime="2018-10-21T14:06:16.000Z" itemprop="datePublished">2018-10-21</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2018/10/20/SKLearn玄学操作/" class="thumbnail">
-  
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2018/10/20/SKLearn玄学操作/" class="title">SKLearn玄学操作</a></p>
-              <p class="item-date"><time datetime="2018-10-20T08:54:00.000Z" itemprop="datePublished">2018-10-20</time></p>
             </div>
           </li>
         
@@ -1899,7 +1964,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">1</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">15</span></li></ul>
     </div>
   </div>
 
@@ -1909,7 +1974,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1919,7 +1984,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/coding/" style="font-size: 20px;">coding</a> <a href="/tags/coding-nodejs/" style="font-size: 10px;">coding nodejs</a> <a href="/tags/coding-wacom/" style="font-size: 10px;">coding wacom</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/init/" style="font-size: 10px;">init</a> <a href="/tags/java/" style="font-size: 17.5px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv </a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a>
+      <a href="/tags/Keras/" style="font-size: 13.33px;">Keras</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 13.33px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16.67px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/艺类/" style="font-size: 13.33px;">艺类</a>
     </div>
   </div>
 

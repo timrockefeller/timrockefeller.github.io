@@ -98,6 +98,8 @@
         
           <a class="main-nav-link" href="/categories">目录</a>
         
+          <a class="main-nav-link" href="/meme">独白</a>
+        
           <a class="main-nav-link" href="/about">关于</a>
         
       </nav>
@@ -130,6 +132,8 @@
         
           <td><a class="main-nav-link" href="/categories">目录</a></td>
         
+          <td><a class="main-nav-link" href="/meme">独白</a></td>
+        
           <td><a class="main-nav-link" href="/about">关于</a></td>
         
         <td>
@@ -159,11 +163,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        18
+        24
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        18
+        21
         <span>tags</span>
       </div>
     </div>
@@ -277,7 +281,154 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/05/22/JavaS/TicTacToe/" data-id="cjsfphwy4002mowhyq02qi6un" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/05/22/JavaS/TicTacToe/" data-id="cjsih2eps0032lshylsyj0jca" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  <article id="post-oldblog/这半年时间" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/14/oldblog/这半年时间/">这半年时间</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/05/14/oldblog/这半年时间/">
+      <time datetime="2018-05-13T16:00:00.000Z" itemprop="datePublished">2018-05-14</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/日记本/">日记本</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/碎碎念/">碎碎念</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <p>很朴素地度过了半年时间，延宕在虚实之间。<strong>积极废人</strong>可能就是我这样的人！</p>
+<p>以下是一些有趣的发现：一切技能都是不断练习能进步的。天赋决定的东西为零，只有兴趣可以影响进步速度。感觉和《刻意联系》中的内容差不多便不细讲。</p>
+<p>在为期半年的人间观察中，很多人对一件事都是有着三分热心态，而帝都学生自我意识尤为强烈，以至于好为人师的风气在学生间传播。如一友人刚买了个陶笛，很浮夸地向众人炫耀着，却吹不出音阶。几天后没看见他再一次拿起。有时这样的人往往是悲惨的，不靠这些东西没有办法活得安全感。</p>
+<p>说起来大学这一载体充分体现了人类强化社会性的，很多事件会自上而下地安排过来，底层学生始终处于一个高压却不敢出去的状态。</p>
+<p>还想再引用一次：</p>
+<blockquote>
+<p>如今你的气质里，藏着你走过的路，读过的书和爱过的人。–《卡萨布兰卡》</p>
+</blockquote>
+<p>共勉。</p>
+
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/05/14/oldblog/这半年时间/" data-id="cjsih2eor0027lshy4iliumia" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -417,7 +568,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjsfphwxl001lowhy7vyxqeca" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjsih2eoa001nlshyjvnw7ovx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -559,7 +710,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="cjsfphwxk001kowhy60aauj16" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="cjsih2eob001plshyc5fj7c8m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -704,7 +855,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" data-id="cjsfphwxm001nowhyjpdwrrjm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" data-id="cjsih2epr002zlshy6w86gqj9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -855,7 +1006,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/18/遇见hexo/" data-id="cjsfphww5000eowhyi581ivtr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/18/遇见hexo/" data-id="cjsih2ena0015lshyp6f05s2d" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1008,7 +1159,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/" data-id="cjsfphwxn001oowhyfgl07zgf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/" data-id="cjsih2eo8001mlshy54wyahd9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1156,7 +1307,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/14/艺类笔记/徐天华：娱乐设计的基本素养/" data-id="cjsfphwxs001vowhyzjvmo8lk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/14/艺类笔记/徐天华：娱乐设计的基本素养/" data-id="cjsih2epp002ylshyrogq9w94" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1263,7 +1414,7 @@
             
   <div class="article-category">
     <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/日记本/">日记本</a>
+      <a class="article-category-link" href="/categories/札记阁/">札记阁</a>
   </div>
 
 
@@ -1297,7 +1448,154 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/03/31/《宣告黎明的露之歌》观感/" data-id="cjsfphww7000iowhy4kaq53lc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/03/31/《宣告黎明的露之歌》观感/" data-id="cjsih2elo000alshy8cvv3aua" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  <article id="post-oldblog/新的世界，共勉" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/17/oldblog/新的世界，共勉/">新的世界，共勉</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2017/07/17/oldblog/新的世界，共勉/">
+      <time datetime="2017-07-16T16:00:00.000Z" itemprop="datePublished">2017-07-17</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/日记本/">日记本</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/碎碎念/">碎碎念</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <p>高考结束的时候就已经想到会来一次潇潇洒洒的分别，想不到这么快就来临了。独在异乡的时候，抱有那么一点与朋友相会的念想，想必漫漫长路就消失殆尽。</p>
+<p>在那之前，这个长长短短的暑假过去一半，却从来没有好好部署过。因此有了这篇文章，给即将虚度过去的时间打上些麻醉。</p>
+<h4 id="代码与制作"><a href="#代码与制作" class="headerlink" title="代码与制作"></a>代码与制作</h4><p>对其的拖误导致一个甚至一群人的延宕，计划是要赶在开学之前能写出第一个版本，大学期间熟练一下美工，补上美工部分。初预定：每周公开一个快照或更新内容信息，放出版本进度以督促自我。btw，大学期间先把计算机类理论学完，考研树莓不迟。有了技术打底，就有更多条件支持创意的实现。</p>
+<h4 id="各地旅行"><a href="#各地旅行" class="headerlink" title="各地旅行"></a>各地旅行</h4><p>穷游TOP，非享受型浏览。或许可以来一次个人行，以适应无人在旁的寂寞感，实际操作较难，所以不如多出家宅见见世面。</p>
+<h4 id="英语预习"><a href="#英语预习" class="headerlink" title="英语预习"></a>英语预习</h4><p>为了四六级吧，也挺重要的，所以接下来可以开始高考复习计划了。期间可听听英文实况，读读论文之类的。</p>
+<h4 id="作品与投稿"><a href="#作品与投稿" class="headerlink" title="作品与投稿"></a>作品与投稿</h4><p>因为有在学习画画，制作PromotionVideo只剩下音乐与视频剪辑两方面内容。若是能火，大学也不会太寂寞吧。这个计划比较长远，尽量要赶上明年的拜年祭，届时也许会是以剧情向PV展现。脑中浮现的都是些离奇古怪的剧本，这应该成为我的价值所在。</p>
+<p>在此之前可以在Pixiv投稿吧，太羞耻么就去Pawoo，也算是一种督促。</p>
+<h4 id="番剧与游戏"><a href="#番剧与游戏" class="headerlink" title="番剧与游戏"></a>番剧与游戏</h4><p>番剧带来清爽，游戏带来世界观。当然，这些留在晚上或者周末，说真的，除了宅圈，这些东西真的没脸拿出来见人。</p>
+<p><em>TBC</em></p>
+
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2017/07/17/oldblog/新的世界，共勉/" data-id="cjsih2eop0023lshyzk9vat3o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1377,7 +1675,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
   </nav>
 
 </section>
@@ -1496,7 +1794,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">15</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">15</span></li></ul>
     </div>
   </div>
 
@@ -1506,7 +1804,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1516,7 +1814,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Keras/" style="font-size: 13.33px;">Keras</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 13.33px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16.67px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/艺类/" style="font-size: 13.33px;">艺类</a>
+      <a href="/tags/Keras/" style="font-size: 13.33px;">Keras</a> <a href="/tags/ML/" style="font-size: 13.33px;">ML</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 13.33px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16.67px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/碎碎念/" style="font-size: 16.67px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 13.33px;">艺类</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 

@@ -5,18 +5,18 @@
   
   <title>节奏游戏开发时的万般阻难 | 外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="施工中…… 音符同步senator 你需要[RequireComponent(typeof(AudioSource))]来规定该元件可被作为音游元件。  使用AudioSettings.dspTime 跟踪歌曲的位置，而不是使用    Time.timeSinceLevelLoad。  使用歌曲的位置来更新移动。  不要通过每帧的时差来更新音符。   位置跟踪在所有节奏游戏中，我们必须跟踪歌曲位置">
+  <meta name="description" content="施工中…… 音符同步senator 你需要[RequireComponent(typeof(AudioSource))]来规定该元件可被作为音游元件。  使用AudioSettings.dspTime 跟踪歌曲的位置，而不是使用    Time.timeSinceLevelLoad。  使用歌曲的位置来更新移动。  不要通过每帧的时差来更新音符。">
 <meta name="keywords" content="游戏开发">
 <meta property="og:type" content="article">
 <meta property="og:title" content="节奏游戏开发时的万般阻难">
 <meta property="og:url" content="http://kitekii.pw/2018/10/16/节奏游戏开发时的万般阻难/index.html">
 <meta property="og:site_name" content="外野">
-<meta property="og:description" content="施工中…… 音符同步senator 你需要[RequireComponent(typeof(AudioSource))]来规定该元件可被作为音游元件。  使用AudioSettings.dspTime 跟踪歌曲的位置，而不是使用    Time.timeSinceLevelLoad。  使用歌曲的位置来更新移动。  不要通过每帧的时差来更新音符。   位置跟踪在所有节奏游戏中，我们必须跟踪歌曲位置">
+<meta property="og:description" content="施工中…… 音符同步senator 你需要[RequireComponent(typeof(AudioSource))]来规定该元件可被作为音游元件。  使用AudioSettings.dspTime 跟踪歌曲的位置，而不是使用    Time.timeSinceLevelLoad。  使用歌曲的位置来更新移动。  不要通过每帧的时差来更新音符。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-22T06:45:47.250Z">
+<meta property="og:updated_time" content="2019-02-24T05:26:59.112Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="节奏游戏开发时的万般阻难">
-<meta name="twitter:description" content="施工中…… 音符同步senator 你需要[RequireComponent(typeof(AudioSource))]来规定该元件可被作为音游元件。  使用AudioSettings.dspTime 跟踪歌曲的位置，而不是使用    Time.timeSinceLevelLoad。  使用歌曲的位置来更新移动。  不要通过每帧的时差来更新音符。   位置跟踪在所有节奏游戏中，我们必须跟踪歌曲位置">
+<meta name="twitter:description" content="施工中…… 音符同步senator 你需要[RequireComponent(typeof(AudioSource))]来规定该元件可被作为音游元件。  使用AudioSettings.dspTime 跟踪歌曲的位置，而不是使用    Time.timeSinceLevelLoad。  使用歌曲的位置来更新移动。  不要通过每帧的时差来更新音符。">
   
   
   
@@ -103,6 +103,8 @@
         
           <a class="main-nav-link" href="/categories">目录</a>
         
+          <a class="main-nav-link" href="/meme">独白</a>
+        
           <a class="main-nav-link" href="/about">关于</a>
         
       </nav>
@@ -135,6 +137,8 @@
         
           <td><a class="main-nav-link" href="/categories">目录</a></td>
         
+          <td><a class="main-nav-link" href="/meme">独白</a></td>
+        
           <td><a class="main-nav-link" href="/about">关于</a></td>
         
         <td>
@@ -164,11 +168,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        18
+        24
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        18
+        21
         <span>tags</span>
       </div>
     </div>
@@ -289,6 +293,7 @@
 <li><p>不要通过每帧的时差来更新音符。</p>
 </li>
 </ol>
+<a id="more"></a>
 <h4 id="位置跟踪"><a href="#位置跟踪" class="headerlink" title="位置跟踪"></a>位置跟踪</h4><p>在所有节奏游戏中，我们必须跟踪歌曲位置，以确定是否应该生成音符。如下所示：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">float songPosition;</span><br><span class="line">// 节拍当前位置</span><br><span class="line">float songPosInBeats;</span><br><span class="line">// 节拍的持续时间</span><br><span class="line">float secPerBeat;</span><br><span class="line">float dsptimesong;</span><br><span class="line">// We initialize these fields in the Start() function:</span><br><span class="line">void Start() &#123;</span><br><span class="line">    secPerBeat = 60f / bpm;</span><br><span class="line">    dsptimesong = (float) AudioSettings.dspTime;</span><br><span class="line">    // 开始播放音乐</span><br><span class="line">    GetComponent&lt;AudioSource&gt;().Play();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>我们转换<code>bpm</code>到<code>secPerBeat</code>后面方便使用。<code>secPerBeat</code>将用于计算节拍中的歌曲位置，这对音符生成非常重要。</p>
@@ -333,7 +338,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/16/节奏游戏开发时的万般阻难/" data-id="cjsfphww3000dowhy99mrzcd6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/16/节奏游戏开发时的万般阻难/" data-id="cjsih2emv000ylshys249a56x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -555,7 +560,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">15</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">15</span></li></ul>
     </div>
   </div>
 
@@ -565,7 +570,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -575,7 +580,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Keras/" style="font-size: 13.33px;">Keras</a> <a href="/tags/ML/" style="font-size: 10px;">ML</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 13.33px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/machine-learning/" style="font-size: 10px;">machine learning</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16.67px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/艺类/" style="font-size: 13.33px;">艺类</a>
+      <a href="/tags/Keras/" style="font-size: 13.33px;">Keras</a> <a href="/tags/ML/" style="font-size: 13.33px;">ML</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 13.33px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 13.33px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16.67px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/碎碎念/" style="font-size: 16.67px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 13.33px;">艺类</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 

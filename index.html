@@ -163,7 +163,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        25
+        26
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -178,12 +178,6 @@
             
             
             <td>
-              <a href="https://github.com/timrockefeller" target="_blank" title="github" class="tooltip">
-                <i class="fa fa-github"></i>
-              </a>
-            </td>
-            
-            <td>
               <a href="https://twitter.com/timrockefeller" target="_blank" title="twitter" class="tooltip">
                 <i class="fa fa-twitter"></i>
               </a>
@@ -196,8 +190,14 @@
             </td>
             
             <td>
-              <a href="https://wpa.qq.com/msgrd?V=3&Uin=489343302" target="_blank" title="qq" class="tooltip">
-                <i class="fa fa-qq"></i>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class="tooltip">
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://www.reddit.com/user/kitekii" target="_blank" title="reddit" class="tooltip">
+                <i class="fa fa-reddit"></i>
               </a>
             </td>
             
@@ -219,16 +219,25 @@
 
       
       <section id="main">
-  <article id="post-JavaS/JDBC" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-Rust/Rust_Complie_note" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
+    
+      
+	
+		<a href="/2019/04/11/Rust/Rust_Complie_note/" itemprop="url">
+      <img src="https://miao.su/images/2019/04/18/sp190418_2305559fa28.png" class="article-banner">
+    </a>
+	
+
+
     
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/03/07/JavaS/JDBC/">JDBC简述</a>
+      <a class="article-title" href="/2019/04/11/Rust/Rust_Complie_note/">Rust Compile Note</a>
     </h1>
   
 
@@ -238,25 +247,15 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2019/03/07/JavaS/JDBC/">
-      <time datetime="2019-03-07T03:34:00.000Z" itemprop="datePublished">2019-03-07</time>
+    <a href="/2019/04/11/Rust/Rust_Complie_note/">
+      <time datetime="2019-04-10T16:00:00.000Z" itemprop="datePublished">2019-04-11</time>
     </a>
   </div>
 
 
             
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
-  </div>
-
 
             
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/database/">database</a>, <a class="tag-link" href="/tags/java/">java</a>, <a class="tag-link" href="/tags/oracle/">oracle</a>
-  </div>
-
 
           </div>
         
@@ -266,41 +265,10 @@
 
     <div class="article-entry" itemprop="articleBody">
     
-      
-      <h3 id="WTF-is-JDBC"><a href="#WTF-is-JDBC" class="headerlink" title="WTF is JDBC"></a>WTF is JDBC</h3><p>Java Data Base Connection。</p>
-<p>实现在Java中进行CRUD（create read update delete）操作。</p>
-<h3 id="JDBC-是一个规范"><a href="#JDBC-是一个规范" class="headerlink" title="JDBC 是一个规范"></a>JDBC 是一个规范</h3><p>java中是一系列接口，规定了使用java程序连接数据库时应该实现的内容。</p>
-<p>告诉数据库厂商，你的数据库产品要想让java程序可以进行连接操作时必须遵守的规范。</p>
-<p>JDBC只是接口，JDBC接口的实现类是由不同的<em>数据库厂商</em>提供的。</p>
-<h3 id="JDBC-常用的接口"><a href="#JDBC-常用的接口" class="headerlink" title="JDBC 常用的接口"></a>JDBC 常用的接口</h3><ul>
-<li><code>javax.sql.Connection</code>数据库连接对象：创建与数据库之间的连接；</li>
-<li><code>javax.sql.Statement</code> 数据库操作对象，将SQL语句发送至数据库，返回数据库查询结果；</li>
-<li><code>javax.sql.ResultSet</code> 结果集对象，负责接收执行查询语句之后的查询结果。</li>
-</ul>
-<h3 id="使用JDBC操作数据库的基本注释"><a href="#使用JDBC操作数据库的基本注释" class="headerlink" title="使用JDBC操作数据库的基本注释"></a>使用JDBC操作数据库的基本注释</h3><p>基本步骤</p>
-<ol>
-<li>CUD 可以不用返回对象，只要执行就行了；</li>
-<li>R 查询时，要使用<code>ResultSet</code>对象来接收查询结果。</li>
-</ol>
-<p>执行查询命令的基本步骤</p>
-<ol>
-<li>创建连接对象<code>Connection</code></li>
-<li>创建操作对象<code>Statement</code></li>
-<li>使用<code>Statement</code>对象发送查询命令</li>
-<li>使用<code>ResultSet</code>对象接收查询结果</li>
-<li>处理查询结果</li>
-<li>关闭数据库连接</li>
-</ol>
-<h3 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.mysql.jdbc.Driver;</span><br><span class="line"><span class="keyword">import</span> con.mysql.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JDBCTest</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">    	<span class="comment">// 创建连接对象Connection</span></span><br><span class="line">        String driverClassName = <span class="string">"com.mysql.jdbc.Driver"</span>;</span><br><span class="line">        String url = <span class="string">"jdbc:mysql://127.0.0.1:3306/name"</span></span><br><span class="line">            +<span class="string">"?useUnicode=true&amp;characterEncoding=utf8"</span>;</span><br><span class="line">        String username = <span class="string">"root"</span>;</span><br><span class="line">        String password = <span class="string">"root"</span>;</span><br><span class="line">        </span><br><span class="line">        Class.forName(driverClassName); <span class="comment">// 反射</span></span><br><span class="line">        Connection conn = DriverManager.getConnection(url,username,password);</span><br><span class="line"> 		</span><br><span class="line">        <span class="comment">// 创建操作对象</span></span><br><span class="line">        Statement stat = conn.createStatement();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 使用Statement对象发送查询命令</span></span><br><span class="line">        String sql = <span class="string">"select * from goods_ustb"</span>;</span><br><span class="line">        <span class="comment">// 使用ResultSet对象接受查询结果</span></span><br><span class="line">        ResultSet rs = stat.executeQuery(sql);</span><br><span class="line">        	<span class="comment">/* 增删改时</span></span><br><span class="line"><span class="comment">        	stat.executeUpdate(sql);</span></span><br><span class="line"><span class="comment">        	*/</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 处理查询结果</span></span><br><span class="line">        <span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">            <span class="keyword">int</span> i = rs.getInt(<span class="comment">/*int columenindex || String culimenlabel*/</span> <span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        	<span class="comment">/* 结果集是一个二维表格。rs是一个引用，每次指向一行数据。 </span></span><br><span class="line"><span class="comment">        		rs对象中两个核心方法：1.向下移动一行；2.取出这一行中某一列的值。</span></span><br><span class="line"><span class="comment">        	*/</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 关闭数据库连接</span></span><br><span class="line">		conn.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>创建工具类，一个方法是获取数据库连接，一个关闭数据库连接。</p>
-<h3 id="工程分层"><a href="#工程分层" class="headerlink" title="工程分层"></a>工程分层</h3><ul>
-<li>domain 实体对象：封装与数据库表对应的类 </li>
-<li>util 工具类：整个工程通用的方法封装到工具类中</li>
-<li>dao 数据访问层：封装了所有针对数据库进行CRUD操作的内容</li>
-<li>service 服务/业务处理层：封装了所有业务处理规则判断代码</li>
-<li></li>
-</ul>
-
+      <p></p><p>谈一些在编译时遇见的问题与语法笔记。</p><p></p>
+      <p class="article-more-link">
+        <a href="/2019/04/11/Rust/Rust_Complie_note/#more">Read More</a>
+      </p>
     
     </div>
     <footer class="article-footer">
@@ -311,7 +279,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/03/07/JavaS/JDBC/" data-id="cjtjk8nja001uxghyl4lpfl7k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/04/11/Rust/Rust_Complie_note/" data-id="cjumsj7e10023k4hy31txf6vt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -390,13 +358,153 @@
 
 
 
-  <article id="post-MNIST-with-FC-and-CNN" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-JavaS/JDBC" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/03/07/JavaS/JDBC/">WTF is JDBC</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2019/03/07/JavaS/JDBC/">
+      <time datetime="2019-03-07T03:34:00.000Z" itemprop="datePublished">2019-03-07</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/database/">database</a>, <a class="tag-link" href="/tags/java/">java</a>, <a class="tag-link" href="/tags/oracle/">oracle</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p></p><p>Java Data Base Connection。</p><p></p>
+      <p class="article-more-link">
+        <a href="/2019/03/07/JavaS/JDBC/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2019/03/07/JavaS/JDBC/" data-id="cjumsj7dd000xk4hy31dyb8nw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  <article id="post-ML/MNIST-with-FC-and-CNN" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
       
 	
-		<a href="/2019/02/22/MNIST-with-FC-and-CNN/" itemprop="url">
+		<a href="/2019/02/22/ML/MNIST-with-FC-and-CNN/" itemprop="url">
       <img src="https://miao.su/images/2019/02/21/taejune-kim-smile-taejunea2dac.jpg" class="article-banner">
     </a>
 	
@@ -408,7 +516,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/22/MNIST-with-FC-and-CNN/">MNIST with FC and CNN</a>
+      <a class="article-title" href="/2019/02/22/ML/MNIST-with-FC-and-CNN/">MNIST with FC and CNN</a>
     </h1>
   
 
@@ -418,7 +526,7 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2019/02/22/MNIST-with-FC-and-CNN/">
+    <a href="/2019/02/22/ML/MNIST-with-FC-and-CNN/">
       <time datetime="2019-02-22T04:50:11.000Z" itemprop="datePublished">2019-02-22</time>
     </a>
   </div>
@@ -450,7 +558,7 @@
 <p>作为一个超级初级的<strong>手写数字数据集</strong>，含有60k个<del>全损</del>低清图像作为训练集，10k个作为验证集。每个图像是<code>(28,28,1)</code>范围在[0,255]的整数数字<strong>灰阶图像</strong>，数字越大代表笔迹越重，即黑底白字。</p>
 <p>介于MNIST的特性，想来试试<strong>FC</strong>和<strong>CNN</strong>之间的区别，当然训练速度仅供参考，模型不同怎么恋爱？我这个小1060也带不动两位巨佬神仙打架。</p><p></p>
       <p class="article-more-link">
-        <a href="/2019/02/22/MNIST-with-FC-and-CNN/#more">Read More</a>
+        <a href="/2019/02/22/ML/MNIST-with-FC-and-CNN/#more">Read More</a>
       </p>
     
     </div>
@@ -462,7 +570,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/02/22/MNIST-with-FC-and-CNN/" data-id="cjtjk8ngy0000xghym3z24m1i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/02/22/ML/MNIST-with-FC-and-CNN/" data-id="cjumsj7dl001bk4hy9nz29knm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -597,33 +705,12 @@
 
     <div class="article-entry" itemprop="articleBody">
     
-      
-      <h3 id="前文"><a href="#前文" class="headerlink" title="前文"></a>前文</h3><p>将hexo部署在了vps上，使用nodejs执行<code>$ hexo s</code>以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。</p>
+      <p></p><h3 id="前文"><a href="#前文" class="headerlink" title="前文"></a>前文</h3><p>将hexo部署在了vps上，使用nodejs执行<code>$ hexo s</code>以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。</p>
 <p>既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。</p>
-<h3 id="Hexo-本地部署"><a href="#Hexo-本地部署" class="headerlink" title="Hexo 本地部署"></a>Hexo 本地部署</h3><p>在_config.yml中设置好deploy，并关联好ssh-key，以实现直接用<code>$ hexo d</code>来完成同步。</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/timrockefeller/timrockefeller.github.io</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-<p>进入仓库的设置界面勾选Github Page即可，与此同时可以选用SSL。</p>
-<h3 id="跨域SSL"><a href="#跨域SSL" class="headerlink" title="跨域SSL"></a>跨域SSL</h3><p>在一个以HTTPS访问的页面上，客户端会默认阻止访问HTTP，无论是否跨域。</p>
-<p>然而当某些插件部署在vps上时（另一个二级域名），就不得不搞个SSL。</p>
-<ol>
-<li><p>启用</p>
-<p>创建一个nodejs的小服务后（如websocket或是简单的action），服务的API往往需要通过域名转发出去。</p>
-</li>
-<li><p>设置转发</p>
-<p>稍微配置一下nginx：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> api.kitekii.pw;</span><br><span class="line">    <span class="attribute">index</span> index.html;</span><br><span class="line">    <span class="attribute">root</span> /path/to/www;</span><br><span class="line">    <span class="attribute">location</span> <span class="regexp">~ api.*</span> &#123;</span><br><span class="line">		<span class="attribute">proxy_pass</span>   http://0.0.0.0:8888;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>本地还是使用http在域内转发，这个端口这么吉利，以后肯定得改（咦）。</p>
-</li>
-<li><p>配置SSL</p>
-<p>暂用Let’s Encrypt（逃），概不细述~~</p>
-<p>添加对<code>listen 443 ssl http2;</code>的监听即可。</p>
-</li>
-<li><p>api允许跨域</p>
-<p>在nginx配置的location项中添加<code>add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;</code>即可实现。</p>
-</li>
-</ol>
-<h3 id="手贱"><a href="#手贱" class="headerlink" title="手贱"></a>手贱</h3><p>千万不要把443绑到其他地方去了！！当初就不该跟着教程走，无意间将443绑给了科学上网服务……虽然当时确实能躲避某种操作，可现在看来已无卵用orz。</p>
-
+<h3 id="Hexo-本地部署"><a href="#Hexo-本地部署" class="headerlink" title="Hexo 本地部署"></a>Hexo 本地部署</h3><p>在_config.yml中设置好deploy，并关联好ssh-key，以实现直接用<code>$ hexo d</code>来完成同步。</p><p></p>
+      <p class="article-more-link">
+        <a href="/2019/02/20/又见hexo+SSL/#more">Read More</a>
+      </p>
     
     </div>
     <footer class="article-footer">
@@ -634,7 +721,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/02/20/又见hexo+SSL/" data-id="cjtjk8nhm000ixghyzmpk6kyo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/02/20/又见hexo+SSL/" data-id="cjumsj7b80005k4hyajhc2jq1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -717,6 +804,15 @@
   <div class="article-inner">
     
     
+      
+	
+		<a href="/2018/12/22/Rust Windows环境搭建/" itemprop="url">
+      <img src="https://miao.su/images/2019/04/18/sp190418_2305559fa28.png" class="article-banner">
+    </a>
+	
+
+
+    
     
       <header class="article-header">
         
@@ -774,7 +870,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/12/22/Rust Windows环境搭建/" data-id="cjtjk8ni9001fxghytlgfvz8q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/12/22/Rust Windows环境搭建/" data-id="cjumsj7cd000lk4hywck89khb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -916,7 +1012,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjtjk8nh90006xghywnv89ymt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjumsj7aw0000k4hyy5njgxj9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -995,7 +1091,7 @@
 
 
 
-  <article id="post-Keras-Intro" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-ML/Keras-Intro" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -1004,7 +1100,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/21/Keras-Intro/">Keras Intro : 基本模型保存</a>
+      <a class="article-title" href="/2018/10/21/ML/Keras-Intro/">Keras Intro : 基本模型保存</a>
     </h1>
   
 
@@ -1014,7 +1110,7 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2018/10/21/Keras-Intro/">
+    <a href="/2018/10/21/ML/Keras-Intro/">
       <time datetime="2018-10-21T14:06:16.000Z" itemprop="datePublished">2018-10-21</time>
     </a>
   </div>
@@ -1042,22 +1138,10 @@
 
     <div class="article-entry" itemprop="articleBody">
     
-      
-      <h2 id="Sequential-Module模型"><a href="#Sequential-Module模型" class="headerlink" title="Sequential-Module模型"></a>Sequential-Module模型</h2><h3 id="常用层"><a href="#常用层" class="headerlink" title="常用层"></a>常用层</h3><h4 id="Dense全连接"><a href="#Dense全连接" class="headerlink" title="Dense全连接"></a>Dense全连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">keras.layers.core.Dense(units,</span><br><span class="line">						activation = <span class="keyword">None</span>,</span><br><span class="line">						use_bias = <span class="keyword">True</span>,</span><br><span class="line">						kernel_initializer = <span class="string">'glorot_uniform'</span>, </span><br><span class="line">						bias_initializer = <span class="string">'zeros'</span>,</span><br><span class="line">						kernel_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						bias_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						activity_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						kernel_constraint = <span class="keyword">None</span>,</span><br><span class="line">						bias_constraint = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
-<p>Dense就是常用的全连接层，所实现的运算是<code>output = activation(dot(input, kernel)+bias)</code>。其中<code>activation</code>是逐元素计算的激活函数，<code>kernel</code>是本层的权值矩阵，<code>bias</code>为偏置向量，只有当<code>use_bias=True</code>才会添加。<br>参数说明</p>
-<ul>
-<li>units：大于0的整数，代表该层的输出<strong>维度</strong>。</li>
-<li>activation：激活函数，为预定义的激活函数名（参考激活函数），或逐元素（element-wise）的Theano函数。如果不指定该参数，将不会使用任何激活函数（即使用线性激活函数：a(x)=x）</li>
-<li>use_bias: 布尔值，是否使用<strong>偏置项</strong></li>
-<li>kernel_initializer：权值初始化方法，为预定义初始化方法名的字符串，或用于初始化权重的初始化器。参考initializers</li>
-<li>bias_initializer：偏置向量初始化方法，为预定义初始化方法名的字符串，或用于初始化偏置向量的初始化器。参考initializers</li>
-<li>kernel_regularizer：施加在权重上的正则项，为Regularizer对象</li>
-<li>bias_regularizer：施加在偏置向量上的正则项，为Regularizer对象</li>
-<li>activity_regularizer：施加在输出上的正则项，为Regularizer对象</li>
-<li>kernel_constraints：施加在权重上的约束项，为Constraints对象</li>
-<li>bias_constraints：施加在偏置上的约束项，为Constraints对象</li>
-</ul>
-
+      <p></p><h2 id="Sequential-Module模型"><a href="#Sequential-Module模型" class="headerlink" title="Sequential-Module模型"></a>Sequential-Module模型</h2><h3 id="常用层"><a href="#常用层" class="headerlink" title="常用层"></a>常用层</h3><h4 id="Dense全连接"><a href="#Dense全连接" class="headerlink" title="Dense全连接"></a>Dense全连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">keras.layers.core.Dense(units,</span><br><span class="line">						activation = <span class="keyword">None</span>,</span><br><span class="line">						use_bias = <span class="keyword">True</span>,</span><br><span class="line">						kernel_initializer = <span class="string">'glorot_uniform'</span>, </span><br><span class="line">						bias_initializer = <span class="string">'zeros'</span>,</span><br><span class="line">						kernel_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						bias_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						activity_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						kernel_constraint = <span class="keyword">None</span>,</span><br><span class="line">						bias_constraint = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure><p></p>
+      <p class="article-more-link">
+        <a href="/2018/10/21/ML/Keras-Intro/#more">Read More</a>
+      </p>
     
     </div>
     <footer class="article-footer">
@@ -1068,7 +1152,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/21/Keras-Intro/" data-id="cjtjk8nhb0008xghy61iuh3nu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/21/ML/Keras-Intro/" data-id="cjumsj7dh0013k4hygunmpeg0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1147,7 +1231,7 @@
 
 
 
-  <article id="post-SKLearn玄学操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-ML/SKLearn玄学操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -1156,7 +1240,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/20/SKLearn玄学操作/">SKLearn玄学操作</a>
+      <a class="article-title" href="/2018/10/20/ML/SKLearn玄学操作/">SKLearn玄学操作</a>
     </h1>
   
 
@@ -1166,7 +1250,7 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2018/10/20/SKLearn玄学操作/">
+    <a href="/2018/10/20/ML/SKLearn玄学操作/">
       <time datetime="2018-10-20T08:54:00.000Z" itemprop="datePublished">2018-10-20</time>
     </a>
   </div>
@@ -1194,18 +1278,10 @@
 
     <div class="article-entry" itemprop="articleBody">
     
-      
-      <h3 id="分离数据集"><a href="#分离数据集" class="headerlink" title="分离数据集"></a>分离数据集</h3><p><a href="https://blog.csdn.net/kyriehe/article/details/77507473" target="_blank" rel="noopener"><strong>train_test_split</strong></a>是交叉验证中常用的函数，功能是从样本中随机的按比例选取train data和test data，形式为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train,X_test, y_train, y_test = cross_validation.train_test_split(train_data, train_target, test_size=<span class="number">0.4</span>, random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>train_data：所要划分的样本特征集 </li>
-<li>train_target：所要划分的样本结果 </li>
-<li>test_size：样本占比，如果是整数的话就是样本的数量 </li>
-<li>random_state：是随机数的种子。</li>
-</ul>
-<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><p><a href="https://www.cnblogs.com/lianyingteng/p/7811126.html" target="_blank" rel="noopener">ML神器：sklearn的快速使用</a></p>
-<p><a href="https://blog.csdn.net/tengyuan93/article/details/78930285" target="_blank" rel="noopener">OneHot编码知识点</a></p>
-<p><a href="https://blog.csdn.net/o4dc8ojo7zl6/article/details/78431750" target="_blank" rel="noopener">机器学习零基础？手把手教你用TensorFlow搭建图像分类器</a></p>
-
+      <p></p><h3 id="分离数据集"><a href="#分离数据集" class="headerlink" title="分离数据集"></a>分离数据集</h3><p><a href="https://blog.csdn.net/kyriehe/article/details/77507473" target="_blank" rel="noopener"><strong>train_test_split</strong></a>是交叉验证中常用的函数，功能是从样本中随机的按比例选取train data和test data，形式为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train,X_test, y_train, y_test = cross_validation.train_test_split(train_data, train_target, test_size=<span class="number">0.4</span>, random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p><p></p>
+      <p class="article-more-link">
+        <a href="/2018/10/20/ML/SKLearn玄学操作/#more">Read More</a>
+      </p>
     
     </div>
     <footer class="article-footer">
@@ -1216,7 +1292,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/20/SKLearn玄学操作/" data-id="cjtjk8nhd000axghydx7x3qg2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/20/ML/SKLearn玄学操作/" data-id="cjumsj7dn001ek4hyox6as6v2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1295,7 +1371,7 @@
 
 
 
-  <article id="post-OpenCV-Intro-基本图像操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <article id="post-ML/OpenCV-Intro-基本图像操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -1304,7 +1380,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/20/OpenCV-Intro-基本图像操作/">OpenCV Intro ： 基本图像操作</a>
+      <a class="article-title" href="/2018/10/20/ML/OpenCV-Intro-基本图像操作/">OpenCV Intro ： 基本图像操作</a>
     </h1>
   
 
@@ -1314,7 +1390,7 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2018/10/20/OpenCV-Intro-基本图像操作/">
+    <a href="/2018/10/20/ML/OpenCV-Intro-基本图像操作/">
       <time datetime="2018-10-20T03:37:00.000Z" itemprop="datePublished">2018-10-20</time>
     </a>
   </div>
@@ -1344,7 +1420,7 @@
     
       <p></p><p>Open Computer Vision 万物起源。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2 <span class="comment"># OpenCV本体</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np <span class="comment"># 数学库</span></span><br></pre></td></tr></table></figure></p><p></p>
       <p class="article-more-link">
-        <a href="/2018/10/20/OpenCV-Intro-基本图像操作/#more">Read More</a>
+        <a href="/2018/10/20/ML/OpenCV-Intro-基本图像操作/#more">Read More</a>
       </p>
     
     </div>
@@ -1356,7 +1432,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/20/OpenCV-Intro-基本图像操作/" data-id="cjtjk8nh40002xghye1e6b0l2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/20/ML/OpenCV-Intro-基本图像操作/" data-id="cjumsj7dj0016k4hyx9qi8d3l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1506,151 +1582,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/16/节奏游戏开发时的万般阻难/" data-id="cjtjk8nhj000exghykpb0zv2w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-oldblog/npm install 一时爽，gyp 来劝退" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/">npm install 一时爽，gyp 来劝退</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/">
-      <time datetime="2018-10-06T16:00:00.000Z" itemprop="datePublished">2018-10-07</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
-  </div>
-
-
-            
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/nodejs/">nodejs</a>
-  </div>
-
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      <p><blockquote>
-<p>搬运自旧博客，不保证其时效性与可靠性</p>
-</blockquote>
-</p><p><img src="https://i.loli.net/2018/10/07/5bb8df9d9e228.png" alt></p>
-<p>大部分时间是因为没有看官方文档……要用python27啊！！！</p><p></p>
-      <p class="article-more-link">
-        <a href="/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/#more">Read More</a>
-      </p>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://kitekii.pw/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/" data-id="cjtjk8nj9001qxghyqk0jpjyk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/16/节奏游戏开发时的万般阻难/" data-id="cjumsj7b10001k4hyyopaqqlk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1747,6 +1679,25 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2019/04/11/Rust/Rust_Complie_note/" class="thumbnail">
+  
+  
+    <span style="background-image:url(https://miao.su/images/2019/04/18/sp190418_2305559fa28.png)" alt="Rust Compile Note" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2019/04/11/Rust/Rust_Complie_note/" class="title">Rust Compile Note</a></p>
+              <p class="item-date"><time datetime="2019-04-10T16:00:00.000Z" itemprop="datePublished">2019-04-11</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2019/03/07/JavaS/JDBC/" class="thumbnail">
   
   
@@ -1758,7 +1709,7 @@
             
             <div class="item-inner">
               <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
-              <p class="item-title"><a href="/2019/03/07/JavaS/JDBC/" class="title">JDBC简述</a></p>
+              <p class="item-title"><a href="/2019/03/07/JavaS/JDBC/" class="title">WTF is JDBC</a></p>
               <p class="item-date"><time datetime="2019-03-07T03:34:00.000Z" itemprop="datePublished">2019-03-07</time></p>
             </div>
           </li>
@@ -1766,7 +1717,7 @@
           <li>
             
             <div class="item-thumbnail">
-              <a href="/2019/02/22/MNIST-with-FC-and-CNN/" class="thumbnail">
+              <a href="/2019/02/22/ML/MNIST-with-FC-and-CNN/" class="thumbnail">
   
   
     <span style="background-image:url(https://miao.su/images/2019/02/21/taejune-kim-smile-taejunea2dac.jpg)" alt="MNIST with FC and CNN" class="thumbnail-image"></span>
@@ -1777,7 +1728,7 @@
             
             <div class="item-inner">
               <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
-              <p class="item-title"><a href="/2019/02/22/MNIST-with-FC-and-CNN/" class="title">MNIST with FC and CNN</a></p>
+              <p class="item-title"><a href="/2019/02/22/ML/MNIST-with-FC-and-CNN/" class="title">MNIST with FC and CNN</a></p>
               <p class="item-date"><time datetime="2019-02-22T04:50:11.000Z" itemprop="datePublished">2019-02-22</time></p>
             </div>
           </li>
@@ -1807,7 +1758,7 @@
               <a href="/2018/12/22/Rust Windows环境搭建/" class="thumbnail">
   
   
-    <span class="thumbnail-image thumbnail-none"></span>
+    <span style="background-image:url(https://miao.su/images/2019/04/18/sp190418_2305559fa28.png)" alt="Rust Windows环境搭建" class="thumbnail-image"></span>
   
 </a>
 
@@ -1817,25 +1768,6 @@
               <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
               <p class="item-title"><a href="/2018/12/22/Rust Windows环境搭建/" class="title">Rust Windows环境搭建</a></p>
               <p class="item-date"><time datetime="2018-12-22T02:22:11.000Z" itemprop="datePublished">2018-12-22</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2018/12/15/Permission denied when git push/" class="thumbnail">
-  
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
-              <p class="item-title"><a href="/2018/12/15/Permission denied when git push/" class="title">Permission denied when git push</a></p>
-              <p class="item-date"><time datetime="2018-12-15T14:53:00.000Z" itemprop="datePublished">2018-12-15</time></p>
             </div>
           </li>
         
@@ -1859,7 +1791,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>《技术指南（仮）》 – 听说你们选了技术？ | 外野 - wryyyyyyyyyY!</title>
+  <title>maven (eclipse|Vs Code) 远程部署docker上的tomcat | 外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="备受瞩目的技术学科悄然出现在高考中…… 好吧这里并没有达成高分的方法或技巧，有的只有技术，我乐意称之为思维背后的创造力。">
-<meta name="keywords" content="高考 list">
+  <meta name="description" content="在docker上装了个Tomcat，由于container的特性，eclipse不能通过常规手段定位Tomcat，所以进行在本地进行“远程部署”。 docker配置初始化123$ docker pull tomcat$ docker run --name tomcat -p 8080:8081 tomcat$ docker exec -it tomcat bash -p 8080:8081：将容器">
+<meta name="keywords" content="init,tomcat">
 <meta property="og:type" content="article">
-<meta property="og:title" content="《技术指南（仮）》 – 听说你们选了技术？">
-<meta property="og:url" content="http://kitekii.pw/2016/10/09/oldblog/技术指南·仮/index.html">
+<meta property="og:title" content="maven (eclipse|Vs Code) 远程部署docker上的tomcat">
+<meta property="og:url" content="http://kitekii.pw/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/index.html">
 <meta property="og:site_name" content="外野">
-<meta property="og:description" content="备受瞩目的技术学科悄然出现在高考中…… 好吧这里并没有达成高分的方法或技巧，有的只有技术，我乐意称之为思维背后的创造力。">
+<meta property="og:description" content="在docker上装了个Tomcat，由于container的特性，eclipse不能通过常规手段定位Tomcat，所以进行在本地进行“远程部署”。 docker配置初始化123$ docker pull tomcat$ docker run --name tomcat -p 8080:8081 tomcat$ docker exec -it tomcat bash -p 8080:8081：将容器">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-22T09:26:35.301Z">
+<meta property="og:updated_time" content="2019-07-04T02:30:52.063Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="《技术指南（仮）》 – 听说你们选了技术？">
-<meta name="twitter:description" content="备受瞩目的技术学科悄然出现在高考中…… 好吧这里并没有达成高分的方法或技巧，有的只有技术，我乐意称之为思维背后的创造力。">
+<meta name="twitter:title" content="maven (eclipse|Vs Code) 远程部署docker上的tomcat">
+<meta name="twitter:description" content="在docker上装了个Tomcat，由于container的特性，eclipse不能通过常规手段定位Tomcat，所以进行在本地进行“远程部署”。 docker配置初始化123$ docker pull tomcat$ docker run --name tomcat -p 8080:8081 tomcat$ docker exec -it tomcat bash -p 8080:8081：将容器">
   
   
   
@@ -214,7 +214,7 @@
 </aside>
 
       
-      <section id="main"><article id="post-oldblog/技术指南·仮" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-JavaS/maven(eclipseVsCode)远程部署tomcat" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <!-- <div class="background"></div> -->
@@ -234,7 +234,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      《技术指南（仮）》 – 听说你们选了技术？
+      maven (eclipse|Vs Code) 远程部署docker上的tomcat
     </h1>
   
 
@@ -244,8 +244,8 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2016/10/09/oldblog/技术指南·仮/">
-      <time datetime="2016-10-08T16:00:00.000Z" itemprop="datePublished">2016-10-09</time>
+    <a href="/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/">
+      <time datetime="2019-07-04T02:04:03.000Z" itemprop="datePublished">2019-07-04</time>
     </a>
   </div>
 
@@ -253,14 +253,14 @@
             
   <div class="article-category">
     <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/札记阁/">札记阁</a>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
   </div>
 
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/高考-list/">高考 list</a>
+    <a class="tag-link" href="/tags/init/">init</a>, <a class="tag-link" href="/tags/tomcat/">tomcat</a>
   </div>
 
 
@@ -273,19 +273,20 @@
     <div class="article-entry" itemprop="articleBody">
     
       
-      <p>备受瞩目的技术学科悄然出现在高考中……</p>
-<p>好吧这里并没有达成高分的方法或技巧，有的只有技术，我乐意称之为思维背后的创造力。</p>
-<a id="more"></a>
-<h3 id="愿望"><a href="#愿望" class="headerlink" title="愿望"></a>愿望</h3><h4 id="如果月球是一个像素点那么大"><a href="#如果月球是一个像素点那么大" class="headerlink" title="如果月球是一个像素点那么大"></a><a href="http://joshworth.com/dev/pixelspace/pixelspace_solarsystem.html#earthtxt" target="_blank" rel="noopener">如果月球是一个像素点那么大</a></h4><p>这个网页设月球的大小是1个像素点。在此基础上，所有的比例都是真实的——不但包括大小，还包括天体之间的距离。</p>
-<h3 id="人生旅途中的开发者"><a href="#人生旅途中的开发者" class="headerlink" title="人生旅途中的开发者"></a>人生旅途中的开发者</h3><p>每一段代码所含有的情感是冰冷的，它们代表的不是一个人的意志，而是全宇宙文明对世界的剖析。<br>当我们以宏观的视角去看待一切时，就没有什么纷争。</p>
-<h4 id="TIS-100"><a href="#TIS-100" class="headerlink" title="TIS-100"></a><a href="http://store.steampowered.com/app/370360" target="_blank" rel="noopener">TIS-100</a></h4><p>TIS-100是一款架空的<del>解谜</del>游戏，游戏内容就是修复TIS-100并解开其中背后隐藏的秘密。<br>游戏最大的特色就是：<del>你们可能从来没有在别的游戏里见过的</del>类汇编语言的编程。<br>它包含一个完整的文档，对于这个语言有着详细的参考。</p>
-<h4 id="NAZO"><a href="#NAZO" class="headerlink" title="NAZO"></a><a href="http://cafebabe.cc/nazo/" target="_blank" rel="noopener">NAZO</a></h4><p>国人制作的一个网页游戏（？），参考自<a href="http://www.gamemastertips.com/" target="_blank" rel="noopener">GameMasterTips</a>。很多人都说是程序员专用，毕竟这么一个解迷游戏第三关只有F12才过得去，后期凯撒解码，brainfuck难度攀升。<br>不过咱是点不开这个网站了，感兴趣的可以参考<a href="http://www.cnblogs.com/hack0ne/p/4573168.html" target="_blank" rel="noopener">解密过程</a>。</p>
-<h4 id="SHENZHEN-I-O"><a href="#SHENZHEN-I-O" class="headerlink" title="SHENZHEN I/O"></a><a href="http://store.steampowered.com/app/504210/" target="_blank" rel="noopener">SHENZHEN I/O</a></h4><p>通用学不好？电路看不懂？什么鬼集成电路？这是给一些对集成电路内部不熟悉的人的福利，教你如何自搭一个音乐芯片。<br>由TIS-100制作商Zachtronics 在16年10月7日（昨天！）带来的又一款模拟游戏。<br>BUILD CIRCUITS. WRITE CODE. RTFM.</p>
-<h4 id="UpLink"><a href="#UpLink" class="headerlink" title="UpLink"></a><a href="http://www.introversion.co.uk/uplink/" target="_blank" rel="noopener">UpLink</a></h4><p>游戏中你扮演一名Uplink的黑客为大公司干活. 包括入侵竞争对手的计算机系统, 盗取研究文件, 破坏, 洗钱, 消灭证据, 甚至嫁祸给无辜的人.<br>你需要用你挣来的钱升级你的电脑, 购买新的软件和工具. 随着经验的增长, 你将可以找到更加危险却也更赚钱的任务. 你可以观察股票市场(甚至影响它的涨落). 你可以修改人们的学历或是犯罪记录. 你可以从银行转账给自己. 当然你也可以参与创造有史以来最致命的病毒.</p>
-<h3 id="只剩下六天的插画师"><a href="#只剩下六天的插画师" class="headerlink" title="只剩下六天的插画师"></a>只剩下六天的插画师</h3><p>作家与画家被指向两个极端，一个揭露幻想，一个创造现实。<br>那个人在哪里？在生与死的境界徘徊，在成与败的间隙抉择，在犹豫。<br>陷入沉思时，在外物的一切仿佛都变得不再那么重要。与其说是不闻不问，更因该是不应不答。自身被自身所创造的世界包围，这就是所谓的避世准则。</p>
-<h4 id="Figure-amp-Gesture-Drawing"><a href="#Figure-amp-Gesture-Drawing" class="headerlink" title="Figure &amp; Gesture Drawing"></a><a href="https://line-of-action.com/" target="_blank" rel="noopener">Figure &amp; Gesture Drawing</a></h4><p>正如官方所说，“Tools for self-educating artists”，自由的创作与构想，练习人体与静物绝佳的地方。<br>#不久前这个域名貌似无法访问了，几个月又好了，跳转到了Line-of-Action#<br>同时还有<a href="http://kitekii.pw/%22http://www.reybustos.com/03ra/ra.html">ReyBustos</a>和一位网友的<a href="http://blog.sina.com.cn/s/blog_74e1be060101lj84.html" target="_blank" rel="noopener">笔录</a>。</p>
-<h4 id="AtarichanDrawer"><a href="#AtarichanDrawer" class="headerlink" title="AtarichanDrawer"></a><a href="http://www.eggazyoutatsu.net/atarichanDrawer.html" target="_blank" rel="noopener">AtarichanDrawer</a></h4><p>あらゆる角度から人体を描く練習をするツールです。アタリを元に人体を描いてください。 時間をかけ、分からない部分はあらゆる資料を参照してから描きましょう。思い出しながら描くことでしっかりとしたチカラが身につきます。</p>
-<h3 id="未完待续的尾声"><a href="#未完待续的尾声" class="headerlink" title="未完待续的尾声"></a>未完待续的尾声</h3><p>步入厅堂，踱进内室，教科书并不是一个人的学术著作。</p>
+      <p>在docker上装了个Tomcat，由于container的特性，eclipse不能通过常规手段定位Tomcat，所以进行在本地进行“远程部署”。</p>
+<h3 id="docker配置"><a href="#docker配置" class="headerlink" title="docker配置"></a>docker配置</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker pull tomcat</span><br><span class="line"><span class="meta">$</span> docker run --name tomcat -p 8080:8081 tomcat</span><br><span class="line"><span class="meta">$</span> docker exec -it tomcat bash</span><br></pre></td></tr></table></figure>
+<p><code>-p 8080:8081</code>：将容器的8080端口映射到主机的8081端口</p>
+<h4 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h4><p>修改配置前我们需要确认一下有没有文本编辑器，可以通过<code>apt-get</code>下载一个vim。</p>
+<p>修改<code>tomcat/conf/tomcat-user.xml</code>文件，在最末尾对应位置修改加入以下内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"manager-gui"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"manager-script"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"admin-gui"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"admin-script"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">"admin"</span> <span class="attr">password</span>=<span class="string">"kitekii"</span> <span class="attr">roles</span>=<span class="string">"manager-gui,manager-script,admin-gui,admin-script"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>只有添加用户才能进入<code>localhost:8081/manager</code>，否则会显示<strong>403 Access Denied</strong>。</p>
+<h3 id="载入插件"><a href="#载入插件" class="headerlink" title="载入插件"></a>载入插件</h3><p>接着我们回到maven，在项目中的pom.xml中<code>&lt;plugins&gt;</code>标签下添加以下内容：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 指定项目部署的端口 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">port</span>&gt;</span>8081<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 指定项目部署的URL,/manager/text是预置的部署接口 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://127.0.0.1:8081/manager/text<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">password</span>&gt;</span>kitekii<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">update</span>&gt;</span>true<span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 指定项目部署路径,如果不设置为默认项目名称 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">path</span>&gt;</span>/mobile<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>即向maven加载了部署所需要的插件，值得注意的是，该tomcat7插件支持部署至tomcat7.*、8.*。</p>
+<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>由于是远程部署，<strong>调试</strong>相关显得更加复杂，此处先对部署进行阐释。</p>
+<h4 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h4><p>只需在shell中键入下文：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mvn tomcat7:deploy</span><br></pre></td></tr></table></figure>
+<h4 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h4><p>添加<strong>Run Configuration</strong>，选择<strong>Maven Build</strong>项，修改goal为<code>tomcat7:deploy</code>即可。</p>
 
     
     </div>
@@ -297,7 +298,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2016/10/09/oldblog/技术指南·仮/" data-id="cjxo8f0em001v2ohytew7tt6x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/" data-id="cjxo8f0e500142ohy4i4u4pg3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -374,15 +375,11 @@
     
 <nav id="article-nav">
   
-    <a href="/2016/11/20/oldblog/霁夜/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          霁夜
-        
-      </div>
-    </a>
   
+    <a href="/2019/04/23/ssr/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">不可描述的操作</div>
+    </a>
   
 </nav>
 

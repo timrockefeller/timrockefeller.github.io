@@ -3,20 +3,20 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>机械卷轴：概念设计中的心理暗示 | 外野 - wryyyyyyyyyY!</title>
+  <title>ShaderGraph自定义节点 | 外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="谈科幻设计 符号化设计脑洞 + 凭感觉   （头脑风暴）  一款急速的飞行器，你会如何画？  符号对不同设计倾向的引导。">
-<meta name="keywords" content="illustrate,艺类">
+  <meta name="description" content="原文：Custom Nodes with CodeFunctionNode@Unity Docs 随着Unity发布了ShaderGraph，创建一个Shader比以往都要更加容易。然而无论提供多少个默认节点，都不能满足用户的自定义需求。因此，我们开发了一个自定义节点的API，可以在C#中创建新节点。或许能满足用户们刁钻的需求。 本文将介绍一种最简单的实现方法，称之为Code Function N">
+<meta name="keywords" content="Unity,Shader">
 <meta property="og:type" content="article">
-<meta property="og:title" content="机械卷轴：概念设计中的心理暗示">
-<meta property="og:url" content="http://kitekii.pw/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/index.html">
+<meta property="og:title" content="ShaderGraph自定义节点">
+<meta property="og:url" content="http://kitekii.pw/2019/07/26/CG/[自译]ShaderGraph自定义节点/index.html">
 <meta property="og:site_name" content="外野">
-<meta property="og:description" content="谈科幻设计 符号化设计脑洞 + 凭感觉   （头脑风暴）  一款急速的飞行器，你会如何画？  符号对不同设计倾向的引导。">
+<meta property="og:description" content="原文：Custom Nodes with CodeFunctionNode@Unity Docs 随着Unity发布了ShaderGraph，创建一个Shader比以往都要更加容易。然而无论提供多少个默认节点，都不能满足用户的自定义需求。因此，我们开发了一个自定义节点的API，可以在C#中创建新节点。或许能满足用户们刁钻的需求。 本文将介绍一种最简单的实现方法，称之为Code Function N">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-22T06:44:14.866Z">
+<meta property="og:updated_time" content="2019-07-26T07:30:18.838Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机械卷轴：概念设计中的心理暗示">
-<meta name="twitter:description" content="谈科幻设计 符号化设计脑洞 + 凭感觉   （头脑风暴）  一款急速的飞行器，你会如何画？  符号对不同设计倾向的引导。">
+<meta name="twitter:title" content="ShaderGraph自定义节点">
+<meta name="twitter:description" content="原文：Custom Nodes with CodeFunctionNode@Unity Docs 随着Unity发布了ShaderGraph，创建一个Shader比以往都要更加容易。然而无论提供多少个默认节点，都不能满足用户的自定义需求。因此，我们开发了一个自定义节点的API，可以在C#中创建新节点。或许能满足用户们刁钻的需求。 本文将介绍一种最简单的实现方法，称之为Code Function N">
   
   
   
@@ -214,7 +214,7 @@
 </aside>
 
       
-      <section id="main"><article id="post-艺类笔记/机械卷轴：概念设计中的心理暗示" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-CG/[自译]ShaderGraph自定义节点" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <!-- <div class="background"></div> -->
@@ -234,7 +234,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      机械卷轴：概念设计中的心理暗示
+      ShaderGraph自定义节点
     </h1>
   
 
@@ -244,8 +244,8 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/">
-      <time datetime="2018-04-22T14:50:00.000Z" itemprop="datePublished">2018-04-22</time>
+    <a href="/2019/07/26/CG/[自译]ShaderGraph自定义节点/">
+      <time datetime="2019-07-26T07:29:45.000Z" itemprop="datePublished">2019-07-26</time>
     </a>
   </div>
 
@@ -253,14 +253,14 @@
             
   <div class="article-category">
     <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/写生架/">写生架</a>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
   </div>
 
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/illustrate/">illustrate</a>, <a class="tag-link" href="/tags/艺类/">艺类</a>
+    <a class="tag-link" href="/tags/Shader/">Shader</a>, <a class="tag-link" href="/tags/Unity/">Unity</a>
   </div>
 
 
@@ -273,21 +273,111 @@
     <div class="article-entry" itemprop="articleBody">
     
       
-      <p>谈科幻设计</p>
-<h2 id="符号化设计"><a href="#符号化设计" class="headerlink" title="符号化设计"></a>符号化设计</h2><p>脑洞 + 凭感觉   （头脑风暴）</p>
-<blockquote>
-<p>一款急速的飞行器，你会如何画？</p>
-</blockquote>
-<p>符号对不同设计倾向的引导。</p>
+      <p>原文：<a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@6.5/manual/Custom-Nodes-With-CodeFunctionNode.html" target="_blank" rel="noopener">Custom Nodes with CodeFunctionNode</a>@Unity Docs</p>
+<p>随着Unity发布了ShaderGraph，创建一个Shader比以往都要更加容易。然而无论提供多少个默认节点，都不能满足用户的自定义需求。因此，我们开发了一个自定义节点的API，可以在C#中创建新节点。或许能满足用户们刁钻的需求。</p>
+<p>本文将介绍一种最简单的实现方法，称之为<strong>Code Function Node</strong>，接下来将展示详细细节。</p>
 <a id="more"></a>
-<p><em>Scott Robertson</em> : 统一构成下的不同设计</p>
-<p>画作品时，不要反复摸一张图。往往不是加很多东西而好看，画到一半时放置突然后悔了。</p>
-<p>场景方面(康勒)，符号剪影和素描构成。</p>
-<h2 id="设计逻辑"><a href="#设计逻辑" class="headerlink" title="设计逻辑"></a>设计逻辑</h2><h3 id="视觉逻辑"><a href="#视觉逻辑" class="headerlink" title="视觉逻辑"></a>视觉逻辑</h3><p>卡牌：不需要实用逻辑，<code>皮肤不会被火烧焦</code>。</p>
-<h3 id="实用逻辑"><a href="#实用逻辑" class="headerlink" title="实用逻辑"></a>实用逻辑</h3><p>视觉合理，实用合理</p>
-<p>重量感，科学性。使用照片贴图等技术配合。</p>
-<h2 id="思路范例"><a href="#思路范例" class="headerlink" title="思路范例"></a>思路范例</h2><p>选好一个符号，画出草图，进一步考虑风格(奇幻，科幻，卡牌)，细化造型或者特效。</p>
-<h3 id="三体：符号与逻辑应用"><a href="#三体：符号与逻辑应用" class="headerlink" title="三体：符号与逻辑应用"></a>三体：符号与逻辑应用</h3><h2 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h2><p><em>萨金特</em>油画</p>
+<p>让我们先创建一个C#脚本，在这个例子中，我们将脚本命名为<code>MyCustomNode</code>。为了使用<strong>Code Function Node API</strong>，需要引入<code>UnityEditor.ShaderGraph</code>并继承父类<code>CodeFunctionNode</code>。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using UnityEditor.ShaderGraph;</span><br><span class="line">public class MyCustomNode:CodeFunctionNode&#123;&#125;</span><br></pre></td></tr></table></figure>
+<p>由于<code>CodeFunctionNode</code>仍是虚类，故接下来我们将实现其中要求我们实现的函数。</p>
+<p>方法<code>GetFunctionToConvert</code>使用<strong>反射</strong>将一段方法转化为ShaderGraph可用的方法信息(MethodInfo)。</p>
+<p>如下添加引用<code>System.Reflection</code>并重写<code>GetFunctionToConvert</code>方法，注意”MyCustomFunction”这段字符串正对应着我们要实现的Shader函数名，我们将在稍后实现。至此一个节点便完成了，同时在构造函数中设置<code>name</code>成员可以指定该Node在ShderGraph中显示的标题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">using UnityEngine;</span><br><span class="line">using UnityEditor.ShaderGraph;</span><br><span class="line">using System.Reflection;</span><br><span class="line">public class MyCustomNode:CodeFunctionNode</span><br><span class="line">&#123;</span><br><span class="line">    public MyCustomNode()&#123;</span><br><span class="line">        name = &quot;My Custom Node&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    protected override MethodInfo GetFunctionToConvert()&#123;</span><br><span class="line">        return GetType().GetMethod(&quot;MyCustomFunction&quot;,BindingFlags.Static | BindingFlags.NonPublic);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接下来我们实现<code>MyCustomFunction</code>函数。</p>
+<p>首先创建一个返回字符串的静态方法，在参数中我们可以定义当前Node的端口(Port)。这些端口名将直接映射到最终实现Shader中的参数名。这个例子中我们将设置两个输入的端口<code>A</code>和<code>B</code>，数据格式都是动态维度向量(Dynamic Dimension Vector)，同时输出一个动态维度向量<code>Out</code>。这一组端口便构成了一个Node的所有节点。同时我们需要添加<code>Slot</code>属性以区分不同的id。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">static string MyCustomFunction(</span><br><span class="line">		[Slot(0, Binding.Node)] DynamicDimensionVector A,</span><br><span class="line">		[Slot(1, Binding.Node)] DynamicDimensionVector B,</span><br><span class="line">		[Slot(2, Binding.Node)] out DynamicDimensionVector Out)</span><br><span class="line">	&#123;</span><br></pre></td></tr></table></figure>
+<p>更详细的数据格式列表请查阅<a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@6.5/manual/CodeFunctionNode-Port-Types.html" target="_blank" rel="noopener">API文档</a>或文末附录。</p>
+<p>这个函数需要返回一个包含着色器程序的字符串，如HLSL语句。本例中我们将定义一个<code>Out=A+B</code>的简单函数，这个函数大致如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">static string MyCustomFunction(</span><br><span class="line">		[Slot(0, Binding.Node)] DynamicDimensionVector A,</span><br><span class="line">		[Slot(1, Binding.Node)] DynamicDimensionVector B,</span><br><span class="line">		[Slot(2, Binding.Node)] out DynamicDimensionVector Out)</span><br><span class="line">	&#123;</span><br><span class="line">    	return</span><br><span class="line">            @&quot;</span><br><span class="line">            &#123;</span><br><span class="line">            	Out = A + B;</span><br><span class="line">            &#125;</span><br><span class="line">            &quot;;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>最后我们需要将这个节点显示再节点列表中，以供选择。这要求我们为类添加一个<strong>属性</strong>。如下添加，最后一个字符串将作为节点在节点列表中的显示名字（区别于显示在节点上方的节点标题）其余为分类文件夹。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[Title(&quot;Custom&quot;, &quot;My Custom Node&quot;)]</span><br><span class="line"></span><br><span class="line">public class MyCustomNode:CodeFunctionNode</span><br><span class="line">&#123;</span><br></pre></td></tr></table></figure>
+<p>这样一来我们就创建好了一个自定义节点，可以在ShaderGraph中尽情使用了！</p>
+<h3 id="其他例子"><a href="#其他例子" class="headerlink" title="其他例子"></a>其他例子</h3><p>除了<code>Out = A + B</code>，我们还可以定义很多东西。下面这个例子展示了如何在三个多维向量中选取最小值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">static string Min3(</span><br><span class="line">		[Slot(0, Binding.None)] DynamicDimensionVector A,</span><br><span class="line">		[Slot(1, Binding.None)] DynamicDimensionVector B,</span><br><span class="line">		[Slot(2, Binding.None)] DynamicDimensionVector C,</span><br><span class="line">		[Slot(3, Binding.None)] out DynamicDimensionVector Out)</span><br><span class="line">	&#123;</span><br><span class="line">    	return</span><br><span class="line">            @&quot;</span><br><span class="line">            &#123;</span><br><span class="line">            	Out = min(min(A,B),C);</span><br><span class="line">            &#125;</span><br><span class="line">            &quot;;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<p>下面这个例子是通过一个布尔值决定是否反转法向量。其中<code>Normal</code>端口被绑定为世界坐标法线(World Space Normal)，即没有线段连入这个端口是，默认使用世界坐标法线。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">static string Min3(</span><br><span class="line">		[Slot(0, Binding.WorldSpaceNormal)] Vector3 Normal,</span><br><span class="line">		[Slot(1, Binding.None)] Boolean Predicate,</span><br><span class="line">		[Slot(2, Binding.None)] out Vector3 Out)</span><br><span class="line">	&#123;</span><br><span class="line">    	return</span><br><span class="line">            @&quot;</span><br><span class="line">            &#123;</span><br><span class="line">            	Out = Predicate == 1 ? -1 * Normal : Normal;</span><br><span class="line">            &#125;</span><br><span class="line">            &quot;;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2><h3 id="Port-Types"><a href="#Port-Types" class="headerlink" title="Port Types"></a>Port Types</h3><table>
+<thead>
+<tr>
+<th>Argument Type</th>
+<th>Data Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boolean</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>Vector1</td>
+<td>Vector1</td>
+</tr>
+<tr>
+<td>Vector2</td>
+<td>Vector2</td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td>Vector3</td>
+</tr>
+<tr>
+<td>Vector4</td>
+<td>Vector4</td>
+</tr>
+<tr>
+<td>Color</td>
+<td>Vector4 (with a ColorRGBA <a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@6.5/manual/Port-Bindings.html" target="_blank" rel="noopener">Port Binding</a>)</td>
+</tr>
+<tr>
+<td>ColorRGBA</td>
+<td>Vector4 (with a ColorRGBA <a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@6.5/manual/Port-Bindings.html" target="_blank" rel="noopener">Port Binding</a>)</td>
+</tr>
+<tr>
+<td>ColorRGB</td>
+<td>Vector3 (with a ColorRGB <a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@6.5/manual/Port-Bindings.html" target="_blank" rel="noopener">Port Binding</a>)</td>
+</tr>
+<tr>
+<td>Texture2D</td>
+<td>Texture2D</td>
+</tr>
+<tr>
+<td>Texture2DArray</td>
+<td>Texture2DArray</td>
+</tr>
+<tr>
+<td>Texture3D</td>
+<td>Texture3D</td>
+</tr>
+<tr>
+<td>Cubemap</td>
+<td>Cubemap</td>
+</tr>
+<tr>
+<td>SamplerState</td>
+<td>SamplerState</td>
+</tr>
+<tr>
+<td>DynamicDimensionVector</td>
+<td>DynamicVector</td>
+</tr>
+<tr>
+<td>Matrix4x4</td>
+<td>Matrix4</td>
+</tr>
+<tr>
+<td>Matrix3x3</td>
+<td>Matrix3</td>
+</tr>
+<tr>
+<td>Matrix2x2</td>
+<td>Matrix2</td>
+</tr>
+<tr>
+<td>DynamicDimensionMatrix</td>
+<td>DynamicMatrix</td>
+</tr>
+</tbody>
+</table>
 
     
     </div>
@@ -299,7 +389,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" data-id="cjyjsgmah003fashygnwbrbrl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/07/26/CG/[自译]ShaderGraph自定义节点/" data-id="cjyjsgm8z0014ashydk24b5gn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -376,19 +466,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          ゼロから始めるJAVA世界生活 02
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/04/18/遇见hexo/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">遇见hexo</div>
+      <div class="article-nav-title">maven (eclipse|Vs Code) 远程部署docker上的tomcat</div>
     </a>
   
 </nav>

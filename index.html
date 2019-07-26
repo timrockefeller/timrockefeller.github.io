@@ -273,7 +273,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/07/26/CG/[自译]ShaderGraph自定义节点/" data-id="cjyjsgm8z0014ashydk24b5gn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/07/26/CG/[自译]ShaderGraph自定义节点/" data-id="cjyjsoi4700108why03ruc32o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -401,7 +401,7 @@
     
       
       <p>在docker上装了个Tomcat，由于container的特性，eclipse不能通过常规手段定位Tomcat，所以进行在本地进行“远程部署”。</p>
-<h3 id="docker配置"><a href="#docker配置" class="headerlink" title="docker配置"></a>docker配置</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker pull tomcat</span><br><span class="line"><span class="meta">$</span> docker run --name tomcat -p 8080:8081 tomcat</span><br><span class="line"><span class="meta">$</span> docker exec -it tomcat bash</span><br></pre></td></tr></table></figure>
+<h3 id="docker配置"><a href="#docker配置" class="headerlink" title="docker配置"></a>docker配置</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker pull tomcat</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker run --name tomcat -p 8080:8081 tomcat</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker <span class="built_in">exec</span> -it tomcat bash</span></span><br></pre></td></tr></table></figure>
 <p><code>-p 8080:8081</code>：将容器的8080端口映射到主机的8081端口</p>
 <h4 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h4><p>修改配置前我们需要确认一下有没有文本编辑器，可以通过<code>apt-get</code>下载一个vim。</p>
 <p>修改<code>tomcat/conf/tomcat-user.xml</code>文件，在最末尾对应位置修改加入以下内容：</p>
@@ -412,7 +412,7 @@
 <p>即向maven加载了部署所需要的插件，值得注意的是，该tomcat7插件支持部署至tomcat7.*、8.*。</p>
 <h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>由于是远程部署，<strong>调试</strong>相关显得更加复杂，此处先对部署进行阐释。</p>
 <h4 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h4><p>只需在shell中键入下文：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mvn tomcat7:deploy</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mvn tomcat7:deploy</span></span><br></pre></td></tr></table></figure>
 <h4 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h4><p>添加<strong>Run Configuration</strong>，选择<strong>Maven Build</strong>项，修改goal为<code>tomcat7:deploy</code>即可。</p>
 
     
@@ -425,7 +425,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/" data-id="cjyjsgm98001dashytbzlj1kk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/" data-id="cjyjsoi4800118whyxxw3q5wo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -581,7 +581,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/04/23/ssr/" data-id="cjyjsgm6d0000ashysspu9g25" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/04/23/ssr/" data-id="cjyjsoi2700048why1ga75vus" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -720,7 +720,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/04/11/Rust/Rust_Complie_note/" data-id="cjyjsgm9c001lashymm7t0v33" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/04/11/Rust/Rust_Complie_note/" data-id="cjyjsoi4l001o8whygvoqrjdl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -860,7 +860,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/03/07/JavaS/JDBC/" data-id="cjyjsgm95001bashyw5p79xvs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/03/07/JavaS/JDBC/" data-id="cjyjsoi4b00148why6fwy6zch" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1011,7 +1011,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/02/22/ML/MNIST-with-FC-and-CNN/" data-id="cjyjsgm8y0012ashy4pk0agwk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/02/22/ML/MNIST-with-FC-and-CNN/" data-id="cjyjsoi4h001h8why6kavvz2h" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1162,7 +1162,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/02/20/又见hexo+SSL/" data-id="cjyjsgm7r000iashyw4qj79tz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/02/20/又见hexo+SSL/" data-id="cjyjsoi2c000a8whygf8fse7h" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1311,7 +1311,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/12/22/Rust Windows环境搭建/" data-id="cjyjsgm81000nashyx0ljtsw6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/12/22/Rust Windows环境搭建/" data-id="cjyjsoi36000s8whywv6esnfw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1438,7 +1438,7 @@
     <div class="article-entry" itemprop="articleBody">
     
       <p></p><p>在很长一段时间没有使用git push 后，你的sshkey可能会过期：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Permission denied(publickey).</span><br><span class="line">fatal: Could not read from remote repository</span><br><span class="line">Please make sure you have the correct access rights and the repository exists.</span><br></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Permission denied(publickey).</span><br><span class="line">fatal: Could <span class="keyword">not</span> <span class="built_in">read</span> <span class="built_in">from</span> remote repository</span><br><span class="line">Please make sure you have <span class="keyword">the</span> correct access rights <span class="keyword">and</span> <span class="keyword">the</span> repository exists.</span><br></pre></td></tr></table></figure>
 <p>解决方案：</p><p></p>
       <p class="article-more-link">
         <a href="/2018/12/15/Permission denied when git push/#more">Read More</a>
@@ -1453,7 +1453,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjyjsgm6n0001ashyy2xa5282" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjyjsoi1x00008why4wo4o7zw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1593,7 +1593,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/21/ML/Keras-Intro/" data-id="cjyjsgm8w0011ashytfqjt0qf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/21/ML/Keras-Intro/" data-id="cjyjsoi4e001b8whyr3dqgeow" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding

@@ -6,7 +6,7 @@
   <title>ゼロから始めるJAVA世界生活 01 | 外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="环境搭建接下来将介绍如何建立环境并支持VSCode。  从官网下载jdk  等待一段时间安装完成  在系统的环境变量设置中，全局变量里添加JAVA_HOME并将值设置为C:\Program Files\Java\jdk-*\，即jdk根目录。  变量中的PATH添加值%JAVA_HOME%\jre\，%JAVA_HOME%\lib\和%JAVA_HOME%\bin\，此时测试以下命令  12$">
-<meta name="keywords" content="java,oracle">
+<meta name="keywords" content="oracle,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ゼロから始めるJAVA世界生活 01">
 <meta property="og:url" content="http://kitekii.pw/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/index.html">
@@ -283,13 +283,13 @@
 <li><p>在系统的环境变量设置中，全局变量里添加<code>JAVA_HOME</code>并将值设置为<code>C:\Program Files\Java\jdk-*\</code>，即jdk根目录。</p>
 </li>
 <li><p>变量中的<code>PATH</code>添加值<code>%JAVA_HOME%\jre\</code>，<code>%JAVA_HOME%\lib\</code>和<code>%JAVA_HOME%\bin\</code>，此时测试以下命令</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ javac -version</span><br><span class="line">$ java -version</span><br></pre></td></tr></table></figure>
+ <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ javac -<span class="built_in">version</span></span><br><span class="line">$ java -<span class="built_in">version</span></span><br></pre></td></tr></table></figure>
 <p> 若能成功显示版本号则安装成功。</p>
 </li>
 </ol>
 <a id="more"></a>
 <h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><p>安装 VSCode 后，添加插件<code>Java Extension Pack</code>。</p>
-<p>在首选项中覆盖以下条目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;files.autoGuessEncoding&quot; : true,</span><br><span class="line">&quot;java.home&quot; : &quot;%JAVA_HOME%&quot;</span><br></pre></td></tr></table></figure></p>
+<p>在首选项中覆盖以下条目：<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"files.autoGuessEncoding"</span> : <span class="literal">true</span>,</span><br><span class="line"><span class="string">"java.home"</span> : <span class="string">"%JAVA_HOME%"</span></span><br></pre></td></tr></table></figure></p>
 <p>环境变量中添加<code>JDK_HOME</code>，值与<code>JAVA_HOME</code>相同。</p>
 <h4 id="项目文件目录"><a href="#项目文件目录" class="headerlink" title="项目文件目录"></a>项目文件目录</h4><pre><code>├── .classpath
 ├── .project
@@ -312,7 +312,7 @@
 <h2 id="概念描述"><a href="#概念描述" class="headerlink" title="概念描述"></a>概念描述</h2><h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Title: Processing</span><br><span class="line">*.jar--&gt;RunTimeEnv: classPath</span><br><span class="line">*.java-&gt;*.class: $ javac</span><br><span class="line">*.class-&gt;RunTimeEnv: $ javaw</span><br><span class="line">*.java--&gt;RunTimeEnv: classname</span><br></pre></td></tr></table></figure>
 <h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>package是java的<strong>逻辑</strong>文件夹，在文件级别上，也会依据分类。</p>
 <p>package能够用<code>.</code>来连接<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> package1.package2.package3.class1 <span class="comment">//意味着将三层逻辑文件夹里的class1类声明使用</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="javadoc"><a href="#javadoc" class="headerlink" title="javadoc"></a>javadoc</h3><h4 id="usage"><a href="#usage" class="headerlink" title="usage"></a>usage</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ javadoc [options] [packagename] [sourcefiles] [@files]</span><br><span class="line">$ javadoc -d doc *.java</span><br></pre></td></tr></table></figure>
+<h3 id="javadoc"><a href="#javadoc" class="headerlink" title="javadoc"></a>javadoc</h3><h4 id="usage"><a href="#usage" class="headerlink" title="usage"></a>usage</h4><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ javadoc <span class="string">[options]</span> <span class="string">[packagename]</span> <span class="string">[sourcefiles]</span> <span class="string">[@files]</span></span><br><span class="line">$ javadoc -d doc *.java</span><br></pre></td></tr></table></figure>
 <p>根据文档中关键词生成文档，诸如<code>@param</code>，<code>@returns</code>，<code>@throw</code>可用于方法注释。</p>
 <h4 id="format"><a href="#format" class="headerlink" title="format"></a>format</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * your note here</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@auther</span> Kitekii</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> a happy number</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="keyword">static</span> <span class="title">foo</span><span class="params">()</span></span>;</span><br></pre></td></tr></table></figure>
 <h3 id="jar"><a href="#jar" class="headerlink" title="*.jar"></a>*.jar</h3><p>将多个class封装成一个包，可保存资源、代码等。</p>
@@ -351,7 +351,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/" data-id="cjyjsgm99001gashy7tiryyw2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/" data-id="cjyjsoi4c00168whyua4rxbjc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding

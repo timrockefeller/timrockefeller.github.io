@@ -6,7 +6,7 @@
   <title>ゼロから始めるJAVA世界生活 03 | 外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="关于数组、函数的碎片知识。">
-<meta name="keywords" content="java,oracle">
+<meta name="keywords" content="oracle,java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ゼロから始めるJAVA世界生活 03">
 <meta property="og:url" content="http://kitekii.pw/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/index.html">
@@ -285,7 +285,7 @@
 <h3 id="冒泡排序（bubble-sorting）"><a href="#冒泡排序（bubble-sorting）" class="headerlink" title="冒泡排序（bubble sorting）"></a>冒泡排序（bubble sorting）</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">BubbleSorting</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;array.length-<span class="number">1</span>;i++)&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;array.length-<span class="number">1</span>-i;j++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(array[j]&gt;array[j+<span class="number">1</span>])&#123;</span><br><span class="line">            <span class="keyword">int</span> temp=array[j];</span><br><span class="line">            array[j]=arr[j+<span class="number">1</span>];</span><br><span class="line">            array[j+<span class="number">1</span>]=temp;</span><br><span class="line">        &#125;</span><br><span class="line">　　&#125;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="API有话说"><a href="#API有话说" class="headerlink" title="API有话说"></a>API有话说</h2><p>JDK API几乎把所有的Java自带特性讲了个遍，这里需要了解一个名词：<strong>重载</strong>。函数重载可使函数的 ~参数~ 变得更多样。<br>上文提及的算法大部分都能由Java Utility Package中Arrays类的 ~静态函数~ 更加快速、低占用地实现。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Arrays.binarySearch(T[] origin, T key); <span class="comment">//return the key number</span></span><br><span class="line">Arrays.sort(T[] origin);</span><br></pre></td></tr></table></figure></p>
 <p>以及Array类型的数据自带一些属性，著名的是<code>·length</code>。</p>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>参阅<a href="https://www.cnblogs.com/AlanLee/p/6627949.html" target="_blank" rel="noopener">作用域</a>。<br>一个函数会构建一个AO作用域，为其分配 ~独立~ 空间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[public|private] &lt;static&gt; T arg(..T args)&#123;</span><br><span class="line">    //do something </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>参阅<a href="https://www.cnblogs.com/AlanLee/p/6627949.html" target="_blank" rel="noopener">作用域</a>。<br>一个函数会构建一个AO作用域，为其分配 ~独立~ 空间。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">public</span>|<span class="keyword">private</span>] &lt;<span class="keyword">static</span>&gt; <span class="function">T <span class="title">arg</span><span class="params">(..T args)</span></span>&#123;</span><br><span class="line">    <span class="comment">//do something </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>上面这就是一个挂在类里面的函数，可以闭包、重用。<br>最近好像<strong>函数式编程</strong>挺火的，可以了解一下。</p>
 
     
@@ -298,7 +298,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjyjsgm9b001iashydhm50nwg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjyjsoi4a00138why88nwz0q4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding

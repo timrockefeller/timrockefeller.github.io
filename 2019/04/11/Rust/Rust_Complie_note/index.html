@@ -278,9 +278,9 @@
 <p>In <strong>hello.rs</strong></p>
 <figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">pub</span> <span class="function"><span class="keyword">fn</span> <span class="title">helloworld</span> </span>() &#123; &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Error-Occurs"><a href="#Error-Occurs" class="headerlink" title="Error Occurs"></a>Error Occurs</h3><h4 id="MSYS-MINGW-cmake-error"><a href="#MSYS-MINGW-cmake-error" class="headerlink" title="MSYS/MINGW + cmake error"></a>MSYS/MINGW + cmake error</h4><p>When compiling a crate using cmake:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> cmake -G "MSYS Makefiles" ..</span><br><span class="line">CMake Error: Could not create named generator MSYS Makefiles</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cmake -G <span class="string">"MSYS Makefiles"</span> ..</span></span><br><span class="line">CMake Error: Could not create named generator MSYS Makefiles</span><br></pre></td></tr></table></figure>
 <p>Instead of installing the <code>cmake</code> package, I think you need to install <code>mingw-w64-i686-cmake</code> (or the 64-bit version <code>mingw-w64-x86_64-cmake</code>).</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pacman -S mingw-w64-x86_64-cmake</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> pacman -S mingw-w64-x86_64-cmake</span></span><br></pre></td></tr></table></figure>
 
     
     </div>
@@ -292,7 +292,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/04/11/Rust/Rust_Complie_note/" data-id="cjyjsgm9c001lashymm7t0v33" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/04/11/Rust/Rust_Complie_note/" data-id="cjyjsoi4l001o8whygvoqrjdl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding

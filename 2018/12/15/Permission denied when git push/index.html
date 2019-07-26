@@ -274,7 +274,7 @@
     
       
       <p>在很长一段时间没有使用git push 后，你的sshkey可能会过期：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Permission denied(publickey).</span><br><span class="line">fatal: Could not read from remote repository</span><br><span class="line">Please make sure you have the correct access rights and the repository exists.</span><br></pre></td></tr></table></figure>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Permission denied(publickey).</span><br><span class="line">fatal: Could <span class="keyword">not</span> <span class="built_in">read</span> <span class="built_in">from</span> remote repository</span><br><span class="line">Please make sure you have <span class="keyword">the</span> correct access rights <span class="keyword">and</span> <span class="keyword">the</span> repository exists.</span><br></pre></td></tr></table></figure>
 <p>解决方案：</p>
 <a id="more"></a>
 <ol>
@@ -284,7 +284,7 @@
 <p><em>注意，上述<a href="mailto:youremail@example.com" target="_blank" rel="noopener">youremail@example.com</a>是指github账户的注册邮箱</em></p>
 <p>上述命令执行后id_rsa.pub文件内容将输出到终端，复制里面的密钥（内容一般是以ssh-rsa 开头，以github账号的注册邮箱结尾的，全部复制下来）至github设置中的ssh-keys。</p>
 <p>最后运行以下命令</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">ssh</span> <span class="selector-tag">-T</span> <span class="selector-tag">git</span>@<span class="keyword">github</span>.<span class="keyword">com</span></span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>Hi —! You’ve successfully authenticated, but GitHub does not provide shell access.</p>
 </blockquote>
@@ -299,7 +299,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjyjsgm6n0001ashyy2xa5282" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjyjsoi1x00008why4wo4o7zw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding

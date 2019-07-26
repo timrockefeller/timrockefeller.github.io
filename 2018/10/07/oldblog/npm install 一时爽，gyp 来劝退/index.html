@@ -314,9 +314,9 @@
 </ul>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">call <span class="string">"C:\Program Files\Microsoft SDKs\Windows\v7.1\bin\Setenv.cmd"</span> /Release /x86</span><br><span class="line">call <span class="string">"C:\Program Files\Microsoft SDKs\Windows\v7.1\bin\Setenv.cmd"</span> /Release /x64</span><br></pre></td></tr></table></figure>
 <p>If you have multiple Python versions installed, you can identify which Python version <code>node-gyp</code> uses by setting the ‘–python’ variable:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ node-gyp --python /path/to/python2.7</span><br></pre></td></tr></table></figure>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">node</span><span class="title">-gyp</span> --python /path/to/python2.<span class="number">7</span></span><br></pre></td></tr></table></figure>
 <p>If <code>node-gyp</code> is called by way of <code>npm</code> and you have multiple versions of Python installed, then you can set <code>npm</code>‘s ‘python’ config key to the appropriate value:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm config set python /path/to/executable/python2.7</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm<span class="built_in"> config </span><span class="builtin-name">set</span> python /path/<span class="keyword">to</span>/executable/python2.7</span><br></pre></td></tr></table></figure>
 <p>Note that OS X is just a flavour of Unix and so needs <code>python</code>, <code>make</code>, and C/C++. An easy way to obtain these is to install XCode from Apple, and then use it to install the command line tools (under Preferences -&gt; Downloads).</p>
 
     
@@ -329,7 +329,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/" data-id="cjyjsgm9g001tashyh4h5c8pn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/" data-id="cjyjsoi4o001u8whyzm8oegml" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding

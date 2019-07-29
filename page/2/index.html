@@ -168,7 +168,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        31
+        32
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -217,6 +217,155 @@
 
       
       <section id="main">
+  <article id="post-Rust Windows环境搭建" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      
+	
+		<a href="/2018/12/22/Rust Windows环境搭建/" itemprop="url">
+      <img src="https://miao.su/images/2019/04/18/sp190418_2305559fa28.png" class="article-banner">
+    </a>
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/12/22/Rust Windows环境搭建/">Rust Windows环境搭建</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/12/22/Rust Windows环境搭建/">
+      <time datetime="2018-12-22T02:22:11.000Z" itemprop="datePublished">2018-12-22</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/init/">init</a>, <a class="tag-link" href="/tags/rust/">rust</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p></p><p>该文章主要讲述在windows10+vscode下如何构建一个完整的rust编译调试环境，以及过程中可能出现的问题。</p><p></p>
+      <p class="article-more-link">
+        <a href="/2018/12/22/Rust Windows环境搭建/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2018/12/22/Rust Windows环境搭建/" data-id="cjyoiz2qk000xh8hyr82n660j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   <article id="post-Permission denied when git push" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -280,7 +429,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjyo5ax7p000028hyf9bmeier" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/12/15/Permission denied when git push/" data-id="cjyoiz2ph0002h8hydtyogahe" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -420,7 +569,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/21/ML/Keras-Intro/" data-id="cjyo5axa0001b28hyvmdc17yp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/21/ML/Keras-Intro/" data-id="cjyoiz2s3001wh8hyeouraysm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -560,7 +709,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/20/ML/SKLearn玄学操作/" data-id="cjyo5axa5001m28hy3cm7lzu8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/20/ML/SKLearn玄学操作/" data-id="cjyoiz2rw001jh8hyl9nuahgi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -700,7 +849,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/20/ML/OpenCV-Intro-基本图像操作/" data-id="cjyo5axa4001j28hycxzwnspy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/20/ML/OpenCV-Intro-基本图像操作/" data-id="cjyoiz2rz001oh8hy5a0uolqe" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -850,7 +999,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/16/节奏游戏开发时的万般阻难/" data-id="cjyo5ax82000628hy8yq9ykg5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/16/节奏游戏开发时的万般阻难/" data-id="cjyoiz2pt000eh8hysbu6zef2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -994,7 +1143,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/" data-id="cjyo5axaa001x28hyybeouugx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/" data-id="cjyoiz2s0001rh8hyypqap2r6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1147,7 +1296,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/10/06/oldblog/如何获取数位板压感信息？windows API似乎可解，js就别想了/" data-id="cjyo5axag002428hycraczhk9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/10/06/oldblog/如何获取数位板压感信息？windows API似乎可解，js就别想了/" data-id="cjyoiz2s50023h8hyzykhvwcc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1288,7 +1437,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/05/22/JavaS/TicTacToe/" data-id="cjyo5axbn004628hyi16pcc7q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/05/22/JavaS/TicTacToe/" data-id="cjyoiz2t10046h8hy0hjhlxto" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1435,147 +1584,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/05/14/oldblog/这半年时间/" data-id="cjyo5axaj002a28hynuqbp67l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-JavaS/ゼロから始めるJAVA世界生活-03" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/">ゼロから始めるJAVA世界生活 03</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/">
-      <time datetime="2018-05-13T06:30:00.000Z" itemprop="datePublished">2018-05-13</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
-  </div>
-
-
-            
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/java/">java</a>, <a class="tag-link" href="/tags/oracle/">oracle</a>
-  </div>
-
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      <p></p><p>关于数组、函数的碎片知识。<br></p>
-      <p class="article-more-link">
-        <a href="/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/#more">Read More</a>
-      </p>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://kitekii.pw/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjyo5ax9z001928hycblim05l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/05/14/oldblog/这半年时间/" data-id="cjyoiz2s80028h8hyzyv87je2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1672,6 +1681,25 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2019/07/29/CG/01_Object_pose_estimation/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2019/07/29/CG/01_Object_pose_estimation/" class="title">【TensorFlow/Graphics】已知物体空间位置估计</a></p>
+              <p class="item-date"><time datetime="2019-07-29T14:40:00.000Z" itemprop="datePublished">2019-07-29</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2019/07/29/碎碎念/190729/" class="thumbnail">
   
   
@@ -1745,25 +1773,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2019/04/23/ssr/" class="thumbnail">
-  
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
-              <p class="item-title"><a href="/2019/04/23/ssr/" class="title">不可描述的操作</a></p>
-              <p class="item-date"><time datetime="2019-04-22T16:00:00.000Z" itemprop="datePublished">2019-04-23</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1784,7 +1793,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1794,7 +1803,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CG/" style="font-size: 12.5px;">CG</a> <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/ML/" style="font-size: 12.5px;">ML</a> <a href="/tags/Shader/" style="font-size: 10px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/init/" style="font-size: 15px;">init</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 17.5px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/碎碎念/" style="font-size: 17.5px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/CG/" style="font-size: 15px;">CG</a> <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/Shader/" style="font-size: 10px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/init/" style="font-size: 15px;">init</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 17.5px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/碎碎念/" style="font-size: 17.5px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 

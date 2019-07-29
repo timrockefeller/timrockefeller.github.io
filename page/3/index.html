@@ -172,7 +172,7 @@
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        26
+        27
         <span>tags</span>
       </div>
     </div>
@@ -278,7 +278,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjyoiz2rt001eh8hyqi1tu9jy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="cjyojinlc001j9chyktrpk3yx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -420,7 +420,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="cjyoiz2rr001ch8hy90htxlfl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="cjyojinl7001a9chycehatrab" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -565,7 +565,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" data-id="cjyoiz2se002kh8hyeg1mho7u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/22/艺类笔记/机械卷轴：概念设计中的心理暗示/" data-id="cjyojinlv002o9chy474n9csw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -716,7 +716,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/18/遇见hexo/" data-id="cjyoiz2pq000ah8hyrm309eji" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/18/遇见hexo/" data-id="cjyojinjl00089chyj4955a0u" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -869,7 +869,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/" data-id="cjyoiz2rp0018h8hywsdn7rc8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/" data-id="cjyojinl600179chym9pas03i" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1017,7 +1017,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/04/14/艺类笔记/徐天华：娱乐设计的基本素养/" data-id="cjyoiz2sd002hh8hynrp90bbs" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/04/14/艺类笔记/徐天华：娱乐设计的基本素养/" data-id="cjyojinlu002l9chyxcvkom8l" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1158,7 +1158,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2018/03/31/《宣告黎明的露之歌》观感/" data-id="cjyoiz2pa0000h8hyjgqyzcz7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2018/03/31/《宣告黎明的露之歌》观感/" data-id="cjyojinjn000a9chy1hfr6390" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1305,148 +1305,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2017/07/17/oldblog/新的世界，共勉/" data-id="cjyoiz2sa002ah8hyv0a2znzi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-oldblog/不明者终不究" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/12/04/oldblog/不明者终不究/">不明者终不究</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2016/12/04/oldblog/不明者终不究/">
-      <time datetime="2016-12-03T16:00:00.000Z" itemprop="datePublished">2016-12-04</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/日记本/">日记本</a>
-  </div>
-
-
-            
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/碎碎念/">碎碎念</a>
-  </div>
-
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      
-      <p>自从高三以来，越来越多的学习压在身上，越来越少的事务可见其尾，自始至终的唯独每周的早餐罢了。<br>年终将至，细细品味了一下，发现并没有什么值得回忆的大事件。或许是生活真的平凡无奇，或许是自我对于世界的否认感。每每拉开距离，以光年的尺度、亿年的时间，仿佛似乎大概也许眼前的东西真的不再重要。可同人于野曾讨论过，当我们的视角放在宏观上时，任何问题都解决不了。这宛如暮鼓晨钟，醍醐灌顶。我曾被《当下的力量》所洗礼，这是一本讲述如何寻找本我的教程读物，几年前我曾不停地拾掇和放下它，直到了现在，它的内容了然于心。我把它当做人生的金手指，因为它会告诉我如何不会痛苦。但毕竟这是苛求，仅仅有内心的平静是远远不够的。所以有些时候我会站在它的对立面去看它。陌生又遥远。</p>
-<p>《我是猫》中的猫骂过主人：写日记的却又不想公之于众的人一般都很表里不一。确实，一个人总会有三层。第一层，对外表现，也就是我们熟知的人们在我们眼里的样子。或许很真挚，或许很虚伪，这完全没有办法仅仅从外表看出来。而当我们深挖至下一层的时候，也就是从喉咙的悬崖上用救生绳落往的第二个平台上、地面布满文字的时候，偷觊了内心世界的时候，要么厌恶，要么同情，要么喜爱，情绪们都会走向极端。但某些时候不能让心灵主人发现，以致疏近也走向极端。再往下一层或许是世界上最灿烂的地方，或许是空无。越靠近一个人的内心，越会容易毁掉一个人。</p>
-<p>遥望星空的时候会想，有没有这样一个人也在遥望星空，然后我们之间四目相对。他来自另外一个地方，来自最表层，也来自最里层。</p>
-
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://kitekii.pw/2016/12/04/oldblog/不明者终不究/" data-id="cjyoiz2s40021h8hyoam8ts8g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2017/07/17/oldblog/新的世界，共勉/" data-id="cjyojinlr002e9chy8yqpha1s" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1588,7 +1447,148 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2016/12/04/oldblog/PSV购入计划/" data-id="cjyoiz2s2001uh8hykn9n7obp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2016/12/04/oldblog/PSV购入计划/" data-id="cjyojinlj001w9chyymfvsnf5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  <article id="post-oldblog/不明者终不究" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/04/oldblog/不明者终不究/">不明者终不究</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2016/12/04/oldblog/不明者终不究/">
+      <time datetime="2016-12-03T16:00:00.000Z" itemprop="datePublished">2016-12-04</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/日记本/">日记本</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/碎碎念/">碎碎念</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <p>自从高三以来，越来越多的学习压在身上，越来越少的事务可见其尾，自始至终的唯独每周的早餐罢了。<br>年终将至，细细品味了一下，发现并没有什么值得回忆的大事件。或许是生活真的平凡无奇，或许是自我对于世界的否认感。每每拉开距离，以光年的尺度、亿年的时间，仿佛似乎大概也许眼前的东西真的不再重要。可同人于野曾讨论过，当我们的视角放在宏观上时，任何问题都解决不了。这宛如暮鼓晨钟，醍醐灌顶。我曾被《当下的力量》所洗礼，这是一本讲述如何寻找本我的教程读物，几年前我曾不停地拾掇和放下它，直到了现在，它的内容了然于心。我把它当做人生的金手指，因为它会告诉我如何不会痛苦。但毕竟这是苛求，仅仅有内心的平静是远远不够的。所以有些时候我会站在它的对立面去看它。陌生又遥远。</p>
+<p>《我是猫》中的猫骂过主人：写日记的却又不想公之于众的人一般都很表里不一。确实，一个人总会有三层。第一层，对外表现，也就是我们熟知的人们在我们眼里的样子。或许很真挚，或许很虚伪，这完全没有办法仅仅从外表看出来。而当我们深挖至下一层的时候，也就是从喉咙的悬崖上用救生绳落往的第二个平台上、地面布满文字的时候，偷觊了内心世界的时候，要么厌恶，要么同情，要么喜爱，情绪们都会走向极端。但某些时候不能让心灵主人发现，以致疏近也走向极端。再往下一层或许是世界上最灿烂的地方，或许是空无。越靠近一个人的内心，越会容易毁掉一个人。</p>
+<p>遥望星空的时候会想，有没有这样一个人也在遥望星空，然后我们之间四目相对。他来自另外一个地方，来自最表层，也来自最里层。</p>
+
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://kitekii.pw/2016/12/04/oldblog/不明者终不究/" data-id="cjyojinlm00249chytvc4nvr1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1688,7 +1688,7 @@
               <a href="/2019/07/29/CG/01_Object_pose_estimation/" class="thumbnail">
   
   
-    <span class="thumbnail-image thumbnail-none"></span>
+    <span style="background-image:url(https://miao.su/images/2017/06/04/Konachan.com-240841anthropomorphismemperor_penguin_kemono_friendsgentoo_penguin_kemono_friendskemono_friendsnyoronyororoyal_penguin_kemono_friends00d36.jpg)" alt="TFG|已知物体空间位置估计" class="thumbnail-image"></span>
   
 </a>
 
@@ -1696,7 +1696,7 @@
             
             <div class="item-inner">
               <p class="item-category"></p>
-              <p class="item-title"><a href="/2019/07/29/CG/01_Object_pose_estimation/" class="title">【TensorFlow/Graphics】已知物体空间位置估计</a></p>
+              <p class="item-title"><a href="/2019/07/29/CG/01_Object_pose_estimation/" class="title">TFG|已知物体空间位置估计</a></p>
               <p class="item-date"><time datetime="2019-07-29T14:40:00.000Z" itemprop="datePublished">2019-07-29</time></p>
             </div>
           </li>
@@ -1807,7 +1807,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CG/" style="font-size: 15px;">CG</a> <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/Shader/" style="font-size: 10px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/init/" style="font-size: 15px;">init</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 17.5px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/碎碎念/" style="font-size: 17.5px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/CG/" style="font-size: 15px;">CG</a> <a href="/tags/Graphics/" style="font-size: 10px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 12.5px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/Shader/" style="font-size: 10px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/tags/anime/" style="font-size: 10px;">anime</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12.5px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12.5px;">illustrate</a> <a href="/tags/init/" style="font-size: 15px;">init</a> <a href="/tags/java/" style="font-size: 20px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 17.5px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/碎碎念/" style="font-size: 17.5px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12.5px;">艺类</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 

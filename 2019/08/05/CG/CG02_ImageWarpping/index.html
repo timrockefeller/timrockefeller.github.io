@@ -3,22 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>又见hexo+SSL | 外野 - wryyyyyyyyyY!</title>
+  <title>USTC-CG|Image Warping | 外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前文将hexo部署在了vps上，使用nodejs执行$ hexo s以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。 既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。 Hexo 本地部署在_config.yml中设置好depl">
-<meta name="keywords" content="hexo,init">
+  <meta name="description" content="反距离加权插值（IDW）根据给定的控制点对和控制点的位移矢量（方向和距离），实现图像每一个像素点的位移。反距离加权插值的方法是通过得到每一个像素点和选定控制点对的逼近    关系，以及相对应的权重关系，求得像素点相对应的变化关系，逼近函数可以理解为对像素点p的影响程度，而权重函数则可以看成是对距离的权重，距离越远，权重越小。$$f(p)=\sum_{i=1}^n w_i(p)f_i(p)$$该函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="又见hexo+SSL">
-<meta property="og:url" content="http://kitekii.pw/2019/02/20/又见hexo+SSL/index.html">
+<meta property="og:title" content="USTC-CG|Image Warping">
+<meta property="og:url" content="http://kitekii.pw/2019/08/05/CG/CG02_ImageWarpping/index.html">
 <meta property="og:site_name" content="外野">
-<meta property="og:description" content="前文将hexo部署在了vps上，使用nodejs执行$ hexo s以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。 既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。 Hexo 本地部署在_config.yml中设置好depl">
+<meta property="og:description" content="反距离加权插值（IDW）根据给定的控制点对和控制点的位移矢量（方向和距离），实现图像每一个像素点的位移。反距离加权插值的方法是通过得到每一个像素点和选定控制点对的逼近    关系，以及相对应的权重关系，求得像素点相对应的变化关系，逼近函数可以理解为对像素点p的影响程度，而权重函数则可以看成是对距离的权重，距离越远，权重越小。$$f(p)=\sum_{i=1}^n w_i(p)f_i(p)$$该函数">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://miao.su/images/2019/02/21/sp181207_1309290a7ea.png">
-<meta property="og:updated_time" content="2019-04-18T14:49:39.329Z">
+<meta property="og:updated_time" content="2019-08-10T08:05:00.080Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="又见hexo+SSL">
-<meta name="twitter:description" content="前文将hexo部署在了vps上，使用nodejs执行$ hexo s以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。 既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。 Hexo 本地部署在_config.yml中设置好depl">
-<meta name="twitter:image" content="https://miao.su/images/2019/02/21/sp181207_1309290a7ea.png">
+<meta name="twitter:title" content="USTC-CG|Image Warping">
+<meta name="twitter:description" content="反距离加权插值（IDW）根据给定的控制点对和控制点的位移矢量（方向和距离），实现图像每一个像素点的位移。反距离加权插值的方法是通过得到每一个像素点和选定控制点对的逼近    关系，以及相对应的权重关系，求得像素点相对应的变化关系，逼近函数可以理解为对像素点p的影响程度，而权重函数则可以看成是对距离的权重，距离越远，权重越小。$$f(p)=\sum_{i=1}^n w_i(p)f_i(p)$$该函数">
   
   
   
@@ -175,7 +172,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        34
+        35
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -223,7 +220,7 @@
 </aside>
 
       
-      <section id="main"><article id="post-又见hexo+SSL" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-CG/CG02_ImageWarpping" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <!-- <div class="background"></div> -->
@@ -238,19 +235,12 @@
       
     
     
-      
-	
-		<img src="https://miao.su/images/2019/02/21/sp181207_1309290a7ea.png" class="article-banner">
-	
-
-
-    
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      又见hexo+SSL
+      USTC-CG|Image Warping
     </h1>
   
 
@@ -260,25 +250,15 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2019/02/20/又见hexo+SSL/">
-      <time datetime="2019-02-20T13:18:00.000Z" itemprop="datePublished">2019-02-20</time>
+    <a href="/2019/08/05/CG/CG02_ImageWarpping/">
+      <time datetime="2019-08-05T15:45:00.000Z" itemprop="datePublished">2019-08-05</time>
     </a>
   </div>
 
 
             
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
-  </div>
-
 
             
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/hexo/">hexo</a>, <a class="tag-link" href="/tags/init/">init</a>
-  </div>
-
 
           </div>
         
@@ -289,32 +269,9 @@
     <div class="article-entry" itemprop="articleBody">
     
       
-      <h3 id="前文"><a href="#前文" class="headerlink" title="前文"></a>前文</h3><p>将hexo部署在了vps上，使用nodejs执行<code>$ hexo s</code>以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。</p>
-<p>既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。</p>
-<h3 id="Hexo-本地部署"><a href="#Hexo-本地部署" class="headerlink" title="Hexo 本地部署"></a>Hexo 本地部署</h3><p>在_config.yml中设置好deploy，并关联好ssh-key，以实现直接用<code>$ hexo d</code>来完成同步。</p>
-<a id="more"></a>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/timrockefeller/timrockefeller.github.io</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
-<p>进入仓库的设置界面勾选Github Page即可，与此同时可以选用SSL。</p>
-<h3 id="跨域SSL"><a href="#跨域SSL" class="headerlink" title="跨域SSL"></a>跨域SSL</h3><p>在一个以HTTPS访问的页面上，客户端会默认阻止访问HTTP，无论是否跨域。</p>
-<p>然而当某些插件部署在vps上时（另一个二级域名），就不得不搞个SSL。</p>
-<ol>
-<li><p>启用</p>
-<p>创建一个nodejs的小服务后（如websocket或是简单的action），服务的API往往需要通过域名转发出去。</p>
-</li>
-<li><p>设置转发</p>
-<p>稍微配置一下nginx：</p>
-<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> api.kitekii.pw;</span><br><span class="line">    <span class="attribute">index</span> index.html;</span><br><span class="line">    <span class="attribute">root</span> /path/to/www;</span><br><span class="line">    <span class="attribute">location</span> <span class="regexp">~ api.*</span> &#123;</span><br><span class="line">		<span class="attribute">proxy_pass</span>   http://0.0.0.0:8888;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>本地还是使用http在域内转发，这个端口这么吉利，以后肯定得改（咦）。</p>
-</li>
-<li><p>配置SSL</p>
-<p>暂用Let’s Encrypt（逃），概不细述~~</p>
-<p>添加对<code>listen 443 ssl http2;</code>的监听即可。</p>
-</li>
-<li><p>api允许跨域</p>
-<p>在nginx配置的location项中添加<code>add_header &#39;Access-Control-Allow-Origin&#39; &#39;*&#39;;</code>即可实现。</p>
-</li>
-</ol>
-<h3 id="手贱"><a href="#手贱" class="headerlink" title="手贱"></a>手贱</h3><p>千万不要把443绑到其他地方去了！！当初就不该跟着教程走，无意间将443绑给了科学上网服务……虽然当时确实能躲避某种操作，可现在看来已无卵用orz。</p>
+      <h2 id="反距离加权插值（IDW）"><a href="#反距离加权插值（IDW）" class="headerlink" title="反距离加权插值（IDW）"></a>反距离加权插值（IDW）</h2><p>根据给定的控制点对和控制点的位移矢量（方向和距离），实现图像每一个像素点的位移。反距离加权插值的方法是通过得到每一个像素点和选定控制点对的逼近    关系，以及相对应的权重关系，求得像素点相对应的变化关系，逼近函数可以理解为对像素点p的影响程度，而权重函数则可以看成是对距离的权重，距离越远，权重越小。<br>$$<br>f(p)=\sum_{i=1}^n w_i(p)f_i(p)<br>$$<br>该函数$f(p)$传入一个像素点的坐标，通过已选定的控制点实现计算插值。f函数返回像素点坐标，$f_i$函数为逼近函数，即<br>$$<br>f_i(p)=q_i+T_i(p-p_i)<br>$$<br>这里$T$的求解我未进行方程组的计算求解，$T$是一个2*2矩阵，$T$可以取近似值1。将控制点数据代入可以求出每一个局部插值函数。<br>而$w_i$权重函数，理解为对距离越远，权重越小，这里通过<br>$$<br>w_i(p_i)=1,\sum_{i=1}^nw_i(p)=1,~and~w_i(p)\geq0,~i=1,…,n.<br>$$</p>
+<p>$$<br>w_i(p)=\frac{\sigma_i(p)}{\sum_{j=1}^n\sigma_j(p)}with~\sigma_j=\frac{1}{d(p,p_i)^\mu}<br>$$</p>
+<p>这里$d(p,p_i)$为$p$和$p_i$的距离，指数$μ$可以取&gt;0的数，这里测试取2最优。通过公式求取权重函数，求和体现多组控制点共同产生影响。</p>
 
     
     </div>
@@ -326,7 +283,7 @@
   
 </div>
 
-  <a data-url="http://kitekii.pw/2019/02/20/又见hexo+SSL/" data-id="cjypt4zrr00084shy4bkbcbly" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://kitekii.pw/2019/08/05/CG/CG02_ImageWarpping/" data-id="cjzij6hea0015e8hyflysa929" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -403,19 +360,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/02/22/ML/MNIST-with-FC-and-CNN/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          MNIST with FC and CNN
-        
-      </div>
-    </a>
   
-  
-    <a href="/2018/12/22/Rust Windows环境搭建/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2019/07/31/bio/cybpnk_vida/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Rust Windows环境搭建</div>
+      <div class="article-nav-title">Lo-fi|冰室产酒</div>
     </a>
   
 </nav>
@@ -442,6 +390,25 @@
     <h3 class="widget-title">recent</h3>
     <div class="widget">
       <ul id="recent-post" class>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2019/08/05/CG/CG02_ImageWarpping/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2019/08/05/CG/CG02_ImageWarpping/" class="title">USTC-CG|Image Warping</a></p>
+              <p class="item-date"><time datetime="2019-08-05T15:45:00.000Z" itemprop="datePublished">2019-08-05</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -519,25 +486,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2019/07/29/CG/CGoverall/" class="thumbnail">
-  
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
-              <p class="item-title"><a href="/2019/07/29/CG/CGoverall/" class="title">CG Learning Routes</a></p>
-              <p class="item-date"><time datetime="2019-07-29T04:00:00.000Z" itemprop="datePublished">2019-07-29</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -558,7 +506,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

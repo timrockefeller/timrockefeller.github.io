@@ -14,7 +14,7 @@
 <meta property="og:description" content="OverallStructure from motion (SFM) is a photogrammetric range imaging technique for estimating three-dimensional structures from two-dimensional image sequences that may be coupled with local motion s">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://miao.su/images/2019/09/12/Sp_190803_230221607e9.jpg">
-<meta property="og:updated_time" content="2019-09-12T01:33:24.577Z">
+<meta property="og:updated_time" content="2019-09-12T12:41:52.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SFM-notes">
 <meta name="twitter:description" content="OverallStructure from motion (SFM) is a photogrammetric range imaging technique for estimating three-dimensional structures from two-dimensional image sequences that may be coupled with local motion s">
@@ -295,7 +295,7 @@
 <p><img src="20190701164052982.png" alt="img"></p>
 <h3 id="SFM算法流程-1"><a href="#SFM算法流程-1" class="headerlink" title="SFM算法流程[^1]"></a>SFM算法流程[^1]</h3><p><img src="276683-20180406165005426-1416253946.png" alt="img"></p>
 <h2 id="速通攻略"><a href="#速通攻略" class="headerlink" title="速通攻略"></a>速通攻略</h2><p><em>版权声明：本文为CSDN博主「RyuZhihao123」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。</em><br><em>原文链接：<a href="https://ryuzhihao123.blog.csdn.net/article/details/70799695" target="_blank" rel="noopener">https://ryuzhihao123.blog.csdn.net/article/details/70799695</a></em></p>
-<p><img src="20170522192118102" alt="流程"></p>
+<p><img src="20170522192118102.jpg" alt="流程"></p>
 <h3 id="参数获取"><a href="#参数获取" class="headerlink" title="参数获取"></a>参数获取</h3><p>包括摄像机内参、外参。有些算法需要对图片的长宽进行统一需注意。  一般来讲，内参矩阵需要通过标定求出来，但是其实部分参数我们可以从图片的信息中获取，在图片上右键“属性”，可以找到部分需要的信息。</p>
 <h3 id="特征点提取和特征点匹配"><a href="#特征点提取和特征点匹配" class="headerlink" title="特征点提取和特征点匹配"></a>特征点提取和特征点匹配</h3><p>这里可以不用我们去实现，使用OpenCV中的SIFT或SURF都可以做到。不过需要OpenCV3.0[^2]，之前版本的OpenCV可以直接使用SIFT和SURF，但是3之后的版本有我们需要的功能，只是它的SIFT等等被移动到nonfree.hpp里去了。</p>
 <p>关于SIFT、SURF的选择：SIFT得到的结果相对比较稀疏且特征点的价值较高，但是OpenCV里的SIFT不太稳定，很多图片在提取过程中会出现莫名其妙的错误。SURT的话特征点会比较多但是质量不怎么好，但是OpenCV的SURF非常稳定。</p>
@@ -342,7 +342,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/09/12/CG/3Drebuild/SFM-notes/" data-id="ck0g0r7dw004z9chye15s6uxm" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/09/12/CG/3Drebuild/SFM-notes/" data-id="ck0gomv3h0054gghyks6y69t3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding

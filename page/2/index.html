@@ -168,7 +168,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        39
+        40
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -217,6 +217,157 @@
 
       
       <section id="main">
+  <article id="post-CG/Custom-Nodes-With-CodeFunctionNode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      
+	
+		<a href="/2019/07/26/CG/Custom-Nodes-With-CodeFunctionNode/" itemprop="url">
+      <img src="https://miao.su/images/2017/06/04/34120476912_6b13d5745c_o7ceff.jpg" class="article-banner" />
+    </a>
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/07/26/CG/Custom-Nodes-With-CodeFunctionNode/">ShaderGraph自定义节点</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2019/07/26/CG/Custom-Nodes-With-CodeFunctionNode/">
+      <time datetime="2019-07-26T07:29:45.000Z" itemprop="datePublished">2019-07-26</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/CG/">CG</a>, <a class="tag-link" href="/tags/Shader/">Shader</a>, <a class="tag-link" href="/tags/Unity/">Unity</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p><p>原文：<a href="https://docs.unity3d.com/Packages/com.unity.shadergraph@6.5/manual/Custom-Nodes-With-CodeFunctionNode.html" target="_blank" rel="noopener">Custom Nodes with CodeFunctionNode</a>@Unity Docs</p>
+<p>随着Unity发布了ShaderGraph，创建一个Shader比以往都要更加容易。然而无论提供多少个默认节点，都不能满足用户的自定义需求。因此，我们开发了一个自定义节点的API，可以在C#中创建新节点。或许能满足用户们刁钻的需求。</p>
+<p>本文将介绍一种最简单的实现方法，称之为<strong>Code Function Node</strong>，接下来将展示详细细节。</p></p>
+      <p class="article-more-link">
+        <a href="/2019/07/26/CG/Custom-Nodes-With-CodeFunctionNode/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2019/07/26/CG/Custom-Nodes-With-CodeFunctionNode/" data-id="ck0nc1ssy000ad8hyuyx5ew8q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   <article id="post-JavaS/maven(eclipseVsCode)远程部署tomcat" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -290,7 +441,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/" data-id="ck0gomuz4000agghyv08yp9qa" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/" data-id="ck0nc1st9000ed8hydnqa39wx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -446,7 +597,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/04/23/unsorted/ssr/" data-id="ck0gomv0o002ggghy5pr7whuu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/04/23/unsorted/ssr/" data-id="ck0nc1sui002id8hyf7lhb36n" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -585,7 +736,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/04/11/Rust/Rust_Complie_note/" data-id="ck0gomuzt0012gghyh5qdzk1x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/04/11/Rust/Rust_Complie_note/" data-id="ck0nc1stz001gd8hyue3o0vyj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -725,7 +876,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/03/07/JavaS/JDBC/" data-id="ck0gomuz00009gghyldw5bgj4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/03/07/JavaS/JDBC/" data-id="ck0nc1st5000dd8hyaqa8fe6a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -876,7 +1027,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/02/22/ML/MNIST-with-FC-and-CNN/" data-id="ck0gomuzr000xgghybvgvsvva" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/02/22/ML/MNIST-with-FC-and-CNN/" data-id="ck0nc1stm000qd8hy2pqlx0vl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1027,7 +1178,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/02/20/unsorted/hexo-again/" data-id="ck0gomv0m002egghy2p8tpr0j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/02/20/unsorted/hexo-again/" data-id="ck0nc1suj002ld8hyck65l1gr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1176,7 +1327,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/12/22/unsorted/Rust Windows环境搭建/" data-id="ck0gomv2k004ngghyqc9bwrv2" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/12/22/unsorted/Rust Windows环境搭建/" data-id="ck0nc1svo004rd8hy0pdhnbrk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1318,7 +1469,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/12/15/unsorted/Permission denied when git push/" data-id="ck0gomv0e0024gghyaa4ik70v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/12/15/unsorted/Permission denied when git push/" data-id="ck0nc1suc0026d8hyilvv1atn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1458,147 +1609,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/10/21/ML/Keras-Intro/" data-id="ck0gomuzn000qgghyk0bj0oeu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-ML/SKLearn玄学操作" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/10/20/ML/SKLearn玄学操作/">SKLearn玄学操作</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2018/10/20/ML/SKLearn玄学操作/">
-      <time datetime="2018-10-20T08:54:00.000Z" itemprop="datePublished">2018-10-20</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
-  </div>
-
-
-            
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/ML/">ML</a>, <a class="tag-link" href="/tags/sklearn/">sklearn</a>
-  </div>
-
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      <p><h3 id="分离数据集"><a href="#分离数据集" class="headerlink" title="分离数据集"></a>分离数据集</h3><p><a href="https://blog.csdn.net/kyriehe/article/details/77507473" target="_blank" rel="noopener"><strong>train_test_split</strong></a>是交叉验证中常用的函数，功能是从样本中随机的按比例选取train data和test data，形式为：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X_train,X_test, y_train, y_test = cross_validation.train_test_split(train_data, train_target, test_size=<span class="number">0.4</span>, random_state=<span class="number">0</span>)</span><br></pre></td></tr></table></figure></p></p>
-      <p class="article-more-link">
-        <a href="/2018/10/20/ML/SKLearn玄学操作/#more">Read More</a>
-      </p>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://blog.iik.moe/2018/10/20/ML/SKLearn玄学操作/" data-id="ck0gomuzu0014gghys6qox1n7" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/10/21/ML/Keras-Intro/" data-id="ck0nc1stk000pd8hyw1vkic4j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1695,6 +1706,25 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2019/09/17/bio/the_inconvenient_truth/" class="thumbnail">
+  
+  
+    <span style="background-image:url(//vignette.wikia.nocookie.net/petscop/images/4/4e/Caresprite_NLM.png)" alt="真实的可怕" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/碎碎念/">碎碎念</a></p>
+              <p class="item-title"><a href="/2019/09/17/bio/the_inconvenient_truth/" class="title">真实的可怕</a></p>
+              <p class="item-date"><time datetime="2019-09-17T04:07:00.000Z" itemprop="datePublished">2019-09-17</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2019/09/12/CG/3Drebuild/SFM-notes/" class="thumbnail">
   
   
@@ -1768,25 +1798,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2019/07/31/bio/cybpnk_vida/" class="thumbnail">
-  
-  
-    <span style="background-image:url(https://miao.su/images/2019/07/30/FA2C4CA0A4D232F317D2B106A4682C51be1cf.jpg)" alt="Lo-fi|冰室产酒" class="thumbnail-image"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/札记阁/">札记阁</a></p>
-              <p class="item-title"><a href="/2019/07/31/bio/cybpnk_vida/" class="title">Lo-fi|冰室产酒</a></p>
-              <p class="item-date"><time datetime="2019-07-31T14:40:00.000Z" itemprop="datePublished">2019-07-31</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1797,7 +1808,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">25</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/碎碎念/">碎碎念</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">25</span></li></ul>
     </div>
   </div>
 
@@ -1807,7 +1818,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

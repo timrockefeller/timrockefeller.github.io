@@ -305,7 +305,7 @@
 </ul>
 <p>输入数据为一个表示顶点(Vec3)的有序数组，输出为7位数组（原来还没到图像啊，某种意义上十分简单了，运算量也不是很大）。</p>
 <h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>通过pip简单地安装需要的包。</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> pip install tensorflow_graphics</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> pip install tensorflow_graphics</span><br></pre></td></tr></table></figure>
 <p><em>待补充：如何安装GPU版本的TensorFlow/Graphics</em></p>
 <p>接下来我们将所需要的包全部导入，同时加载一个简单的3D模型：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow <span class="keyword">import</span> keras</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.geometry.transformation <span class="keyword">import</span> quaternion</span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.math <span class="keyword">import</span> vector</span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.notebooks <span class="keyword">import</span> threejs_visualization</span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.notebooks.resources <span class="keyword">import</span> tfg_simplified_logo</span><br><span class="line"></span><br><span class="line">tf.enable_eager_execution()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loads the Tensorflow Graphics simplified logo.</span></span><br><span class="line">vertices = tfg_simplified_logo.mesh[<span class="string">'vertices'</span>].astype(np.float32)</span><br><span class="line">faces = tfg_simplified_logo.mesh[<span class="string">'faces'</span>]</span><br><span class="line">num_vertices = vertices.shape[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
@@ -365,7 +365,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/29/CG/01_Object_pose_estimation/" data-id="ck8tya7lm004pqohyceqbz3w3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/29/CG/01_Object_pose_estimation/" data-id="ck8zndyay000dl0hyqbbw57sk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -496,7 +496,7 @@
             
             <div class="item-inner">
               <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
-              <p class="item-title"><a href="/2020/04/10/coding/unityshaderkey/" class="title">Unity Shader速查表</a></p>
+              <p class="item-title"><a href="/2020/04/10/coding/unityshaderkey/" class="title">Unity Shader 超常用魔法目录</a></p>
               <p class="item-date"><time datetime="2020-04-10T04:00:00.000Z" itemprop="datePublished">2020-04-10</time></p>
             </div>
           </li>
@@ -515,7 +515,7 @@
             
             <div class="item-inner">
               <p class="item-category"><a class="article-category-link" href="/categories/日记本/">日记本</a></p>
-              <p class="item-title"><a href="/2020/04/01/bio/TBC/" class="title"></a></p>
+              <p class="item-title"><a href="/2020/04/01/bio/TBC/" class="title">四月成分表</a></p>
               <p class="item-date"><time datetime="2020-04-01T12:00:45.000Z" itemprop="datePublished">2020-04-01</time></p>
             </div>
           </li>

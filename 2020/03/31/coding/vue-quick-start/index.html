@@ -3,19 +3,19 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>疾风入门VUE | 外野 - wryyyyyyyyyY!</title>
+  <title>疾风VUE | 外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="由于要磕一个Electron项目，一想Vue的好用之处，立即着手准备vue-cli的学习。">
+  <meta name="description" content="由于要磕一个Electron项目，一想Vue的好用之处，立即着手准备vue-cli的学习。   4月21日更新：要同时磕三个electron+vue项目，我顶了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="疾风入门VUE">
+<meta property="og:title" content="疾风VUE">
 <meta property="og:url" content="http://blog.iik.moe/2020/03/31/coding/vue-quick-start/index.html">
 <meta property="og:site_name" content="外野">
-<meta property="og:description" content="由于要磕一个Electron项目，一想Vue的好用之处，立即着手准备vue-cli的学习。">
+<meta property="og:description" content="由于要磕一个Electron项目，一想Vue的好用之处，立即着手准备vue-cli的学习。   4月21日更新：要同时磕三个electron+vue项目，我顶了。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-31T11:37:08.616Z">
+<meta property="og:updated_time" content="2020-04-22T13:34:13.187Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="疾风入门VUE">
-<meta name="twitter:description" content="由于要磕一个Electron项目，一想Vue的好用之处，立即着手准备vue-cli的学习。">
+<meta name="twitter:title" content="疾风VUE">
+<meta name="twitter:description" content="由于要磕一个Electron项目，一想Vue的好用之处，立即着手准备vue-cli的学习。   4月21日更新：要同时磕三个electron+vue项目，我顶了。">
   
   
   
@@ -240,7 +240,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      疾风入门VUE
+      疾风VUE
     </h1>
   
 
@@ -257,6 +257,11 @@
 
 
             
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
 
             
 
@@ -269,8 +274,19 @@
     <div class="article-entry" itemprop="articleBody">
     
       
-      <p>由于要磕一个Electron项目，一想Vue的好用之处，立即着手准备<code>vue-cli</code>的学习。</p>
+      <p><del>由于要磕一个Electron项目，</del>一想Vue的好用之处，立即着手准备<code>vue-cli</code>的学习。</p>
+<blockquote>
+<p> 4月21日更新：要同时磕三个electron+vue项目，我顶了。</p>
+</blockquote>
 <a id="more"></a>
+<p>列几个坑点</p>
+<h3 id="computed不被侦听"><a href="#computed不被侦听" class="headerlink" title="computed不被侦听"></a>computed不被侦听</h3><p>在计算属性(computed porperties)配合getter、setter时，getter内部变量发生变化时不会触发计算。即使是dom绑定了这个值也不会被侦听，而是需要主动调用更新。</p>
+<p>这时候其实可以用<code>console.log</code>去取个值。</p>
+<p>实际项目中我甚至加了些Promise，感觉线程要爆炸，故在本组件中加了个信号量。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  data () &#123; <span class="keyword">return</span> &#123;<span class="attr">sem</span>: <span class="number">1</span>&#125; &#125;,</span><br><span class="line">  computed: &#123;</span><br><span class="line">    status: &#123;</span><br><span class="line">      <span class="keyword">get</span> () &#123;</span><br><span class="line">        <span class="keyword">let</span> that = <span class="keyword">this</span></span><br><span class="line">        <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">res, rej</span>) =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (that.sem &gt; <span class="number">1</span> &amp;&amp; that.sem--)	<span class="comment">// P</span></span><br><span class="line">            res()</span><br><span class="line">        &#125;).then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">          that.sem++                    	<span class="comment">// V</span></span><br><span class="line">        &#125;)</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'sth'</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+
+<p>TBC</p>
 
     
     </div>
@@ -282,7 +298,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/03/31/coding/vue-quick-start/" data-id="ck976pm2l0023jkhyh9m26tae" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/03/31/coding/vue-quick-start/" data-id="ck9bdprxe001wbshyk0s3ts31" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -424,7 +440,7 @@
               <a href="/2020/04/15/coding/tencent-intern/" class="thumbnail">
   
   
-    <span style="background-image:url(https://s1.ax1x.com/2020/04/15/JinUQe.th.jpg)" alt="IEG Intern Log &amp; Boy Talk" class="thumbnail-image"></span>
+    <span style="background-image:url(https://s1.ax1x.com/2020/04/15/JinUQe.th.jpg)" alt="IEG Intern Log &amp; Talks" class="thumbnail-image"></span>
   
 </a>
 
@@ -432,7 +448,7 @@
             
             <div class="item-inner">
               <p class="item-category"><a class="article-category-link" href="/categories/札记阁/">札记阁</a></p>
-              <p class="item-title"><a href="/2020/04/15/coding/tencent-intern/" class="title">IEG Intern Log &amp; Boy Talk</a></p>
+              <p class="item-title"><a href="/2020/04/15/coding/tencent-intern/" class="title">IEG Intern Log &amp; Talks</a></p>
               <p class="item-date"><time datetime="2020-04-15T07:00:00.000Z" itemprop="datePublished">2020-04-15</time></p>
             </div>
           </li>
@@ -504,7 +520,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">30</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">9</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">31</span></li></ul>
     </div>
   </div>
 
@@ -589,7 +605,7 @@
         client_id: 'a688b926cb46e56975d4',
         client_secret: 'ea63339d43ee4bf2d959d37a886a1c8c19e3709d',
       },
-      id: '疾风入门VUE'
+      id: '疾风VUE'
     })
     gitment.render('comments')
   </script>

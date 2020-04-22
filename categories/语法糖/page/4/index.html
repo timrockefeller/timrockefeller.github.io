@@ -3,22 +3,15 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>OpenGL测试与缓冲器 | 外野 - wryyyyyyyyyY!</title>
+  <title>Category: 语法糖 | 外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在片段着色器进行渲染之前，需对每一个顶点进行测试，不同的有深度测试、alpha测试、模板测试。同时渲染器可绑定子渲染器，进行离屏缓存，此时需要绑定至帧缓冲器或累计缓冲器中。 填坑中……">
-<meta name="keywords" content="CG,OpenGL">
-<meta property="og:type" content="article">
-<meta property="og:title" content="OpenGL测试与缓冲器">
-<meta property="og:url" content="http://blog.iik.moe/2019/10/03/CG/LOGL/LOGL04_01/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="外野">
+<meta property="og:url" content="http://blog.iik.moe/categories/语法糖/page/4/index.html">
 <meta property="og:site_name" content="外野">
-<meta property="og:description" content="在片段着色器进行渲染之前，需对每一个顶点进行测试，不同的有深度测试、alpha测试、模板测试。同时渲染器可绑定子渲染器，进行离屏缓存，此时需要绑定至帧缓冲器或累计缓冲器中。 填坑中……">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://blog.iik.moe/2019/10/03/CG/LOGL/LOGL04_01/result.png">
-<meta property="og:updated_time" content="2019-10-21T05:51:14.588Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OpenGL测试与缓冲器">
-<meta name="twitter:description" content="在片段着色器进行渲染之前，需对每一个顶点进行测试，不同的有深度测试、alpha测试、模板测试。同时渲染器可绑定子渲染器，进行离屏缓存，此时需要绑定至帧缓冲器或累计缓冲器中。 填坑中……">
-<meta name="twitter:image" content="http://blog.iik.moe/2019/10/03/CG/LOGL/LOGL04_01/result.png">
+<meta name="twitter:title" content="外野">
   
   
   
@@ -223,296 +216,57 @@
 </aside>
 
       
-      <section id="main"><article id="post-CG/LOGL/LOGL04_01" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <!-- <div class="background"></div> -->
-      
-      <!-- <script>
-        ;!(function($) {
-          var max = 99;
-          var index = Math.floor(Math.random() * max) + 1;
-          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
-        })(jQuery)
-      </script> -->
-      
-    
-    
-    
-      <header class="article-header">
+      <section id="main">
+<div class="timeline timeline-wrap">
+  <div class="timeline-row timeline-row-major">
+    <span class="node"><i class="fa fa-folder"></i></span>
+    <h1 class="title">语法糖</h1>
+  </div>
+  
+    <div class="timeline-row">
+      <span class="node"></span>
+      <div class="content">
         
   
-    <h1 class="article-title" itemprop="name">
-      OpenGL测试与缓冲器
+    <h1 itemprop="name">
+      <a class="timeline-article-title" href="/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/">ゼロから始めるJAVA世界生活 01</a>
     </h1>
   
 
 
-        
-          <div class="article-meta">
-            
+        <div class="article-meta">
+          
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2019/10/03/CG/LOGL/LOGL04_01/">
-      <time datetime="2019-10-02T16:00:00.000Z" itemprop="datePublished">2019-10-03</time>
+    <a href="/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/">
+      <time datetime="2018-04-17T12:20:06.000Z" itemprop="datePublished">2018-04-17</time>
     </a>
   </div>
 
 
-            
+          
   <div class="article-category">
     <i class="fa fa-folder"></i>
       <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
   </div>
 
 
-            
+          
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/CG/">CG</a>, <a class="tag-link" href="/tags/OpenGL/">OpenGL</a>
+    <a class="tag-link" href="/tags/java/">java</a>, <a class="tag-link" href="/tags/oracle/">oracle</a>
   </div>
 
 
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      
-      <p>在片段着色器进行渲染之前，需对每一个顶点进行测试，不同的有深度测试、alpha测试、模板测试。同时渲染器可绑定子渲染器，进行离屏缓存，此时需要绑定至帧缓冲器或累计缓冲器中。</p>
-<p>填坑中……</p>
-<a id="more"></a>
-<h2 id="深度测试函数"><a href="#深度测试函数" class="headerlink" title="深度测试函数"></a>深度测试函数</h2><p><code>glDepthFunc(GL_LESS);</code></p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">函数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">GL_ALWAYS</td>
-<td style="text-align:left">永远通过深度测试</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_NEVER</td>
-<td style="text-align:left">永远不通过深度测试</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_LESS</td>
-<td style="text-align:left">在片段深度值小于缓冲的深度值时通过测试</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_EQUAL</td>
-<td style="text-align:left">在片段深度值等于缓冲区的深度值时通过测试</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_LEQUAL</td>
-<td style="text-align:left">在片段深度值小于等于缓冲区的深度值时通过测试</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_GREATER</td>
-<td style="text-align:left">在片段深度值大于缓冲区的深度值时通过测试</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_NOTEQUAL</td>
-<td style="text-align:left">在片段深度值不等于缓冲区的深度值时通过测试</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_GEQUAL</td>
-<td style="text-align:left">在片段深度值大于等于缓冲区的深度值时通过测试</td>
-</tr>
-</tbody>
-</table>
-<h3 id="防止深度冲突"><a href="#防止深度冲突" class="headerlink" title="防止深度冲突"></a>防止深度冲突</h3><p>第一个也是最重要的技巧是<strong>永远不要把多个物体摆得太靠近，以至于它们的一些三角形会重叠</strong>。通过在两个物体之间设置一个用户无法注意到的偏移值，你可以完全避免这两个物体之间的深度冲突。在箱子和地板的例子中，我们可以将箱子沿着正y轴稍微移动一点。箱子位置的这点微小改变将不太可能被注意到，但它能够完全减少深度冲突的发生。然而，这需要对每个物体都手动调整，并且需要进行彻底的测试来保证场景中没有物体会产生深度冲突。</p>
-<p>第二个技巧是<strong>尽可能将近平面设置远一些</strong>。在前面我们提到了精度在靠近<strong>近</strong>平面时是非常高的，所以如果我们将<strong>近</strong>平面远离观察者，我们将会对整个平截头体有着更大的精度。然而，将近平面设置太远将会导致近处的物体被裁剪掉，所以这通常需要实验和微调来决定最适合你的场景的<strong>近</strong>平面距离。</p>
-<p>另外一个很好的技巧是牺牲一些性能，<strong>使用更高精度的深度缓冲</strong>。大部分深度缓冲的精度都是24位的，但现在大部分的显卡都支持32位的深度缓冲，这将会极大地提高精度。所以，牺牲掉一些性能，你就能获得更高精度的深度测试，减少深度冲突。</p>
-<p>我们上面讨论的三个技术是最普遍也是很容易实现的抗深度冲突技术了。还有一些更复杂的技术，但它们依然不能完全消除深度冲突。深度冲突是一个常见的问题，但如果你组合使用了上面列举出来的技术，你可能不会再需要处理深度冲突了。</p>
-<h2 id="模板测试"><a href="#模板测试" class="headerlink" title="模板测试"></a>模板测试</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">glStencilMask(<span class="number">0xFF</span>); <span class="comment">// 每一位写入模板缓冲时都保持原样</span></span><br><span class="line">glStencilMask(<span class="number">0x00</span>); <span class="comment">// 每一位在写入模板缓冲时都会变成0（禁用写入）</span></span><br></pre></td></tr></table></figure>
-<p><img src="result.png" alt="result"></p>
-<p><hr><br>glStencilFunc(GLenum func, GLint ref, GLuint mask)一共包含三个参数：</p>
-<ul>
-<li><code>func</code>：设置模板测试函数(Stencil Test Function)。这个测试函数将会应用到已储存的模板值上和glStencilFunc函数的<code>ref</code>值上。可用的选项有：GL_NEVER、GL_LESS、GL_LEQUAL、GL_GREATER、GL_GEQUAL、GL_EQUAL、GL_NOTEQUAL和GL_ALWAYS。它们的语义和深度缓冲的函数类似。</li>
-<li><code>ref</code>：设置了模板测试的参考值(Reference Value)。模板缓冲的内容将会与这个值进行比较。</li>
-<li><code>mask</code>：设置一个掩码，它将会与参考值和储存的模板值在测试比较它们之前进行与(AND)运算。初始情况下所有位都为1。</li>
-</ul>
-<p><hr><br>glStencilOp(GLenum sfail, GLenum dpfail, GLenum dppass)一共包含三个选项，我们能够设定每个选项应该采取的行为：</p>
-<ul>
-<li><code>sfail</code>：模板测试失败时采取的行为。</li>
-<li><code>dpfail</code>：模板测试通过，但深度测试失败时采取的行为。</li>
-<li><code>dppass</code>：模板测试和深度测试都通过时采取的行为。</li>
-</ul>
-<p>每个选项都可以选用以下的其中一种行为：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">行为</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">GL_KEEP</td>
-<td style="text-align:left">保持当前储存的模板值</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_ZERO</td>
-<td style="text-align:left">将模板值设置为0</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_REPLACE</td>
-<td style="text-align:left">将模板值设置为glStencilFunc函数设置的<code>ref</code>值</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_INCR</td>
-<td style="text-align:left">如果模板值小于最大值则将模板值加1</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_INCR_WRAP</td>
-<td style="text-align:left">与GL_INCR一样，但如果模板值超过了最大值则归零</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_DECR</td>
-<td style="text-align:left">如果模板值大于最小值则将模板值减1</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_DECR_WRAP</td>
-<td style="text-align:left">与GL_DECR一样，但如果模板值小于0则将其设置为最大值</td>
-</tr>
-<tr>
-<td style="text-align:left">GL_INVERT</td>
-<td style="text-align:left">按位翻转当前的模板缓冲值</td>
-</tr>
-</tbody>
-</table>
-<p><hr></p>
-<h3 id="脑子遇到的坑"><a href="#脑子遇到的坑" class="headerlink" title="脑子遇到的坑"></a>脑子遇到的坑</h3><h4 id="清空缓冲前检查膜版掩码是否为0xff"><a href="#清空缓冲前检查膜版掩码是否为0xff" class="headerlink" title="清空缓冲前检查膜版掩码是否为0xff"></a>清空缓冲前检查膜版掩码是否为0xff</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">glStencilMask(<span class="number">0xFF</span>);  <span class="comment">// important</span></span><br><span class="line">glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);</span><br></pre></td></tr></table></figure>
-<h4 id="别忘了全局的一些选项"><a href="#别忘了全局的一些选项" class="headerlink" title="别忘了全局的一些选项"></a>别忘了全局的一些选项</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// configure global opengl state</span></span><br><span class="line">glEnable(GL_DEPTH_TEST);</span><br><span class="line">glDepthFunc(GL_LESS);</span><br><span class="line">glEnable(GL_STENCIL_TEST);</span><br><span class="line">glStencilFunc(GL_NOTEQUAL, <span class="number">1</span>, <span class="number">0xFF</span>);</span><br><span class="line">glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);<span class="comment">// 使用替换规则</span></span><br></pre></td></tr></table></figure>
-<p><hr><br>应该还是有shader实现描边的。</p>
-<p>参见崩崩崩的精细描边。</p>
-<p>由于这个方法使通过放大模型来达到包边的效果，需要画两次。有没有什么神仙方法通过法线实现？自己实现的法线会在一些曲率不高的边缘产生厚描边。</p>
-<p>同时也有头发这种东西需要处理。</p>
-<p>但是需要精细描边的基本上都是NPR，头发都变一大块叻。</p>
-
-    
+        </div>
+      </div>
     </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/10/03/CG/LOGL/LOGL04_01/" data-id="ck9bdps840060bshybm7cpa30" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2019/10/08/oldblog/PSV购入计划/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          PSV购入计划
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2019/10/01/CG/LOGL/LOGL03_01/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">OpenGL光线渲染</div>
-    </a>
-  
-</nav>
-
-
-  
-</article>
-
-
-  
-  
-    <section id="comments"></section>
-  
-
-
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/categories/语法糖/page/3/">&laquo; Prev</a><a class="page-number" href="/categories/语法糖/">1</a><a class="page-number" href="/categories/语法糖/page/2/">2</a><a class="page-number" href="/categories/语法糖/page/3/">3</a><span class="page-number current">4</span>
+  </nav>
 
 </section>
       
@@ -715,7 +469,7 @@
         client_id: 'a688b926cb46e56975d4',
         client_secret: 'ea63339d43ee4bf2d959d37a886a1c8c19e3709d',
       },
-      id: 'OpenGL测试与缓冲器'
+      id: ''
     })
     gitment.render('comments')
   </script>

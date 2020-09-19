@@ -168,7 +168,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        54
+        55
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -217,6 +217,196 @@
 
       
       <section id="main">
+  <article id="post-CG/SimpleURPToonLitOutlineShader" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      
+	
+		<a href="/2020/09/19/CG/SimpleURPToonLitOutlineShader/" itemprop="url">
+      <img src="https://s1.ax1x.com/2020/09/19/w5wWut.png" class="article-banner" />
+    </a>
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/09/19/CG/SimpleURPToonLitOutlineShader/">URP Toon Lit 初见</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/09/19/CG/SimpleURPToonLitOutlineShader/">
+      <time datetime="2020-09-19T02:29:45.000Z" itemprop="datePublished">2020-09-19</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/CG/">CG</a>, <a class="tag-link" href="/tags/Shader/">Shader</a>, <a class="tag-link" href="/tags/Unity/">Unity</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <blockquote>
+<p>Git Repository: <a href="https://github.com/timrockefeller/UnityURPToonLitShaderExample" target="_blank" rel="noopener">timrockefeller/UnityURPToonLitShaderExample</a></p>
+</blockquote>
+<h2 id="Main-Structure"><a href="#Main-Structure" class="headerlink" title="Main Structure"></a>Main Structure</h2><ol>
+<li><p>SurfaceColor pass</p>
+</li>
+<li><p>Outline pass</p>
+</li>
+<li><p>ShadowCaster pass</p>
+</li>
+<li><p>DepthOnly pass</p>
+</li>
+</ol>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><p>核心特性</p>
+<ul>
+<li><p>面部法线修正⚠️</p>
+</li>
+<li><p>光滑描边⚠️</p>
+</li>
+<li><p>FOV、LOD 描边变形修正⚠️</p>
+</li>
+<li><p>面部头发投影 clip⚠️ </p>
+</li>
+<li><p>前发遮挡的眼部渲染</p>
+</li>
+<li><p>各向异性头发渲染与“天使环”结合 UV 拉伸</p>
+</li>
+<li><p>边缘光</p>
+</li>
+<li><p>PBR 镜面光照</p>
+</li>
+<li><p>通过 HSV 控制阴影、描边颜色</p>
+</li>
+<li><p>2D 嘴部渲染</p>
+</li>
+<li><p>stencil local hair shadow on face</p>
+</li>
+<li><p>物理与风的模拟</p>
+</li>
+<li><p>其他的特性材质如 AO、镜面、法线等</p>
+</li>
+</ul>
+<h2 id="Spotlight-Methods"><a href="#Spotlight-Methods" class="headerlink" title="Spotlight Methods"></a>Spotlight Methods</h2><h3 id="Alpha-Cliping"><a href="#Alpha-Cliping" class="headerlink" title="Alpha Cliping"></a>Alpha Cliping</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DoClipTestToTargetAlphaValue</span><span class="params">(half alpha)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// iOS上编译该shader出了点问题</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    if(_UseAlphaClipping)</span></span><br><span class="line"><span class="comment">    &#123;   </span></span><br><span class="line"><span class="comment">        clip(alpha - _Cutoff);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 并非最佳方案，尽量使用GPU原生特性</span></span><br><span class="line">    clip(alpha - _Cutoff + (<span class="number">1.0001</span>-_UseAlphaClipping));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Lighting-Equaltion"><a href="#Lighting-Equaltion" class="headerlink" title="Lighting Equaltion"></a>Lighting Equaltion</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// this function will be used by all direct lights (directional/point/spot)</span></span><br><span class="line"><span class="function">half3 <span class="title">ShadeSingleLightDefaultMethod</span><span class="params">(SurfaceData surfaceData, LightingData lightingData, Light light)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    half3 N = lightingData.normalWS;</span><br><span class="line">    half3 L = light.direction;</span><br><span class="line">    half3 V = lightingData.viewDirectionWS;</span><br><span class="line">    half3 H = normalize(L+V);</span><br><span class="line"></span><br><span class="line">    half NoL = dot(N,L);</span><br><span class="line"></span><br><span class="line">    half lightAttenuation = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// light's shadow map. If you prefer hard shadow, you can smoothstep() light.shadowAttenuation to make it sharp.</span></span><br><span class="line">    lightAttenuation *= lerp(<span class="number">1</span>,light.shadowAttenuation,_ReceiveShadowMappingAmount);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// light's distance &amp; angle fade for point light &amp; spot light (see GetAdditionalPerObjectLight() in Lighting.hlsl)</span></span><br><span class="line">    <span class="comment">// Lighting.hlsl -&gt; https://github.com/Unity-Technologies/Graphics/blob/master/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl</span></span><br><span class="line">    lightAttenuation *= min(<span class="number">2</span>,light.distanceAttenuation); <span class="comment">//max intensity = 2, prevent over bright if light too close, can expose this float to editor if you wish to</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// N dot L</span></span><br><span class="line">    <span class="comment">// simplest 1 line cel shade, you can always replace this line by your own better method !</span></span><br><span class="line">    lightAttenuation *= smoothstep(_CelShadeMidPoint-_CelShadeSoftness,_CelShadeMidPoint+_CelShadeSoftness, NoL);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// don't want direct lighting becomes too bright for toon lit characters? set this value to a lower value </span></span><br><span class="line">    lightAttenuation *= _DirectLightMultiplier;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> surfaceData.albedo * light.color * lightAttenuation;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2020/09/19/CG/SimpleURPToonLitOutlineShader/" data-id="ckf93d0uv000qnghykdoodqzj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   <article id="post-notes/IEGLog" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -273,7 +463,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/08/17/notes/IEGLog/" data-id="cke2y1wzk001zdshyyz1brq79" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/08/17/notes/IEGLog/" data-id="ckf93d0xg002cnghyu000gybl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -422,7 +612,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/06/26/bio/bks/" data-id="cke2y1wyt0019dshymjimtd33" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/06/26/bio/bks/" data-id="ckf93d0vw001fnghydb13yvu1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -562,7 +752,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/05/30/bio/handoff/" data-id="cke2y1wz3001jdshyiq9e10ab" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/05/30/bio/handoff/" data-id="ckf93d0w5001hnghyxt9lc332" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -704,7 +894,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/05/21/unsorted/rakuensuihou/" data-id="cke2y1x2r0032dshyqrfbyyl5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/05/21/unsorted/rakuensuihou/" data-id="ckf93d10n0041nghynssurrmz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -853,7 +1043,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/04/29/bio/hometown/" data-id="cke2y1wzg001udshy7bbtnizy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/04/29/bio/hometown/" data-id="ckf93d0wv0020nghy2b3bnuud" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1003,7 +1193,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/04/15/coding/tencent-intern/" data-id="cke2y1wzp0026dshynhhao5js" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/04/15/coding/tencent-intern/" data-id="ckf93d0xb0029nghy7s528hmw" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1152,7 +1342,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/04/12/notes/SoftwareEngineering/" data-id="cke2y1wzx002bdshywzk8jjlg" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/04/12/notes/SoftwareEngineering/" data-id="ckf93d0y6002snghylehtfkn8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1301,7 +1491,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/04/10/coding/unityshaderkey/" data-id="cke2y1wzq0028dshywah512qr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/04/10/coding/unityshaderkey/" data-id="ckf93d0xq002jnghyqn40chsu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1450,145 +1640,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/04/01/bio/TBC/" data-id="cke2y1wz6001ndshyns1dakvi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-coding/vue-quick-start" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/03/31/coding/vue-quick-start/">疾风VUE</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2020/03/31/coding/vue-quick-start/">
-      <time datetime="2020-03-31T12:00:00.000Z" itemprop="datePublished">2020-03-31</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
-  </div>
-
-
-            
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      <p><p><del>由于要磕一个Electron项目，</del>一想Vue的好用之处，立即着手准备<code>vue-cli</code>的学习。</p>
-<blockquote>
-<p> 4月21日更新：要同时磕三个electron+vue项目，我顶了。</p>
-</blockquote></p>
-      <p class="article-more-link">
-        <a href="/2020/03/31/coding/vue-quick-start/#more">Read More</a>
-      </p>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://blog.iik.moe/2020/03/31/coding/vue-quick-start/" data-id="cke2y1wzz002ddshyut93uobb" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/04/01/bio/TBC/" data-id="ckf93d0wq001xnghyc8g6ms7j" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1685,6 +1737,25 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2020/09/19/CG/SimpleURPToonLitOutlineShader/" class="thumbnail">
+  
+  
+    <span style="background-image:url(https://s1.ax1x.com/2020/09/19/w5wWut.png)" alt="URP Toon Lit 初见" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-title"><a href="/2020/09/19/CG/SimpleURPToonLitOutlineShader/" class="title">URP Toon Lit 初见</a></p>
+              <p class="item-date"><time datetime="2020-09-19T02:29:45.000Z" itemprop="datePublished">2020-09-19</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2020/08/17/notes/IEGLog/" class="thumbnail">
   
   
@@ -1758,25 +1829,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/04/29/bio/hometown/" class="thumbnail">
-  
-  
-    <span style="background-image:url(https://s1.ax1x.com/2020/04/19/JM1q9x.th.png)" alt="Maybe so 無限未来" class="thumbnail-image"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/日记本/">日记本</a></p>
-              <p class="item-title"><a href="/2020/04/29/bio/hometown/" class="title">Maybe so 無限未来</a></p>
-              <p class="item-date"><time datetime="2020-04-29T15:00:00.000Z" itemprop="datePublished">2020-04-29</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1787,7 +1839,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">31</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">32</span></li></ul>
     </div>
   </div>
 
@@ -1797,7 +1849,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1807,7 +1859,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/Graphics/" style="font-size: 12px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/ML/" style="font-size: 16px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 14px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 10px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 10px;">Unity</a> <a href="/tags/anime/" style="font-size: 12px;">anime</a> <a href="/tags/cmake/" style="font-size: 12px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12px;">illustrate</a> <a href="/tags/init/" style="font-size: 14px;">init</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 16px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/Graphics/" style="font-size: 12px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/ML/" style="font-size: 16px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 14px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 12px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 12px;">Unity</a> <a href="/tags/anime/" style="font-size: 12px;">anime</a> <a href="/tags/cmake/" style="font-size: 12px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12px;">illustrate</a> <a href="/tags/init/" style="font-size: 14px;">init</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 16px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 

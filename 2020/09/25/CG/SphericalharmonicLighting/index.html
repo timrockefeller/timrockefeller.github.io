@@ -3,27 +3,20 @@
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="utf-8">
   
-  <title>BDRF经验模型之一：Phong Lighting Model | 外野 - wryyyyyyyyyY!</title>
+  <title>球谐函数与全局光照 | 外野 - wryyyyyyyyyY!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="环境光照(Ambient Lighting)：即使在黑暗的情况下，世界上通常也仍然有一些光亮（月亮、远处的光），所以物体几乎永远不会是完全黑暗的。为了模拟这个，我们会使用一个环境光照常量，它永远会给物体一些颜色。 漫反射光照(Diffuse Lighting)：模拟光源对物体的方向性影响(Directional Impact)。它是冯氏光照模型中视觉上最显著的分量。物体的某一部分越是正对着光源，">
-<meta name="keywords" content="CG,OpenGL">
+  <meta name="description" content="球谐函数学习笔记。">
+<meta name="keywords" content="CG,Shader">
 <meta property="og:type" content="article">
-<meta property="og:title" content="BDRF经验模型之一：Phong Lighting Model">
-<meta property="og:url" content="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/index.html">
+<meta property="og:title" content="球谐函数与全局光照">
+<meta property="og:url" content="http://blog.iik.moe/2020/09/25/CG/SphericalharmonicLighting/index.html">
 <meta property="og:site_name" content="外野">
-<meta property="og:description" content="环境光照(Ambient Lighting)：即使在黑暗的情况下，世界上通常也仍然有一些光亮（月亮、远处的光），所以物体几乎永远不会是完全黑暗的。为了模拟这个，我们会使用一个环境光照常量，它永远会给物体一些颜色。 漫反射光照(Diffuse Lighting)：模拟光源对物体的方向性影响(Directional Impact)。它是冯氏光照模型中视觉上最显著的分量。物体的某一部分越是正对着光源，">
+<meta property="og:description" content="球谐函数学习笔记。">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/basic_lighting_phong.png">
-<meta property="og:image" content="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/LOGL02_01/ambient_lighting.png">
-<meta property="og:image" content="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/LOGL02_01/basic_lighting_diffuse.png">
-<meta property="og:image" content="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/LOGL02_01/provation1.png">
-<meta property="og:image" content="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/LOGL02_01/provation2.png">
-<meta property="og:image" content="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/LOGL02_01/basic_lighting_specular.png">
-<meta property="og:updated_time" content="2019-10-21T05:50:51.673Z">
+<meta property="og:updated_time" content="2020-09-19T05:51:38.432Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="BDRF经验模型之一：Phong Lighting Model">
-<meta name="twitter:description" content="环境光照(Ambient Lighting)：即使在黑暗的情况下，世界上通常也仍然有一些光亮（月亮、远处的光），所以物体几乎永远不会是完全黑暗的。为了模拟这个，我们会使用一个环境光照常量，它永远会给物体一些颜色。 漫反射光照(Diffuse Lighting)：模拟光源对物体的方向性影响(Directional Impact)。它是冯氏光照模型中视觉上最显著的分量。物体的某一部分越是正对着光源，">
-<meta name="twitter:image" content="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/basic_lighting_phong.png">
+<meta name="twitter:title" content="球谐函数与全局光照">
+<meta name="twitter:description" content="球谐函数学习笔记。">
   
   
   
@@ -228,7 +221,7 @@
 </aside>
 
       
-      <section id="main"><article id="post-CG/LOGL/LOGL02_01" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-CG/SphericalharmonicLighting" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <!-- <div class="background"></div> -->
@@ -248,7 +241,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      BDRF经验模型之一：Phong Lighting Model
+      球谐函数与全局光照
     </h1>
   
 
@@ -258,8 +251,8 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2019/09/01/CG/LOGL/LOGL02_01/">
-      <time datetime="2019-08-31T16:00:00.000Z" itemprop="datePublished">2019-09-01</time>
+    <a href="/2020/09/25/CG/SphericalharmonicLighting/">
+      <time datetime="2020-09-25T12:29:45.000Z" itemprop="datePublished">2020-09-25</time>
     </a>
   </div>
 
@@ -274,7 +267,7 @@
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/CG/">CG</a>, <a class="tag-link" href="/tags/OpenGL/">OpenGL</a>
+    <a class="tag-link" href="/tags/CG/">CG</a>, <a class="tag-link" href="/tags/Shader/">Shader</a>
   </div>
 
 
@@ -287,84 +280,13 @@
     <div class="article-entry" itemprop="articleBody">
     
       
-      <ul>
-<li>环境光照(Ambient Lighting)：即使在黑暗的情况下，世界上通常也仍然有一些光亮（月亮、远处的光），所以物体几乎永远不会是完全黑暗的。为了模拟这个，我们会使用一个环境光照常量，它永远会给物体一些颜色。</li>
-<li>漫反射光照(Diffuse Lighting)：模拟光源对物体的方向性影响(Directional Impact)。它是冯氏光照模型中视觉上最显著的分量。物体的某一部分越是正对着光源，它就会越亮。</li>
-<li>镜面光照(Specular Lighting)：模拟有光泽物体上面出现的亮点。镜面光照的颜色相比于物体的颜色会更倾向于光的颜色。</li>
-</ul>
+      <p>球谐函数学习笔记。</p>
 <a id="more"></a>
-<p><img src="basic_lighting_phong.png" alt="img"></p>
-<h2 id="环境光照"><a href="#环境光照" class="headerlink" title="环境光照"></a>环境光照</h2><p>GI(Global Illumination)，全局照明。开销大、复杂。<em>可以前期烘焙Lightmap</em></p>
-<p>环境光照：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">float</span> ambientStrength = <span class="number">0.1</span>;</span><br><span class="line">    vec3 ambient = ambientStrength * lightColor;</span><br><span class="line"></span><br><span class="line">    vec3 result = ambient * objectColor;</span><br><span class="line">    FragColor = vec4(result, <span class="number">1.0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="LOGL02_01/ambient_lighting.png" alt="img"></p>
-<h2 id="漫反射光照"><a href="#漫反射光照" class="headerlink" title="漫反射光照"></a>漫反射光照</h2><h3 id="法向量"><a href="#法向量" class="headerlink" title="法向量"></a>法向量</h3><p>法向量是一个垂直于顶点表面的（单位）向量。</p>
-<p>传入fs中。</p>
-<h3 id="计算漫反射光强度"><a href="#计算漫反射光强度" class="headerlink" title="计算漫反射光强度"></a>计算漫反射光强度</h3><p>对norm和lightDir向量进行点乘。</p>
-<p>两个向量之间的角度越大，漫反射分量就会越小。</p>
-<p><img src="LOGL02_01/basic_lighting_diffuse.png" alt="img"></p>
-<h3 id="法线矩阵"><a href="#法线矩阵" class="headerlink" title="法线矩阵"></a>法线矩阵</h3><p>模型矩阵左上角的逆矩阵的转置矩阵</p>
-<p>它使用了一些线性代数的操作来移除对法向量错误缩放的影响。如果你想知道这个矩阵是如何计算出来的，建议去阅读这个<a href="http://www.lighthouse3d.com/tutorials/glsl-tutorial/the-normal-matrix/" target="_blank" rel="noopener">文章</a>。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Normal = mat3(transpose(inverse(model))) * aNormal;</span><br></pre></td></tr></table></figure>
-<p>注意我们还要把被处理过的矩阵强制转换为3×3矩阵，来保证它失去了位移属性以及能够乘以<code>vec3</code>的法向量。</p>
-<blockquote>
-<p>即使是对于着色器来说，逆矩阵也是一个开销比较大的运算，因此，只要可能就应该避免在着色器中进行逆矩阵运算，它们必须为你场景中的每个顶点都进行这样的处理。用作学习目这样做是可以的，但是对于一个对效率有要求的应用来说，在绘制之前你最好用CPU计算出法线矩阵，然后通过uniform把值传递给着色器（像模型矩阵一样）。</p>
-</blockquote>
-<p>证明：</p>
-<p><img src="LOGL02_01/provation1.png" alt></p>
-<p><img src="LOGL02_01/provation2.png" alt></p>
-<h2 id="镜面光照"><a href="#镜面光照" class="headerlink" title="镜面光照"></a>镜面光照</h2><p><img src="LOGL02_01/basic_lighting_specular.png" alt="img"></p>
-<p>对每一个FragPos进行视角方向计算，再同光源反射先点乘，得出反光强度。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">float</span> spec = <span class="built_in">pow</span>(max(dot(viewDir, reflectDir), <span class="number">0.0</span>), <span class="number">32</span>);</span><br></pre></td></tr></table></figure>
-<p>此处32是<strong>Shininess</strong>(反射因子)，越大则镜面反射效果越强，即表现得更光滑，反之更粗糙。</p>
-<h2 id="GLSL-几何函数"><a href="#GLSL-几何函数" class="headerlink" title="GLSL 几何函数"></a>GLSL 几何函数</h2><table>
-<thead>
-<tr>
-<th style="text-align:left">函数</th>
-<th style="text-align:left">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">float length(vec2/vec3/vec4 x)</td>
-<td style="text-align:left">返回x向量的长度</td>
-</tr>
-<tr>
-<td style="text-align:left">float distance(vec p0,vec p1)</td>
-<td style="text-align:left">返回p0和p1之间的距离</td>
-</tr>
-<tr>
-<td style="text-align:left">float dot(vec x,vec y)</td>
-<td style="text-align:left">返回x和y的点乘结果</td>
-</tr>
-<tr>
-<td style="text-align:left">vec3 cross(vec3 x,vec3 y)</td>
-<td style="text-align:left">返回x和y的叉乘结果</td>
-</tr>
-<tr>
-<td style="text-align:left">vec normalize(vec x)</td>
-<td style="text-align:left">返回和x方向相同的单位长度向量</td>
-</tr>
-<tr>
-<td style="text-align:left">vec faceforward(vec N,vec I,vec nRef)</td>
-<td style="text-align:left">如果dot(Nref,l)&lt;0则返回N，否则返回-N</td>
-</tr>
-<tr>
-<td style="text-align:left">vec reflect(vec l,vec N)</td>
-<td style="text-align:left">返回入射向量l的反射方向和表面法线方向N</td>
-</tr>
-<tr>
-<td style="text-align:left">vec refract(vec vec N,float eta)</td>
-<td style="text-align:left">返回入射向量l的反射方向、表面法线方向N和折射指数比eta</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">reflect(-A,B) == - reflect(A,B) <span class="comment">//true</span></span><br></pre></td></tr></table></figure>
-<h2 id="漫反射贴图-Diffuse-Map"><a href="#漫反射贴图-Diffuse-Map" class="headerlink" title="漫反射贴图(Diffuse Map)"></a>漫反射贴图(Diffuse Map)</h2><blockquote>
-<p>注意<code>sampler2D</code>是所谓的不透明类型(Opaque Type)，也就是说我们不能将它实例化，只能通过uniform来定义它。如果我们使用除uniform以外的方法（比如函数的参数）实例化这个结构体，GLSL会抛出一些奇怪的错误。这同样也适用于任何封装了不透明类型的结构体。</p>
-</blockquote>
-<p>移除环境光材质颜色向量，因为环境光颜色在几乎所有情况下都等于漫反射颜色，所以我们不需要将它们分开储存。</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Material</span> &#123;</span></span><br><span class="line">    sampler2D diffuse;</span><br><span class="line">    vec3      specular;</span><br><span class="line">    <span class="keyword">float</span>     shininess;</span><br><span class="line">&#125;; </span><br><span class="line">...</span><br><span class="line">in vec2 TexCoords;</span><br></pre></td></tr></table></figure>
+<h3 id="Wiki"><a href="#Wiki" class="headerlink" title="Wiki"></a>Wiki</h3><p>球谐函数(SH)光照是一种实时渲染技术，可以在相对较小的开销下产生高度真实感的阴影和阴影。所有 SH 光照技术都包括用球面函数替换部分标准光照方程，这些球面函数以球谐函数为基础投射到频率空间中。举一个简单的例子，如果不考虑保持高频细节，用于环境映射的立方体映射可能会减少到只有 9 个 SH 系数。</p>
+<p>More intriguing techniques use SH to encode multiple functions—usually the global lighting environment and a per-vertex radiance transfer function. The generalized lighting equation involves, among other things, integrating the product of the incoming radiance and the BRDF over a sphere—something that is far too expensive for real-time rendering. But if the two functions are projected into SH coefficients, the integral of their product over the sphere is just the dot product of the two SH coefficient vectors. Generating the per-vertex transfer functions and projecting them to SH space is still an expensive process, but evaluating them is almost trivial. More to the point, they can be evaluated correctly even if the lighting environment changes in intensity or orientation. Even the most complex ray-traced radiosity algorithm can be rendered in real-time with dynamically changing lighting.</p>
+<p>SH lighting using preprocessed coefficients produces results that are beautiful but limited. Typically the lighting can change, or the lit mesh can be rotated, but the mesh can’t be translated or deformed without requiring a new set of per-vertex coefficients. More recent techniques split the lighting equation into more parts and introduce techniques for updating SH components in real time.</p>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://zhuanlan.zhihu.com/p/108485929" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/108485929</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/49436452" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/49436452</a></p>
 
     
     </div>
@@ -376,7 +298,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/" data-id="ckf998afk006jfohy45ade76m" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/09/25/CG/SphericalharmonicLighting/" data-id="ckf998a3t000pfohy7eltilxf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -453,19 +375,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2019/09/02/unsorted/awesome-cmakelists/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          CMakeList DLC速通手脚架
-        
-      </div>
-    </a>
   
-  
-    <a href="/2019/08/19/unsorted/cmake-with-vscode/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2020/09/19/CG/SimpleURPToonLitOutlineShader/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">VSCode管理CMake项目</div>
+      <div class="article-nav-title">URP Toon Lit 初见</div>
     </a>
   
 </nav>
@@ -683,7 +596,7 @@
         client_id: 'a688b926cb46e56975d4',
         client_secret: 'ea63339d43ee4bf2d959d37a886a1c8c19e3709d',
       },
-      id: 'BDRF经验模型之一：Phong Lighting Model'
+      id: '球谐函数与全局光照'
     })
     gitment.render('comments')
   </script>

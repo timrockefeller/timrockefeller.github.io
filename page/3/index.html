@@ -168,11 +168,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        55
+        58
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        36
+        38
         <span>tags</span>
       </div>
     </div>
@@ -217,6 +217,440 @@
 
       
       <section id="main">
+  <article id="post-unsorted/awesome-cmakelists" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+      
+	
+		<a href="/2019/09/02/unsorted/awesome-cmakelists/" itemprop="url">
+      <img src="https://miao.su/images/2019/09/02/c3160056079946.jpg" class="article-banner" />
+    </a>
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/02/unsorted/awesome-cmakelists/">CMakeList DLC速通手脚架</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2019/09/02/unsorted/awesome-cmakelists/">
+      <time datetime="2019-09-02T02:25:00.000Z" itemprop="datePublished">2019-09-02</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/cmake/">cmake</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p><p>受够了重复<code>add_executable</code>带来的键盘磨损？受够了<code>add_subdirectory</code>眼花缭乱？</p>
+<p>此文摘录一些好用的Cmake函数，以用于项目构建。</p></p>
+      <p class="article-more-link">
+        <a href="/2019/09/02/unsorted/awesome-cmakelists/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2019/09/02/unsorted/awesome-cmakelists/" data-id="ckhequ46r003u04hyefpz4jvk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  <article id="post-CG/LOGL/LOGL02_01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/01/CG/LOGL/LOGL02_01/">BDRF经验模型之一：Phong Lighting Model</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2019/09/01/CG/LOGL/LOGL02_01/">
+      <time datetime="2019-08-31T16:00:00.000Z" itemprop="datePublished">2019-09-01</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/CG/">CG</a>, <a class="tag-link" href="/tags/OpenGL/">OpenGL</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p><ul>
+<li>环境光照(Ambient Lighting)：即使在黑暗的情况下，世界上通常也仍然有一些光亮（月亮、远处的光），所以物体几乎永远不会是完全黑暗的。为了模拟这个，我们会使用一个环境光照常量，它永远会给物体一些颜色。</li>
+<li>漫反射光照(Diffuse Lighting)：模拟光源对物体的方向性影响(Directional Impact)。它是冯氏光照模型中视觉上最显著的分量。物体的某一部分越是正对着光源，它就会越亮。</li>
+<li>镜面光照(Specular Lighting)：模拟有光泽物体上面出现的亮点。镜面光照的颜色相比于物体的颜色会更倾向于光的颜色。</li>
+</ul></p>
+      <p class="article-more-link">
+        <a href="/2019/09/01/CG/LOGL/LOGL02_01/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/" data-id="ckhequ4ci006y04hyrxelj87w" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  <article id="post-unsorted/cmake-with-vscode" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/19/unsorted/cmake-with-vscode/">VSCode管理CMake项目</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2019/08/19/unsorted/cmake-with-vscode/">
+      <time datetime="2019-08-19T14:00:00.000Z" itemprop="datePublished">2019-08-19</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/CG/">CG</a>, <a class="tag-link" href="/tags/cmake/">cmake</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p><p>久闻LearnOpenGL的环境特别难搭建，今天见识了一番果真如此。初识CMake，开了大口想再VsCode里也舒舒服服地爽一把，而事实上仅仅是创建一个窗口便自闭了若干天。总结一下大致所需要的操作吧。</p></p>
+      <p class="article-more-link">
+        <a href="/2019/08/19/unsorted/cmake-with-vscode/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2019/08/19/unsorted/cmake-with-vscode/" data-id="ckhequ476003y04hyhp5xy0qj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   <article id="post-CG/CG02_ImageWarpping" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -269,7 +703,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/08/05/CG/CG02_ImageWarpping/" data-id="ckfjmtg2l000am4hykrk0i6fo" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/08/05/CG/CG02_ImageWarpping/" data-id="ckhequ40e000e04hykm5cml03" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -413,7 +847,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/31/bio/cybpnk_vida/" data-id="ckfjmtg58001rm4hy1pag0k9g" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/31/bio/cybpnk_vida/" data-id="ckhequ42u001w04hyirro94vd" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -562,7 +996,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/30/CG/02_Camera_calibration/" data-id="ckfjmtg2g0009m4hyc7odcm1q" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/30/CG/02_Camera_calibration/" data-id="ckhequ40b000d04hy40nwijiz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -711,7 +1145,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/29/CG/01_Object_pose_estimation/" data-id="ckfjmtg280005m4hyl60bhcxv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/29/CG/01_Object_pose_estimation/" data-id="ckhequ406000a04hyj6rrbeax" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -854,7 +1288,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/29/bio/190729/" data-id="ckfjmtg51001nm4hyvyt2pj92" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/29/bio/190729/" data-id="ckhequ429001l04hy28tth1bk" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -996,7 +1430,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/29/CG/CGoverall/" data-id="ckfjmtg2r000dm4hykks42na8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/29/CG/CGoverall/" data-id="ckhequ40q000p04hylfpfqzns" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1147,454 +1581,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/26/CG/Custom-Nodes-With-CodeFunctionNode/" data-id="ckfjmtg2u000em4hym2aqutxf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-JavaS/maven(eclipseVsCode)远程部署tomcat" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/">maven (eclipse|Vs Code) 远程部署docker上的tomcat</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/">
-      <time datetime="2019-07-04T02:04:03.000Z" itemprop="datePublished">2019-07-04</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
-  </div>
-
-
-            
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/init/">init</a>, <a class="tag-link" href="/tags/tomcat/">tomcat</a>
-  </div>
-
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      
-      <p>在docker上装了个Tomcat，由于container的特性，eclipse不能通过常规手段定位Tomcat，所以进行在本地进行“远程部署”。</p>
-<h3 id="docker配置"><a href="#docker配置" class="headerlink" title="docker配置"></a>docker配置</h3><h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> docker pull tomcat</span><br><span class="line"><span class="meta">$</span> docker run --name tomcat -p 8080:8081 tomcat</span><br><span class="line"><span class="meta">$</span> docker exec -it tomcat bash</span><br></pre></td></tr></table></figure>
-<p><code>-p 8080:8081</code>：将容器的8080端口映射到主机的8081端口</p>
-<h4 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h4><p>修改配置前我们需要确认一下有没有文本编辑器，可以通过<code>apt-get</code>下载一个vim。</p>
-<p>修改<code>tomcat/conf/tomcat-user.xml</code>文件，在最末尾对应位置修改加入以下内容：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"manager-gui"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"manager-script"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"admin-gui"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">role</span> <span class="attr">rolename</span>=<span class="string">"admin-script"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">user</span> <span class="attr">username</span>=<span class="string">"admin"</span> <span class="attr">password</span>=<span class="string">"kitekii"</span> <span class="attr">roles</span>=<span class="string">"manager-gui,manager-script,admin-gui,admin-script"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
-<p>只有添加用户才能进入<code>localhost:8081/manager</code>，否则会显示<strong>403 Access Denied</strong>。</p>
-<h3 id="载入插件"><a href="#载入插件" class="headerlink" title="载入插件"></a>载入插件</h3><p>接着我们回到maven，在项目中的pom.xml中<code>&lt;plugins&gt;</code>标签下添加以下内容：</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.apache.tomcat.maven<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>tomcat7-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 指定项目部署的端口 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">port</span>&gt;</span>8081<span class="tag">&lt;/<span class="name">port</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 指定项目部署的URL,/manager/text是预置的部署接口 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">url</span>&gt;</span>http://127.0.0.1:8081/manager/text<span class="tag">&lt;/<span class="name">url</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">username</span>&gt;</span>admin<span class="tag">&lt;/<span class="name">username</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">password</span>&gt;</span>kitekii<span class="tag">&lt;/<span class="name">password</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">update</span>&gt;</span>true<span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br><span class="line">		<span class="comment">&lt;!-- 指定项目部署路径,如果不设置为默认项目名称 --&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">path</span>&gt;</span>/mobile<span class="tag">&lt;/<span class="name">path</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>即向maven加载了部署所需要的插件，值得注意的是，该tomcat7插件支持部署至tomcat7.*、8.*。</p>
-<h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>由于是远程部署，<strong>调试</strong>相关显得更加复杂，此处先对部署进行阐释。</p>
-<h4 id="VS-Code"><a href="#VS-Code" class="headerlink" title="VS Code"></a>VS Code</h4><p>只需在shell中键入下文：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> mvn tomcat7:deploy</span><br></pre></td></tr></table></figure>
-<h4 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h4><p>添加<strong>Run Configuration</strong>，选择<strong>Maven Build</strong>项，修改goal为<code>tomcat7:deploy</code>即可。</p>
-
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://blog.iik.moe/2019/07/04/JavaS/maven(eclipseVsCode)远程部署tomcat/" data-id="ckfjmtg3g000um4hy7ssi6bty" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-unsorted/ssr" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/23/unsorted/ssr/">不可描述的操作</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2019/04/23/unsorted/ssr/">
-      <time datetime="2019-04-22T16:00:00.000Z" itemprop="datePublished">2019-04-23</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
-  </div>
-
-
-            
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      
-      <p>前往世界。</p>
-<h3 id="SSR-安裝-Ubuntu-16-04"><a href="#SSR-安裝-Ubuntu-16-04" class="headerlink" title="SSR 安裝 (Ubuntu 16.04)"></a>SSR 安裝 (Ubuntu 16.04)</h3><p>以下使用 <strong>秋水逸冰</strong> 撰写的一键脚本 <a href="https://teddysun.com/486.html" target="_blank" rel="noopener">Shadowsocks 一键安装脚本（四合一）</a></p>
-<ul>
-<li><p>使用 root 用户执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>选择安装 SSR，配置按照以下推荐方案选择</p>
-<ul>
-<li>避免被GFW 封锁    <pre><code>- 端口 : 不要使用 80,443 等常見端口，避免被主動探測是否有正常網頁服務在運作
-- 加密 : none
-- 協議 : auth_chain_a
-- 混淆 : plain
-</code></pre></li>
-</ul>
-<p>auth_chain_a 自带加密，故不需要二次加密<br>若非遭到 QoS 或是网络出口对对外流量限制较严格(只放行网页流量)，不需要开启混淆</p>
-<ul>
-<li>混淆流量躲避网络出口 QoS 用<pre><code>- 端口 : 推荐443
-- 加密 : none
-- 協議 : auth_chain_a 或是 chain_b,c,d 後者封包分布大小更加規整，避免遭到分析，根据客户端所支持的种类做选择
-- 混淆 : tls1.2_ticket_auth
-</code></pre></li>
-</ul>
-<h3 id="BBR"><a href="#BBR" class="headerlink" title="BBR"></a>BBR</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate "https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh"&amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://blog.iik.moe/2019/04/23/unsorted/ssr/" data-id="ckfjmtgb8003wm4hyl5vxsytt" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-Rust/Rust_Complie_note" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      
-	
-		<a href="/2019/04/11/Rust/Rust_Complie_note/" itemprop="url">
-      <img src="https://miao.su/images/2019/04/18/sp190418_2305559fa28.png" class="article-banner" />
-    </a>
-	
-
-
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/11/Rust/Rust_Complie_note/">Rust Compile Note</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2019/04/11/Rust/Rust_Complie_note/">
-      <time datetime="2019-04-10T16:00:00.000Z" itemprop="datePublished">2019-04-11</time>
-    </a>
-  </div>
-
-
-            
-
-            
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      <p><p>谈一些在编译时遇见的问题与语法笔记。</p></p>
-      <p class="article-more-link">
-        <a href="/2019/04/11/Rust/Rust_Complie_note/#more">Read More</a>
-      </p>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://blog.iik.moe/2019/04/11/Rust/Rust_Complie_note/" data-id="ckfjmtg4e001fm4hydpqnykth" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/26/CG/Custom-Nodes-With-CodeFunctionNode/" data-id="ckhequ401000804hy372voiow" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1691,6 +1678,63 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2020/11/11/coding/MasteringCPPStandardLibraryFeatures/" class="thumbnail">
+  
+  
+    <span style="background-image:url(https://s3.ax1x.com/2020/11/12/BzsiKU.md.jpg)" alt="Mastering C++ Standard Library Features" class="thumbnail-image"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2020/11/11/coding/MasteringCPPStandardLibraryFeatures/" class="title">Mastering C++ Standard Library Features</a></p>
+              <p class="item-date"><time datetime="2020-11-10T16:00:00.000Z" itemprop="datePublished">2020-11-11</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2020/11/09/CG/thegibook/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2020/11/09/CG/thegibook/" class="title">《全局光照技术》札记</a></p>
+              <p class="item-date"><time datetime="2020-11-08T16:00:00.000Z" itemprop="datePublished">2020-11-09</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2020/10/01/coding/so-many-pointers/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-title"><a href="/2020/10/01/coding/so-many-pointers/" class="title">指针</a></p>
+              <p class="item-date"><time datetime="2020-09-30T16:00:00.000Z" itemprop="datePublished">2020-10-01</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2020/09/25/CG/SphericalharmonicLighting/" class="thumbnail">
   
   
@@ -1726,63 +1770,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/06/26/bio/bks/" class="thumbnail">
-  
-  
-    <span style="background-image:url(https://s1.ax1x.com/2020/06/26/NstYh8.th.jpg)" alt="夏至潮湿燥热，适合电子烧烤" class="thumbnail-image"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/日记本/">日记本</a></p>
-              <p class="item-title"><a href="/2020/06/26/bio/bks/" class="title">夏至潮湿燥热，适合电子烧烤</a></p>
-              <p class="item-date"><time datetime="2020-06-26T13:00:00.000Z" itemprop="datePublished">2020-06-26</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/05/30/bio/handoff/" class="thumbnail">
-  
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/日记本/">日记本</a></p>
-              <p class="item-title"><a href="/2020/05/30/bio/handoff/" class="title">May Game Days</a></p>
-              <p class="item-date"><time datetime="2020-05-30T13:00:00.000Z" itemprop="datePublished">2020-05-30</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/05/21/unsorted/rakuensuihou/" class="thumbnail">
-  
-  
-    <span style="background-image:url(https://s1.ax1x.com/2020/05/22/YXmYvt.th.jpg)" alt="想去乐园，请问怎么走？" class="thumbnail-image"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/札记阁/">札记阁</a></p>
-              <p class="item-title"><a href="/2020/05/21/unsorted/rakuensuihou/" class="title">想去乐园，请问怎么走？</a></p>
-              <p class="item-date"><time datetime="2020-05-21T11:00:00.000Z" itemprop="datePublished">2020-05-21</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1793,7 +1780,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">33</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">34</span></li></ul>
     </div>
   </div>
 
@@ -1803,7 +1790,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/06/">June 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/05/">May 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/04/">April 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/03/">March 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">October 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/09/">September 2019</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/08/">August 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/07/">July 2019</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/04/">April 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/02/">February 2019</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">December 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/10/">October 2018</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">May 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">April 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">March 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">November 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/10/">October 2016</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1813,7 +1800,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/Graphics/" style="font-size: 12px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/ML/" style="font-size: 16px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 14px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 14px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 12px;">Unity</a> <a href="/tags/anime/" style="font-size: 12px;">anime</a> <a href="/tags/cmake/" style="font-size: 12px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12px;">illustrate</a> <a href="/tags/init/" style="font-size: 14px;">init</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 16px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/Graphics/" style="font-size: 12px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/ML/" style="font-size: 16px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 14px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 14px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 12px;">Unity</a> <a href="/tags/anime/" style="font-size: 12px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 12px;">cmake</a> <a href="/tags/coding/" style="font-size: 10px;">coding</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12px;">illustrate</a> <a href="/tags/init/" style="font-size: 14px;">init</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 16px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 

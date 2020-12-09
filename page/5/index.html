@@ -164,7 +164,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        59
+        60
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -213,6 +213,146 @@
 
       
       <section id="main">
+  <article id="post-ML/Keras-Intro" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/10/21/ML/Keras-Intro/">Keras Intro : 基本模型保存</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/10/21/ML/Keras-Intro/">
+      <time datetime="2018-10-21T14:06:16.000Z" itemprop="datePublished">2018-10-21</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link" href="/tags/Keras/">Keras</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p><h2 id="Sequential-Module模型"><a href="#Sequential-Module模型" class="headerlink" title="Sequential-Module模型"></a>Sequential-Module模型</h2><h3 id="常用层"><a href="#常用层" class="headerlink" title="常用层"></a>常用层</h3><h4 id="Dense全连接"><a href="#Dense全连接" class="headerlink" title="Dense全连接"></a>Dense全连接</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">keras.layers.core.Dense(units,</span><br><span class="line">						activation = <span class="keyword">None</span>,</span><br><span class="line">						use_bias = <span class="keyword">True</span>,</span><br><span class="line">						kernel_initializer = <span class="string">'glorot_uniform'</span>, </span><br><span class="line">						bias_initializer = <span class="string">'zeros'</span>,</span><br><span class="line">						kernel_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						bias_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						activity_regularizer = <span class="keyword">None</span>,</span><br><span class="line">						kernel_constraint = <span class="keyword">None</span>,</span><br><span class="line">						bias_constraint = <span class="keyword">None</span>)</span><br></pre></td></tr></table></figure></p>
+      <p class="article-more-link">
+        <a href="/2018/10/21/ML/Keras-Intro/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2018/10/21/ML/Keras-Intro/" data-id="ckih74hvq0019hghy1xgna25t" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   <article id="post-ML/SKLearn玄学操作" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -274,7 +414,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/10/20/ML/SKLearn玄学操作/" data-id="ckih6qler001jbshyl2g1pnnn" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/10/20/ML/SKLearn玄学操作/" data-id="ckih74hwr001shghyjke9wvcf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -414,7 +554,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/10/20/ML/OpenCV-Intro-基本图像操作/" data-id="ckih6qlek001gbshyv8uvq1uf" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/10/20/ML/OpenCV-Intro-基本图像操作/" data-id="ckih74hwb001ihghy59hatus3" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -564,7 +704,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/10/16/unsorted/MUG-devlog/" data-id="ckih6qlih003ebshy9nw1649x" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/10/16/unsorted/MUG-devlog/" data-id="ckih74i03003mhghyq7xcqe31" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -708,7 +848,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/" data-id="ckih6qlhf002xbshy02hrwqqx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/10/07/oldblog/npm install 一时爽，gyp 来劝退/" data-id="ckih74hys0030hghy6g74vvk6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -861,7 +1001,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/10/06/oldblog/如何获取数位板压感信息？windows API似乎可解，js就别想了/" data-id="ckih6qlhz0034bshy7gt0ecr9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/10/06/oldblog/如何获取数位板压感信息？windows API似乎可解，js就别想了/" data-id="ckih74hz20035hghyqqjhgdis" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1002,7 +1142,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/05/22/JavaS/TicTacToe/" data-id="ckih6qlcd0005bshy4hcleibr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/05/22/JavaS/TicTacToe/" data-id="ckih74hv3000uhghyzby3fssr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1149,7 +1289,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/05/14/oldblog/这半年时间/" data-id="ckih6qlio003hbshykp94w4iy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/05/14/oldblog/这半年时间/" data-id="ckih74hzl003fhghyvwh0h8n4" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1289,7 +1429,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="ckih6qld6000ibshykrpnmbm9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/05/13/JavaS/ゼロから始めるJAVA世界生活-03/" data-id="ckih74hvg0014hghy2t7trj36" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1431,152 +1571,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="ckih6qlcx000dbshy1lbee388" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-Art/机械卷轴：概念设计中的心理暗示" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/04/22/Art/机械卷轴：概念设计中的心理暗示/">机械卷轴：概念设计中的心理暗示</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2018/04/22/Art/机械卷轴：概念设计中的心理暗示/">
-      <time datetime="2018-04-22T14:50:00.000Z" itemprop="datePublished">2018-04-22</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/写生架/">写生架</a>
-  </div>
-
-
-            
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/illustrate/">illustrate</a>, <a class="tag-link" href="/tags/艺类/">艺类</a>
-  </div>
-
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      <p><p>谈科幻设计</p>
-<h2 id="符号化设计"><a href="#符号化设计" class="headerlink" title="符号化设计"></a>符号化设计</h2><p>脑洞 + 凭感觉   （头脑风暴）</p>
-<blockquote>
-<p>一款急速的飞行器，你会如何画？</p>
-</blockquote>
-<p>符号对不同设计倾向的引导。</p></p>
-      <p class="article-more-link">
-        <a href="/2018/04/22/Art/机械卷轴：概念设计中的心理暗示/#more">Read More</a>
-      </p>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://blog.iik.moe/2018/04/22/Art/机械卷轴：概念设计中的心理暗示/" data-id="ckih6qlcr0009bshys5rd5rbc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/04/28/JavaS/ゼロから始めるJAVA世界生活-02/" data-id="ckih74hvm0017hghy4d6whybz" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1668,7 +1663,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">35</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">36</span></li></ul>
     </div>
   </div>
 
@@ -1678,7 +1673,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 12px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/ML/" style="font-size: 16px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 14px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 14px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 12px;">Unity</a> <a href="/tags/anime/" style="font-size: 12px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 12px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12px;">illustrate</a> <a href="/tags/init/" style="font-size: 14px;">init</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 16px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/C/" style="font-size: 12px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 12px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 12px;">Keras</a> <a href="/tags/ML/" style="font-size: 16px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 14px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 14px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 12px;">Unity</a> <a href="/tags/anime/" style="font-size: 12px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 12px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 12px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 12px;">illustrate</a> <a href="/tags/init/" style="font-size: 14px;">init</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 16px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 16px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 12px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 

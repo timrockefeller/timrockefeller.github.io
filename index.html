@@ -221,6 +221,15 @@
   <div class="article-inner">
     
     
+      
+	
+		<a href="/2020/12/09/coding/ECS/BuildingAnECS.1/" itemprop="url">
+      <img src="https://s3.ax1x.com/2020/12/09/rCCLkD.jpg" class="article-banner" />
+    </a>
+	
+
+
+    
     
       <header class="article-header">
         
@@ -264,8 +273,7 @@
 
     <div class="article-entry" itemprop="articleBody">
     
-      
-      <blockquote>
+      <p><blockquote>
 <p>原文链接：<a href="https://ajmmertens.medium.com/building-an-ecs-1-types-hierarchies-and-prefabs-9f07666a1e9d" target="_blank" rel="noopener">Building an ECS #1: Types, Hierarchies and Prefabs</a></p>
 </blockquote>
 <h2 id="Entity-Index"><a href="#Entity-Index" class="headerlink" title="Entity Index"></a>Entity Index</h2><p>首先来看几个概念：</p>
@@ -282,42 +290,9 @@
 <p>在这两个 <code>add</code> 操作之后，<code>entityIndex</code> 中就应该包含一项绑定 <code>Player</code> 与 <code>[Position, Health]</code> 的数组元素。当然，是以 <code>ComponentId</code>，即 <code>uint64_t</code> 的形式定义的，例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ComponentId Position_id = <span class="number">1</span>;</span><br><span class="line">ComponentId Health_id = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
 <p>如此一来，Player 这一 Entity 的 <strong>Type</strong> 便成了 <code>[1, 2]</code>。</p>
-<p>ECS 其中一种实现方法 <a href="https://github.com/SanderMertens/flecs" target="_blank" rel="noopener">SanderMertens/Flecs</a> 提供了一种思路：由于 Entity 与 Component 均使用整形作为 id，可以将它俩统一存入 EntityIndex。虽然这样会降低些许可读性，但在实际开发时，考虑某个 Entity 拥有哪些组件也将会造成同样的问题。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    EcsComponent: [EcsComponent, EcsId],</span><br><span class="line">    EcsId: [EcsComponent, EcsId],</span><br><span class="line">    Position: [EcsComponent, EcsId],</span><br><span class="line">    Health: [EcsComponent, EcsID],</span><br><span class="line">    Player: [EcsId, Position, Health]</span><br><span class="line">&#125;;</span><br><span class="line">&#123;   <span class="comment">// Convert to digital params:</span></span><br><span class="line">    <span class="number">1</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">2</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">10</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">20</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">30</span>: [<span class="number">2</span>, <span class="number">10</span>, <span class="number">20</span>]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>“One of the biggest implications of this design is that we can add entities to entities” – Ajmmertens.</p>
-</blockquote>
-<h2 id="Hierarchies"><a href="#Hierarchies" class="headerlink" title="Hierarchies"></a>Hierarchies</h2><p>上文已阐述了 Entity 与 Component 的储存方式，当我们将若干 Entity 载入场景中时，需要一个不可或缺的功能：Entity 层级。按照之前 Entity Index 的实现，我们可以将父节点以 Component 的形式绑定至 Entity 中：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    Parent: []</span><br><span class="line">    Child1: [Parent]</span><br><span class="line">    Child2: [Parent]</span><br><span class="line">    Child3: [Parent]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当然这个写法是有问题的，我们无法区分 <code>std::vector&lt;uint_64&gt;</code> 中哪些是父对象，哪些是子对象：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Player: [Position, Health, MyPlatoon]</span><br></pre></td></tr></table></figure>
-<p>这时可以使用<strong>类型标注(Type Flag)</strong>来对数组元素进行标注，以描述其在数组中的作用。下例使用了一个 <code>CHILDOF</code> 标注修饰 <code>MyPlatoon</code>，令其成为 <code>Player</code> 的父对象。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Player: [Position, Health, CHILDOF | MyPlatoon]</span><br></pre></td></tr></table></figure>
-<p>只需要进行一次或运算便能得到父对象：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Type type = entity_index[Player];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> el : type) &#123;</span><br><span class="line">    <span class="keyword">if</span> (el &amp; CHILDOF) &#123;</span><br><span class="line">        <span class="comment">// ... element is a parent</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// ... element is not a parent</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>层级可谓游戏设计中极为常用的功能，牺牲一些内存来储存层级信息优大于劣。当然现在我们只谈到了如何储存方式，如何在系统中运作就是另外一个浩大工程了。</p>
-<h2 id="Prefab"><a href="#Prefab" class="headerlink" title="Prefab"></a>Prefab</h2><p><strong>重用对象</strong>，又称<strong>预设</strong>(Prefab)这看起来很复杂的功能在游戏开发中也不可或缺。在 Flecs 中将对象扩展了一位信息用作声明实例间的关系，显式定义为<code>INSTANCEOF</code>。利用这一位信息再添加一些结合语义，就能使对象共用一组 Component。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    Base: [Color],</span><br><span class="line">    InstanceA: Position, INSTANCEOF| Base],</span><br><span class="line">	InstanceB: Position, INSTANCEOF| Base]</span><br><span class="line">&#125;</span><br><span class="line">// `InstanceA` and `InstanceB` both share all components from `Base`</span><br></pre></td></tr></table></figure>
-<p>当我们想获取 <code>InstanceA</code> 或 <code>InstanceB</code> 的 <code>Color</code> 组件时，实际上获取到的是 <code>Base</code> 的 <code>Color</code>。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InstanceA.get&lt;Color&gt;(); <span class="comment">// returns Base.Color</span></span><br></pre></td></tr></table></figure>
-<p>这里说的<strong>共用组件</strong>(shared component)对应<strong>拥有组件</strong>(owned component)。下面看一段 Flecs 的应用代码，观察如何在 API 上去调用：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> BlueSquare = flecs::entity()</span><br><span class="line">    .<span class="built_in">set</span>&lt;Color&gt;(&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>&#125;)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Square&gt;(&#123;<span class="number">50</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> SquareA = flecs::entity()</span><br><span class="line">    .add_instanceof(BlueSquare)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Position&gt;(&#123;<span class="number">10</span>, <span class="number">20</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> SquareB = flecs::entity()</span><br><span class="line">    .add_instanceof(BlueSquare)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Position&gt;(&#123;<span class="number">30</span>, <span class="number">40</span>&#125;);</span><br></pre></td></tr></table></figure>
-<p>将会生成如下 entity index：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    BlueSquare: [Color, Square],</span><br><span class="line">    SquareA: [INSTANCEOF| BlueSquare, Position]</span><br><span class="line">    SquareB: [INSTANCEOF| BlueSquare, Position]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>继续优化：假设 <code>SquareA</code> 想要更新自己的 <code>Color</code> 而不去影响其他 <code>BlueSquare</code> 实例，便需要一个<strong>复写</strong>(override)的功能。就结论来说我们可以增加两条规则：</p>
-<ul>
-<li>Adding a component to an instance will <strong>override</strong> the base</li>
-<li>When overriding a <strong>shared component</strong>, the value of the base will be <strong>copied</strong> to the instance</li>
-</ul>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> BlueSquare = flecs::entity()</span><br><span class="line">    .<span class="built_in">set</span>&lt;Color&gt;(&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>&#125;)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Square&gt;(&#123;<span class="number">50</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> SquareA = flecs::entity()</span><br><span class="line">    .add_instanceof(BlueSquare)</span><br><span class="line">    .add&lt;Color&gt;()</span><br><span class="line">    .<span class="built_in">set</span>&lt;Position&gt;(&#123;<span class="number">10</span>, <span class="number">20</span>&#125;);</span><br><span class="line"><span class="comment">// Code for SquareB ...</span></span><br></pre></td></tr></table></figure>
-<p>注意第 6 行并没有为 <code>Color</code> 组件赋初值。根据规则 2 的定义，新增的 <code>Color</code> 组件内容将<strong>拷贝</strong>于<code>BlueSquare</code>。执行完上面的代码后将得到：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    BlueSquare: [Color, Square],</span><br><span class="line">    SquareA: [INSTANCEOF | BlueSquare, Color, Position]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>功能虽然有了，但每次创建实例时都需要将 <code>Color</code> 重新 <code>add</code> 着实麻烦。我们可以定义一个特殊的 Archetype 来代替这个操作：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> BlueSquarePrefab = flecs::entity()</span><br><span class="line">    .<span class="built_in">set</span>&lt;Color&gt;(&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>&#125;)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Square&gt;(&#123;<span class="number">50</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> BlueSquare = flecs::type()</span><br><span class="line">    .add_instanceof(BlueSquarePrefab)</span><br><span class="line">    .add&lt;Color&gt;();</span><br><span class="line"><span class="keyword">auto</span> SquareA = flecs::entity()</span><br><span class="line">    .add(BlueSquare)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Position&gt;(&#123;<span class="number">10</span>, <span class="number">20</span>&#125;);</span><br></pre></td></tr></table></figure>
-<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>层级与实例均使用了 EntityId 中的一位来用于标识，即使是如此简单的数据结构，却能实现一个较为复杂的行为。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Entities, types and entity index</span><br><span class="line">using EntityId = uint64_t;</span><br><span class="line">using Type = vector&lt;EntityId&gt;;</span><br><span class="line">unordered_map&lt;EntityId, Type&gt; entity_index;// Type flags</span><br><span class="line">const EntityId INSTANCEOF = 1 &lt;&lt; 63;</span><br><span class="line">const EntityId CHILDOF = 1 &lt;&lt; 62;</span><br></pre></td></tr></table></figure>
-<p>希望这篇文章能给你提供一些关于如何设计 ECS 的灵感~</p>
-
+      <p class="article-more-link">
+        <a href="/2020/12/09/coding/ECS/BuildingAnECS.1/#more">Read More</a>
+      </p>
     
     </div>
     <footer class="article-footer">
@@ -328,7 +303,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/12/09/coding/ECS/BuildingAnECS.1/" data-id="ckih1ks2v0000i4hyv5lwo5sp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/12/09/coding/ECS/BuildingAnECS.1/" data-id="ckih1mczf0071i0hy45wrbpz9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -432,7 +407,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/11/22/comment/refrain/" data-id="ckie23xf1002hdkhyff35cepu" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/11/22/comment/refrain/" data-id="ckih1mcrh002qi0hy326knx4c" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -584,7 +559,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/11/11/coding/MasteringCPPStandardLibraryFeatures/" data-id="ckie23xew002edkhyupkl5pia" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/11/11/coding/MasteringCPPStandardLibraryFeatures/" data-id="ckih1mcpq001oi0hy2uichnix" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -716,7 +691,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/11/09/CG/thegibook/" data-id="ckie23xct0012dkhy410i3gch" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/11/09/CG/thegibook/" data-id="ckih1mcnl000fi0hyyrtatjd9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -856,7 +831,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/09/25/CG/SphericalharmonicLighting/" data-id="ckie23xd50019dkhyia2ed3en" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/09/25/CG/SphericalharmonicLighting/" data-id="ckih1mcnh000di0hyflvqj6pr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1043,7 +1018,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/09/19/CG/SimpleURPToonLitOutlineShader/" data-id="ckie23xc4000edkhyinn7ekbh" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/09/19/CG/SimpleURPToonLitOutlineShader/" data-id="ckih1mcnp000ji0hyd3o9hy9v" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1192,7 +1167,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/06/26/bio/bks/" data-id="ckie23xe2001sdkhyi5gyuohy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/06/26/bio/bks/" data-id="ckih1mcqe0027i0hy9hhyjyl8" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1332,7 +1307,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/05/30/bio/handoff/" data-id="ckie23xdr001mdkhyknao98s1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/05/30/bio/handoff/" data-id="ckih1mcr0002li0hym3tsh0vq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1474,7 +1449,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/05/21/unsorted/rakuensuihou/" data-id="ckie23xia0046dkhyt0ly68ww" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/05/21/unsorted/rakuensuihou/" data-id="ckih1mctz0041i0hyqysgf4pi" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1623,7 +1598,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/04/29/bio/hometown/" data-id="ckie23xe5001udkhysem2gfay" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/04/29/bio/hometown/" data-id="ckih1mcqw002hi0hywbs5c4gl" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -1723,7 +1698,7 @@
               <a href="/2020/12/09/coding/ECS/BuildingAnECS.1/" class="thumbnail">
   
   
-    <span class="thumbnail-image thumbnail-none"></span>
+    <span style="background-image:url(https://s3.ax1x.com/2020/12/09/rCCLkD.md.jpg)" alt="手撕ECS" class="thumbnail-image"></span>
   
 </a>
 

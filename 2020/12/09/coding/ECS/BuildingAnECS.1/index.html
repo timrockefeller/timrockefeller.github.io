@@ -13,10 +13,12 @@
 <meta property="og:site_name" content="外野">
 <meta property="og:description" content="原文链接：Building an ECS #1: Types, Hierarchies and Prefabs  Entity Index首先来看几个概念：  Entities 是运行时中独一无二的“东西”，通常与一个独一无二的整数标示。 Type（或 Archetype）来区分 Entity 所拥有组件列表的异同，通常用一个数组标示。比如一个 FPS 游戏中 Player 对象拥有两个组件，分">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-12-09T06:38:13.786Z">
+<meta property="og:image" content="https://s3.ax1x.com/2020/12/09/rCCLkD.md.jpg">
+<meta property="og:updated_time" content="2020-12-09T06:41:31.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手撕ECS">
 <meta name="twitter:description" content="原文链接：Building an ECS #1: Types, Hierarchies and Prefabs  Entity Index首先来看几个概念：  Entities 是运行时中独一无二的“东西”，通常与一个独一无二的整数标示。 Type（或 Archetype）来区分 Entity 所拥有组件列表的异同，通常用一个数组标示。比如一个 FPS 游戏中 Player 对象拥有两个组件，分">
+<meta name="twitter:image" content="https://s3.ax1x.com/2020/12/09/rCCLkD.md.jpg">
   
   
   
@@ -236,6 +238,13 @@
       
     
     
+      
+	
+		<img src="https://s3.ax1x.com/2020/12/09/rCCLkD.jpg" class="article-banner" />
+	
+
+
+    
     
       <header class="article-header">
         
@@ -296,7 +305,7 @@
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Player.add&lt;Position&gt;();</span><br><span class="line">Player.add&lt;Health&gt;();</span><br></pre></td></tr></table></figure>
 <p>在这两个 <code>add</code> 操作之后，<code>entityIndex</code> 中就应该包含一项绑定 <code>Player</code> 与 <code>[Position, Health]</code> 的数组元素。当然，是以 <code>ComponentId</code>，即 <code>uint64_t</code> 的形式定义的，例如：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ComponentId Position_id = <span class="number">1</span>;</span><br><span class="line">ComponentId Health_id = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
-<p>如此一来，Player 这一 Entity 的 <strong>Type</strong> 便成了 <code>[1, 2]</code>。</p>
+<p>如此一来，Player 这一 Entity 的 <strong>Type</strong> 便成了 <code>[1, 2]</code>。<a id="more"></a></p>
 <p>ECS 其中一种实现方法 <a href="https://github.com/SanderMertens/flecs" target="_blank" rel="noopener">SanderMertens/Flecs</a> 提供了一种思路：由于 Entity 与 Component 均使用整形作为 id，可以将它俩统一存入 EntityIndex。虽然这样会降低些许可读性，但在实际开发时，考虑某个 Entity 拥有哪些组件也将会造成同样的问题。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    EcsComponent: [EcsComponent, EcsId],</span><br><span class="line">    EcsId: [EcsComponent, EcsId],</span><br><span class="line">    Position: [EcsComponent, EcsId],</span><br><span class="line">    Health: [EcsComponent, EcsID],</span><br><span class="line">    Player: [EcsId, Position, Health]</span><br><span class="line">&#125;;</span><br><span class="line">&#123;   <span class="comment">// Convert to digital params:</span></span><br><span class="line">    <span class="number">1</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">2</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">10</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">20</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">30</span>: [<span class="number">2</span>, <span class="number">10</span>, <span class="number">20</span>]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <blockquote>
@@ -343,7 +352,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2020/12/09/coding/ECS/BuildingAnECS.1/" data-id="ckih1ks2v0000i4hyv5lwo5sp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2020/12/09/coding/ECS/BuildingAnECS.1/" data-id="ckih1mczf0071i0hy45wrbpz9" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -457,7 +466,7 @@
               <a href="/2020/12/09/coding/ECS/BuildingAnECS.1/" class="thumbnail">
   
   
-    <span class="thumbnail-image thumbnail-none"></span>
+    <span style="background-image:url(https://s3.ax1x.com/2020/12/09/rCCLkD.md.jpg)" alt="手撕ECS" class="thumbnail-image"></span>
   
 </a>
 

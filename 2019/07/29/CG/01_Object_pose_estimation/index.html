@@ -365,7 +365,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/29/CG/01_Object_pose_estimation/" data-id="ckih1soqi0008swhymsrbx1qr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/29/CG/01_Object_pose_estimation/" data-id="ckih2pz8u000474hyr7hqwag5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -664,11 +664,15 @@
 
     
   
+
+
   <!-- <link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
   <script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script> -->
-  <link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
-  <script src="https://billts.site/js/gitment.js"></script>
-  <script>
+  <!-- <link rel="stylesheet" href="https://billts.site/extra_css/gitment.css">
+  <script src="https://billts.site/js/gitment.js"></script> -->
+  <!-- <link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+  <script src="https://www.wenjunjiang.win/js/gitment.js"></script> -->
+  <!-- <script>
     var gitment = new Gitment({
       owner: 'timrockefeller',
       repo: 'timrockefeller.github.io',
@@ -679,6 +683,23 @@
       id: 'TFG|已知物体空间位置估计'
     })
     gitment.render('comments')
+  </script> -->
+<!--  UPDATE: switch to gitalk @ 2020.12.09 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+  <script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+  <div id="gitalk-container"></div>
+  <script>
+    const gitalk = new Gitalk({
+      clientID: 'a688b926cb46e56975d4',
+      clientSecret: 'ea63339d43ee4bf2d959d37a886a1c8c19e3709d',
+      repo: 'timrockefeller.github.io',      // The repository of store comments,
+      owner: 'timrockefeller',
+      admin: ['GitHub repo owner and collaborators, only these guys can initialize github issues'],
+      id: 'TFG|已知物体空间位置估计',      // Ensure uniqueness and length less than 50
+      distractionFreeMode: false  // Facebook-like distraction free mode
+    })
+
+    gitalk.render('gitalk-container')
   </script>
   
 

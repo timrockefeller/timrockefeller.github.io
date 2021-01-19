@@ -1,35 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang=en>
+<head>
   <meta charset="utf-8">
   
   <title>TFG|镜头校准 | 外野 - wryyyyyyyyyY!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="description" content="摄像机(Camera)也是渲染过程中不可缺少的一部分，这个实验将介绍摄像机如何。本文为官方提供的入门项目Camera calibration的阅读笔记，代码均摘自源文件中。">
-<meta name="keywords" content="CG,ML,Graphics">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TFG|镜头校准">
 <meta property="og:url" content="http://blog.iik.moe/2019/07/30/CG/02_Camera_calibration/index.html">
 <meta property="og:site_name" content="外野">
 <meta property="og:description" content="摄像机(Camera)也是渲染过程中不可缺少的一部分，这个实验将介绍摄像机如何。本文为官方提供的入门项目Camera calibration的阅读笔记，代码均摘自源文件中。">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.loli.net/2019/07/30/5d3fea718dbd538775.png">
-<meta property="og:updated_time" content="2019-07-30T12:37:30.526Z">
+<meta property="article:published_time" content="2019-07-30T12:22:00.000Z">
+<meta property="article:modified_time" content="2019-07-30T12:37:30.526Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="CG">
+<meta property="article:tag" content="ML">
+<meta property="article:tag" content="Graphics">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="TFG|镜头校准">
-<meta name="twitter:description" content="摄像机(Camera)也是渲染过程中不可缺少的一部分，这个实验将介绍摄像机如何。本文为官方提供的入门项目Camera calibration的阅读笔记，代码均摘自源文件中。">
 <meta name="twitter:image" content="https://i.loli.net/2019/07/30/5d3fea718dbd538775.png">
   
   
   
 
   
-    <link rel="icon" href="/image/favicon.ico">
-    <link rel="apple-touch-icon" href="/image/favicon.ico">
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
   
-  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-  <link rel="stylesheet" href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css">
-  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
   <script>
     window.addEventListener('DOMContentLoaded', function () {
       NProgress.start()
@@ -48,14 +56,26 @@
     })
   </script>
 
-  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/csshake/1.5.2/csshake.min.css">
-  <link rel="stylesheet" href="/libs/open-sans/styles.css">
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/csshake/1.5.2/csshake.min.css">
 
-  <script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
   <script>
     $(function() {
       // Init ScrollReveal Animate
@@ -72,10 +92,14 @@
   </script>
   
   
-    <link rel="stylesheet" href="//cdn.bootcss.com/lightgallery/1.6.0/css/lightgallery.min.css">
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/lightgallery/1.6.0/css/lightgallery.min.css">
+
   
   
-    <link rel="stylesheet" href="//cdn.bootcss.com/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
   
   
   
@@ -95,8 +119,8 @@
   
 
 
-</head>
-</html>
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
 <body>
   <div id="container">
     <header id="header">
@@ -171,7 +195,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        62
+        63
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -265,14 +289,14 @@
             
   <div class="article-category">
     <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
   </div>
 
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/CG/">CG</a>, <a class="tag-link" href="/tags/Graphics/">Graphics</a>, <a class="tag-link" href="/tags/ML/">ML</a>
+    <a class="tag-link-link" href="/tags/CG/" rel="tag">CG</a>, <a class="tag-link-link" href="/tags/Graphics/" rel="tag">Graphics</a>, <a class="tag-link-link" href="/tags/ML/" rel="tag">ML</a>
   </div>
 
 
@@ -285,12 +309,12 @@
     <div class="article-entry" itemprop="articleBody">
     
       
-      <p>摄像机(Camera)也是渲染过程中不可缺少的一部分，这个实验将介绍摄像机如何。本文为官方提供的入门项目<a href="https://colab.research.google.com/github/tensorflow/graphics/blob/master/tensorflow_graphics/notebooks/intrinsics_optimization.ipynb" target="_blank" rel="noopener">Camera calibration</a>的阅读笔记，代码均摘自源文件中。</p>
+      <p>摄像机(Camera)也是渲染过程中不可缺少的一部分，这个实验将介绍摄像机如何。本文为官方提供的入门项目<a target="_blank" rel="noopener" href="https://colab.research.google.com/github/tensorflow/graphics/blob/master/tensorflow_graphics/notebooks/intrinsics_optimization.ipynb">Camera calibration</a>的阅读笔记，代码均摘自源文件中。</p>
 <a id="more"></a>
 <p>摄像机的参数分为内参和外参。<strong>内参</strong>是与相机自身特性相关的参数，比如相机的焦距、像素大小等。<strong>外参</strong>是在世界坐标系中的参数，比如相机的位置、旋转方向等。</p>
 <p><strong>内参</strong><br>为什么叫内参呢，这个是因为这些参数是只有相机来决定的，不会因为外界环境而改变。 相机的内参是：1/dx、1/dy、r、u0、v0、f<br>opencv中的内参是4个，分别为fx、fy、u0、v0。其实opencv中的fx也就是F*Sx，其中F是焦距上面的f，Sx是像素/每毫米也就是上面的1/dx。<br>dx和dy表示x方向和y方向的一个像素分别占多少个单位，是反映现实中的图像物理坐标关系与像素坐标系转换的关键（我理解的是可以反映像元密度）。<br>u0，v0代表图像的中心像素坐标和图像原点像素坐标之间相差的横向和纵向像素数。</p>
 <h3 id="Camera-calibration"><a href="#Camera-calibration" class="headerlink" title="Camera calibration"></a>Camera calibration</h3><p>摄像机将一个3D物体映射到2D平面上，这一过程同现实世界中的相机一样，可调节的内参非常多，如镜头变形(lens distortion)、感光(ISO)、焦距(focal length)以及曝光时间(exposure time)等。</p>
-<p><img src="https://i.loli.net/2019/07/30/5d3fe8e89a1ce70298.jpg" alt></p>
+<p><img src="https://i.loli.net/2019/07/30/5d3fe8e89a1ce70298.jpg" alt=""></p>
 <p>在这个算法中我们选取两个内参作为要预测的值：</p>
 <ul>
 <li><strong>主点</strong>(Principal point)：光学中心(optical center)在图像上的投影，理想情况下与图像中心重合。</li>
@@ -299,29 +323,29 @@
 <p>通过获取相机参数，我们可以做更多有意思的事，比如重构3D模型。该实验中我们用一个简单的矩形进行演示。</p>
 <h3 id="导入相关包"><a href="#导入相关包" class="headerlink" title="导入相关包"></a>导入相关包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment">#################################</span></span><br><span class="line"><span class="comment"># Imports the necessary modules #</span></span><br><span class="line"><span class="comment">#################################</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.math.optimizer <span class="keyword">import</span> levenberg_marquardt</span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.rendering.camera <span class="keyword">import</span> perspective  </span><br><span class="line"></span><br><span class="line">tf.enable_eager_execution()</span><br></pre></td></tr></table></figure>
 <h3 id="创建渲染器"><a href="#创建渲染器" class="headerlink" title="创建渲染器"></a>创建渲染器</h3><p>我们的目标是输入相机参数，渲染一张包含一个正方形（4个顶点）的图像。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">render_rectangle</span><span class="params">(rectangle_vertices, focal, principal_point, image_dimensions)</span>:</span></span><br><span class="line">  <span class="string">"""Renders a rectangle on the image plane.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    rectangle_vertices: the four 3D corners of a rectangle.</span></span><br><span class="line"><span class="string">    focal: the focal lengths of a projective camera.</span></span><br><span class="line"><span class="string">    principal_point: the position of the principal point on the image plane.</span></span><br><span class="line"><span class="string">    image_dimensions: the dimensions (in pixels) of the image.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    A 2d image of the 3D rectangle.</span></span><br><span class="line"><span class="string">  """</span></span><br><span class="line">  image = np.zeros((int(image_dimensions[<span class="number">0</span>]), int(image_dimensions[<span class="number">1</span>]), <span class="number">3</span>))<span class="comment">#初始化一张全空白图像(w,h,[r,g,b])</span></span><br><span class="line">  vertices_2d = perspective.project(rectangle_vertices, focal, principal_point)</span><br><span class="line">  vertices_2d_np = vertices_2d.numpy()</span><br><span class="line">  top_left_corner = np.maximum(vertices_2d_np[<span class="number">0</span>, :], (<span class="number">0</span>, <span class="number">0</span>)).astype(int)</span><br><span class="line">  bottom_right_corner = np.minimum(</span><br><span class="line">      vertices_2d_np[<span class="number">1</span>, :],</span><br><span class="line">      (image_dimensions[<span class="number">1</span>] - <span class="number">1</span>, image_dimensions[<span class="number">0</span>] - <span class="number">1</span>)).astype(int)</span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> range(top_left_corner[<span class="number">0</span>], bottom_right_corner[<span class="number">0</span>] + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> range(top_left_corner[<span class="number">1</span>], bottom_right_corner[<span class="number">1</span>] + <span class="number">1</span>):</span><br><span class="line">      c1 = float(bottom_right_corner[<span class="number">0</span>] + <span class="number">1</span> -</span><br><span class="line">                 x) / float(bottom_right_corner[<span class="number">0</span>] + <span class="number">1</span> - top_left_corner[<span class="number">0</span>])</span><br><span class="line">      c2 = float(bottom_right_corner[<span class="number">1</span>] + <span class="number">1</span> -</span><br><span class="line">                 y) / float(bottom_right_corner[<span class="number">1</span>] + <span class="number">1</span> - top_left_corner[<span class="number">1</span>])</span><br><span class="line">      image[y, x] = (c1, c2, <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> image</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">render_rectangle</span>(<span class="params">rectangle_vertices, focal, principal_point, image_dimensions</span>):</span></span><br><span class="line">  <span class="string">&quot;&quot;&quot;Renders a rectangle on the image plane.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    rectangle_vertices: the four 3D corners of a rectangle.</span></span><br><span class="line"><span class="string">    focal: the focal lengths of a projective camera.</span></span><br><span class="line"><span class="string">    principal_point: the position of the principal point on the image plane.</span></span><br><span class="line"><span class="string">    image_dimensions: the dimensions (in pixels) of the image.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    A 2d image of the 3D rectangle.</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  image = np.zeros((<span class="built_in">int</span>(image_dimensions[<span class="number">0</span>]), <span class="built_in">int</span>(image_dimensions[<span class="number">1</span>]), <span class="number">3</span>))<span class="comment">#初始化一张全空白图像(w,h,[r,g,b])</span></span><br><span class="line">  vertices_2d = perspective.project(rectangle_vertices, focal, principal_point)</span><br><span class="line">  vertices_2d_np = vertices_2d.numpy()</span><br><span class="line">  top_left_corner = np.maximum(vertices_2d_np[<span class="number">0</span>, :], (<span class="number">0</span>, <span class="number">0</span>)).astype(<span class="built_in">int</span>)</span><br><span class="line">  bottom_right_corner = np.minimum(</span><br><span class="line">      vertices_2d_np[<span class="number">1</span>, :],</span><br><span class="line">      (image_dimensions[<span class="number">1</span>] - <span class="number">1</span>, image_dimensions[<span class="number">0</span>] - <span class="number">1</span>)).astype(<span class="built_in">int</span>)</span><br><span class="line">  <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(top_left_corner[<span class="number">0</span>], bottom_right_corner[<span class="number">0</span>] + <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> y <span class="keyword">in</span> <span class="built_in">range</span>(top_left_corner[<span class="number">1</span>], bottom_right_corner[<span class="number">1</span>] + <span class="number">1</span>):</span><br><span class="line">      c1 = <span class="built_in">float</span>(bottom_right_corner[<span class="number">0</span>] + <span class="number">1</span> -</span><br><span class="line">                 x) / <span class="built_in">float</span>(bottom_right_corner[<span class="number">0</span>] + <span class="number">1</span> - top_left_corner[<span class="number">0</span>])</span><br><span class="line">      c2 = <span class="built_in">float</span>(bottom_right_corner[<span class="number">1</span>] + <span class="number">1</span> -</span><br><span class="line">                 y) / <span class="built_in">float</span>(bottom_right_corner[<span class="number">1</span>] + <span class="number">1</span> - top_left_corner[<span class="number">1</span>])</span><br><span class="line">      image[y, x] = (c1, c2, <span class="number">1</span>)</span><br><span class="line">  <span class="keyword">return</span> image</span><br></pre></td></tr></table></figure>
 <p>下面我们定义一个初始的内参作为对照，并将它渲染出来。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sets up the vertices of the rectangle.</span></span><br><span class="line">rectangle_depth = <span class="number">1000.0</span></span><br><span class="line">rectangle_vertices = np.array(</span><br><span class="line">    ((<span class="number">-150.0</span>, <span class="number">-75.0</span>, rectangle_depth), (<span class="number">150.0</span>, <span class="number">75.0</span>, rectangle_depth)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sets up the size of the image plane.</span></span><br><span class="line">image_width = <span class="number">400</span></span><br><span class="line">image_height = <span class="number">300</span></span><br><span class="line">image_dimensions = np.array((image_height, image_width), dtype=np.float64)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sets the horizontal and vertical focal length to be the same. The focal length</span></span><br><span class="line"><span class="comment"># picked yields a field of view around 50degrees.</span></span><br><span class="line">focal_lengths = np.array((image_height, image_height), dtype=np.float64)</span><br><span class="line"><span class="comment"># Sets the principal point at the image center.</span></span><br><span class="line">ideal_principal_point = np.array(</span><br><span class="line">    (image_width, image_height), dtype=np.float64) / <span class="number">2.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Let's see what our scene looks like using the intrinsic paramters defined above.</span></span><br><span class="line">render = render_rectangle(rectangle_vertices, focal_lengths, ideal_principal_point,</span><br><span class="line">                          image_dimensions)</span><br><span class="line">_ = plt.imshow(render)</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2019/07/30/5d403293851b278276.png" alt></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Sets up the vertices of the rectangle.</span></span><br><span class="line">rectangle_depth = <span class="number">1000.0</span></span><br><span class="line">rectangle_vertices = np.array(</span><br><span class="line">    ((-<span class="number">150.0</span>, -<span class="number">75.0</span>, rectangle_depth), (<span class="number">150.0</span>, <span class="number">75.0</span>, rectangle_depth)))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sets up the size of the image plane.</span></span><br><span class="line">image_width = <span class="number">400</span></span><br><span class="line">image_height = <span class="number">300</span></span><br><span class="line">image_dimensions = np.array((image_height, image_width), dtype=np.float64)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Sets the horizontal and vertical focal length to be the same. The focal length</span></span><br><span class="line"><span class="comment"># picked yields a field of view around 50degrees.</span></span><br><span class="line">focal_lengths = np.array((image_height, image_height), dtype=np.float64)</span><br><span class="line"><span class="comment"># Sets the principal point at the image center.</span></span><br><span class="line">ideal_principal_point = np.array(</span><br><span class="line">    (image_width, image_height), dtype=np.float64) / <span class="number">2.0</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Let&#x27;s see what our scene looks like using the intrinsic paramters defined above.</span></span><br><span class="line">render = render_rectangle(rectangle_vertices, focal_lengths, ideal_principal_point,</span><br><span class="line">                          image_dimensions)</span><br><span class="line">_ = plt.imshow(render)</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2019/07/30/5d403293851b278276.png" alt=""></p>
 <p>同样的，我们可以随机生成其他状态下的渲染结果：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 这里可以进行自定义或用随机生成</span></span><br><span class="line">focal_length_x = <span class="number">100</span>  <span class="comment">#@param &#123; min: 100.0, max: 500.0 &#125;</span></span><br><span class="line">focal_length_y = <span class="number">500</span>  <span class="comment">#@param &#123; min: 100.0, max: 500.0 &#125;</span></span><br><span class="line">optical_center_x = <span class="number">386</span>  <span class="comment">#@param &#123; min: 0.0, max: 400.0 &#125;</span></span><br><span class="line">optical_center_y = <span class="number">152</span>  <span class="comment">#@param &#123; min: 0.0, max: 300.0 &#125;</span></span><br><span class="line"><span class="comment">## 通过该函数生成对应图片</span></span><br><span class="line">render = render_rectangle(</span><br><span class="line">    rectangle_vertices,</span><br><span class="line">    np.array((focal_length_x, focal_length_y), dtype=np.float64),</span><br><span class="line">    np.array((optical_center_x, optical_center_y), dtype=np.float64),</span><br><span class="line">    image_dimensions)</span><br><span class="line">_ = plt.imshow(render)</span><br></pre></td></tr></table></figure>
-<p><img src="https://i.loli.net/2019/07/30/5d40385c5842380043.png" alt></p>
+<p><img src="https://i.loli.net/2019/07/30/5d40385c5842380043.png" alt=""></p>
 <h3 id="拟合开始"><a href="#拟合开始" class="headerlink" title="拟合开始"></a>拟合开始</h3><p>先定义几个函数来简化我们的操作：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 显示出原图案、预测图案、两者之差</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_optimization_step</span><span class="params">(observation, prediction)</span>:</span></span><br><span class="line">  plt.figure(figsize=(<span class="number">20</span>, <span class="number">10</span>))</span><br><span class="line">  ax = plt.subplot(<span class="string">"131"</span>)</span><br><span class="line">  ax.set_title(<span class="string">"Observation"</span>)</span><br><span class="line">  _ = ax.imshow(observation)</span><br><span class="line">  ax = plt.subplot(<span class="string">"132"</span>)</span><br><span class="line">  ax.set_title(<span class="string">"Prediction using estimated intrinsics"</span>)</span><br><span class="line">  _ = ax.imshow(prediction)</span><br><span class="line">  ax = plt.subplot(<span class="string">"133"</span>)</span><br><span class="line">  ax.set_title(<span class="string">"Difference image"</span>)</span><br><span class="line">  _ = ax.imshow(np.abs(observation - prediction))</span><br><span class="line">  plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment">## 输出误差</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_errors</span><span class="params">(focal_error, center_error)</span>:</span></span><br><span class="line">  print(<span class="string">"Error focal length %f"</span> % (focal_error,))</span><br><span class="line">  print(<span class="string">"Err principal point %f"</span> % (center_error,))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">## 显示出原图案、预测图案、两者之差</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">plot_optimization_step</span>(<span class="params">observation, prediction</span>):</span></span><br><span class="line">  plt.figure(figsize=(<span class="number">20</span>, <span class="number">10</span>))</span><br><span class="line">  ax = plt.subplot(<span class="string">&quot;131&quot;</span>)</span><br><span class="line">  ax.set_title(<span class="string">&quot;Observation&quot;</span>)</span><br><span class="line">  _ = ax.imshow(observation)</span><br><span class="line">  ax = plt.subplot(<span class="string">&quot;132&quot;</span>)</span><br><span class="line">  ax.set_title(<span class="string">&quot;Prediction using estimated intrinsics&quot;</span>)</span><br><span class="line">  _ = ax.imshow(prediction)</span><br><span class="line">  ax = plt.subplot(<span class="string">&quot;133&quot;</span>)</span><br><span class="line">  ax.set_title(<span class="string">&quot;Difference image&quot;</span>)</span><br><span class="line">  _ = ax.imshow(np.<span class="built_in">abs</span>(observation - prediction))</span><br><span class="line">  plt.show()</span><br><span class="line"></span><br><span class="line"><span class="comment">## 输出误差</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">print_errors</span>(<span class="params">focal_error, center_error</span>):</span></span><br><span class="line">  print(<span class="string">&quot;Error focal length %f&quot;</span> % (focal_error,))</span><br><span class="line">  print(<span class="string">&quot;Err principal point %f&quot;</span> % (center_error,))</span><br></pre></td></tr></table></figure>
 <p>Let’s now define the values of the intrinsic parameters we are looking for, and an initial guess of the values of these parameters.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_parameters</span><span class="params">()</span>:</span></span><br><span class="line">  <span class="comment"># Constructs the intrinsic parameters we wish to recover.</span></span><br><span class="line">  real_focal_lengths = focal_lengths * np.random.uniform(<span class="number">0.8</span>, <span class="number">1.2</span>, size=(<span class="number">2</span>,))</span><br><span class="line">  real_principal_point = ideal_principal_point + (np.random.random(<span class="number">2</span>) -</span><br><span class="line">                                                  <span class="number">0.5</span>) * image_width / <span class="number">5.0</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Initializes the first estimate of the intrinsic parameters.</span></span><br><span class="line">  estimate_focal_lengths = tf.Variable(real_focal_lengths +</span><br><span class="line">                                       (np.random.random(<span class="number">2</span>) - <span class="number">0.5</span>) *</span><br><span class="line">                                       image_width)</span><br><span class="line">  estimate_principal_point = tf.Variable(real_principal_point +</span><br><span class="line">                                         (np.random.random(<span class="number">2</span>) - <span class="number">0.5</span>) *</span><br><span class="line">                                         image_width / <span class="number">4</span>)</span><br><span class="line">  <span class="keyword">return</span> real_focal_lengths, real_principal_point, estimate_focal_lengths, estimate_principal_point</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">build_parameters</span>():</span></span><br><span class="line">  <span class="comment"># Constructs the intrinsic parameters we wish to recover.</span></span><br><span class="line">  real_focal_lengths = focal_lengths * np.random.uniform(<span class="number">0.8</span>, <span class="number">1.2</span>, size=(<span class="number">2</span>,))</span><br><span class="line">  real_principal_point = ideal_principal_point + (np.random.random(<span class="number">2</span>) -</span><br><span class="line">                                                  <span class="number">0.5</span>) * image_width / <span class="number">5.0</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># Initializes the first estimate of the intrinsic parameters.</span></span><br><span class="line">  estimate_focal_lengths = tf.Variable(real_focal_lengths +</span><br><span class="line">                                       (np.random.random(<span class="number">2</span>) - <span class="number">0.5</span>) *</span><br><span class="line">                                       image_width)</span><br><span class="line">  estimate_principal_point = tf.Variable(real_principal_point +</span><br><span class="line">                                         (np.random.random(<span class="number">2</span>) - <span class="number">0.5</span>) *</span><br><span class="line">                                         image_width / <span class="number">4</span>)</span><br><span class="line">  <span class="keyword">return</span> real_focal_lengths, real_principal_point, estimate_focal_lengths, estimate_principal_point</span><br></pre></td></tr></table></figure>
 <p>As described earlier, one can compare how the 3D object would look using the current estimate of the intrinsic parameters, can compare that to the actual observation. The following function captures a distance beween these two images which we will seek to minimize.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">residuals</span><span class="params">(estimate_focal_lengths, estimate_principal_point)</span>:</span></span><br><span class="line">  vertices_2d_gt = perspective.project(rectangle_vertices, real_focal_lengths,</span><br><span class="line">                                       real_principal_point)</span><br><span class="line">  vertices_2d_observed = perspective.project(rectangle_vertices,</span><br><span class="line">                                             estimate_focal_lengths,</span><br><span class="line">                                             estimate_principal_point)</span><br><span class="line">  <span class="keyword">return</span> vertices_2d_gt - vertices_2d_observed</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">residuals</span>(<span class="params">estimate_focal_lengths, estimate_principal_point</span>):</span></span><br><span class="line">  vertices_2d_gt = perspective.project(rectangle_vertices, real_focal_lengths,</span><br><span class="line">                                       real_principal_point)</span><br><span class="line">  vertices_2d_observed = perspective.project(rectangle_vertices,</span><br><span class="line">                                             estimate_focal_lengths,</span><br><span class="line">                                             estimate_principal_point)</span><br><span class="line">  <span class="keyword">return</span> vertices_2d_gt - vertices_2d_observed</span><br></pre></td></tr></table></figure>
 <p>All the pieces are now in place to solve the problem; let’s give it a go!</p>
 <p>Note: the residuals are minimized using Levenberg-Marquardt, which is particularly indicated for this problem. First order optimizers (e.g. Adam or gradient descent) could also be used.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Samples intrinsic parameters to recover and an initial solution.</span></span><br><span class="line">real_focal_lengths, real_principal_point, estimate_focal_lengths, estimate_principal_point = build_parameters(</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Contructs the observed image.</span></span><br><span class="line">observation = render_rectangle(rectangle_vertices, real_focal_lengths,</span><br><span class="line">                               real_principal_point, image_dimensions)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Displays the initial solution.</span></span><br><span class="line">print(<span class="string">"Initial configuration:"</span>)</span><br><span class="line">print_errors(</span><br><span class="line">    np.linalg.norm(estimate_focal_lengths - real_focal_lengths),</span><br><span class="line">    np.linalg.norm(estimate_principal_point - real_principal_point))</span><br><span class="line">image = render_rectangle(rectangle_vertices, estimate_focal_lengths,</span><br><span class="line">                         estimate_principal_point, image_dimensions)</span><br><span class="line">plot_optimization_step(observation, image) <span class="comment"># 显示最初始时的结果</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Optimization.</span></span><br><span class="line">_, (estimate_focal_lengths,</span><br><span class="line">    estimate_principal_point) = levenberg_marquardt.minimize(</span><br><span class="line">        residuals, (estimate_focal_lengths, estimate_principal_point), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"Predicted configuration:"</span>)</span><br><span class="line">print_errors(</span><br><span class="line">    np.linalg.norm(estimate_focal_lengths - real_focal_lengths),</span><br><span class="line">    np.linalg.norm(estimate_principal_point - real_principal_point))</span><br><span class="line">image = render_rectangle(rectangle_vertices, estimate_focal_lengths,</span><br><span class="line">                         estimate_principal_point, image_dimensions)</span><br><span class="line">plot_optimization_step(observation, image) <span class="comment"># 显示预测完成后的结果</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Samples intrinsic parameters to recover and an initial solution.</span></span><br><span class="line">real_focal_lengths, real_principal_point, estimate_focal_lengths, estimate_principal_point = build_parameters(</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Contructs the observed image.</span></span><br><span class="line">observation = render_rectangle(rectangle_vertices, real_focal_lengths,</span><br><span class="line">                               real_principal_point, image_dimensions)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Displays the initial solution.</span></span><br><span class="line">print(<span class="string">&quot;Initial configuration:&quot;</span>)</span><br><span class="line">print_errors(</span><br><span class="line">    np.linalg.norm(estimate_focal_lengths - real_focal_lengths),</span><br><span class="line">    np.linalg.norm(estimate_principal_point - real_principal_point))</span><br><span class="line">image = render_rectangle(rectangle_vertices, estimate_focal_lengths,</span><br><span class="line">                         estimate_principal_point, image_dimensions)</span><br><span class="line">plot_optimization_step(observation, image) <span class="comment"># 显示最初始时的结果</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Optimization.</span></span><br><span class="line">_, (estimate_focal_lengths,</span><br><span class="line">    estimate_principal_point) = levenberg_marquardt.minimize(</span><br><span class="line">        residuals, (estimate_focal_lengths, estimate_principal_point), <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;Predicted configuration:&quot;</span>)</span><br><span class="line">print_errors(</span><br><span class="line">    np.linalg.norm(estimate_focal_lengths - real_focal_lengths),</span><br><span class="line">    np.linalg.norm(estimate_principal_point - real_principal_point))</span><br><span class="line">image = render_rectangle(rectangle_vertices, estimate_focal_lengths,</span><br><span class="line">                         estimate_principal_point, image_dimensions)</span><br><span class="line">plot_optimization_step(observation, image) <span class="comment"># 显示预测完成后的结果</span></span><br></pre></td></tr></table></figure>
 <p>Initial configuration:<br>Error focal length 187.253365<br>Err principal point 49.621742</p>
-<p><img src="https://i.loli.net/2019/07/30/5d4039d3188f732360.png" alt></p>
+<p><img src="https://i.loli.net/2019/07/30/5d4039d3188f732360.png" alt=""></p>
 <p>Predicted configuration:<br>Error focal length 0.000000<br>Err principal point 0.000000</p>
-<p><img src="https://i.loli.net/2019/07/30/5d4039df022ce45948.png" alt></p>
-<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a href="http://production.xitek.com/glossary.php?a=detail&amp;id=249" target="_blank" rel="noopener">焦点与焦距</a></p>
-<p><a href="https://blog.csdn.net/qq_16481211/article/details/79464786" target="_blank" rel="noopener">相机内外参数以及畸变参数</a></p>
-<p><a href="https://blog.csdn.net/liulina603/article/details/52953414" target="_blank" rel="noopener">计算机视觉学习——相机内参数和外参数</a></p>
+<p><img src="https://i.loli.net/2019/07/30/5d4039df022ce45948.png" alt=""></p>
+<h3 id="References"><a href="#References" class="headerlink" title="References"></a>References</h3><p><a target="_blank" rel="noopener" href="http://production.xitek.com/glossary.php?a=detail&amp;id=249">焦点与焦距</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16481211/article/details/79464786">相机内外参数以及畸变参数</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/liulina603/article/details/52953414">计算机视觉学习——相机内参数和外参数</a></p>
 
     
     </div>
@@ -333,7 +357,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/07/30/CG/02_Camera_calibration/" data-id="ckjvg3xzj000abghy9g8al0mx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/07/30/CG/02_Camera_calibration/" data-id="ckk3eudnr000ptchybzdbhg97" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -470,6 +494,25 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2021/01/19/coding/TemplatesAndCommonUse/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2021/01/19/coding/TemplatesAndCommonUse/" class="title">【西加加】模板虽奇，难如上青天</a></p>
+              <p class="item-date"><time datetime="2021-01-19T06:00:00.000Z" itemprop="datePublished">2021-01-19</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2021/01/04/notes/EconomyAndManagement/" class="thumbnail">
   
   
@@ -480,7 +523,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/札记阁/">札记阁</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a></p>
               <p class="item-title"><a href="/2021/01/04/notes/EconomyAndManagement/" class="title">经济与管理 札记</a></p>
               <p class="item-date"><time datetime="2021-01-03T16:00:00.000Z" itemprop="datePublished">2021-01-04</time></p>
             </div>
@@ -499,7 +542,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/日记本/">日记本</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a></p>
               <p class="item-title"><a href="/2021/01/01/bio/NewYear2021/" class="title">新年新气象</a></p>
               <p class="item-date"><time datetime="2020-12-31T16:00:00.000Z" itemprop="datePublished">2021-01-01</time></p>
             </div>
@@ -518,7 +561,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
               <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.2/" class="title">手撕ECS #2: Archetypes and Vectorization</a></p>
               <p class="item-date"><time datetime="2020-12-09T09:14:05.896Z" itemprop="datePublished">2020-12-09</time></p>
             </div>
@@ -537,28 +580,9 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
               <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.1/" class="title">手撕ECS #1: Types, Hierarchies and Prefabs</a></p>
               <p class="item-date"><time datetime="2020-12-09T06:38:41.633Z" itemprop="datePublished">2020-12-09</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/11/22/comment/refrain/" class="thumbnail">
-  
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2020/11/22/comment/refrain/" class="title"></a></p>
-              <p class="item-date"><time datetime="2020-11-21T16:00:00.000Z" itemprop="datePublished">2020-11-22</time></p>
             </div>
           </li>
         
@@ -572,7 +596,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">36</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">37</span></li></ul>
     </div>
   </div>
 
@@ -582,7 +606,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 11.67px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 15px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 11.67px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 
@@ -662,10 +686,14 @@
 
 
   
-    <script src="//cdn.bootcss.com/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+    
+<script src="//cdn.bootcss.com/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
   
   
-    <script src="//cdn.bootcss.com/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+    
+<script src="//cdn.bootcss.com/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
   
   
   
@@ -675,7 +703,9 @@
 
 
 <!-- Custom Scripts -->
+
 <script src="/js/main.js"></script>
+
 
   </div>
 </body>

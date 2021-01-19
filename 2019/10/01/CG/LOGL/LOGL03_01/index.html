@@ -1,37 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang=en>
+<head>
   <meta charset="utf-8">
   
   <title>OpenGL光线渲染 | 外野 - wryyyyyyyyyY!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="description" content="本文阐述若干种冯氏BDRF模型中光线的渲染方式。">
-<meta name="keywords" content="CG,OpenGL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OpenGL光线渲染">
 <meta property="og:url" content="http://blog.iik.moe/2019/10/01/CG/LOGL/LOGL03_01/index.html">
 <meta property="og:site_name" content="外野">
 <meta property="og:description" content="本文阐述若干种冯氏BDRF模型中光线的渲染方式。">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://blog.iik.moe/2019/10/01/CG/LOGL/LOGL03_01/light_casters_directional.png">
 <meta property="og:image" content="http://blog.iik.moe/2019/10/01/CG/LOGL/LOGL03_01/attenuation.png">
 <meta property="og:image" content="http://blog.iik.moe/2019/10/01/CG/LOGL/LOGL03_01/light_casters_spotlight_angles.png">
-<meta property="og:updated_time" content="2019-10-21T05:51:15.061Z">
+<meta property="article:published_time" content="2019-09-30T16:00:00.000Z">
+<meta property="article:modified_time" content="2019-10-21T05:51:15.061Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="CG">
+<meta property="article:tag" content="OpenGL">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OpenGL光线渲染">
-<meta name="twitter:description" content="本文阐述若干种冯氏BDRF模型中光线的渲染方式。">
 <meta name="twitter:image" content="http://blog.iik.moe/2019/10/01/CG/LOGL/LOGL03_01/light_casters_directional.png">
   
   
   
 
   
-    <link rel="icon" href="/image/favicon.ico">
-    <link rel="apple-touch-icon" href="/image/favicon.ico">
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
   
-  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-  <link rel="stylesheet" href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css">
-  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
   <script>
     window.addEventListener('DOMContentLoaded', function () {
       NProgress.start()
@@ -50,14 +57,26 @@
     })
   </script>
 
-  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/csshake/1.5.2/csshake.min.css">
-  <link rel="stylesheet" href="/libs/open-sans/styles.css">
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/csshake/1.5.2/csshake.min.css">
 
-  <script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
   <script>
     $(function() {
       // Init ScrollReveal Animate
@@ -74,10 +93,14 @@
   </script>
   
   
-    <link rel="stylesheet" href="//cdn.bootcss.com/lightgallery/1.6.0/css/lightgallery.min.css">
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/lightgallery/1.6.0/css/lightgallery.min.css">
+
   
   
-    <link rel="stylesheet" href="//cdn.bootcss.com/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
   
   
   
@@ -97,8 +120,8 @@
   
 
 
-</head>
-</html>
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
 <body>
   <div id="container">
     <header id="header">
@@ -173,7 +196,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        62
+        63
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -260,14 +283,14 @@
             
   <div class="article-category">
     <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
   </div>
 
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/CG/">CG</a>, <a class="tag-link" href="/tags/OpenGL/">OpenGL</a>
+    <a class="tag-link-link" href="/tags/CG/" rel="tag">CG</a>, <a class="tag-link-link" href="/tags/OpenGL/" rel="tag">OpenGL</a>
   </div>
 
 
@@ -293,9 +316,7 @@
 <blockquote>
 <p>我们一直将光的位置和位置向量定义为<code>vec3</code>，但一些人会喜欢将所有的向量都定义为<code>vec4</code>。当我们将位置向量定义为一个<code>vec4</code>时，很重要的一点是要将w分量设置为1.0，这样变换和投影才能正确应用。然而，当我们定义一个方向向量为<code>vec4</code>的时候，我们不想让位移有任何的效果（因为它仅仅代表的是方向），所以我们将w分量设置为0.0。</p>
 <p>方向向量就会像这样来表示：<code>vec4(0.2f, 1.0f, 0.3f, 0.0f)</code>。这也可以作为一个快速检测光照类型的工具：你可以检测w分量是否等于1.0，来检测它是否是光的位置向量；w分量等于0.0，则它是光的方向向量，这样就能根据这个来调整光照计算了：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt; if(lightVector.w == 0.0) // 注意浮点数据类型的误差</span><br><span class="line">&gt; // 执行定向光照计算</span><br><span class="line">&gt; else if(lightVector.w == 1.0)</span><br><span class="line">&gt; // 根据光源的位置做光照计算（与上一节一样）</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if(lightVector.w &#x3D;&#x3D; 0.0) &#x2F;&#x2F; 注意浮点数据类型的误差</span><br><span class="line">&#x2F;&#x2F; 执行定向光照计算</span><br><span class="line">else if(lightVector.w &#x3D;&#x3D; 1.0)</span><br><span class="line">&#x2F;&#x2F; 根据光源的位置做光照计算（与上一节一样）</span><br></pre></td></tr></table></figure>
 <p>你知道吗：这正是旧OpenGL（固定函数式）决定光源是定向光还是位置光源(Positional Light Source)的方法，并根据它来调整光照。</p>
 </blockquote>
 <h2 id="点光源"><a href="#点光源" class="headerlink" title="点光源"></a>点光源</h2><p>$$<br>\begin{equation} F_{att} = \frac{1.0}{K_c + K_l <em> d + K_q </em> d^2} \end{equation}<br>$$</p>
@@ -326,7 +347,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/10/01/CG/LOGL/LOGL03_01/" data-id="ckjvg3ybj0077bghy7anh5anc" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/10/01/CG/LOGL/LOGL03_01/" data-id="ckk3eudp3004htchyb01shoqx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -463,6 +484,25 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2021/01/19/coding/TemplatesAndCommonUse/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2021/01/19/coding/TemplatesAndCommonUse/" class="title">【西加加】模板虽奇，难如上青天</a></p>
+              <p class="item-date"><time datetime="2021-01-19T06:00:00.000Z" itemprop="datePublished">2021-01-19</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2021/01/04/notes/EconomyAndManagement/" class="thumbnail">
   
   
@@ -473,7 +513,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/札记阁/">札记阁</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a></p>
               <p class="item-title"><a href="/2021/01/04/notes/EconomyAndManagement/" class="title">经济与管理 札记</a></p>
               <p class="item-date"><time datetime="2021-01-03T16:00:00.000Z" itemprop="datePublished">2021-01-04</time></p>
             </div>
@@ -492,7 +532,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/日记本/">日记本</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a></p>
               <p class="item-title"><a href="/2021/01/01/bio/NewYear2021/" class="title">新年新气象</a></p>
               <p class="item-date"><time datetime="2020-12-31T16:00:00.000Z" itemprop="datePublished">2021-01-01</time></p>
             </div>
@@ -511,7 +551,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
               <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.2/" class="title">手撕ECS #2: Archetypes and Vectorization</a></p>
               <p class="item-date"><time datetime="2020-12-09T09:14:05.896Z" itemprop="datePublished">2020-12-09</time></p>
             </div>
@@ -530,28 +570,9 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
               <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.1/" class="title">手撕ECS #1: Types, Hierarchies and Prefabs</a></p>
               <p class="item-date"><time datetime="2020-12-09T06:38:41.633Z" itemprop="datePublished">2020-12-09</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/11/22/comment/refrain/" class="thumbnail">
-  
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2020/11/22/comment/refrain/" class="title"></a></p>
-              <p class="item-date"><time datetime="2020-11-21T16:00:00.000Z" itemprop="datePublished">2020-11-22</time></p>
             </div>
           </li>
         
@@ -565,7 +586,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">36</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">37</span></li></ul>
     </div>
   </div>
 
@@ -575,7 +596,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 11.67px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 15px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 11.67px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 
@@ -655,10 +676,14 @@
 
 
   
-    <script src="//cdn.bootcss.com/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+    
+<script src="//cdn.bootcss.com/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
   
   
-    <script src="//cdn.bootcss.com/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+    
+<script src="//cdn.bootcss.com/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
   
   
   
@@ -668,7 +693,9 @@
 
 
 <!-- Custom Scripts -->
+
 <script src="/js/main.js"></script>
+
 
   </div>
 </body>

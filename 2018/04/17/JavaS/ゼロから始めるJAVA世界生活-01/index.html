@@ -1,33 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang=en>
+<head>
   <meta charset="utf-8">
   
   <title>ゼロから始めるJAVA世界生活 01 | 外野 - wryyyyyyyyyY!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="description" content="环境搭建接下来将介绍如何建立环境并支持VSCode。  从官网下载jdk  等待一段时间安装完成  在系统的环境变量设置中，全局变量里添加JAVA_HOME并将值设置为C:\Program Files\Java\jdk-*\，即jdk根目录。  变量中的PATH添加值%JAVA_HOME%\jre\，%JAVA_HOME%\lib\和%JAVA_HOME%\bin\，此时测试以下命令  12$">
-<meta name="keywords" content="java,oracle">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ゼロから始めるJAVA世界生活 01">
-<meta property="og:url" content="http://blog.iik.moe/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/index.html">
+<meta property="og:url" content="http://blog.iik.moe/2018/04/17/JavaS/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8BJAVA%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB-01/index.html">
 <meta property="og:site_name" content="外野">
 <meta property="og:description" content="环境搭建接下来将介绍如何建立环境并支持VSCode。  从官网下载jdk  等待一段时间安装完成  在系统的环境变量设置中，全局变量里添加JAVA_HOME并将值设置为C:\Program Files\Java\jdk-*\，即jdk根目录。  变量中的PATH添加值%JAVA_HOME%\jre\，%JAVA_HOME%\lib\和%JAVA_HOME%\bin\，此时测试以下命令  12$">
-<meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-22T06:40:55.546Z">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-04-17T12:20:06.000Z">
+<meta property="article:modified_time" content="2019-02-22T06:40:55.546Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="oracle">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ゼロから始めるJAVA世界生活 01">
-<meta name="twitter:description" content="环境搭建接下来将介绍如何建立环境并支持VSCode。  从官网下载jdk  等待一段时间安装完成  在系统的环境变量设置中，全局变量里添加JAVA_HOME并将值设置为C:\Program Files\Java\jdk-*\，即jdk根目录。  变量中的PATH添加值%JAVA_HOME%\jre\，%JAVA_HOME%\lib\和%JAVA_HOME%\bin\，此时测试以下命令  12$">
   
   
   
 
   
-    <link rel="icon" href="/image/favicon.ico">
-    <link rel="apple-touch-icon" href="/image/favicon.ico">
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
   
-  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-  <link rel="stylesheet" href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css">
-  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
   <script>
     window.addEventListener('DOMContentLoaded', function () {
       NProgress.start()
@@ -46,14 +53,26 @@
     })
   </script>
 
-  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/csshake/1.5.2/csshake.min.css">
-  <link rel="stylesheet" href="/libs/open-sans/styles.css">
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/csshake/1.5.2/csshake.min.css">
 
-  <script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
   <script>
     $(function() {
       // Init ScrollReveal Animate
@@ -70,10 +89,14 @@
   </script>
   
   
-    <link rel="stylesheet" href="//cdn.bootcss.com/lightgallery/1.6.0/css/lightgallery.min.css">
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/lightgallery/1.6.0/css/lightgallery.min.css">
+
   
   
-    <link rel="stylesheet" href="//cdn.bootcss.com/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
   
   
   
@@ -93,8 +116,8 @@
   
 
 
-</head>
-</html>
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
 <body>
   <div id="container">
     <header id="header">
@@ -169,7 +192,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        62
+        63
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -247,7 +270,7 @@
             
   <div class="article-date">
     <i class="fa fa-calendar"></i>
-    <a href="/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/">
+    <a href="/2018/04/17/JavaS/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8BJAVA%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB-01/">
       <time datetime="2018-04-17T12:20:06.000Z" itemprop="datePublished">2018-04-17</time>
     </a>
   </div>
@@ -256,14 +279,14 @@
             
   <div class="article-category">
     <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
   </div>
 
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/java/">java</a>, <a class="tag-link" href="/tags/oracle/">oracle</a>
+    <a class="tag-link-link" href="/tags/java/" rel="tag">java</a>, <a class="tag-link-link" href="/tags/oracle/" rel="tag">oracle</a>
   </div>
 
 
@@ -279,7 +302,7 @@
       <hr>
 <h2 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h2><p>接下来将介绍如何建立环境并支持<strong>VSCode</strong>。</p>
 <ol>
-<li><p>从<a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html" target="_blank" rel="noopener">官网</a>下载jdk</p>
+<li><p>从<a target="_blank" rel="noopener" href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">官网</a>下载jdk</p>
 </li>
 <li><p>等待一段时间安装完成</p>
 </li>
@@ -292,8 +315,7 @@
 </ol>
 <a id="more"></a>
 <h3 id="VSCode"><a href="#VSCode" class="headerlink" title="VSCode"></a>VSCode</h3><p>安装 VSCode 后，添加插件<code>Java Extension Pack</code>。</p>
-<p>在首选项中覆盖以下条目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;files.autoGuessEncoding&quot; : true,</span><br><span class="line">&quot;java.home&quot; : &quot;%JAVA_HOME%&quot;</span><br></pre></td></tr></table></figure></p>
-<p>环境变量中添加<code>JDK_HOME</code>，值与<code>JAVA_HOME</code>相同。</p>
+<p>在首选项中覆盖以下条目：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&quot;files.autoGuessEncoding&quot; : true,</span><br><span class="line">&quot;java.home&quot; : &quot;%JAVA_HOME%&quot;</span><br></pre></td></tr></table></figure><br>环境变量中添加<code>JDK_HOME</code>，值与<code>JAVA_HOME</code>相同。</p>
 <h4 id="项目文件目录"><a href="#项目文件目录" class="headerlink" title="项目文件目录"></a>项目文件目录</h4><pre><code>├── .classpath
 ├── .project
 ├── .vscode
@@ -301,16 +323,12 @@
 ├── bin
 └── src
 </code></pre><h4 id="创建-project和-classpath文件"><a href="#创建-project和-classpath文件" class="headerlink" title="创建.project和.classpath文件"></a>创建.project和.classpath文件</h4><ul>
-<li><p>.project</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">projectDescription</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>testjava<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">comment</span>&gt;</span>Project testjava created by Buildship.<span class="tag">&lt;/<span class="name">comment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">projects</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">projects</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">buildSpec</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>org.eclipse.jdt.core.javabuilder<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arguments</span>&gt;</span> <span class="tag">&lt;/<span class="name">arguments</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>org.eclipse.buildship.core.gradleprojectbuilder<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arguments</span>&gt;</span> <span class="tag">&lt;/<span class="name">arguments</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">buildSpec</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">natures</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">nature</span>&gt;</span>org.eclipse.jdt.core.javanature<span class="tag">&lt;/<span class="name">nature</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">nature</span>&gt;</span>org.eclipse.buildship.core.gradleprojectnature<span class="tag">&lt;/<span class="name">nature</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">natures</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">projectDescription</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>.classpath</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">classpath</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">"src"</span> <span class="attr">path</span>=<span class="string">"src"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">"con"</span> <span class="attr">path</span>=<span class="string">"org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">"con"</span> <span class="attr">path</span>=<span class="string">"org.eclipse.buildship.core.gradleclasspathcontainer"</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">"output"</span> <span class="attr">path</span>=<span class="string">"bin"</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">classpath</span>&gt;</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>.project<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">projectDescription</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">name</span>&gt;</span>testjava<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">comment</span>&gt;</span>Project testjava created by Buildship.<span class="tag">&lt;/<span class="name">comment</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">projects</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">projects</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">buildSpec</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>org.eclipse.jdt.core.javabuilder<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arguments</span>&gt;</span> <span class="tag">&lt;/<span class="name">arguments</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">name</span>&gt;</span>org.eclipse.buildship.core.gradleprojectbuilder<span class="tag">&lt;/<span class="name">name</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">arguments</span>&gt;</span> <span class="tag">&lt;/<span class="name">arguments</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">buildCommand</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">buildSpec</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">natures</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">nature</span>&gt;</span>org.eclipse.jdt.core.javanature<span class="tag">&lt;/<span class="name">nature</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">nature</span>&gt;</span>org.eclipse.buildship.core.gradleprojectnature<span class="tag">&lt;/<span class="name">nature</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">natures</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">projectDescription</span>&gt;</span></span><br></pre></td></tr></table></figure></li>
+<li>.classpath<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">classpath</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">&quot;src&quot;</span> <span class="attr">path</span>=<span class="string">&quot;src&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">&quot;con&quot;</span> <span class="attr">path</span>=<span class="string">&quot;org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8/&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">&quot;con&quot;</span> <span class="attr">path</span>=<span class="string">&quot;org.eclipse.buildship.core.gradleclasspathcontainer&quot;</span>/&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">classpathentry</span> <span class="attr">kind</span>=<span class="string">&quot;output&quot;</span> <span class="attr">path</span>=<span class="string">&quot;bin&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">classpath</span>&gt;</span></span><br></pre></td></tr></table></figure>
+VSCode会自动识别为eclipse项目。</li>
 </ul>
-<p>VSCode会自动识别为eclipse项目。</p>
 <h4 id="配置launch-json"><a href="#配置launch-json" class="headerlink" title="配置launch.json"></a>配置launch.json</h4><p>在此处添加classpath,cwd等信息可为编译器指定目录。</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"0.2.0"</span>,</span><br><span class="line">  <span class="attr">"configurations"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"java"</span>,</span><br><span class="line">      <span class="attr">"name"</span>: <span class="string">"Debug (Launch)"</span>,</span><br><span class="line">      <span class="attr">"request"</span>: <span class="string">"launch"</span>,</span><br><span class="line">      <span class="attr">"cwd"</span>: <span class="string">"$&#123;workspaceFolder&#125;/bin"</span>,</span><br><span class="line">      <span class="attr">"sourcePaths"</span>: [</span><br><span class="line">        <span class="string">"$(workspaceRoot)/src"</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"classPaths"</span>: [//可导入jar包</span><br><span class="line">        <span class="string">""</span>,</span><br><span class="line">        <span class="string">"$(workspaceRoot)/bin"</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"mainClass"</span>: <span class="string">"com.coolcao.test.$&#123;fileBasenameNoExtension&#125;"</span>,</span><br><span class="line">      <span class="attr">"args"</span>: <span class="string">""</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;version&quot;</span>: <span class="string">&quot;0.2.0&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;configurations&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">&quot;type&quot;</span>: <span class="string">&quot;java&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;Debug (Launch)&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;request&quot;</span>: <span class="string">&quot;launch&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;cwd&quot;</span>: <span class="string">&quot;$&#123;workspaceFolder&#125;/bin&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;sourcePaths&quot;</span>: [</span><br><span class="line">        <span class="string">&quot;$(workspaceRoot)/src&quot;</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">&quot;classPaths&quot;</span>: [<span class="comment">//可导入jar包</span></span><br><span class="line">        <span class="string">&quot;&quot;</span>,</span><br><span class="line">        <span class="string">&quot;$(workspaceRoot)/bin&quot;</span></span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">&quot;mainClass&quot;</span>: <span class="string">&quot;com.coolcao.test.$&#123;fileBasenameNoExtension&#125;&quot;</span>,</span><br><span class="line">      <span class="attr">&quot;args&quot;</span>: <span class="string">&quot;&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h3><p>该软件能自动寻找jdk环境，提供<strong>GUI</strong>。</p>
 <h2 id="概念描述"><a href="#概念描述" class="headerlink" title="概念描述"></a>概念描述</h2><h3 id="编译过程"><a href="#编译过程" class="headerlink" title="编译过程"></a>编译过程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Title: Processing</span><br><span class="line">*.jar--&gt;RunTimeEnv: classPath</span><br><span class="line">*.java-&gt;*.class: $ javac</span><br><span class="line">*.class-&gt;RunTimeEnv: $ javaw</span><br><span class="line">*.java--&gt;RunTimeEnv: classname</span><br></pre></td></tr></table></figure>
 <h3 id="package"><a href="#package" class="headerlink" title="package"></a>package</h3><p>package是java的<strong>逻辑</strong>文件夹，在文件级别上，也会依据分类。</p>
@@ -336,12 +354,12 @@
 </ol>
 <h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><h3 id="元件"><a href="#元件" class="headerlink" title="元件"></a>元件</h3><p>初始化变量：<code>int a = 0;</code></p>
 <p>由五个部分组成<code>**数据类型** *名称* 运算符 **初始化值** 分号</code></p>
-<h3 id="operator"><a href="#operator" class="headerlink" title="operator"></a>operator</h3><p>包括<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>=</code>,<code>==</code>,<code>!=</code>,<code>&gt;</code>,<code>&lt;</code>,<code>&gt;&gt;</code>,<code>&lt;&lt;</code>,<code>&lt;=</code>,<code>&gt;=</code>,<code>?*:</code>,<code>~</code>,<code>()</code>,<code>[]</code>,<code>{}</code>,<code>&amp;&amp;</code>,<code>||</code>,<code>^</code>在内的二元、三元运算符。</p>
+<h3 id="operator"><a href="#operator" class="headerlink" title="operator"></a>operator</h3><p>包括<code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>=</code>,<code>==</code>,<code>!=</code>,<code>&gt;</code>,<code>&lt;</code>,<code>&gt;&gt;</code>,<code>&lt;&lt;</code>,<code>&lt;=</code>,<code>&gt;=</code>,<code>?*:</code>,<code>~</code>,<code>()</code>,<code>[]</code>,<code>&#123;&#125;</code>,<code>&amp;&amp;</code>,<code>||</code>,<code>^</code>在内的二元、三元运算符。</p>
 <h2 id="面向对象设计"><a href="#面向对象设计" class="headerlink" title="面向对象设计"></a>面向对象设计</h2><p>java是纯面向对象语言，风格和C#类似</p>
 <p>类 -&gt; 实例1，实例2，…</p>
 <p><code>实例1.fun();</code>，<code>类.(static)foo();</code>。</p>
-<h2 id="小作业"><a href="#小作业" class="headerlink" title="小作业"></a>小作业</h2><h3 id="1-Hello-world"><a href="#1-Hello-world" class="headerlink" title="1. Hello world"></a>1. Hello world</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @file ./HelloWorld.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello World"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="2-Operation"><a href="#2-Operation" class="headerlink" title="2. Operation"></a>2. Operation</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @file test.java</span></span><br><span class="line"><span class="comment">// @classpath ./bin</span></span><br><span class="line"><span class="keyword">import</span> com.oraclesdp.common.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</span><br><span class="line">        String value = SystemIn.nextLine();</span><br><span class="line">        System.out.println(value);</span><br><span class="line">        System.out.println(<span class="number">13</span>&gt;&gt;<span class="number">2</span>);<span class="comment">// 3</span></span><br><span class="line">        System.out.println(<span class="number">23</span>&amp;<span class="number">12</span>);<span class="comment">// 4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="小作业"><a href="#小作业" class="headerlink" title="小作业"></a>小作业</h2><h3 id="1-Hello-world"><a href="#1-Hello-world" class="headerlink" title="1. Hello world"></a>1. Hello world</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @file ./HelloWorld.java</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello World&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-Operation"><a href="#2-Operation" class="headerlink" title="2. Operation"></a>2. Operation</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// @file test.java</span></span><br><span class="line"><span class="comment">// @classpath ./bin</span></span><br><span class="line"><span class="keyword">import</span> com.oraclesdp.common.*;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String [] args)</span></span>&#123;</span><br><span class="line">        String value = SystemIn.nextLine();</span><br><span class="line">        System.out.println(value);</span><br><span class="line">        System.out.println(<span class="number">13</span>&gt;&gt;<span class="number">2</span>);<span class="comment">// 3</span></span><br><span class="line">        System.out.println(<span class="number">23</span>&amp;<span class="number">12</span>);<span class="comment">// 4</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
 <p>以上。</p>
 
     
@@ -354,7 +372,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2018/04/17/JavaS/ゼロから始めるJAVA世界生活-01/" data-id="ckjvg3y0j000xbghy4c70ug2o" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2018/04/17/JavaS/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8BJAVA%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB-01/" data-id="ckk3eudnj000atchy8ddd8imq" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -431,7 +449,7 @@
     
 <nav id="article-nav">
   
-    <a href="/2018/04/18/unsorted/遇见hexo/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2018/04/18/unsorted/%E9%81%87%E8%A7%81hexo/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
@@ -441,7 +459,7 @@
     </a>
   
   
-    <a href="/2018/04/14/Art/徐天华：娱乐设计的基本素养/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/04/14/Art/%E5%BE%90%E5%A4%A9%E5%8D%8E%EF%BC%9A%E5%A8%B1%E4%B9%90%E8%AE%BE%E8%AE%A1%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%B4%A0%E5%85%BB/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">徐天华：娱乐设计的基本素养</div>
     </a>
@@ -491,6 +509,25 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2021/01/19/coding/TemplatesAndCommonUse/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2021/01/19/coding/TemplatesAndCommonUse/" class="title">【西加加】模板虽奇，难如上青天</a></p>
+              <p class="item-date"><time datetime="2021-01-19T06:00:00.000Z" itemprop="datePublished">2021-01-19</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2021/01/04/notes/EconomyAndManagement/" class="thumbnail">
   
   
@@ -501,7 +538,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/札记阁/">札记阁</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a></p>
               <p class="item-title"><a href="/2021/01/04/notes/EconomyAndManagement/" class="title">经济与管理 札记</a></p>
               <p class="item-date"><time datetime="2021-01-03T16:00:00.000Z" itemprop="datePublished">2021-01-04</time></p>
             </div>
@@ -520,7 +557,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/日记本/">日记本</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a></p>
               <p class="item-title"><a href="/2021/01/01/bio/NewYear2021/" class="title">新年新气象</a></p>
               <p class="item-date"><time datetime="2020-12-31T16:00:00.000Z" itemprop="datePublished">2021-01-01</time></p>
             </div>
@@ -539,7 +576,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
               <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.2/" class="title">手撕ECS #2: Archetypes and Vectorization</a></p>
               <p class="item-date"><time datetime="2020-12-09T09:14:05.896Z" itemprop="datePublished">2020-12-09</time></p>
             </div>
@@ -558,28 +595,9 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
               <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.1/" class="title">手撕ECS #1: Types, Hierarchies and Prefabs</a></p>
               <p class="item-date"><time datetime="2020-12-09T06:38:41.633Z" itemprop="datePublished">2020-12-09</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/11/22/comment/refrain/" class="thumbnail">
-  
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2020/11/22/comment/refrain/" class="title"></a></p>
-              <p class="item-date"><time datetime="2020-11-21T16:00:00.000Z" itemprop="datePublished">2020-11-22</time></p>
             </div>
           </li>
         
@@ -593,7 +611,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">36</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">37</span></li></ul>
     </div>
   </div>
 
@@ -603,7 +621,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 11.67px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 15px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 11.67px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 
@@ -683,10 +701,14 @@
 
 
   
-    <script src="//cdn.bootcss.com/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+    
+<script src="//cdn.bootcss.com/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
   
   
-    <script src="//cdn.bootcss.com/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+    
+<script src="//cdn.bootcss.com/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
   
   
   
@@ -696,7 +718,9 @@
 
 
 <!-- Custom Scripts -->
+
 <script src="/js/main.js"></script>
+
 
   </div>
 </body>

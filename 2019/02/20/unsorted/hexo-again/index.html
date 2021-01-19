@@ -1,35 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
-<head><meta name="generator" content="Hexo 3.9.0">
+<html lang=en>
+<head>
   <meta charset="utf-8">
   
   <title>又见hexo+SSL | 外野 - wryyyyyyyyyY!</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <meta name="description" content="前文将hexo部署在了vps上，使用nodejs执行$ hexo s以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。 既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。 Hexo 本地部署在_config.yml中设置好depl">
-<meta name="keywords" content="init,hexo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="又见hexo+SSL">
 <meta property="og:url" content="http://blog.iik.moe/2019/02/20/unsorted/hexo-again/index.html">
 <meta property="og:site_name" content="外野">
 <meta property="og:description" content="前文将hexo部署在了vps上，使用nodejs执行$ hexo s以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。 既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。 Hexo 本地部署在_config.yml中设置好depl">
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://miao.su/images/2019/02/21/sp181207_1309290a7ea.png">
-<meta property="og:updated_time" content="2019-04-18T14:49:39.329Z">
+<meta property="article:published_time" content="2019-02-20T13:18:00.000Z">
+<meta property="article:modified_time" content="2019-04-18T14:49:39.329Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="init">
+<meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="又见hexo+SSL">
-<meta name="twitter:description" content="前文将hexo部署在了vps上，使用nodejs执行$ hexo s以维持生态，猛然发现以这种方式操作，写完稿子还要本地push然后远端pull两次操作，还得处理图床，实在是太麻烦了，尤其到扯上插件、主题的部署更是爆炸，再三考虑后还是换Github Page吧。 既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。 Hexo 本地部署在_config.yml中设置好depl">
 <meta name="twitter:image" content="https://miao.su/images/2019/02/21/sp181207_1309290a7ea.png">
   
   
   
 
   
-    <link rel="icon" href="/image/favicon.ico">
-    <link rel="apple-touch-icon" href="/image/favicon.ico">
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
   
-  <script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-  <link rel="stylesheet" href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css">
-  <script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//cdn.bootcss.com/nprogress/0.2.0/nprogress.min.js"></script>
+
   <script>
     window.addEventListener('DOMContentLoaded', function () {
       NProgress.start()
@@ -48,14 +55,26 @@
     })
   </script>
 
-  <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="//cdn.bootcss.com/csshake/1.5.2/csshake.min.css">
-  <link rel="stylesheet" href="/libs/open-sans/styles.css">
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  <link rel="stylesheet" href="/css/style.css">
+  
+<link rel="stylesheet" href="//cdn.bootcss.com/csshake/1.5.2/csshake.min.css">
 
-  <script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
-  <script src="//cdn.bootcss.com/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//cdn.bootcss.com/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//cdn.bootcss.com/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
   <script>
     $(function() {
       // Init ScrollReveal Animate
@@ -72,10 +91,14 @@
   </script>
   
   
-    <link rel="stylesheet" href="//cdn.bootcss.com/lightgallery/1.6.0/css/lightgallery.min.css">
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/lightgallery/1.6.0/css/lightgallery.min.css">
+
   
   
-    <link rel="stylesheet" href="//cdn.bootcss.com/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+    
+<link rel="stylesheet" href="//cdn.bootcss.com/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
   
   
   
@@ -95,8 +118,8 @@
   
 
 
-</head>
-</html>
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.3.0"></head>
+
 <body>
   <div id="container">
     <header id="header">
@@ -171,7 +194,7 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        62
+        63
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -265,14 +288,14 @@
             
   <div class="article-category">
     <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/语法糖/">语法糖</a>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
   </div>
 
 
             
   <div class="article-tag">
     <i class="fa fa-tag"></i>
-    <a class="tag-link" href="/tags/hexo/">hexo</a>, <a class="tag-link" href="/tags/init/">init</a>
+    <a class="tag-link-link" href="/tags/hexo/" rel="tag">hexo</a>, <a class="tag-link-link" href="/tags/init/" rel="tag">init</a>
   </div>
 
 
@@ -289,7 +312,7 @@
 <p>既然脱离开了nodejs应用的端口占用，老nginx就有机会换上SSL大法。</p>
 <h3 id="Hexo-本地部署"><a href="#Hexo-本地部署" class="headerlink" title="Hexo 本地部署"></a>Hexo 本地部署</h3><p>在_config.yml中设置好deploy，并关联好ssh-key，以实现直接用<code>$ hexo d</code>来完成同步。</p>
 <a id="more"></a>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/timrockefeller/timrockefeller.github.io</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/timrockefeller/timrockefeller.github.io</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
 <p>进入仓库的设置界面勾选Github Page即可，与此同时可以选用SSL。</p>
 <h3 id="跨域SSL"><a href="#跨域SSL" class="headerlink" title="跨域SSL"></a>跨域SSL</h3><p>在一个以HTTPS访问的页面上，客户端会默认阻止访问HTTP，无论是否跨域。</p>
 <p>然而当某些插件部署在vps上时（另一个二级域名），就不得不搞个SSL。</p>
@@ -322,7 +345,7 @@
   
 </div>
 
-  <a data-url="http://blog.iik.moe/2019/02/20/unsorted/hexo-again/" data-id="ckjvg3y9r005tbghyeszveddj" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+  <a data-url="http://blog.iik.moe/2019/02/20/unsorted/hexo-again/" data-id="ckk3eudoy003ytchy3zv96bej" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
   (function ($) {
     // Prevent duplicate binding
@@ -409,7 +432,7 @@
     </a>
   
   
-    <a href="/2018/12/22/unsorted/Rust Windows环境搭建/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2018/12/22/unsorted/Rust%20Windows%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Rust Windows环境搭建</div>
     </a>
@@ -459,6 +482,25 @@
           <li>
             
             <div class="item-thumbnail">
+              <a href="/2021/01/19/coding/TemplatesAndCommonUse/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2021/01/19/coding/TemplatesAndCommonUse/" class="title">【西加加】模板虽奇，难如上青天</a></p>
+              <p class="item-date"><time datetime="2021-01-19T06:00:00.000Z" itemprop="datePublished">2021-01-19</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
               <a href="/2021/01/04/notes/EconomyAndManagement/" class="thumbnail">
   
   
@@ -469,7 +511,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/札记阁/">札记阁</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a></p>
               <p class="item-title"><a href="/2021/01/04/notes/EconomyAndManagement/" class="title">经济与管理 札记</a></p>
               <p class="item-date"><time datetime="2021-01-03T16:00:00.000Z" itemprop="datePublished">2021-01-04</time></p>
             </div>
@@ -488,7 +530,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/日记本/">日记本</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a></p>
               <p class="item-title"><a href="/2021/01/01/bio/NewYear2021/" class="title">新年新气象</a></p>
               <p class="item-date"><time datetime="2020-12-31T16:00:00.000Z" itemprop="datePublished">2021-01-01</time></p>
             </div>
@@ -507,7 +549,7 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
               <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.2/" class="title">手撕ECS #2: Archetypes and Vectorization</a></p>
               <p class="item-date"><time datetime="2020-12-09T09:14:05.896Z" itemprop="datePublished">2020-12-09</time></p>
             </div>
@@ -526,28 +568,9 @@
             </div>
             
             <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/语法糖/">语法糖</a></p>
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
               <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.1/" class="title">手撕ECS #1: Types, Hierarchies and Prefabs</a></p>
               <p class="item-date"><time datetime="2020-12-09T06:38:41.633Z" itemprop="datePublished">2020-12-09</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/11/22/comment/refrain/" class="thumbnail">
-  
-  
-    <span class="thumbnail-image thumbnail-none"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"></p>
-              <p class="item-title"><a href="/2020/11/22/comment/refrain/" class="title"></a></p>
-              <p class="item-date"><time datetime="2020-11-21T16:00:00.000Z" itemprop="datePublished">2020-11-22</time></p>
             </div>
           </li>
         
@@ -561,7 +584,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/写生架/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/日记本/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/札记阁/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/语法糖/">语法糖</a><span class="category-list-count">36</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">37</span></li></ul>
     </div>
   </div>
 
@@ -571,7 +594,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 11.67px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/学习笔记/" style="font-size: 10px;">学习笔记</a> <a href="/tags/小作文/" style="font-size: 10px;">小作文</a> <a href="/tags/求职/" style="font-size: 10px;">求职</a> <a href="/tags/游戏开发/" style="font-size: 10px;">游戏开发</a> <a href="/tags/琐事/" style="font-size: 15px;">琐事</a> <a href="/tags/碎碎念/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/艺类/" style="font-size: 11.67px;">艺类</a> <a href="/tags/课业/" style="font-size: 10px;">课业</a> <a href="/tags/购物清单/" style="font-size: 10px;">购物清单</a> <a href="/tags/高考-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 
@@ -651,10 +674,14 @@
 
 
   
-    <script src="//cdn.bootcss.com/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+    
+<script src="//cdn.bootcss.com/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
   
   
-    <script src="//cdn.bootcss.com/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+    
+<script src="//cdn.bootcss.com/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
   
   
   
@@ -664,7 +691,9 @@
 
 
 <!-- Custom Scripts -->
+
 <script src="/js/main.js"></script>
+
 
   </div>
 </body>

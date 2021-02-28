@@ -186,11 +186,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        63
+        65
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        40
+        42
         <span>tags</span>
       </div>
     </div>
@@ -235,6 +235,307 @@
 
       
       <section id="main">
+  <article id="post-CG/translation.Rapid 3D Reconstruction for Image Sequence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/28/CG/translation.Rapid%203D%20Reconstruction%20for%20Image%20Sequence/">【熟肉】无人机相机采集图像序列的快速三维重建</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/02/28/CG/translation.Rapid%203D%20Reconstruction%20for%20Image%20Sequence/">
+      <time datetime="2021-02-28T15:18:07.976Z" itemprop="datePublished">2021-02-28</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/paper/" rel="tag">paper</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p><blockquote>
+<p>原文标题：Rapid 3D Reconstruction for Image Sequence Acquired from UAV Camera</p>
+<p>首发于：<a target="_blank" rel="noopener" href="https://www.mdpi.com/1424-8220/18/1/225">MDPI</a></p>
+<p>Yufu Qu *, Jianyu Huang and Xuan Zhang<br>Department of Measurement Technology &amp; Instrument, School of Instrumentation Science &amp; Optoelectronics<br>Engineering, Beihang University, Beijing 100191, China; <a href="mailto:Hjy448@buaa.edu.cn">Hjy448@buaa.edu.cn</a> (J.H.);<br><a href="mailto:zhangxuanaj@buaa.edu.cn">zhangxuanaj@buaa.edu.cn</a> (X.Z.)</p>
+<p>Correspondence: <a href="mailto:qyf@buaa.eud.cn">qyf@buaa.eud.cn</a>; Tel.: +86-010-8231-7336<br>Received: 23 November 2017; Accepted: 11 January 2018; Published: 14 January 2018</p>
+</blockquote>
+<p><strong>摘要</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In order to reconstruct three-dimensional (3D) structures from an image sequence captured by unmanned aerial vehicles’ camera (UAVs) and improve the processing speed, we propose a rapid 3D reconstruction method that is based on an image queue, considering the continuity and relevance of UAV camera images.</span><br></pre></td></tr></table></figure>
+<p>为了加快无人机相机采集图像三维重建过程，我们提出了一种基于图像序列相关度的快速重建方法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The proposed approach first compresses the feature points of each image into three principal component points by using the principal component analysis method. In order to select the key images suitable for 3D reconstruction, the principal component points are used to estimate the interrelationships between images.</span><br></pre></td></tr></table></figure>
+<p>该方法首先利用<strong>主成分分析法</strong>(Principal Components Analysis, PCA)将每幅图像的特征点压缩为 3 个主成分点。利用主成分点估计图像之间的相互关系，可以为选择<strong>适合三维重建的关键帧</strong>提供依据。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Second, these key images are inserted into a fixed-length image queue. The positions and orientations of the images are calculated, and the 3D coordinates of the feature points are estimated using weighted bundle adjustment. With this structural information, the depth maps of these images can be calculated.</span><br></pre></td></tr></table></figure>
+<p>其次，将这些关键帧插入到一个固定长度的图像队列中。计算图像的位置和方向，并使用<strong>加权束平差</strong>(weighted bundle adjustment)估计特征点的三维坐标。利用这些结构信息，可以计算出这些图像的深度图。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Next, we update the image queue by deleting some of the old images and inserting some new images into the queue, and a structural calculation of all the images can be performed by repeating the previous steps.</span><br></pre></td></tr></table></figure>
+<p>接着通过删除一些旧图像和插入一些新图像来更新图像队列，并重复前面的步骤对所有图像进行结构化计算。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Finally, a dense 3D point cloud can be obtained using the depth–map fusion method. The experimental results indicate that when the texture of the images is complex and the number of images exceeds 100, the proposed method can improve the calculation speed by more than a factor of four with almost no loss of precision.</span><br></pre></td></tr></table></figure>
+<p>最后利用深度图融合方法得到密集的三维点云。实验结果表明，当图像的纹理复杂且图像数量超过 100 时，该方法可以将计算速度提高 4 倍以上，几乎不损失精度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Furthermore, as the number of images increases, the improvement in the calculation speed will become more noticeable.</span><br></pre></td></tr></table></figure>
+<p>此外，随着图像数量的增加，相较原方法计算速度也会明显地提高。</p>
+<blockquote>
+<p>Keywords: UAV camera; multi-view stereo; structure from motion; 3D reconstruction; point cloud</p>
+</blockquote></p>
+      <p class="article-more-link">
+        <a href="/2021/02/28/CG/translation.Rapid%203D%20Reconstruction%20for%20Image%20Sequence/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2021/02/28/CG/translation.Rapid%203D%20Reconstruction%20for%20Image%20Sequence/" data-id="cklpavouh0004h0hy5qij6ri5" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
+  <article id="post-coding/DisassemblyIntro" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/02/25/coding/DisassemblyIntro/">观逆向：还是得学会汇编</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/02/25/coding/DisassemblyIntro/">
+      <time datetime="2021-02-25T13:00:00.000Z" itemprop="datePublished">2021-02-25</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/%E9%80%86%E5%90%91/" rel="tag">逆向</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <p>前几日和朋友聊起各式音游，对解包产生了很大兴趣。当然也被科普了各种防逆向知识，由此想罗列一番做个随笔。</p>
+<h3 id="JAVA-class-loader-热加载"><a href="#JAVA-class-loader-热加载" class="headerlink" title="JAVA: class loader 热加载"></a>JAVA: class loader 热加载</h3><p>加壳的目的无非两种：压缩或加密。类似于 Minecraft Forge，在运行时中将所需要的字节码转入内存中，这种方式能很好地隐藏 OEP。</p>
+<p>而对策便是直接替换class loader，将写入内存的部分输出到文件中，便能获取到所有运行时源码。</p>
+<h3 id="字节码按规律修改"><a href="#字节码按规律修改" class="headerlink" title="字节码按规律修改"></a>字节码按规律修改</h3><p>在《Project SEIKAI》中，游戏资源被一种特殊的方式所加密。其步骤为：开头128个字节每8个字节的前5个字节二进制取反。这种方法可谓异常简单，只需对比一遍原生 Unity 未加密的资源包二进制文件就能找出规律。</p>
+<p>refer: <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv7962019">解包PJS资源的进一步探索</a>, 黑鲸.</p>
+<h3 id="CPU级加壳"><a href="#CPU级加壳" class="headerlink" title="CPU级加壳"></a>CPU级加壳</h3><p>这种方式是将在指令头做一个映射，修改译码过程。这种方式可能连操作系统都不一定能捕捉到。</p>
+<h3 id="卷尾"><a href="#卷尾" class="headerlink" title="卷尾"></a>卷尾</h3><p>加壳的方式非常之多，还有 int3 陷阱等不再赘述。我也推荐他试着逆向原神，不过难度确实很大，据我所知成功的也仅寥寥几人。日厂手游开发中 Unity 使用率越来越高，这也导致了很多 Unity 上的安全问题能在各种产品中重现。而回忆当年《Love Live!》用的自家引擎，也算是一种原始的加壳方式吧。</p>
+
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2021/02/25/coding/DisassemblyIntro/" data-id="cklpavotx0000h0hy91fcdt6a" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   <article id="post-coding/TemplatesAndCommonUse" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1369,333 +1670,6 @@
 
 
 
-  <article id="post-CG/SphericalharmonicLighting" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/25/CG/SphericalharmonicLighting/">球谐函数与全局光照</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2020/09/25/CG/SphericalharmonicLighting/">
-      <time datetime="2020-09-25T12:29:45.000Z" itemprop="datePublished">2020-09-25</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
-  </div>
-
-
-            
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link-link" href="/tags/CG/" rel="tag">CG</a>, <a class="tag-link-link" href="/tags/Shader/" rel="tag">Shader</a>
-  </div>
-
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      <p><p>球谐函数学习笔记。</p></p>
-      <p class="article-more-link">
-        <a href="/2020/09/25/CG/SphericalharmonicLighting/#more">Read More</a>
-      </p>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://blog.iik.moe/2020/09/25/CG/SphericalharmonicLighting/" data-id="ckk3eudny0018tchy651u1x10" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
-  <article id="post-CG/SimpleURPToonLitOutlineShader" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-      
-	
-		<a href="/2020/09/19/CG/SimpleURPToonLitOutlineShader/" itemprop="url">
-      <img src="https://i.loli.net/2020/12/09/7Zrx8sLYMVCXAqS.jpg" class="article-banner" />
-    </a>
-	
-
-
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/09/19/CG/SimpleURPToonLitOutlineShader/">URP Toon Lit 初见</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2020/09/19/CG/SimpleURPToonLitOutlineShader/">
-      <time datetime="2020-09-19T02:29:45.000Z" itemprop="datePublished">2020-09-19</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
-  </div>
-
-
-            
-  <div class="article-tag">
-    <i class="fa fa-tag"></i>
-    <a class="tag-link-link" href="/tags/CG/" rel="tag">CG</a>, <a class="tag-link-link" href="/tags/Shader/" rel="tag">Shader</a>, <a class="tag-link-link" href="/tags/Unity/" rel="tag">Unity</a>
-  </div>
-
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      
-      <blockquote>
-<p>Git Repository: <a target="_blank" rel="noopener" href="https://github.com/timrockefeller/UnityURPToonLitShaderExample">timrockefeller/UnityURPToonLitShaderExample</a></p>
-</blockquote>
-<h2 id="Main-Structure"><a href="#Main-Structure" class="headerlink" title="Main Structure"></a>Main Structure</h2><ol>
-<li>SurfaceColor pass</li>
-<li>Outline pass</li>
-<li>ShadowCaster pass</li>
-<li>DepthOnly pass</li>
-</ol>
-<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><p>核心特性</p>
-<ul>
-<li><p>面部法线修正⚠️</p>
-</li>
-<li><p>光滑描边⚠️</p>
-</li>
-<li><p>FOV、LOD 描边变形修正⚠️</p>
-</li>
-<li><p>面部头发投影 clip⚠️ </p>
-</li>
-<li><p>stencil local hair shadow on face</p>
-</li>
-<li><p>前发遮挡的眼部渲染</p>
-<p>使用 Stencil Test，参考 UTS</p>
-</li>
-<li><p>各向异性头发渲染与“天使环”结合 UV 拉伸</p>
-</li>
-<li><p>边缘光</p>
-</li>
-<li><p>PBR 镜面光照</p>
-</li>
-<li><p>通过 HSV 控制阴影、描边颜色</p>
-</li>
-<li><p>2D 嘴部渲染</p>
-</li>
-<li><p>物理与风的模拟</p>
-</li>
-<li><p>其他的特性材质如 AO、镜面、法线等</p>
-</li>
-</ul>
-<h2 id="Spotlight-Methods"><a href="#Spotlight-Methods" class="headerlink" title="Spotlight Methods"></a>Spotlight Methods</h2><h3 id="Alpha-Cliping"><a href="#Alpha-Cliping" class="headerlink" title="Alpha Cliping"></a>Alpha Cliping</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DoClipTestToTargetAlphaValue</span><span class="params">(half alpha)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// iOS上编译该shader出了点问题</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    if(_UseAlphaClipping)</span></span><br><span class="line"><span class="comment">    &#123;   </span></span><br><span class="line"><span class="comment">        clip(alpha - _Cutoff);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 并非最佳方案，尽量使用GPU原生特性</span></span><br><span class="line">    clip(alpha - _Cutoff + (<span class="number">1.0001</span>-_UseAlphaClipping));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="Lighting-Equaltion"><a href="#Lighting-Equaltion" class="headerlink" title="Lighting Equaltion"></a>Lighting Equaltion</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// this function will be used by all direct lights (directional/point/spot)</span></span><br><span class="line"><span class="function">half3 <span class="title">ShadeSingleLightDefaultMethod</span><span class="params">(SurfaceData surfaceData, LightingData lightingData, Light light)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    half3 N = lightingData.normalWS;</span><br><span class="line">    half3 L = light.direction;</span><br><span class="line">    half3 V = lightingData.viewDirectionWS;</span><br><span class="line">    half3 H = normalize(L+V);</span><br><span class="line"></span><br><span class="line">    half NoL = dot(N,L);</span><br><span class="line"></span><br><span class="line">    half lightAttenuation = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// light&#x27;s shadow map. If you prefer hard shadow, you can smoothstep() light.shadowAttenuation to make it sharp.</span></span><br><span class="line">    lightAttenuation *= lerp(<span class="number">1</span>,light.shadowAttenuation,_ReceiveShadowMappingAmount);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// light&#x27;s distance &amp; angle fade for point light &amp; spot light (see GetAdditionalPerObjectLight() in Lighting.hlsl)</span></span><br><span class="line">    <span class="comment">// Lighting.hlsl -&gt; https://github.com/Unity-Technologies/Graphics/blob/master/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl</span></span><br><span class="line">    lightAttenuation *= min(<span class="number">2</span>,light.distanceAttenuation); <span class="comment">//max intensity = 2, prevent over bright if light too close, can expose this float to editor if you wish to</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// N dot L</span></span><br><span class="line">    <span class="comment">// simplest 1 line cel shade, you can always replace this line by your own better method !</span></span><br><span class="line">    lightAttenuation *= smoothstep(_CelShadeMidPoint-_CelShadeSoftness,_CelShadeMidPoint+_CelShadeSoftness, NoL);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// don&#x27;t want direct lighting becomes too bright for toon lit characters? set this value to a lower value </span></span><br><span class="line">    lightAttenuation *= _DirectLightMultiplier;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> surfaceData.albedo * light.color * lightAttenuation;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://blog.iik.moe/2020/09/19/CG/SimpleURPToonLitOutlineShader/" data-id="ckk3eudnx0014tchy4tddh324" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
   <nav id="page-nav">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
   </nav>
@@ -1710,6 +1684,44 @@
     <h3 class="widget-title">recent</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2021/02/28/CG/translation.Rapid%203D%20Reconstruction%20for%20Image%20Sequence/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"></p>
+              <p class="item-title"><a href="/2021/02/28/CG/translation.Rapid%203D%20Reconstruction%20for%20Image%20Sequence/" class="title">【熟肉】无人机相机采集图像序列的快速三维重建</a></p>
+              <p class="item-date"><time datetime="2021-02-28T15:18:07.976Z" itemprop="datePublished">2021-02-28</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2021/02/25/coding/DisassemblyIntro/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2021/02/25/coding/DisassemblyIntro/" class="title">观逆向：还是得学会汇编</a></p>
+              <p class="item-date"><time datetime="2021-02-25T13:00:00.000Z" itemprop="datePublished">2021-02-25</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -1768,44 +1780,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/12/09/coding/ECS/BuildingAnECS.2/" class="thumbnail">
-  
-  
-    <span style="background-image:url(https://i.loli.net/2020/12/09/QDmhs8JEvOqLFg9.jpg)" alt="手撕ECS #2: Archetypes and Vectorization" class="thumbnail-image"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
-              <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.2/" class="title">手撕ECS #2: Archetypes and Vectorization</a></p>
-              <p class="item-date"><time datetime="2020-12-09T09:14:05.896Z" itemprop="datePublished">2020-12-09</time></p>
-            </div>
-          </li>
-        
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2020/12/09/coding/ECS/BuildingAnECS.1/" class="thumbnail">
-  
-  
-    <span style="background-image:url(https://i.loli.net/2020/12/09/Cry7zqbtpWHVGYE.jpg)" alt="手撕ECS #1: Types, Hierarchies and Prefabs" class="thumbnail-image"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
-              <p class="item-title"><a href="/2020/12/09/coding/ECS/BuildingAnECS.1/" class="title">手撕ECS #1: Types, Hierarchies and Prefabs</a></p>
-              <p class="item-date"><time datetime="2020-12-09T06:38:41.633Z" itemprop="datePublished">2020-12-09</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1816,7 +1790,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">37</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">38</span></li></ul>
     </div>
   </div>
 
@@ -1826,7 +1800,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 

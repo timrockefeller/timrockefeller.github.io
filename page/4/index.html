@@ -186,11 +186,11 @@
     </div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        66
+        67
         <span>posts</span>
       </div>
       <div class="article-info-block">
-        44
+        45
         <span>tags</span>
       </div>
     </div>
@@ -235,6 +235,150 @@
 
       
       <section id="main">
+  <article id="post-CG/LOGL/LOGL02_01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/01/CG/LOGL/LOGL02_01/">BDRF经验模型之一：Phong Lighting Model</a>
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2019/09/01/CG/LOGL/LOGL02_01/">
+      <time datetime="2019-08-31T16:00:00.000Z" itemprop="datePublished">2019-09-01</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/CG/" rel="tag">CG</a>, <a class="tag-link-link" href="/tags/OpenGL/" rel="tag">OpenGL</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      <p><ul>
+<li>环境光照(Ambient Lighting)：即使在黑暗的情况下，世界上通常也仍然有一些光亮（月亮、远处的光），所以物体几乎永远不会是完全黑暗的。为了模拟这个，我们会使用一个环境光照常量，它永远会给物体一些颜色。</li>
+<li>漫反射光照(Diffuse Lighting)：模拟光源对物体的方向性影响(Directional Impact)。它是冯氏光照模型中视觉上最显著的分量。物体的某一部分越是正对着光源，它就会越亮。</li>
+<li>镜面光照(Specular Lighting)：模拟有光泽物体上面出现的亮点。镜面光照的颜色相比于物体的颜色会更倾向于光的颜色。</li>
+</ul></p>
+      <p class="article-more-link">
+        <a href="/2019/09/01/CG/LOGL/LOGL02_01/#more">Read More</a>
+      </p>
+    
+    </div>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2019/09/01/CG/LOGL/LOGL02_01/" data-id="ckk3eudpw0077tchy97vxegc0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+
   <article id="post-unsorted/cmake-with-vscode" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1536,161 +1680,6 @@
 
 
 
-  <article id="post-unsorted/ssr" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/04/23/unsorted/ssr/">不可描述的操作</a>
-    </h1>
-  
-
-
-        
-          <div class="article-meta">
-            
-  <div class="article-date">
-    <i class="fa fa-calendar"></i>
-    <a href="/2019/04/23/unsorted/ssr/">
-      <time datetime="2019-04-22T16:00:00.000Z" itemprop="datePublished">2019-04-23</time>
-    </a>
-  </div>
-
-
-            
-  <div class="article-category">
-    <i class="fa fa-folder"></i>
-      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
-  </div>
-
-
-            
-
-          </div>
-        
-      </header>
-    
-    
-
-    <div class="article-entry" itemprop="articleBody">
-    
-      
-      <p>前往世界。</p>
-<h3 id="SSR-安裝-Ubuntu-16-04"><a href="#SSR-安裝-Ubuntu-16-04" class="headerlink" title="SSR 安裝 (Ubuntu 16.04)"></a>SSR 安裝 (Ubuntu 16.04)</h3><p>以下使用 <strong>秋水逸冰</strong> 撰写的一键脚本 <a target="_blank" rel="noopener" href="https://teddysun.com/486.html">Shadowsocks 一键安装脚本（四合一）</a></p>
-<ul>
-<li><p>使用 root 用户执行</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wget --no-check-certificate -O shadowsocks-all.sh https://raw.githubusercontent.com/teddysun/shadowsocks_install/master/shadowsocks-all.sh</span><br><span class="line">chmod +x shadowsocks-all.sh</span><br><span class="line">./shadowsocks-all.sh 2&gt;&amp;1 | tee shadowsocks-all.log</span><br></pre></td></tr></table></figure>
-<p>选择安装 SSR，配置按照以下推荐方案选择</p>
-</li>
-<li><p>避免被GFW 封锁    </p>
-<pre><code>- 端口 : 不要使用 80,443 等常見端口，避免被主動探測是否有正常網頁服務在運作
-- 加密 : none
-- 協議 : auth_chain_a
-- 混淆 : plain
-</code></pre></li>
-</ul>
-<p>auth_chain_a 自带加密，故不需要二次加密<br>若非遭到 QoS 或是网络出口对对外流量限制较严格(只放行网页流量)，不需要开启混淆</p>
-<ul>
-<li>混淆流量躲避网络出口 QoS 用<pre><code>- 端口 : 推荐443
-- 加密 : none
-- 協議 : auth_chain_a 或是 chain_b,c,d 後者封包分布大小更加規整，避免遭到分析，根据客户端所支持的种类做选择
-- 混淆 : tls1.2_ticket_auth
-</code></pre></li>
-</ul>
-<h3 id="BBR"><a href="#BBR" class="headerlink" title="BBR"></a>BBR</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget -N --no-check-certificate &quot;https://raw.githubusercontent.com/chiakge/Linux-NetSpeed/master/tcp.sh&quot;&amp;&amp; chmod +x tcp.sh &amp;&amp; ./tcp.sh</span><br></pre></td></tr></table></figure>
-    
-    </div>
-    <footer class="article-footer">
-      
-      <div class="share-container">
-  
-  
-  
-</div>
-
-  <a data-url="http://blog.iik.moe/2019/04/23/unsorted/ssr/" data-id="ckk3eudp00043tchyc02p5nuy" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-  (function ($) {
-    // Prevent duplicate binding
-    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-      __SHARE_BUTTON_BINDED__ = true;
-    } else {
-      return;
-    }
-    $('body').on('click', function() {
-      $('.article-share-box.on').removeClass('on');
-    }).on('click', '.article-share-link', function(e) {
-      e.stopPropagation();
-
-      var $this = $(this),
-        url = $this.attr('data-url'),
-        encodedUrl = encodeURIComponent(url),
-        id = 'article-share-box-' + $this.attr('data-id'),
-        offset = $this.offset(),
-        box;
-
-      if ($('#' + id).length) {
-        box = $('#' + id);
-        if (box.hasClass('on')){
-          box.removeClass('on');
-          return;
-        }
-      } else {
-        var html = [
-          '<div id="' + id + '" class="article-share-box">',
-            '<input class="article-share-input" value="' + url + '">',
-            '<div class="article-share-links">',
-              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-            '</div>',
-          '</div>'
-        ].join('');
-
-        box = $(html);
-
-        $('body').append(box);
-      }
-
-      $('.article-share-box.on').hide();
-
-      box.css({
-        top: offset.top + 25,
-        left: offset.left
-      }).addClass('on');
-
-    }).on('click', '.article-share-box', function (e) {
-      e.stopPropagation();
-    }).on('click', '.article-share-box-input', function () {
-      $(this).select();
-    }).on('click', '.article-share-box-link', function (e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-    });
-  })(jQuery);
-</script>
-
-
-
-      
-  
-
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-
   <nav id="page-nav">
     <a class="extend prev" rel="prev" href="/page/3/">&amp;laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &amp;raquo;</a>
   </nav>
@@ -1705,6 +1694,25 @@
     <h3 class="widget-title">recent</h3>
     <div class="widget">
       <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2021/03/24/CV/CameraCalibrationWithOpenCV/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2021/03/24/CV/CameraCalibrationWithOpenCV/" class="title">【CV】相机标定时各种参数干什么用的？！</a></p>
+              <p class="item-date"><time datetime="2021-03-24T13:00:00.000Z" itemprop="datePublished">2021-03-24</time></p>
+            </div>
+          </li>
         
           <li>
             
@@ -1782,25 +1790,6 @@
             </div>
           </li>
         
-          <li>
-            
-            <div class="item-thumbnail">
-              <a href="/2021/01/04/notes/EconomyAndManagement/" class="thumbnail">
-  
-  
-    <span style="background-image:url(https://s3.ax1x.com/2021/01/05/sFRHij.md.jpg)" alt="经济与管理 札记" class="thumbnail-image"></span>
-  
-</a>
-
-            </div>
-            
-            <div class="item-inner">
-              <p class="item-category"><a class="article-category-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a></p>
-              <p class="item-title"><a href="/2021/01/04/notes/EconomyAndManagement/" class="title">经济与管理 札记</a></p>
-              <p class="item-date"><time datetime="2021-01-03T16:00:00.000Z" itemprop="datePublished">2021-01-04</time></p>
-            </div>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -1811,7 +1800,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">39</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">12</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">40</span></li></ul>
     </div>
   </div>
 
@@ -1821,7 +1810,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">tag cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+      <a href="/tags/C/" style="font-size: 13.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 10px;">ECS</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/c/" style="font-size: 10px;">c++</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 10px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
     </div>
   </div>
 

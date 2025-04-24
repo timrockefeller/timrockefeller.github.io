@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <title>ゼロから始めるJAVA世界生活 02 | 外野 - wryyyyyyyyyY!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。 判别结构if-else12345678910111213if(布尔表达式)&amp;#123;   &#x2F;&#x2F;如果布尔表达式为true将执行的语句&amp;#125;if(布尔表达式 1)&amp;#123;   &#x2F;&#x2F;如果布尔表达式 1的值为true执行代码&amp;#125;else if(布尔表达式 2)&amp;#123;   &#x2F;&#x2F;如果布尔表达式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ゼロから始めるJAVA世界生活 02">
+<meta property="og:url" content="http://blog.iik.moe/2018/04/28/JavaS/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8BJAVA%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB-02/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。 判别结构if-else12345678910111213if(布尔表达式)&amp;#123;   &#x2F;&#x2F;如果布尔表达式为true将执行的语句&amp;#125;if(布尔表达式 1)&amp;#123;   &#x2F;&#x2F;如果布尔表达式 1的值为true执行代码&amp;#125;else if(布尔表达式 2)&amp;#123;   &#x2F;&#x2F;如果布尔表达式">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-04-28T21:00:28.000Z">
+<meta property="article:modified_time" content="2025-04-24T08:25:47.970Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="oracle">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+
+  
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
+  
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/csshake/1.5.2/csshake.min.css">
+
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  <script src="/js/chord.js"></script>
+  
+  
+    
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/css/lightgallery.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
+  
+  
+  
+  
+  
+  
+    <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f1fb63876cc310548f153f32652bc624";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+  
+
+
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        
+        <span class="site-title">外野</span>
+      </a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">目录</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+        
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="/image/avatar.jpg" />
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form>
+
+</div>
+
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">目录</a></td>
+        
+          <td><a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/image/avatar.jpg" />
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        79
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        48
+        <span>tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://twitter.com/kitekii_" target="_blank" title="twitter" class=tooltip >
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class=tooltip >
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class=tooltip >
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://steamcommunity.com/id/6hi/" target="_blank" title="steam" class=tooltip >
+                <i class="fa fa-steam"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
+  </div>
+  
+  
+</aside>
+
+      
+      <section id="main"><article id="post-JavaS/ゼロから始めるJAVA世界生活-02" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <!-- <div class="background"></div> -->
+      
+      <!-- <script>
+        ;!(function($) {
+          var max = 99;
+          var index = Math.floor(Math.random() * max) + 1;
+          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
+        })(jQuery)
+      </script> -->
+      
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      ゼロから始めるJAVA世界生活 02
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/04/28/JavaS/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8BJAVA%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB-02/">
+      <time datetime="2018-04-28T21:00:28.000Z" itemprop="datePublished">2018-04-28</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/java/" rel="tag">java</a>, <a class="tag-link-link" href="/tags/oracle/" rel="tag">oracle</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <hr>
+<p>很快我们就进入了结构阶段，这些东西貌似在c++，c#里都差不多，是逻辑的基本组成部分。</p>
+<h2 id="判别结构"><a href="#判别结构" class="headerlink" title="判别结构"></a>判别结构</h2><h3 id="if-else"><a href="#if-else" class="headerlink" title="if-else"></a>if-else</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式为true将执行的语句</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>(布尔表达式 <span class="number">1</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 1的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">2</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 2的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式 <span class="number">3</span>)&#123;</span><br><span class="line">   <span class="comment">//如果布尔表达式 3的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> &#123;</span><br><span class="line">   <span class="comment">//如果以上布尔表达式都不为true执行代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>嵌套是这样的：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式 <span class="number">1</span>)&#123;</span><br><span class="line">   <span class="comment">////如果布尔表达式 1的值为true执行代码</span></span><br><span class="line">   <span class="keyword">if</span>(布尔表达式 <span class="number">2</span>)&#123;</span><br><span class="line">      <span class="comment">////如果布尔表达式 2的值为true执行代码</span></span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="switch-case"><a href="#switch-case" class="headerlink" title="switch-case"></a>switch-case</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(expression)&#123;</span><br><span class="line">    <span class="keyword">case</span> value :</span><br><span class="line">       <span class="comment">//语句</span></span><br><span class="line">       <span class="keyword">break</span>; <span class="comment">//可选</span></span><br><span class="line">    <span class="keyword">case</span> value :</span><br><span class="line">       <span class="comment">//语句</span></span><br><span class="line">       <span class="keyword">break</span>; <span class="comment">//可选</span></span><br><span class="line">    <span class="comment">//你可以有任意数量的case语句</span></span><br><span class="line">    <span class="keyword">default</span> : <span class="comment">//可选</span></span><br><span class="line">       <span class="comment">//语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>switch 语句有如下规则：</p>
+<ul>
+<li>switch 语句中的变量类型可以是： byte、short、int 或者 char。从 Java SE 7 开始，switch 支持字符串类型了，同时 case 标签必须为字符串常量或字面量。</li>
+<li>switch 语句可以拥有多个 case 语句。每个 case 后面跟一个要比较的值和冒号。</li>
+<li>case 语句中的值的数据类型必须与变量的数据类型相同，而且只能是常量或者字面常量。</li>
+<li>当变量的值与 case 语句的值相等时，那么 case 语句之后的语句开始执行，直到 break 语句出现才会跳出 switch 语句。</li>
+<li>当遇到 break 语句时，switch 语句终止。程序跳转到 switch 语句后面的语句执行。case 语句不必须要包含 break 语句。如果没有 break 语句出现，程序会继续执行下一条 case 语句，直到出现 break 语句。</li>
+<li>switch 语句可以包含一个 default 分支，该分支必须是 switch 语句的最后一个分支。default 在没有 case 语句的值和变量值相等的时候执行。default 分支不需要 break 语句。</li>
+</ul>
+<h2 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h2><h3 id="while"><a href="#while" class="headerlink" title="while"></a>while</h3><p>while是最简单的循环</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span>( 布尔表达式 ) &#123;</span><br><span class="line">  <span class="comment">//循环内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="do-while"><a href="#do-while" class="headerlink" title="do-while"></a>do-while</h3><p>对于 while 语句而言，如果不满足条件，则不能进入循环。但有时候我们需要即使不满足条件，也至少执行一次。</p>
+<p>do…while 循环和 while 循环相似，不同的是，do…while 循环至少会执行一次。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">       <span class="comment">//代码语句</span></span><br><span class="line">&#125;<span class="keyword">while</span>(布尔表达式);</span><br></pre></td></tr></table></figure>
+
+<h3 id="for"><a href="#for" class="headerlink" title="for"></a>for</h3><p>虽然所有循环结构都可以用<code>while</code>或者<code>do...while</code>表示，但Java提供了另一种语句循环，使一些循环结构变得更加简单。</p>
+<p>for循环执行的次数是在执行前就确定的。语法格式如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(初始化; 布尔表达式; 更新) &#123;</span><br><span class="line">    <span class="comment">//代码语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于 for 循环有以下几点说明：</p>
+<ul>
+<li>最先执行初始化步骤。可以声明一种类型，但可初始化一个或多个循环控制变量，也可以是空语句。</li>
+<li>然后，检测布尔表达式的值。如果为<code>true</code>，循环体被执行。如果为<code>false</code>，循环终止，开始执行循环体后面的语句。</li>
+<li>执行一次循环后，更新循环控制变量。</li>
+<li>再次检测布尔表达式。循环执行上面的过程。</li>
+</ul>
+<h3 id="upgraded-for"><a href="#upgraded-for" class="headerlink" title="upgraded for"></a>upgraded for</h3><p>java1.5版本以上加入了一个诡谲的for方式，先看代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(声明语句 : 表达式)</span><br><span class="line">&#123;</span><br><span class="line">   <span class="comment">//YCH</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>表达式里填的是<strong>数组名称</strong>，这个for语句能<strong>遍历</strong>对应数组内的所有元素，包括所有类型。</p>
+<h2 id="结构的跳出"><a href="#结构的跳出" class="headerlink" title="结构的跳出"></a>结构的跳出</h2><p>有的时候我们需要让一个体系提前中断，或是直接进入下一个循环，Java提供了两个关键词帮助我们<del>重新做人</del>。</p>
+<h3 id="break"><a href="#break" class="headerlink" title="break"></a>break</h3><p><code>break</code>主要用在<strong>循环语句</strong>或者<strong>switch语句</strong>中，用来跳出整个语句块。亦可言跳出最里层的循环，并且继续执行该循环下面的语句。</p>
+<p>当然，在函数层级上，<code>return</code>永远是最强的跳水运动员。</p>
+<h3 id="continue"><a href="#continue" class="headerlink" title="continue"></a>continue</h3><p>continue 适用于任何循环控制结构中。作用是让程序立刻跳转到下一次循环的迭代。</p>
+<p>在<strong>for</strong>循环中，<strong>continue</strong>语句使程序立即跳转到更新语句。</p>
+<p>在<strong>while</strong>或者<strong>do…while</strong>循环中，程序立即跳转到布尔表达式的判断语句。</p>
+
+    
+    </div>
+    <script>chords.replace()</script>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2018/04/28/JavaS/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8BJAVA%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB-02/" data-id="cm9v3m2m00017f6ojbkej3yxx" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/05/13/JavaS/%E3%82%BC%E3%83%AD%E3%81%8B%E3%82%89%E5%A7%8B%E3%82%81%E3%82%8BJAVA%E4%B8%96%E7%95%8C%E7%94%9F%E6%B4%BB-03/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          ゼロから始めるJAVA世界生活 03
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/04/22/Art/%E6%9C%BA%E6%A2%B0%E5%8D%B7%E8%BD%B4%EF%BC%9A%E6%A6%82%E5%BF%B5%E8%AE%BE%E8%AE%A1%E4%B8%AD%E7%9A%84%E5%BF%83%E7%90%86%E6%9A%97%E7%A4%BA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">机械卷轴：概念设计中的心理暗示</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  
+  
+    
+      <script src="https://giscus.app/client.js"
+              data-repo="timrockefeller/timrockefeller.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE2Mjk2MzY="
+              data-category-id="DIC_kwDOCjrcRM4CUVZS"
+              data-mapping="pathname"
+              data-strict="-1"
+              data-reactions-enabled="0"
+              data-emit-metadata="-1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="zh-CN"
+              data-loading="lazy"
+              crossorigin="anonymous" 
+              async>
+      </script>
+
+    
+  
+
+
+</section>
+      
+        
+<aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recent</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="title">【踩坑记录】如何在 MacOS (Unix) 上运行 EraTW</a></p>
+              <p class="item-date"><time datetime="2025-01-23T00:00:00.000Z" itemprop="datePublished">2025-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="title">ECS &amp; Hierarchies</a></p>
+              <p class="item-date"><time datetime="2024-02-05T00:00:00.000Z" itemprop="datePublished">2024-02-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/02/coding/ECS/ECS_storage/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/02/coding/ECS/ECS_storage/" class="title">ECS 储存数据的方式</a></p>
+              <p class="item-date"><time datetime="2024-02-02T00:00:00.000Z" itemprop="datePublished">2024-02-02</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/12/06/bio/canning_or_willing/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a></p>
+              <p class="item-title"><a href="/2023/12/06/bio/canning_or_willing/" class="title">能做和会做</a></p>
+              <p class="item-date"><time datetime="2023-12-06T00:00:00.000Z" itemprop="datePublished">2023-12-06</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/11/17/coding/constly-const-ptr/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2023/11/17/coding/constly-const-ptr/" class="title">Constly Const Pointer</a></p>
+              <p class="item-date"><time datetime="2023-11-17T00:00:00.000Z" itemprop="datePublished">2023-11-17</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 15px;">ECS</a> <a href="/tags/Era/" style="font-size: 10px;">Era</a> <a href="/tags/Game/" style="font-size: 10px;">Game</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 11.67px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://blog.dashjay.com" target="_blank">DashJay</a>
+          </li>
+        
+          <li>
+            <a href="https://measureds.github.io" target="_blank">Measureds</a>
+          </li>
+        
+          <li>
+            <a href="https://zanbuffet.github.io" target="_blank">Zanbuffet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme mod from <a href="#">Icarus</a><br>
+      
+        <!-- <script src="https://api.quq.cat/hitokoto"></script>
+<div id="hitokoto"><script defer>hitokoto()</script></div> -->
+<p id="hitokoto">:D 获取中...</p>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+      
+    </div>
+  </div>
+</footer>
+
+    
+
+
+  
+    
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
+  
+  
+    
+<script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
+  
+  
+  
+  
+  
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+  </div>
+</body>
+</html>

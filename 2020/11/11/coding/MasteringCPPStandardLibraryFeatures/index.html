@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Mastering C++ Standard Library Features | 外野 - wryyyyyyyyyY!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="快速掌握 Modern C++ 标准库特性，基于 Vittorio Romeo 发布的教程编撰。  C++ 后面跟着的数字越来越大，才发现漏学了亿个特性，赶紧捡起来重新看一遍。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mastering C++ Standard Library Features">
+<meta property="og:url" content="http://blog.iik.moe/2020/11/11/coding/MasteringCPPStandardLibraryFeatures/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="快速掌握 Modern C++ 标准库特性，基于 Vittorio Romeo 发布的教程编撰。  C++ 后面跟着的数字越来越大，才发现漏学了亿个特性，赶紧捡起来重新看一遍。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2020/12/09/2bw8WhuvoURlVGY.jpg">
+<meta property="article:published_time" content="2020-11-11T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-24T08:25:47.972Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/09/2bw8WhuvoURlVGY.jpg">
+  
+  
+  
+
+  
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
+  
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/csshake/1.5.2/csshake.min.css">
+
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  <script src="/js/chord.js"></script>
+  
+  
+    
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/css/lightgallery.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
+  
+  
+  
+  
+  
+  
+    <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f1fb63876cc310548f153f32652bc624";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+  
+
+
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        
+        <span class="site-title">外野</span>
+      </a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">目录</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+        
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="/image/avatar.jpg" />
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form>
+
+</div>
+
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">目录</a></td>
+        
+          <td><a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/image/avatar.jpg" />
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        79
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        48
+        <span>tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://twitter.com/kitekii_" target="_blank" title="twitter" class=tooltip >
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class=tooltip >
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class=tooltip >
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://steamcommunity.com/id/6hi/" target="_blank" title="steam" class=tooltip >
+                <i class="fa fa-steam"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
+  </div>
+  
+  
+</aside>
+
+      
+      <section id="main"><article id="post-coding/MasteringCPPStandardLibraryFeatures" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <!-- <div class="background"></div> -->
+      
+      <!-- <script>
+        ;!(function($) {
+          var max = 99;
+          var index = Math.floor(Math.random() * max) + 1;
+          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
+        })(jQuery)
+      </script> -->
+      
+    
+    
+      
+	
+		<img src="https://i.loli.net/2020/12/09/2bw8WhuvoURlVGY.jpg" class="article-banner" />
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Mastering C++ Standard Library Features
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/11/11/coding/MasteringCPPStandardLibraryFeatures/">
+      <time datetime="2020-11-11T00:00:00.000Z" itemprop="datePublished">2020-11-11</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/C/" rel="tag">C++</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <blockquote>
+<p>快速掌握 Modern C++ 标准库特性，基于 Vittorio Romeo 发布的教程编撰。</p>
+</blockquote>
+<p>C++ 后面跟着的数字越来越大，才发现漏学了亿个特性，赶紧捡起来重新看一遍。</p>
+<span id="more"></span>
+
+<h2 id="1-Value-Categories-and-Move-Semantics"><a href="#1-Value-Categories-and-Move-Semantics" class="headerlink" title="1. Value Categories and Move Semantics"></a>1. Value Categories and Move Semantics</h2><h3 id="1-1-L-values-and-R-values"><a href="#1-1-L-values-and-R-values" class="headerlink" title="1.1 L-values and R-values"></a>1.1 L-values and R-values</h3><p>区分左值与右值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> a;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 顾名思义，左值指出现在赋值号左边</span></span><br><span class="line">a = <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 左值可被取址</span></span><br><span class="line"><span class="type">int</span>* a_ptr = &amp;a;</span><br><span class="line"><span class="comment">// 左值可被引用</span></span><br><span class="line"><span class="type">int</span>&amp; a_ref = a;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 下面都是左值：</span></span><br><span class="line"><span class="comment">// (*) 变量名</span></span><br><span class="line">a;</span><br><span class="line"><span class="comment">// (*) 对象成员</span></span><br><span class="line"><span class="keyword">struct</span> &#123; <span class="type">int</span> _b; &#125; f;</span><br><span class="line">f._b;</span><br><span class="line"><span class="comment">// (*) 函数返回可引用值</span></span><br><span class="line"><span class="function"><span class="type">int</span>&amp; <span class="title">bar</span><span class="params">()</span></span>; <span class="comment">// = &#123;static int i = 1; return i;&#125;</span></span><br><span class="line">&amp;<span class="built_in">bar</span>();</span><br><span class="line"><span class="built_in">bar</span>() = <span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span>&amp;&amp; rv_ref0 = <span class="number">5</span>;</span><br><span class="line"><span class="type">int</span>&amp;&amp; rv_ref1 = <span class="built_in">bar</span>(); <span class="comment">// &#123;return 1;&#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//下面都是右值：</span></span><br><span class="line"><span class="comment">// (*) 数字</span></span><br><span class="line"><span class="number">5</span>;</span><br><span class="line"><span class="number">10.33f</span>;</span><br><span class="line"><span class="comment">// (*) 内建表达式</span></span><br><span class="line"><span class="number">5</span> + <span class="number">10</span> * <span class="number">3</span>;</span><br><span class="line"><span class="comment">// (*) 函数返回可不引用值</span></span><br><span class="line"><span class="built_in">bar</span>();</span><br></pre></td></tr></table></figure>
+
+<p>函数的左、右值参数重载</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(<span class="type">int</span> &amp;)</span> </span>&#123; std::cout&lt;&lt;<span class="string">&quot;non-const lvalue ref\n&quot;</span>; &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(<span class="type">int</span> &amp;&amp;)</span> </span>&#123; std::cout&lt;&lt;<span class="string">&quot;non-const rvalue ref\n&quot;</span>; &#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">bar</span><span class="params">(<span class="type">const</span> <span class="type">int</span>&amp;)</span> </span>&#123; std::cout&lt;&lt;<span class="string">&quot;const lvalue ref\n&quot;</span>; &#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> a = <span class="number">5</span>;</span><br><span class="line">    <span class="built_in">foo</span>(a); <span class="comment">// non-const lvalue ref</span></span><br><span class="line">    <span class="built_in">foo</span>(<span class="number">5</span>); <span class="comment">// non-const rvalue ref</span></span><br><span class="line">    <span class="built_in">bar</span>(a); <span class="comment">// const lvalue ref</span></span><br><span class="line">    <span class="built_in">bar</span>(<span class="number">5</span>); <span class="comment">// const lvalue ref</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>C++ 表达式分为两类：左值与右值。</li>
+<li>左值可以出现在内建赋值号左侧，右值不能。</li>
+<li>左值引用只能与左值绑定</li>
+<li>右值引用只能与右值绑定</li>
+</ul>
+<h3 id="1-2-R-value-refences-and-std-move"><a href="#1-2-R-value-refences-and-std-move" class="headerlink" title="1.2 R-value refences and std::move"></a>1.2 R-value refences and std::move</h3><p>右值的意义：表示一个没有标识的临时对象，可以认为一个右值能将自己的资源所有权转移给他人。</p>
+<p><strong>std::move</strong></p>
+<ul>
+<li>顾名思义，<code>std::move</code>将一个左值（或其他）映射为右值引用</li>
+<li>实际上并没有发生内存变化</li>
+<li>一般来说使用一个被move后的值是不安全的</li>
+<li><em>moving when returning is unnecessary and sometimes detrimental</em></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// C++03</span></span><br><span class="line">std::vector&lt;data&gt; v0;</span><br><span class="line">std::vector&lt;data&gt; v1 = v0; <span class="comment">// copy internal buffer</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// C++11 +</span></span><br><span class="line">std::vector&lt;data&gt; v0;</span><br><span class="line">std::vector&lt;data&gt; v1 = std::<span class="built_in">move</span>(v0); <span class="comment">// transfer ownership</span></span><br><span class="line"><span class="comment">// 此处使用了 vector(vector &amp;&amp; other) 构造函数</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// std::move 本质只是一个静态映射</span></span><br><span class="line"><span class="keyword">auto</span> v2 = <span class="keyword">static_cast</span>&lt;std::vector&lt;data&gt;&amp;&amp;&gt;(v0);</span><br></pre></td></tr></table></figure>
+
+<p>使用<code>move</code>后的值可能会导致<u>未定义行为(undefined behavior)</u>错误。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;data&gt; v0;</span><br><span class="line">std::<span class="built_in">move</span>(v0);<span class="comment">// No-op. 映射为一个右值却没有用于赋值或构造，即啥事都没发生</span></span><br><span class="line">v<span class="number">0.</span><span class="built_in">size</span>() <span class="comment">// Perfectly safe.</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>RVO(Return value optimization)，返回值优化，一种编译器技术：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Copy_elision">https://en.wikipedia.org/wiki/Copy_elision</a></p>
+</blockquote>
+<p>在<code>return</code>时使用<code>std::move</code>会导致编译器不启用 RVO，从而降低效率。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;data return_example() &#123;</span><br><span class="line">	std::vector&lt;data&gt; v0;</span><br><span class="line">    </span><br><span class="line">    // Wrong:</span><br><span class="line">    // <span class="keyword">return</span> std::move(v0);</span><br><span class="line">    </span><br><span class="line">    // Correct:</span><br><span class="line">    <span class="keyword">return</span> v0;// lvalue</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然如果需要刻意地将成员所有权移出对象，择机而用。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">foo</span> &#123;</span><br><span class="line">    std::vector&lt;data&gt; v;</span><br><span class="line">    </span><br><span class="line">    <span class="function">std::vector&lt;data&gt; <span class="title">get_v</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> v; &#125; <span class="comment">// lvalue, equal to &quot;this-&gt;v&quot;</span></span><br><span class="line">    <span class="function">std::vector&lt;data&gt; <span class="title">move_v</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> std::<span class="built_in">move</span>(v); &#125; <span class="comment">// rvalue</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-Practical-Uses-of-std-move"><a href="#1-3-Practical-Uses-of-std-move" class="headerlink" title="1.3 Practical Uses of std::move"></a>1.3 Practical Uses of std::move</h3><p><strong>Move Semantics in the Standard Library</strong></p>
+<ul>
+<li>Many classes in the standard library are “move aware”</li>
+<li>Some classes represents “unique ownership” and are move-only</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">std::pair&lt;foo, <span class="type">int</span>&gt; p;</span><br><span class="line"><span class="keyword">auto</span> p_copy = p;</span><br><span class="line"><span class="keyword">auto</span> p_move = std::<span class="built_in">move</span>(p);</span><br><span class="line"></span><br><span class="line">std::tuple&lt;foo, <span class="type">int</span>, <span class="type">char</span>&gt; t;</span><br><span class="line"><span class="keyword">auto</span> t_copy = t;</span><br><span class="line"><span class="keyword">auto</span> t_move = std::<span class="built_in">move</span>(t);</span><br></pre></td></tr></table></figure>
+
+<p><code>std::vector</code>以及其他 container 的索引特性也会随着传入值变化</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;foo&gt; v;</span><br><span class="line"><span class="keyword">auto</span> v_copy = v;</span><br><span class="line"><span class="keyword">auto</span> v_move = std::<span class="built_in">move</span>(v);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将一个临时值添加进容器</span></span><br><span class="line">v.<span class="built_in">push_back</span>(foo&#123;&#125;);</span><br><span class="line"></span><br><span class="line">foo f;</span><br><span class="line"></span><br><span class="line"><span class="comment">// copy</span></span><br><span class="line">v.<span class="built_in">push_back</span>(f);</span><br><span class="line"></span><br><span class="line"><span class="comment">// move</span></span><br><span class="line">v.<span class="built_in">push_back</span>(std::<span class="built_in">move</span>(f));</span><br><span class="line"><span class="comment">// http://en.cppreference.com/w/cpp/container/vector/push_back</span></span><br></pre></td></tr></table></figure>
+
+<p>有些类型具有 Unique Ownership 特性，运行时只能由一个标识持有所有权，只能使用<code>std::move</code>来赋值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">std::thread t&#123;[]&#123; std::cout&lt;&lt;<span class="string">&quot;thread!&quot;</span>; &#125;&#125;;</span><br><span class="line"><span class="comment">// auto t_copy = t;          // calls `thread(const thread&amp;) = delete;`</span></span><br><span class="line"><span class="keyword">auto</span> t_move = std::<span class="built_in">move</span>(t);  <span class="comment">// calls `thread(thread &amp;&amp;) noexcept;`</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 再者还有 unique_lock 与 unique_ptr</span></span><br><span class="line">&#123;</span><br><span class="line">    std::mutex m;</span><br><span class="line">    std::unique_lock&lt;std::mutex&gt; ul&#123;m&#125;;</span><br><span class="line">    <span class="comment">// auto ul.copy = ul;</span></span><br><span class="line">    <span class="keyword">auto</span> ul_move = std::<span class="built_in">move</span>(ul);</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    std::unique_ptr&lt;<span class="type">int</span>&gt; up = std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">// auto up_copy = up;</span></span><br><span class="line">    <span class="keyword">auto</span> up_move = std::<span class="built_in">move</span>(up);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>避免<code>std::move</code>导致的无谓消耗</strong></p>
+<ul>
+<li><p>将对象移入容器</p>
+<p>设想一种情况：将文件以<code>std::string</code>的形式读入内存并放入<code>std::vector</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;std::string&gt; files;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; ++i) &#123;</span><br><span class="line">    std::string s = <span class="built_in">read_large_file</span>(i);</span><br><span class="line">    <span class="comment">// ...do some processing on `s`...</span></span><br><span class="line">    files.<span class="built_in">push_back</span>(s);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>那么问题来了，上面的代码有无缺陷？该如何优化？</p>
+<ol>
+<li><code>line 1</code>后插入<code>files.reserve(10);</code>能预先将容器大小设置为 10 以避免容器扩展时的内存复制行为。</li>
+<li><code>line 5</code>修改为<code>files.push_back(std::move(s));</code>，当然就是我们本章所述的优化重点。</li>
+</ol>
+</li>
+<li><p>用<code>move</code>取代复制容器</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">consume_multiples</span><span class="params">(std::map&lt;<span class="type">int</span>, std::vector&lt;<span class="type">int</span>&gt;)</span></span>;</span><br><span class="line"></span><br><span class="line">std::map&lt;<span class="type">int</span>, std::vector&lt;<span class="type">int</span>&gt;&gt; multiples_of;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; ++i) &#123;</span><br><span class="line">    <span class="keyword">auto</span> i_multiples = <span class="built_in">get_multiples</span>(i);</span><br><span class="line">    multiples_of[i] = i_multiples;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">consume_multiples</span>(multiples_of);</span><br></pre></td></tr></table></figure>
+
+<p>改进：</p>
+<ol>
+<li><code>line 6</code>为<code>i_multiples</code>添加<code>std::move</code>，或者可以直接将<code>line 5-6</code>合并为<code>multiples_of[i] = get_multiples(i);</code>。</li>
+<li><code>line 8</code>也可以套一层<code>std::move</code>，但需要注意，<code>consume_multiples</code>形参为左值形式，所以依然会复制内存。</li>
+</ol>
+<blockquote>
+<p>关于 Sink Argument：<a target="_blank" rel="noopener" href="https://dzone.com/articles/c-sink-parameter-passing">https://dzone.com/articles/c-sink-parameter-passing</a></p>
+</blockquote>
+<p>在为函数配置参数的时候，需要同时考虑左值与右值的情况。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">person</span> &#123;</span><br><span class="line">    std::string _name;</span><br><span class="line">    <span class="comment">// before c++ 11</span></span><br><span class="line">    <span class="built_in">person</span>(<span class="type">const</span> std::string&amp; name) : _name&#123;name&#125; &#123; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_name</span><span class="params">(<span class="type">const</span> std::string&amp; name)</span> </span>&#123; _name = name; &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// after c++ 11, added below overloads</span></span><br><span class="line">    <span class="built_in">person</span>(std::string&amp;&amp; name) : _name&#123;std::<span class="built_in">move</span>(name)&#125; &#123; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_name</span><span class="params">(std::string&amp;&amp; name)</span> </span>&#123; _name = std::<span class="built_in">move</span>(name); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上写法在传入左值时只执行一次复制，传入右值时只执行一次移动，确实难以挑刺。可是当参数个数为 N 时，我们需要重载 2^N 个函数以保证每个参数都能匹配左右值。</p>
+<p>所以有了一个基本范式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">person</span> &#123;</span><br><span class="line">    std::string _name;</span><br><span class="line">    <span class="built_in">person</span>(std::string name) : _name&#123;std::<span class="built_in">move</span>(name)&#125; &#123; &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">set_name</span><span class="params">(std::string name)</span> </span>&#123; _name = std::<span class="built_in">move</span>(name); &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>传入左值时，将值<em>复制</em>到<code>std::string name</code>中，接着<em>移动</em>给成员（1 次复制 + 1 次移动）。</li>
+<li>传入右值时，将值<em>移动</em>到<code>std::string name</code>中，接着<em>移动</em>给成员（1 次移动 + 1 次移动）。</li>
+</ul>
+<p>这样一来能够牺牲极为微小的性能（一次移动），来节省指数级个数的重载函数。</p>
+</li>
+</ul>
+<h3 id="1-4-Value-Categories-The-Full-Picture"><a href="#1-4-Value-Categories-The-Full-Picture" class="headerlink" title="1.4 Value Categories: The Full Picture"></a>1.4 Value Categories: The Full Picture</h3><p>只把值分为左值、右值远远不能满足 c++ 移动语法的要求。事实上我们需要使用一个树来定义各个值的详细类型。</p>
+<blockquote>
+<p>官方定义的值分类：<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/value_category">https://en.cppreference.com/w/cpp/language/value_category</a></p>
+</blockquote>
+<p>叶子节点（子分类）由三个类别组成：</p>
+<ul>
+<li><p>PR-value (“Pure R-value”) <strong>纯右值</strong></p>
+</li>
+<li><p>L-value <strong>左值</strong></p>
+</li>
+<li><p>X-value (“eXpiring r-value”) <strong>将亡值</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>分类的用例：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/happenlee/p/9337776.html">https://www.cnblogs.com/happenlee/p/9337776.html</a></p>
+</blockquote>
+<p>X-value 与 L-value 统称为 GL-value，<strong>泛左值</strong>，Generalized L-value。</p>
+<p>X-value 与 PR-value 统称为 R-value，<strong>右值</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">foo</span> &#123; &#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">foo   <span class="title">prvalue</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">foo&amp;  <span class="title">lvalue</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function">foo&amp;&amp; <span class="title">xvalue</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 此处为*纯右值*</span></span><br><span class="line">    <span class="built_in">prvalue</span>();</span><br><span class="line">    <span class="comment">// 此处为*左值*，它为一个左值的引用，且不能被移动</span></span><br><span class="line">    <span class="built_in">lvalue</span>();</span><br><span class="line">    <span class="comment">// 此处为*将亡值*，`foo&amp;&amp;`是一个右值的引用</span></span><br><span class="line">    <span class="built_in">xvalue</span>();</span><br><span class="line">    </span><br><span class="line">    foo f;</span><br><span class="line">    f;            <span class="comment">// 左值</span></span><br><span class="line">    std::<span class="built_in">move</span>(f); <span class="comment">// 将亡值，相较纯右值有了左值的特性</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-5-Perfect-Forwarding"><a href="#1-5-Perfect-Forwarding" class="headerlink" title="1.5 Perfect Forwarding"></a>1.5 Perfect Forwarding</h3><p>当没有使用参数推导(argument deduction)时，<code>&amp;</code>意为左值引用，<code>&amp;&amp;</code>意为右值引用。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">take_lvalue</span><span class="params">(<span class="type">int</span>&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">tale_rvalue</span><span class="params">(<span class="type">int</span>&amp;&amp;)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>而仅在使用<strong>模板参数推导</strong>时，<code>&amp;&amp;</code>意为<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/language/reference#Forwarding_references">转发引用</a>(forwarding reference)。哪里有 type deduction，哪里才有 forwarding reference。</p>
+<blockquote>
+<p>转发引用研究：<a target="_blank" rel="noopener" href="https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers">https://isocpp.org/blog/2012/11/universal-references-in-c11-scott-meyers</a><br>Chinese Ver.：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ConfuciusPei/p/12420082.html">https://www.cnblogs.com/ConfuciusPei/p/12420082.html</a></p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">take_anything</span><span class="params">(T&amp;&amp;)</span></span>; <span class="comment">// 不再是右值引用</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">example</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">take_anything</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="comment">// `0` 是纯右值，即右值</span></span><br><span class="line">    <span class="comment">// * `T` 推导为 `int`</span></span><br><span class="line">    <span class="comment">// * `T&amp;&amp;` 推导为 `int&amp;&amp;`</span></span><br><span class="line">    <span class="type">int</span> x = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">take_anything</span>(x);</span><br><span class="line">    <span class="comment">// `x` 是左值</span></span><br><span class="line">    <span class="comment">// * `T` 推导为 `int&amp;`</span></span><br><span class="line">    <span class="comment">// * `T&amp;&amp;` 推导为 `int&amp;`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">foo</span> &#123;</span><br><span class="line">    <span class="comment">// !important 这个`T`未被推导，故`T&amp;&amp;`仅仅是类型`T`的右值引用</span></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">not_a_forwarding_reference</span><span class="params">(T&amp;&amp;)</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意下面这个例子，将解释为什么需要转发引用以及完美转发的实现方式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">dictionary</span> &#123;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    std::vector&lt;std::string&gt; _words;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">add</span><span class="params">(T&amp;&amp; s)</span> </span>&#123;</span><br><span class="line">        _words.<span class="built_in">push_back</span>(std::forward&lt;T&gt;(s));</span><br><span class="line">        <span class="comment">// 如果`s`是左值，则`std::forward`不做任何操作</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 这样一来我们既不需要之前的范式新增多余的move操作</span></span><br><span class="line">    <span class="comment">// 也不必重复写相同的代码覆盖所有值分类</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>std::forward</code>是怎样工作的？<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/forward">Cppref</a> 中显式地定义为<code>static_cast&lt;T&amp;&amp;&gt;(t)</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">sink</span><span class="params">(<span class="type">int</span>&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">sink</span><span class="params">(<span class="type">int</span>&amp;&amp;)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">pipe</span><span class="params">(T&amp;&amp; x)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">sink</span>(std::forward&lt;T&gt;(x));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以这样认为：<code>std::forward</code>是一种带有条件的<code>std::move</code>，它仅在传入值为右值时才执行移动操作。</p>
+<p>C++11 引入了如下 2 条规则：</p>
+<ol>
+<li><p>模板函数对右值引用参数的推导</p>
+<p>向一个模板函数传递一个左值实参，同时该模板函数的对应形参是右值引用，编译器会把该实参推导为左值引用。</p>
+</li>
+<li><p>引用折叠</p>
+<p>由于存在<strong>引用的引用</strong>，而 C++ 不允许显式地定义它们，故编译器会将这种 double reference 折叠成 single reference。</p>
+<table>
+<thead>
+<tr>
+<th>原类别</th>
+<th>折叠类别</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>T&amp; &amp;&amp;，T&amp;&amp; &amp;，T&amp; &amp;</td>
+<td>T&amp;</td>
+</tr>
+<tr>
+<td>T&amp;&amp; &amp;&amp;</td>
+<td>T&amp;&amp;</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<blockquote>
+<p>Used <code>std::exchange</code> to elegantly implement move operations for your classes</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span> <span class="title class_">U</span> = T&gt;</span><br><span class="line"><span class="keyword">constexpr</span> <span class="comment">// since C++20</span></span><br><span class="line">T <span class="built_in">exchange</span>(T&amp; obj, U&amp;&amp; new_value) &#123;</span><br><span class="line">       T old_value = std::<span class="built_in">move</span>(obj); <span class="comment">// 将`obj`转移至`old_value`上</span></span><br><span class="line">       obj = std::forward&lt;U&gt;(new_value); <span class="comment">// 为`obj`完美转发`new_value`的值</span></span><br><span class="line">       <span class="keyword">return</span> old_value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h2 id="2-Smart-Pointer"><a href="#2-Smart-Pointer" class="headerlink" title="2. Smart Pointer"></a>2. Smart Pointer</h2><h3 id="2-1-What-problem-do-they-solve"><a href="#2-1-What-problem-do-they-solve" class="headerlink" title="2.1 What problem do they solve?"></a>2.1 What problem do they solve?</h3><blockquote>
+<ul>
+<li>Problems with manual dynamic memory allocation</li>
+<li>Why new&#x2F;delete are considered harmful</li>
+</ul>
+</blockquote>
+<p>传统使用<code>new</code>与<code>delete</code>时，如不规范会造成：</p>
+<ul>
+<li>未<code>delete</code>造成的内存溢出</li>
+<li>多次<code>delete</code>，即 Double-free Error</li>
+<li>访问已被<code>delete</code>的指针</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">memory_leak</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* x = <span class="keyword">new</span> <span class="type">int</span>&#123;<span class="number">42</span>&#125;;</span><br><span class="line">    <span class="keyword">return</span> *x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">double_free</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* x = <span class="keyword">new</span> <span class="type">int</span>&#123;<span class="number">42</span>&#125;;</span><br><span class="line">    <span class="keyword">delete</span> x;</span><br><span class="line">    <span class="keyword">delete</span> x; <span class="comment">// Undefined behavior, VERY DANGER!!!</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">use_after_free</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span>* x = <span class="keyword">new</span> <span class="type">int</span>&#123;<span class="number">42</span>&#125;;</span><br><span class="line">    <span class="keyword">delete</span> x;</span><br><span class="line">    <span class="keyword">return</span> *x; <span class="comment">// Undefined behavior</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>函数中若传入一个原生指针，我们无法分辨它是否需要在函数内<code>delete</code>。选择销毁，外部若再销毁一次就会出现错误；选择不销毁，外部若不销毁则造成内存溢出。真是两难。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">bar</span><span class="params">(<span class="type">int</span>* x)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// Who owns `x`?</span></span><br><span class="line">    <span class="comment">// Am I supposed to `delete` it?</span></span><br><span class="line">    <span class="comment">// Can I assume that it is non-null?</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 混乱的所有权需要写好多文档来声明：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">abc</span> &#123;</span><br><span class="line">    std::vector&lt;foo*&gt; _foos;</span><br><span class="line">    <span class="comment">// 谁负责创建与销毁`_foos`中指针指向的各个元素？</span></span><br><span class="line">    <span class="comment">// 还是说`abc`仅仅是`foo`实例的引用？</span></span><br><span class="line">    <span class="comment">// `abc`的复制构造函数、析构函数应该怎样设计？</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这些问题在智能指针面前不攻自破。</p>
+<h3 id="2-2-Unique-ownership-std-unique-ptr"><a href="#2-2-Unique-ownership-std-unique-ptr" class="headerlink" title="2.2 Unique ownership: std::unique_ptr"></a>2.2 Unique ownership: <code>std::unique_ptr</code></h3><p>需要明确以下概念：</p>
+<ul>
+<li>所有<strong>资源</strong>都需要被<strong>申请</strong>与<strong>释放</strong></li>
+<li>动态内存、文件、线程都是资源的一种</li>
+<li>唯一所有权(unique ownership)指有且只有一个所有者(owner)负责申请、释放资源</li>
+<li>只能通过其所有者来访问资源</li>
+</ul>
+<p><code>std::unique_ptr</code>是一个 move-only 的类型，以表示对资源的唯一所有权。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 欲使用智能指针，需包含 &lt;memory&gt; 头文件</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">not_so_smart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    foo* f = <span class="keyword">new</span> foo;</span><br><span class="line">    <span class="comment">// ...use `f`...</span></span><br><span class="line">    <span class="keyword">delete</span> f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">smart</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::unique_ptr&lt;foo&gt; f&#123;<span class="keyword">new</span> foo&#125;;</span><br><span class="line">    <span class="comment">// ...use `f`...</span></span><br><span class="line">    <span class="comment">// automaticly delete `f`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>std::unique_ptr</code>对象包装一个原始指针，并负责其生命周期。当该对象被销毁时，会在其析构函数中删除关联的原始指针。上例两个函数的操作与性能开销完全相同，不过后者能大幅减少写出 bug 的可能。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">std::unique_ptr&lt;foo&gt; f&#123;<span class="keyword">new</span> foo&#125;;</span><br><span class="line"><span class="keyword">auto</span> f1 = f; <span class="comment">// ERROR: called a deleted function</span></span><br><span class="line"><span class="keyword">auto</span> f2 = std::<span class="built_in">move</span>(f); <span class="comment">// kanzen ojbk</span></span><br></pre></td></tr></table></figure>
+
+<p>在<code>f</code>将所有权交给<code>f2</code>后，<code>f</code>的销毁不会导致任何副作用。在函数中也是如此：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::unique_ptr&lt;foo&gt; <span class="title">gen_ptr</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::unique_ptr&lt;foo&gt; f&#123;<span class="keyword">new</span> foo&#125;;</span><br><span class="line">    <span class="keyword">return</span> f;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">take_ptr</span><span class="params">(std::unique_ptr&lt;foo&gt; f)</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; <span class="string">&quot;took ownership of `f`\n&quot;</span>;</span><br><span class="line">    <span class="comment">// then `~f()` called</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> f = <span class="built_in">gen_ptr</span>();</span><br><span class="line">    <span class="built_in">take_ptr</span>(std::<span class="built_in">move</span>(f));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而！混合使用<code>new</code>与智能指针，也仍会有一些运行时的潜在问题发生。阅读如下代码片段：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">(std::unique_ptr&lt;<span class="type">int</span>&gt;, <span class="type">int</span>)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">err</span><span class="params">()</span> </span>&#123; <span class="keyword">throw</span> std::runtime_error&#123;<span class="string">&quot;whoops!&quot;</span>&#125;; &#125;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">foo</span>(std::unique_ptr&lt;<span class="type">int</span>&gt;&#123;<span class="keyword">new</span> <span class="type">int</span>&#123;<span class="number">5</span>&#125;&#125;, <span class="built_in">err</span>());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>foo</code>被调用前有三种可能的执行顺序：</p>
+<table>
+<thead>
+<tr>
+<th>#0</th>
+<th>#1</th>
+<th>#2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>申请资源<code>new int[5]</code><br />构造<code>unique_ptr</code><br />执行<code>err()</code>抛出异常</td>
+<td>执行<code>err()</code>抛出异常<br />申请资源<code>new int[5]</code><br />构造<code>unique_ptr</code></td>
+<td>申请资源<code>new int[5]</code><br />执行<code>err()</code>抛出异常<br />构造<code>unique_ptr</code></td>
+</tr>
+</tbody></table>
+<p>上述三种情况中，#0 与 #1 相对来说是内存安全的，而 #2 会导致内存溢出！<code>unique_ptr</code>没能接管申请的<code>new int[5]</code>，而是被异常中断了，意味着产生了被申请却未被释放的资源。</p>
+<p>这时候就需要<code>std::make_unique</code>的帮助了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">foo</span>(std::<span class="built_in">make_unique</span>&lt;<span class="type">int</span>&gt;(<span class="number">5</span>), <span class="built_in">err</span>());</span><br></pre></td></tr></table></figure>
+
+<p><strong>How it works?</strong></p>
+<p>我们来尝试自己实现一个<code>unique_ptr</code>吧！</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">UniquePtr</span> &#123;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    T* _ptr&#123;<span class="literal">nullptr</span>&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">UniquePtr</span>() = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">UniquePtr</span>(T* ptr) <span class="keyword">noexcept</span></span><br><span class="line">        : _ptr&#123;ptr&#125; &#123;&#125;</span><br><span class="line">    ~<span class="built_in">UniquePtr</span>() <span class="keyword">noexcept</span> &#123; <span class="keyword">delete</span> _ptr; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// prevent copies</span></span><br><span class="line">    <span class="built_in">UniquePtr</span>(<span class="type">const</span> UniquePtr&amp;) = <span class="keyword">delete</span>;</span><br><span class="line">    UniquePtr&amp; <span class="keyword">operator</span>=(<span class="type">const</span> UniquePtr&amp;) = <span class="keyword">delete</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// ownership transfer</span></span><br><span class="line">    <span class="built_in">UniquePtr</span>(UniquePtr&amp;&amp; rhs) <span class="keyword">noexcept</span></span><br><span class="line">        : _ptr&#123;ptr&#125; &#123;</span><br><span class="line">        rhs._ptr = <span class="literal">nullptr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    UniquePtr&amp; <span class="keyword">operator</span>=(UniquePtr&amp;&amp; rhs) <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        _ptr = rhs._ptr;</span><br><span class="line">        rhs._ptr = <span class="literal">nullptr</span>;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Run-Time Overhead：<a target="_blank" rel="noopener" href="https://godbolt.org/g/EdBxSu">https://godbolt.org/g/EdBxSu</a></p>
+<p>吐槽一下，最新的 GCC 能把未使用的变量直接优化消失……(-O2 人类大脑发光.jpg)</p>
+</blockquote>
+<h3 id="2-3-Shared-ownership-std-shared-ptr-and-std-weak-ptr"><a href="#2-3-Shared-ownership-std-shared-ptr-and-std-weak-ptr" class="headerlink" title="2.3 Shared ownership: std::shared_ptr and std::weak_ptr"></a>2.3 Shared ownership: <code>std::shared_ptr</code> and <code>std::weak_ptr</code></h3><p>相较于<code>std::unique_ptr</code>，<code>std::shared_ptr</code>多了一个“共享”的属性。<code>std::shared_ptr</code>能够被复制，同时使用”引用计数“来确认还有多少个智能指针可以访问被申请的资源。直到”引用计数“归零，即没有任何<code>std::shared_ptr</code>能够访问该资源时，才将该资源析构释放。</p>
+<p>来看下面这个例子理解何时释放资源：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">sharing</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::shared_ptr&lt;foo&gt; keep_alive;</span><br><span class="line">    &#123;</span><br><span class="line">        std::shared_ptr&lt;foo&gt; f0&#123;<span class="keyword">new</span> foo&#125;; <span class="comment">// reference count = 1</span></span><br><span class="line">        <span class="keyword">auto</span> f1 = f0;					  <span class="comment">// reference count = 2</span></span><br><span class="line">        <span class="keyword">auto</span> f2 = f0;					  <span class="comment">// reference count = 3</span></span><br><span class="line">        <span class="keyword">auto</span> f3 = f0;					  <span class="comment">// reference count = 4</span></span><br><span class="line">        keep_alive = f2;				  <span class="comment">// reference count = 5</span></span><br><span class="line">    &#125; <span class="comment">// f0, f1, f2, f3 destroyed, reference count -= 4</span></span><br><span class="line">    <span class="built_in">assert</span>(keep_alive); <span class="comment">// OK			  // reference count = 1</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">transferring</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::shared_ptr&lt;foo&gt; f0&#123;<span class="keyword">new</span> foo&#125;;</span><br><span class="line">    <span class="keyword">auto</span> f1 = std::<span class="built_in">move</span>(f0);			  <span class="comment">// reference count = 1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>同样的，共享指针也有一个配套函数<code>std::make_shared</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt; <span class="keyword">class</span> <span class="title class_">T</span>, <span class="keyword">class</span>... Args &gt;</span><br><span class="line">shared_ptr&lt;T&gt; make_shared`( Args&amp;&amp;... args );</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Run-Time Overhead: <a target="_blank" rel="noopener" href="https://godbolt.org/g/hkjiyi">https://godbolt.org/g/hkjiyi</a></p>
+</blockquote>
+<p><code>std::weak_ptr</code>是一种不控制对象生命周期的智能指针，它指向一个<code>std::shared_ptr</code>来对其进行访问与管理。其中一些重要的成员函数：</p>
+<ul>
+<li><code>.expired() -&gt; bool</code>：检测所管理的对象是否被释放。</li>
+<li><code>.lock() -&gt; std::shared_ptr&lt;T&gt;</code>：若对象未被释放，则返回一个强引用，否则返回一个空的<code>std::shared_ptr</code>。</li>
+<li><code>.use_count() -&gt; long</code>：返回所管理对象的引用计数值。</li>
+</ul>
+<p>其中<code>operator*</code>与<code>operator-&gt;</code>没有重载，并且它在拷贝或赋值时不会增加引用计数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">checking_existence</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::weak_ptr&lt;<span class="type">int</span>&gt; wp;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">assert</span>(wp.<span class="built_in">use_count</span>() == <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">assert</span>(wp.<span class="built_in">expired</span>());</span><br><span class="line">    </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">auto</span> sp = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">42</span>);</span><br><span class="line">        wp = sp;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">assert</span>(wp.<span class="built_in">use_count</span>() == <span class="number">1</span>);</span><br><span class="line">        <span class="built_in">assert</span>(!wp.<span class="built_in">expired</span>());</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 第二个引用</span></span><br><span class="line">        <span class="keyword">auto</span> sp2 = sp;</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">assert</span>(wp.<span class="built_in">use_count</span>() == <span class="number">2</span>);</span><br><span class="line">        <span class="built_in">assert</span>(!wp.<span class="built_in">expired</span>());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">assert</span>(wp.<span class="built_in">use_count</span>() == <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">assert</span>(wp.<span class="built_in">expired</span>());</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">accessing_objects</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::weakp_ptr&lt;<span class="type">int</span>&gt; wp;</span><br><span class="line">    <span class="built_in">assert</span>(wp.<span class="built_in">lock</span>() == <span class="literal">nullptr</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">auto</span> sp = std::<span class="built_in">make_shared</span>&lt;<span class="type">int</span>&gt;(<span class="number">42</span>);</span><br><span class="line">    wp = sp;</span><br><span class="line">    <span class="built_in">assert</span>(*wp.<span class="built_in">lock</span>() == <span class="number">42</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>std::weak_ptr</code>还能够避免<code>std::shared_ptr</code>的循环引用。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">cycle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">b</span>;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">a</span> &#123;</span><br><span class="line">        std::shared_ptr&lt;b&gt; _b;</span><br><span class="line">        ~<span class="built_in">a</span>() &#123; std::cout&lt;&lt;<span class="string">&quot;~a()\n&quot;</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">struct</span> <span class="title class_">b</span> &#123;</span><br><span class="line">        std::shared_ptr&lt;a&gt; _a;</span><br><span class="line">        ~<span class="built_in">b</span>() &#123; std::cout&lt;&lt;<span class="string">&quot;~b()\n&quot;</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">auto</span> sa = std::<span class="built_in">make_shared</span>&lt;a&gt;();</span><br><span class="line">    <span class="keyword">auto</span> sb = std::<span class="built_in">make_shared</span>&lt;b&gt;();</span><br><span class="line">    sb-&gt;_a = sa;</span><br><span class="line">    sa-&gt;_b = sb;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>执行完上例代码后，<code>sa</code>和<code>sb</code>依然没有被释放。将<code>line 8</code>修改为<code>std::weak_ptr&lt;a&gt; _a;</code>，便能成功执行两个析构函数。</p>
+<h3 id="2-4-Guidelines"><a href="#2-4-Guidelines" class="headerlink" title="2.4 Guidelines"></a>2.4 Guidelines</h3><p>No Allocation Is Better then Allocation</p>
+<ul>
+<li>Makeing use of the stack and value-semantic types should be preferred to dynamic allocation</li>
+<li>Objects on the stacl are easier to reason about and more “predictable”</li>
+<li>Dynamic memory usage can hava a <strong>significant cost</strong>: allocations are not free, they can reduce locality, and the compiler is often not able to aggressively optimize</li>
+<li>Sometimes allocations are necessary - <strong>allocate only when you need to</strong></li>
+<li>Always use <strong>smart pointers</strong> - do not use <code>new</code>&#x2F;<code>delete</code></li>
+</ul>
+<p><code>std::unique_ptr</code> as Your First Choice</p>
+<ul>
+<li>If dynamic allocation is necessary, <code>std::unique_ptr</code> <strong>should be your first choise</strong></li>
+<li>It is a <strong>zero-cost abstraction</strong> over <code>new</code>&#x2F;<code>delete</code> (except for some rare cases)</li>
+<li>It models <strong>unique</strong> ownership, which is simple and easy to reason about</li>
+</ul>
+<p><code>std::shared_ptr</code> Should Be Used Sparingly</p>
+<ul>
+<li>It is not a zero-cost abstraction over <code>new</code>&#x2F;<code>delete</code> - it can have significant overhead due to atomic reference-counting operations</li>
+<li>Shared ownership <strong>can be harder to reason about</strong></li>
+</ul>
+<p>Always Use <code>std::make_xxx</code> Functions to Create Smart Pointers</p>
+<ul>
+<li>They prevent potential memory leaks</li>
+<li>They make the code terser and more readable</li>
+<li>They do not require <code>new</code> to be explicitly called</li>
+<li>They can greatly improve performance for <code>std::shared_ptr</code></li>
+</ul>
+<p>Role of Raw Pointers in Mordern C++</p>
+<ul>
+<li>In Mordern C++, raw pointers are “optional reference” to ab object</li>
+<li>A raw pointer should <strong>never</strong> imply ownership</li>
+<li>As long as raw pointers are not managing memory, they’re fine to use</li>
+</ul>
+<p><strong>最佳实践</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">linked_list</span> &#123;</span><br><span class="line">    T _value;</span><br><span class="line">    std::unique_ptr&lt;linked_list&lt;T&gt;&gt; _next;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">binary_tree</span> &#123;</span><br><span class="line">    T _value;</span><br><span class="line">    std::unique_ptr&lt;binary_tree&lt;T&gt;&gt; _left;</span><br><span class="line">    std::unique_ptr&lt;binary_tree&lt;T&gt;&gt; _right;</span><br><span class="line">    binary_tree&lt;T&gt;* _parent;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">texture</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">mesh</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">game_object</span> &#123;</span><br><span class="line">    std::shared_ptr&lt;texture&gt; _texture;</span><br><span class="line">    std::shared_ptr&lt;mesh&gt; _mesh;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">cahce</span> &#123;</span><br><span class="line">    std::unordered_map&lt;std::string, std::weak_ptr&lt;T&gt;&gt; _items;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-Creating-Movable-Classes"><a href="#3-Creating-Movable-Classes" class="headerlink" title="3. Creating Movable Classes"></a>3. Creating Movable Classes</h2><h3 id="3-1-Standard-Library-Support-for-Movable-Types"><a href="#3-1-Standard-Library-Support-for-Movable-Types" class="headerlink" title="3.1 Standard Library Support for Movable Types"></a>3.1 Standard Library Support for Movable Types</h3><ul>
+<li>Implemeted move operations for your types allows your code to be faster, safer, and more expressive.</li>
+<li>Learned that the standard library provides a huge number of move-aware containers and utilities, which make use of move operations where posiible.</li>
+<li>Studied that the mordern C++ libraries follow the steps of the standard library and will strive to provide more-awareness.</li>
+<li>Understood that <strong>always think about move semantics and move-awareness</strong> when creating your own types.</li>
+</ul>
+<p>回顾一下类型构造时采取的不同参数，先来看一个例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">foo</span> &#123;</span><br><span class="line">    <span class="built_in">foo</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;foo()\n&quot;</span>; &#125;</span><br><span class="line">    ~<span class="built_in">foo</span>() &#123; std::cout &lt;&lt; <span class="string">&quot;~foo()\n&quot;</span>; &#125;</span><br><span class="line">    <span class="built_in">foo</span>(<span class="type">const</span> foo&amp;) &#123; std::cout &lt;&lt; <span class="string">&quot;foo(const foo&amp;)\n&quot;</span>; &#125;</span><br><span class="line">	<span class="built_in">foo</span>(foo&amp;&amp;) &#123; std::cout &lt;&lt; <span class="string">&quot;foo(foo&amp;&amp;)\n&quot;</span>; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="type">void</span> vector_move_awareness &#123;</span><br><span class="line">    std::vector&lt;foo&gt; v; v.<span class="built_in">reserve</span>(<span class="number">10</span>);</span><br><span class="line">    foo f0;</span><br><span class="line">    <span class="comment">// &quot;foo()&quot;</span></span><br><span class="line">    v.<span class="built_in">push_back</span>(f0);</span><br><span class="line">    <span class="comment">// &quot;foo(const foo&amp;)&quot;</span></span><br><span class="line">    v.<span class="built_in">push_back</span>(std::<span class="built_in">move</span>(f0));</span><br><span class="line">    <span class="comment">// &quot;foo(foo&amp;&amp;)&quot;</span></span><br><span class="line">    v.<span class="built_in">push_back</span>(foo&#123;&#125;);</span><br><span class="line">    <span class="comment">// &quot;foo()&quot;</span></span><br><span class="line">    <span class="comment">// &quot;foo(foo&amp;&amp;)&quot;</span></span><br><span class="line">&#125;</span><br><span class="line">	<span class="comment">// &quot;~foo()&quot; ** 5</span></span><br></pre></td></tr></table></figure>
+
+<p>可以看见，在一些对象被构造时出现了很多无必要的移动语义。这种情况可以通过使用一些容器(Container)来避免、甚至完全回避移动语义。<code>std::vector::emplace_back</code>就是一个很好的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">bar</span> &#123;</span><br><span class="line">    <span class="type">int</span> _x;</span><br><span class="line">    <span class="built_in">bar</span>(<span class="type">int</span> x) : _x&#123;x&#125; &#123; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">vector_emplacement</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;bar&gt; v; v.<span class="built_in">reserve</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="comment">// Moves `bar` temporary</span></span><br><span class="line">    v.<span class="built_in">push_back</span>(bar&#123;<span class="number">42</span>&#125;);</span><br><span class="line">    <span class="comment">// Constructs `bar` instance &quot;in place&quot;</span></span><br><span class="line">    v.<span class="built_in">emplace_back</span>(<span class="number">42</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>emplace_back</code>能将参数完美转发到对应的容器内并进行构造。而对于一些嵌套的构造来说，就不可避免地发生移动语义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">bar_wrapper</span> &#123;</span><br><span class="line">    bar _b;</span><br><span class="line">    <span class="built_in">bar_wrapper</span>(bar b) : _b&#123;std::<span class="built_in">move</span>(b)&#125; &#123; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">vector_emplacement_and_move</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::vector&lt;bar_wrapper&gt; v;</span><br><span class="line">    <span class="comment">// 即使`bar_wrapper`能够完美转发，但是参数`bar&#123;42&#125;`仍然需要在此处被构建，并被移动</span></span><br><span class="line">    v.<span class="built_in">emplace_back</span>(bar&#123;<span class="number">42</span>&#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>除了<code>std::vector</code>，还有很多标准库中的容器支持<code>emplace</code>，譬如<code>std::map</code>、<code>std::set</code>、<code>std::list</code>。</p>
+</blockquote>
+<p>也有很多通用函数与类支持移动语义，例如：</p>
+<ul>
+<li>通用功能：<code>std::swap</code>和<code>std::exchange</code></li>
+<li>封装类：<code>std::pair</code>和<code>std::tuple</code></li>
+<li>计数器：<code>std::move_iterator</code></li>
+</ul>
+<h4 id="Utility-Functions"><a href="#Utility-Functions" class="headerlink" title="Utility Functions"></a>Utility Functions</h4><p>拿<code>std::swap</code>来说，在 C++11 之前，它通常如下定义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">old_swap</span><span class="params">(T&amp; x, T&amp; y)</span> </span>&#123;</span><br><span class="line">    T tmp&#123;x&#125;; <span class="comment">// copy #0</span></span><br><span class="line">    x = y;    <span class="comment">// copy #1</span></span><br><span class="line">    y = tmp;  <span class="comment">// copy #2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>居然执行了三次复制操作，可谓十分消耗性能了。在 C++11 之后，开发者们就将复制语义全部更换为移动语义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">new_swap</span><span class="params">(T&amp; x, T&amp; y)</span> </span>&#123;</span><br><span class="line">    T tmp&#123;std::<span class="built_in">move</span>(x)&#125;; <span class="comment">// copy #0</span></span><br><span class="line">    x = std::<span class="built_in">move</span>(y);    <span class="comment">// move #1</span></span><br><span class="line">    y = std::<span class="built_in">move</span>(tmp);  <span class="comment">// move #2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>熟悉这些通用功能还能简化我们的代码。还记得我们之前实现的<code>UniquePtr</code>吗？它的移动构造函数就可以如下定义：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ownership transfer</span></span><br><span class="line"><span class="built_in">UniquePtr</span>(UniquePtr&amp;&amp; rhs) <span class="keyword">noexcept</span></span><br><span class="line">    : _ptr&#123;std::<span class="built_in">exchange</span>(rhs._p, <span class="literal">nullptr</span>)&#125; &#123; &#125;</span><br><span class="line">UniquePtr&amp; <span class="keyword">operator</span>=(UniquePtr&amp;&amp; rhs) <span class="keyword">noexcept</span> &#123;</span><br><span class="line">    _ptr = std::<span class="built_in">exchange</span>(rhs._ptr, <span class="literal">nullptr</span>);</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Wrappers"><a href="#Wrappers" class="headerlink" title="Wrappers"></a>Wrappers</h4><p><code>std::pair</code>与<code>std::tuple</code>是将数个对象封装在一起的通用组件。由于<code>tuple</code>涵盖了绝大部分<code>pair</code>的特性，后文将仅以<code>tuple</code>举例。</p>
+<p><code>tuple</code>实例可以通过<code>std::make_tuple</code>或是赋值创建。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">foo</span> &#123; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">bar</span> &#123; &#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">creating_and_assigning</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::tuple&lt;foo, bar, <span class="type">int</span>&gt; t0&#123;&#123;&#125;, &#123;&#125;, <span class="number">1</span>&#125;;</span><br><span class="line">    <span class="keyword">auto</span> t1 = std::<span class="built_in">make_tuple</span>(foo&#123;&#125;, bar&#123;&#125;, <span class="number">5</span>);</span><br><span class="line">    </span><br><span class="line">    t0 = t1;</span><br><span class="line">    t1 = std::<span class="built_in">move</span>(t0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>封装类内部的元素可以通过<code>std::get</code>来获取。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">retrieving_by_index</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> t = std::<span class="built_in">make_tuple</span>(foo&#123;&#125;, bar&#123;&#125;, <span class="number">5</span>);</span><br><span class="line">    <span class="comment">// Getting lvalue references</span></span><br><span class="line">    foo&amp; i0 = std::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(t);</span><br><span class="line">    bar&amp; i1 = std::<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;(t);</span><br><span class="line">    <span class="type">int</span>&amp; i2 = std::<span class="built_in">get</span>&lt;<span class="number">2</span>&gt;(t);</span><br><span class="line">    <span class="comment">// Moving out of a tuple</span></span><br><span class="line">    foo m0 = std::<span class="built_in">move</span>(std::<span class="built_in">get</span>&lt;<span class="number">0</span>&gt;(t));</span><br><span class="line">    bar m1 = std::<span class="built_in">get</span>&lt;<span class="number">1</span>&gt;(std::<span class="built_in">move</span>(t));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从 C++14 开始，在没有重复类型的封装容器内，<code>std::get</code>支持通过传入类型来获取元素。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">retriving_by_type</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> t = std::<span class="built_in">make_tuple</span>(foo&#123;&#125;, bar&#123;&#125;, <span class="number">5</span>);</span><br><span class="line">    <span class="type">const</span> <span class="keyword">auto</span>&amp; i = std::<span class="built_in">get</span>&lt;<span class="type">int</span>&gt;(t);</span><br><span class="line">    <span class="built_in">assert</span>(i == <span class="number">5</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>std::tie</code>可以为封装器解包。当需要为函数返回值解包时还是挺有用的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">std::tuple&lt;foo, bar&gt; <span class="title">get_t</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">destructuring</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    foo f; bar b;</span><br><span class="line">    std::<span class="built_in">tie</span>(f, b) = <span class="built_in">get_t</span>();</span><br><span class="line">    <span class="comment">// 如果内部对象为右值则会从原封装器中移出。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>C++17 起出现了<code>std::apply</code>函数，它能将函数应用于<code>tuple</code>中。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">apply_example</span> <span class="params">()</span></span>&#123;</span><br><span class="line">    std::<span class="built_in">apply</span>(</span><br><span class="line">        [](<span class="type">int</span> x, <span class="type">int</span> y) -&gt; <span class="type">int</span> &#123; <span class="keyword">return</span> x + y; &#125;,</span><br><span class="line">        std::<span class="built_in">make_tuple</span>(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>类似的，<code>std::make_from_tuple</code>可以通过<code>tuple</code>元素来传入构造函数以创建对象。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">foobar</span> &#123;</span><br><span class="line">    <span class="built_in">foobar</span>(foo, bar) &#123; &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">make_from_tuple_example</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> fb = std::<span class="built_in">make_from_tuple</span>&lt;foobar&gt;(std::<span class="built_in">make_tuple</span>(foo&#123;&#125;, bar&#123;&#125;));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>善用<code>tuple</code>可以增加代码粘性，且能快速创建数据结构及其功能原型。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">two_ints</span> &#123;</span><br><span class="line">    <span class="type">int</span> _a, _b;</span><br><span class="line">    <span class="type">bool</span> <span class="keyword">operator</span>==(<span class="type">const</span> two_ints&amp; rhs) <span class="type">const</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> std::<span class="built_in">tie</span>(_a, _b) == std::<span class="built_in">tie</span>(rhs._a, rhs._b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上述中<code>==</code>可以替换为<code>&gt;</code>、<code>&gt;=</code>、<code>&lt;</code>、<code>&lt;=</code>等，按顺序比较。</p>
+<h4 id="std-move-iterator"><a href="#std-move-iterator" class="headerlink" title="std::move_iterator"></a><code>std::move_iterator</code></h4><p>STL 中提供了大量的基于<strong>迭代器</strong>的预置算法函数，但大部分算法不支持移动语义。幸运的是大佬们还是将<code>std::move_iterator</code>与<code>std::make_move_iterator</code>添入了<code>&lt;iterator&gt;</code>头文件中。这使得开发者能够将现存的迭代器“适配”于移动语义。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">std::vector&lt;std::string&gt; src&#123;<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;world&quot;</span>, <span class="string">&quot;iik&quot;</span>&#125;;</span><br><span class="line">std::vector&lt;std::string&gt; dst;</span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> condition = [] (<span class="type">const</span> std::string&amp; s) -&gt; <span class="type">bool</span> &#123;<span class="keyword">return</span> s.<span class="built_in">size</span>() == <span class="number">5</span>;&#125;;</span><br><span class="line"><span class="comment">// 不使用移动语义</span></span><br><span class="line">std::<span class="built_in">copy_if</span>(std::<span class="built_in">begin</span>(src), std::<span class="built_in">end</span>(src),</span><br><span class="line">             std::<span class="built_in">back_inserter</span>(dst),</span><br><span class="line">             condition);</span><br><span class="line"><span class="comment">// 使用移动语义</span></span><br><span class="line">std::<span class="built_in">copy_if</span>(std::<span class="built_in">make_move_iterator</span>(std::<span class="built_in">begin</span>(src)),</span><br><span class="line">             std::<span class="built_in">make_move_iterator</span>(std::<span class="built_in">end</span>(src)),</span><br><span class="line">             std::<span class="built_in">back_inserter</span>(dst),</span><br><span class="line">             condition);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-Rule-of-Five-and-Rule-of-Zero"><a href="#3-2-Rule-of-Five-and-Rule-of-Zero" class="headerlink" title="3.2 Rule of Five and Rule of Zero"></a>3.2 Rule of Five and Rule of Zero</h3><p>C++11 之前其实只有 Rule of Three：</p>
+<blockquote>
+<p>在一个类中需要显式地定义以下三项之一时，<strong>你应该同时显式地定义其它两个</strong>：</p>
+<ul>
+<li>析构函数(Destructor)</li>
+<li>拷贝构造函数(Copy constructor)</li>
+<li>重载拷贝赋值函数(Copy assignment)</li>
+</ul>
+</blockquote>
+<p>遵循这一规则能有效地避免开发者申请资源时的错误与疏忽。</p>
+<p>而 C++11 之后的 Rule of Five 实际上只是新增了两个约束：<strong>移动构造函数</strong>(Move constructor)与<strong>重载移动赋值函数</strong>(Move assignment)。</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/4782757/rule-of-three-becomes-rule-of-five-with-c11">Rule-of-Three becomes Rule-of-Five with C++11?</a></p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">file_handle</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">acquire</span><span class="params">(file_handle*)</span></span>;       <span class="comment">// 申请资源操作</span></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">release</span><span class="params">(file_handle*)</span></span>;       <span class="comment">// 释放资源操作</span></span><br><span class="line"><span class="function">file_handle* <span class="title">share</span><span class="params">(file_handle*)</span></span>; <span class="comment">// 拷贝操作</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">file</span> &#123;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    file_handle* _fh;</span><br><span class="line">    <span class="type">int</span> _flags&#123;<span class="number">0</span>&#125;;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    ~<span class="built_in">file</span>() &#123; <span class="built_in">release</span>(_fh); &#125;     <span class="comment">// 析构时释放资源</span></span><br><span class="line">    <span class="comment">// 根据 Rule of Three，需要实现*拷贝构造函数*与*重载拷贝赋值函数*</span></span><br><span class="line">    <span class="built_in">file</span>(<span class="type">const</span> file&amp; rhs)</span><br><span class="line">        : _fh&#123;<span class="built_in">share</span>(rhs._fh)&#125;,</span><br><span class="line">    	  _flags&#123;rhs._flags&#125; &#123; &#125;</span><br><span class="line">    file&amp; <span class="keyword">operator</span>=(<span class="type">const</span> file&amp; rhs) &#123;</span><br><span class="line">        _fh = <span class="built_in">share</span>(rhs._fh);</span><br><span class="line">        _flags = rhs._flags;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 根据 Rule of Five，需要实现*移动构造函数*与*重载移动赋值函数*</span></span><br><span class="line">    <span class="built_in">file</span>(file&amp;&amp; rhs)</span><br><span class="line">        : _fh&#123;std::<span class="built_in">exchange</span>(rhs._fh, <span class="literal">nullptr</span>)&#125;,</span><br><span class="line">    	  _flags&#123;rhs._flags&#125; &#123; &#125;</span><br><span class="line">    file&amp; <span class="keyword">operator</span>=(file&amp;&amp; rhs) &#123;</span><br><span class="line">        _fh = std::<span class="built_in">ecchange</span>(rhs._fh, <span class="literal">nullptr</span>);</span><br><span class="line">        _flags = rhs._flags;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Rule of Zero 是一种遵循<strong>单一职责原则</strong>(Sigle Responsibility Principle, SRP)的编码法则，它要求满足 Rule of Five 的类应该专门处理所有权，而其他业务类均不应该有自定义的析构、拷贝&#x2F;移动构造函数、重载拷贝&#x2F;移动赋值函数。这一原则作用与上例即将<code>file_handle</code>的处理单独写成一个类型，并只负责资源调度，而负责业务的<code>file</code>不能自定义上述五个函数。</p>
+<p>当然我们也可以利用智能指针的特性来封装这个文件类：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;utility&gt;</span></span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">file_handle</span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">acquire</span><span class="params">(file_handle*)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">release</span><span class="params">(file_handle*)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">unique_file</span> &#123;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    std::unique_ptr&lt;file_handle, <span class="keyword">decltype</span>(&amp;release)&gt; _fh;</span><br><span class="line">    <span class="type">int</span> _flags&#123;<span class="number">0</span>&#125;;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">unique_file</span>(file_handle* fh): _fh&#123;fh, &amp;release&#125; &#123; <span class="built_in">acquire</span>(fh); &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">shared_file</span> &#123;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    std::shared_ptr&lt;file_handle&gt; _fh;</span><br><span class="line">    <span class="type">int</span> _flags&#123;<span class="number">0</span>&#125;;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">shared_file</span>(file_handle* fh): _fh&#123;fh, &amp;release&#125; &#123; <span class="built_in">acquire</span>(fh); &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意<code>shared_ptr</code>与<code>unique_ptr</code>中 Deletor 的定义。</p>
+</blockquote>
+<h3 id="3-3-Example-Implementing-std-vector"><a href="#3-3-Example-Implementing-std-vector" class="headerlink" title="3.3 Example: Implementing std::vector"></a>3.3 Example: Implementing <code>std::vector</code></h3><p>Rule of Five</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">vector</span> &#123;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    T* _data&#123;<span class="literal">nullptr</span>&#125;;</span><br><span class="line">    std::<span class="type">size_t</span> _size&#123;<span class="number">0</span>&#125;, _capacity&#123;<span class="number">0</span>&#125;;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>() = <span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">vector</span>() &#123; <span class="keyword">delete</span>[] _data; &#125;</span><br><span class="line">    <span class="built_in">vector</span>(vector&amp;&amp; rhs)</span><br><span class="line">        : _data&#123;std::<span class="built_in">exchange</span>(rhs._data, <span class="literal">nullptr</span>)&#125;,</span><br><span class="line">          _size&#123;rhs._size&#125;, _capacity&#123;rhs._capacity&#125; &#123;&#125;</span><br><span class="line">    vector&amp; <span class="keyword">operator</span>=(vector&amp;&amp; rhs) &#123;</span><br><span class="line">        _data = std::<span class="built_in">exchange</span>(rhs._data, <span class="literal">nullptr</span>);</span><br><span class="line">        _size = rhs._size;</span><br><span class="line">        _capacity = rhs._capacity;</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">vector</span>(<span class="type">const</span> vector&amp; rhs)</span><br><span class="line">        : _size&#123;rhs._size&#125;, _capacity&#123;rhs._capacity&#125; &#123;</span><br><span class="line">        _data = <span class="keyword">new</span> T&#123;_capacity&#125;;</span><br><span class="line">        std::<span class="built_in">copy</span>(rhs._data, rhs._data + _size, _data);</span><br><span class="line">    &#125;</span><br><span class="line">    vector&amp; <span class="keyword">operator</span>=(<span class="type">const</span> vector&amp; rhs) &#123;</span><br><span class="line">        _size = rhs._size; _capacity = rhs._capacity;</span><br><span class="line">        _data = <span class="keyword">new</span> T&#123;_capacity&#125;;</span><br><span class="line">        std::<span class="built_in">copy</span>(rhs._data, rhs._data + _size, _data);</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(<span class="type">const</span> T&amp; x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (_capacity == _size) &#123;</span><br><span class="line">            <span class="type">const</span> <span class="keyword">auto</span> new_capacity = _capacity + <span class="number">10</span>;</span><br><span class="line">            T* tmp = <span class="keyword">new</span> T[new_capacity];</span><br><span class="line">            std::<span class="built_in">copy</span>(_data, _data + _capacity, tmp);</span><br><span class="line">            std::<span class="built_in">swap</span>(tmp, _data);</span><br><span class="line">            <span class="keyword">delete</span>[] tmp;</span><br><span class="line">            _capacity = new_capacity;</span><br><span class="line">        &#125;</span><br><span class="line">        _data[_size] = x;</span><br><span class="line">        ++_size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">const</span> <span class="keyword">auto</span>&amp; <span class="title">at</span><span class="params">(std::<span class="type">size_t</span> i)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="built_in">assert</span>(i &lt; _size);</span><br><span class="line">        <span class="keyword">return</span> _data[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Rule of Zero</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="function"><span class="keyword">auto</span> <span class="title">copy_uptr_array</span><span class="params">(<span class="type">const</span> std::unique_ptr&lt;T[]&gt;&amp; src,</span></span></span><br><span class="line"><span class="params"><span class="function">                     std::<span class="type">size_t</span> capacity, std::<span class="type">size_t</span> size)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">auto</span> result = std::<span class="built_in">make_unique</span>&lt;T[]&gt;(capacity);</span><br><span class="line">    std::<span class="built_in">copy</span>(src.<span class="built_in">get</span>(), src.<span class="built_in">get</span>() + size, result.<span class="built_in">get</span>());</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">vector</span> &#123;</span><br><span class="line">  <span class="keyword">private</span>:</span><br><span class="line">    std::unique_ptr&lt;T[]&gt; _data;</span><br><span class="line">    std::<span class="type">size_t</span> _size&#123;<span class="number">0</span>&#125;, _capacity&#123;<span class="number">0</span>&#125;;</span><br><span class="line">  <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">vector</span>() = <span class="keyword">default</span>;</span><br><span class="line">    ~<span class="built_in">vector</span>() &#123; <span class="keyword">delete</span>[] _data; &#125;</span><br><span class="line">	<span class="comment">// 使用`default`来避免人为申请资源带来的问题</span></span><br><span class="line">    <span class="built_in">vector</span>(vector&amp;&amp; rhs) = <span class="keyword">default</span>;</span><br><span class="line">    vector&amp; <span class="keyword">operator</span>=(vector&amp;&amp; rhs) = <span class="keyword">default</span>;</span><br><span class="line">    <span class="built_in">vector</span>(<span class="type">const</span> vector&amp; rhs)</span><br><span class="line">        : _size&#123;rhs._size&#125;, _capacity&#123;rhs._capacity&#125; &#123;</span><br><span class="line">        _data = <span class="built_in">copy_uptr_array</span>(rhs._data, _capacity, _size);</span><br><span class="line">    &#125;</span><br><span class="line">    vector&amp; <span class="keyword">operator</span>=(<span class="type">const</span> vector&amp; rhs) &#123;</span><br><span class="line">        _size = rhs._size; _capacity = rhs._capacity;</span><br><span class="line">        _data = <span class="built_in">copy_uptr_array</span>(rhs._data, _capacity, _size);</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> U&gt;</span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">push_back</span><span class="params">(U&amp;&amp; x)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (_capacity == _size) &#123;</span><br><span class="line">            <span class="type">const</span> <span class="keyword">auto</span> new_capacity = _capacity + <span class="number">10</span>;</span><br><span class="line">            _data = <span class="built_in">copy_uptr_array</span>(_data, new_capacity, _size);</span><br><span class="line">            _capacity = new_capacity;</span><br><span class="line">        &#125;</span><br><span class="line">        _data[_size] = std::forward&lt;U&gt;(x); <span class="comment">// !important</span></span><br><span class="line">        ++_size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="type">const</span> <span class="keyword">auto</span>&amp; <span class="title">at</span><span class="params">(std::<span class="type">size_t</span> i)</span> <span class="type">const</span></span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Discover-Lambdas"><a href="#4-Discover-Lambdas" class="headerlink" title="4. Discover Lambdas"></a>4. Discover Lambdas</h2><h3 id="4-1-Lambda-Expressions-What-Are-They"><a href="#4-1-Lambda-Expressions-What-Are-They" class="headerlink" title="4.1 Lambda Expressions: What Are They?"></a>4.1 Lambda Expressions: What Are They?</h3><ul>
+<li>A lambda expression produces a closure</li>
+<li>A closure is an <strong>unnamed function</strong> object capable of <strong>captureing variables in scope</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[函数对象参数] (操作符重载函数参数) <span class="keyword">mutable</span> 或 exception 声明 -&gt; 返回值类型 &#123;函数体&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>各项语法与作用详阅：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jimodetiantang/p/9016826.html">https://www.cnblogs.com/jimodetiantang/p/9016826.html</a></p>
+</blockquote>
+<h3 id="4-2-Lambda-Function-Objects-in-Disguise"><a href="#4-2-Lambda-Function-Objects-in-Disguise" class="headerlink" title="4.2 Lambda: Function Objects in Disguise"></a>4.2 Lambda: Function Objects in Disguise</h3><blockquote>
+<p>Performance Overhead：<a target="_blank" rel="noopener" href="https://godbolt.org/g/MTX3mW">https://godbolt.org/g/MTX3mW</a></p>
+</blockquote>
+<ul>
+<li>Every lambda expresgsion produce a <strong>unique</strong> anonymous type</li>
+<li>There is no type-erasure: the compiler is able to inline aggresively</li>
+<li>Lambda expression are <strong>zero-overhead abstracions</strong></li>
+</ul>
+<h3 id="4-3Anatomy-of-a-Lambda"><a href="#4-3Anatomy-of-a-Lambda" class="headerlink" title="4.3Anatomy of a Lambda"></a>4.3Anatomy of a Lambda</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[=, &amp;b, &amp;c](<span class="type">int</span> a, <span class="type">float</span> b)<span class="keyword">mutable</span> -&gt; <span class="type">int</span> &#123; <span class="keyword">return</span> a+b; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>[/* */]</code> is the <strong>capture-list</strong></li>
+<li>The capture-list is followed by the <strong>parameter-list</strong> <code>(/* */)</code></li>
+<li>The parameter-list is <strong>optionally</strong> followed by <code>mutable</code> and&#x2F;or a <strong>trailing return type</strong></li>
+<li>The <strong>body</strong> of the lambda is always at the end</li>
+</ul>
+<p>加上 <code>mutable</code> 修饰符后，可以修改传递进来的拷贝（注意是能修改拷贝，而不是值本身）。<code>exception</code> 声明用于指定函数抛出的异常，如抛出整数类型的异常，可以使用 <code>throw(int)</code>。</p>
+<p>从 C++14 开始，参数表可以写<code>auto</code>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="keyword">auto</span> l = [](<span class="type">const</span> <span class="keyword">auto</span>&amp; x) &#123; std::cout &lt;&lt; x; &#125;;</span><br><span class="line"><span class="comment">/* ↑ 等价于 ↓ */</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">anonymous</span> &#123;</span><br><span class="line">    <span class="keyword">template</span> &lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">	<span class="function"><span class="keyword">auto</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">const</span> T&amp; x)</span> <span class="type">const</span> </span>&#123; std::cout &lt;&lt; x; &#125;</span><br><span class="line">&#125; l;</span><br></pre></td></tr></table></figure>
+
+<p>再举几个有意思的例子：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 转发引用至目标函数`sink`</span></span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> l0 = [](<span class="keyword">auto</span>&amp;&amp; x) &#123; <span class="built_in">sink</span>(std::forward&lt;<span class="keyword">decltype</span>(x)&gt;(x)); &#125;;</span><br><span class="line"><span class="comment">// 不定参数</span></span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> l1 = [](<span class="keyword">auto</span>... xs) &#123; <span class="built_in">log</span>(severity::error, xs...); &#125;;</span><br><span class="line"><span class="comment">// 往Lambda里传Lambda</span></span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> l2 = [](<span class="keyword">auto</span> f) &#123; <span class="built_in">f</span>(); <span class="built_in">f</span>(); &#125;; <span class="type">const</span> <span class="keyword">auto</span> f = [] &#123; std::cout&lt;&lt;<span class="string">&quot;yes!&quot;</span>; &#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>函数对象参数</strong></p>
+<ul>
+<li><code>[ ] &#123; &#125;</code> - 不捕捉任何对象</li>
+<li><code>[ =] &#123; &#125;</code> - 按<strong>值</strong>传递所有局部变量（危险）</li>
+<li><code>[ &amp;] &#123; &#125;</code> - 按<strong>引用</strong>传递所有局部变量（危险）</li>
+<li><code>[ a] &#123; &#125;</code> - 将 <code>a</code> 进行<strong>值</strong>传递</li>
+<li><code>[ &amp;a] &#123; &#125;</code> - 将 <code>a</code> 进行<strong>引用</strong>传递</li>
+<li><code>[ &amp;, a] &#123; &#125;</code> - 将 <code>a</code> 进行<strong>值</strong>传递，其余所有局部变量按<strong>引用</strong>传递</li>
+<li><code>[ =, &amp;a] &#123; &#125;</code> - 将 <code>a</code> 进行<strong>引用</strong>传递，其余所有局部变量按<strong>值</strong>传递</li>
+</ul>
+<p>从 C++14 开始允许向 Lambda 表达式中初始化一些项目，例如：</p>
+<ul>
+<li><code>[i = 0] &#123; &#125;</code></li>
+<li><code>[x = std::move(foo)] &#123; &#125;</code></li>
+<li><code>[a&#123;10&#125;, b&#123;15&#125;] &#123; &#125;</code></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> b;</span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> l = [i = <span class="number">0</span>, a = b] &#123; &#125;;</span><br><span class="line"><span class="comment">/* ↑ 等价于 ↓ */</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">anonymous</span> &#123;</span><br><span class="line">    <span class="type">int</span> i = <span class="number">0</span>, a;</span><br><span class="line">    <span class="built_in">anonymous</span>(<span class="type">int</span> b) : a&#123;b&#125; &#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">auto</span> <span class="title">operator</span><span class="params">()</span><span class="params">()</span> <span class="type">const</span> </span>&#123;&#125;</span><br><span class="line">&#125; l&#123;b&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>结合移动语义</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> up = std::<span class="built_in">make_unique</span>&lt;foo&gt;();</span><br><span class="line"><span class="keyword">auto</span> l = [up = std::<span class="built_in">move</span>(up)]() multable &#123; <span class="built_in">sink</span>(std::<span class="built_in">move</span>(up)); &#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>mutable</code>的有无直接影响这个函数的运作：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">without_mutable</span> &#123;</span><br><span class="line">    std::unique_ptr&lt;foo&gt; up;</span><br><span class="line">    <span class="function"><span class="keyword">auto</span> <span class="title">operator</span><span class="params">()</span><span class="params">()</span> <span class="type">const</span> </span>&#123; <span class="built_in">sink</span>(std::<span class="built_in">move</span>(<span class="keyword">this</span>-&gt;up)); &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">with_mutable</span> &#123;</span><br><span class="line">    std::unique_ptr&lt;foo&gt; up;</span><br><span class="line">    <span class="function"><span class="keyword">auto</span> <span class="title">operator</span><span class="params">()</span><span class="params">()</span> </span>&#123; <span class="built_in">sink</span>(std::<span class="built_in">move</span>(<span class="keyword">this</span>-&gt;up)); &#125; <span class="comment">// ←少了`const`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><code>constexpr</code> 与 C++17</strong></p>
+<p>C++17 中，Lambda 表达式均被隐式地加上了<code>constexpr</code>标识。下面三者均等价：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[]&#123; <span class="keyword">return</span> <span class="number">10</span>; &#125;</span><br><span class="line">[]() <span class="keyword">constexpr</span> &#123; <span class="keyword">return</span> <span class="number">10</span>; &#125;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ann</span> &#123; <span class="function"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <span class="title">operator</span><span class="params">()</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> <span class="number">10</span>; &#125; &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>同时 Lambda 可以被塞进模板声明了（下列代码在 C++11&#x2F;14 会发生编译期错误）：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std::array&lt;<span class="type">int</span>, []&#123; <span class="keyword">return</span> 10; &#125;()&gt; ints;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Summary</strong></p>
+<ul>
+<li>Learned that lambdas can flexibly capture the surrounding environment</li>
+<li>Studied that new closure data members can be defined with “generalized lambda capures”</li>
+<li>Discussed that <code>mutable</code> can be used to remove the <code>const </code> quealifier from the closure’s generated <code>operator()</code></li>
+<li>Learned that auto parameters can be used to generate closure with a templated <code>operator()</code></li>
+<li>Lambdas can be <code>constexpr</code> in C++17</li>
+</ul>
+<h2 id="5-Lambdas-as-First-Class-Citizens"><a href="#5-Lambdas-as-First-Class-Citizens" class="headerlink" title="5. Lambdas as First-Class Citizens"></a>5. Lambdas as First-Class Citizens</h2><h3 id="5-1-Lambdas-Versatile-Tools"><a href="#5-1-Lambdas-Versatile-Tools" class="headerlink" title="5.1 Lambdas: Versatile Tools"></a>5.1 Lambdas: Versatile Tools</h3><blockquote>
+<p>什么是<strong>第一类对象</strong>(First-class citizen)？指可以在执行器创造并作为参数传递给其他函数或存入变量的实体。一般第一类对象所持有的特性为：</p>
+<ul>
+<li>可以被存入变数或其他结构</li>
+<li>可以被作为参数传递给其他函数</li>
+<li>可以被作为函数的返回值</li>
+<li>可以在执行期创造，而无需完全在设计期全部写出</li>
+<li>即使没有被系结至某一名称，也可以存在</li>
+</ul>
+<p>绝大多数语言中，数值与基础型别都是第一类对象，然而不同语言中对函数的区别很大，例如C语言与C++中的函数不是第一类对象，因为在这些语言中函数不能在执行期创造，而必须在设计时全部写好。相比之下，Scheme中的函数是第一类对象，因为可以用 Lambda 函数并作为第一类对象来操作。</p>
+</blockquote>
+<p>C++ 中函数名实际上意味着函数的引用，当一个普通的函数<code>void func()&#123;&#125;</code>作为参数时，<code>func</code>与<code>&amp;func</code>是等价的。这也就意味着指向该函数的指针也能使用<code>operator()()</code>执行，即<code>func_ptr()</code>等价于<code>(*func_ptr)()</code>。</p>
+<p>正因为这个特性，面对参数重载的函数，编译器会不明白选取哪个函数：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">predicate</span><span class="params">(<span class="type">const</span> Foo&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="type">bool</span> <span class="title">predicate</span><span class="params">(<span class="type">const</span> Bar&amp;)</span></span>;</span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">test</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::<span class="built_in">find_if</span>(c.<span class="built_in">begin</span>(), c.<span class="built_in">end</span>(), predicate);</span><br><span class="line">    <span class="comment">// Fails to compile</span></span><br><span class="line">    <span class="keyword">auto</span> p = <span class="built_in">static_cast</span>&lt;<span class="built_in">bool</span>(*)(<span class="type">const</span> Foo&amp;)&gt;(predicate);</span><br><span class="line">    <span class="comment">// OjbK!</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在<code>&lt;functional&gt;</code>库中有很多功能于 C++14 被弃用了，而这些都能用 Lambda 表达式重新实现：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Deprecated:</span></span><br><span class="line"><span class="keyword">auto</span> b0 = std::<span class="built_in">bind1st</span>(f, <span class="number">42</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Recommended:</span></span><br><span class="line"><span class="keyword">auto</span> b0 = [](<span class="keyword">auto</span>&amp;&amp;... xs) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">f</span>(<span class="number">42</span>, std::forward&lt;<span class="keyword">decltype</span>(xs)&gt;(xs)...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>“ <code>&lt;functional&gt;</code>: What’s New, And Proper Usage”：<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=zt7ThwVfap0">https://www.youtube.com/watch?v=zt7ThwVfap0</a></p>
+</blockquote>
+<p>与重载、  模板共同使用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span>       </span>&#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line"><span class="function"><span class="type">float</span> <span class="title">add</span><span class="params">(<span class="type">float</span> a, <span class="type">float</span> b)</span> </span>&#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line"><span class="keyword">auto</span> add10 = [](<span class="keyword">auto</span> x) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">add</span>(<span class="built_in">static_cast</span>&lt;<span class="keyword">decltype</span>(x)&gt;(<span class="number">10</span>), x);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">add10</span>(<span class="number">10</span>);    <span class="comment">// = 20</span></span><br><span class="line"><span class="built_in">add10</span>(<span class="number">10.5f</span>); <span class="comment">// = 20.5</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-Strong-Callable-Objects"><a href="#5-2-Strong-Callable-Objects" class="headerlink" title="5.2 Strong Callable Objects"></a>5.2 Strong Callable Objects</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span> </span>&#123; std::cout &lt;&lt; <span class="string">&quot;hello!\n&quot;</span>; &#125;</span><br><span class="line"><span class="comment">////////////</span></span><br><span class="line"><span class="keyword">auto</span> p0 = &amp;foo;</span><br><span class="line"><span class="built_in">void</span> (*p1)() = &amp;foo;</span><br><span class="line">std::vector&lt;<span class="type">void</span> (*)()&gt; vec&#123;&amp;foo&#125;;</span><br><span class="line"><span class="comment">////////////</span></span><br><span class="line"><span class="built_in">p0</span>(); <span class="built_in">p1</span>(); vec[<span class="number">0</span>](); <span class="comment">// ok</span></span><br></pre></td></tr></table></figure>
+
+<p>正如之前所提到的，Lambda 表达式可以类比为一个匿名的 struct，它具有自己的<code>operator()</code>重载，这意味着每一个匿名函数都会产生一个全新的类型：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 由于类型不确定，Lambda 表达式必须要与`auto`或者模板相关联</span></span><br><span class="line"><span class="keyword">auto</span> p0 = []&#123; std::cout &lt;&lt; <span class="string">&quot;yesyesyes\n&quot;</span>; &#125;;</span><br><span class="line"><span class="keyword">template</span> &lt;<span class="keyword">typename</span> F&gt;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">wrapper</span> &#123; F _f; &#125;;</span><br><span class="line"></span><br><span class="line">wrapper&lt;<span class="keyword">decltype</span>(p0)&gt; w&#123;std::<span class="built_in">move</span>(p0)&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>即使两个匿名函数拥有完全一致的定义、参数表等，它们的类型还是不一样！</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> l0 = []&#123;&#125;; <span class="keyword">auto</span> l1 = []&#123;&#125;;</span><br><span class="line"><span class="built_in">assert</span>(<span class="keyword">decltype</span>(l0) != <span class="keyword">decltype</span>(l1));</span><br></pre></td></tr></table></figure>
+
+<p>一个<strong>没有指定任何捕获</strong>的 Lambda 函数，可以<strong>显式</strong>转换成一个具有<strong>相同声明形式</strong>函数指针。所以，像下面这样做是合法的：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> a_lambda_func = [](<span class="type">int</span> x) &#123; <span class="comment">/*...*/</span> &#125;;</span><br><span class="line"><span class="built_in">void</span>(*func_ptr)(<span class="type">int</span>) = a_lambda_func;</span><br><span class="line"><span class="built_in">func_ptr</span>(<span class="number">4</span>); <span class="comment">//calls the lambda.</span></span><br></pre></td></tr></table></figure>
+
+<p>而下面这个例子则会引发错误：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i;</span><br><span class="line"><span class="keyword">auto</span> l0 = [&amp;i]&#123; &#125;;</span><br><span class="line"><span class="built_in">void</span>(*p0)() = l0;</span><br><span class="line"><span class="comment">// error: cannot convert `main()::&lt;lambda()&gt;` to `void(*)()` in initialization</span></span><br></pre></td></tr></table></figure>
+
+<p>无参 Lambda 表达式可以通过一元运算符 <code>+</code>，显式地转换为对应的函数指针。这样就不需要把函数指针对应形式写出来了，直接 <code>auto</code> 走起：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> l0 = []&#123; &#125;;</span><br><span class="line"><span class="built_in">static_assert</span>(!std::is_same_v&lt;<span class="keyword">decltype</span>(l0), <span class="built_in">void</span>(*)()&gt;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">auto</span> p0 = +[]&#123; &#125;; <span class="comment">// converted to function pointer</span></span><br><span class="line"><span class="built_in">static_assert</span>( std::is_same_v&lt;<span class="keyword">decltype</span>(p0), <span class="built_in">void</span>(*)()&gt;);</span><br></pre></td></tr></table></figure>
+
+<h4 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h4><blockquote>
+<p>Concept 指一类数据类型能满足一定条件的模板集合，它可以通过<code>require</code>声明需满足的表达式来为<code>template</code>作出一系列限定。</p>
+</blockquote>
+<p><code>FunctionObject</code>就是原生的一个 Concept，如下定义：</p>
+<blockquote>
+<p>类型 T 如果是 <code>FunctionObject</code>，需要满足：</p>
+<ul>
+<li><p>类型 T 满足 <code>std::is_object</code></p>
+</li>
+<li><p>给定如下条件</p>
+<ul>
+<li><code>f</code>, 为 <code>T</code> 的一个变量或常量实例</li>
+<li><code>args</code>, 一个匹配的参数表</li>
+</ul>
+<p>该表达式需合法：<code>f(args)</code>，表现为函数的调用</p>
+</li>
+</ul>
+</blockquote>
+<p>而 <code>Callable</code> 则是需要满足 <code>std::invoke</code> 的调用。详见<a target="_blank" rel="noopener" href="https://en.cppreference.com/w/cpp/utility/functional/invoke">Cppref</a>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">std::<span class="built_in">invoke</span>(add, <span class="number">-9</span>, <span class="number">23</span>);</span><br><span class="line"></span><br><span class="line">std::<span class="built_in">invoke</span>([]() &#123;<span class="built_in">print</span>(<span class="number">42</span>);&#125;);</span><br><span class="line"></span><br><span class="line"><span class="function">Foo <span class="title">foo</span><span class="params">(<span class="number">1234</span>)</span></span>;</span><br><span class="line">std::<span class="built_in">invoke</span>(&amp;Foo::print, foo);</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> num = std::<span class="built_in">invoke</span>(&amp;Foo::_num, foo);</span><br><span class="line"><span class="built_in">assert</span>(num == <span class="number">1234</span>);</span><br><span class="line"></span><br><span class="line">std::<span class="built_in">invoke</span>(printer&#123;&#125;, <span class="number">18</span>);</span><br><span class="line"><span class="comment">// Very useful in generic code and template</span></span><br></pre></td></tr></table></figure>
+
+<p>标准库中也有很多同 <code>Callable</code> 共同起作用的函数：</p>
+<ul>
+<li><code>std::function</code></li>
+<li><code>std::bind</code></li>
+<li><code>std::result_of</code></li>
+<li><code>std::thread::thread</code></li>
+<li><code>std::call_once</code></li>
+<li><code>std::async</code></li>
+<li><code>std::packaged_task</code></li>
+<li><code>std::reference_wrapper</code></li>
+</ul>
+<h4 id="Type-Erasure"><a href="#Type-Erasure" class="headerlink" title="Type Erasure"></a>Type Erasure</h4><p>鉴于即使使用了<code>auto f = +[]&#123; &#125;;</code>也难以推断<code>f</code>的实际类型，标准库中引入了<code>std::function</code>来解决这个问题。</p>
+<ul>
+<li>Type erasure is the idea of “erasing” the concrete type of an object into some common type that can store anything satisfying a particular concept</li>
+<li>Usually requires indirection and&#x2F;or dynamic allocations</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">A</span> &#123;<span class="function"><span class="type">void</span> <span class="title">foo</span><span class="params">()</span></span>; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">B</span> &#123;<span class="function"><span class="type">void</span> <span class="title">bar</span><span class="params">()</span></span>; &#125;;</span><br><span class="line">std::any x = A&#123;&#125;;</span><br><span class="line">         x = B&#123;&#125;; <span class="comment">// OK</span></span><br><span class="line"><span class="comment">// ref: https://en.cppreference.com/w/cpp/utility/any</span></span><br></pre></td></tr></table></figure>
+
+<p><code>std::function </code> 能为 <code>Callable</code> 对象进行类型擦除。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> </span>&#123; <span class="keyword">return</span> a + b; &#125;</span><br><span class="line"><span class="type">const</span> <span class="keyword">auto</span> sub = [](<span class="type">int</span> a, <span class="type">int</span> b) &#123; <span class="keyword">return</span> a - b; &#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">mult</span> &#123;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span> <span class="type">const</span> </span>&#123; <span class="keyword">return</span> a * b; &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">///////////</span></span><br><span class="line">std::function&lt;<span class="type">int</span>(<span class="type">int</span>,<span class="type">int</span>)&gt; f = add;</span><br><span class="line">f = sub;</span><br><span class="line">f = mult&#123;&#125;;</span><br><span class="line">f = [](<span class="type">int</span> a, <span class="type">int</span> b) &#123; <span class="keyword">return</span> a / b; &#125;;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>类模板 std::function 是<strong>通用多态函数封装器</strong>。</li>
+<li>std::function 的实例能<strong>存储、复制及调用</strong>任何可调用 (Callable) 目标——函数、 lambda 表达式、 bind 表达式或其他函数对象，还有指向成员函数指针和指向数据成员指针。</li>
+<li>它也是对 C++ 中现有的可调用实体的一种类型安全的包裹（相对来说，函数指针的调用不是类型安全的）</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// no-member functions</span></span><br><span class="line">std::function&lt;<span class="type">void</span>(<span class="type">int</span>)&gt; f = print_num;</span><br><span class="line"><span class="built_in">f</span>(<span class="number">-9</span>);</span><br><span class="line"><span class="comment">// lambda expressions</span></span><br><span class="line">std::function&lt;<span class="type">void</span>()&gt; f = [] &#123; std::cout &lt;&lt; <span class="number">42</span>; &#125;;</span><br><span class="line"><span class="built_in">f</span>();</span><br><span class="line"><span class="comment">// member functions</span></span><br><span class="line">std::function&lt;<span class="type">void</span>(<span class="type">const</span> Foo&amp;, <span class="type">int</span>)&gt; f = &amp;Foo::print;</span><br><span class="line"><span class="function">Foo <span class="title">foo</span><span class="params">(<span class="number">1234</span>)</span></span>;</span><br><span class="line"><span class="built_in">f</span>(foo, <span class="number">1</span>);</span><br><span class="line"><span class="comment">// data members</span></span><br><span class="line">std::function&lt;<span class="type">int</span>(<span class="type">const</span> Foo&amp;)&gt; f = &amp;Foo::_number;</span><br><span class="line">std::cout&lt;&lt; <span class="built_in">f</span>(foo) &lt;&lt; <span class="string">&#x27;\n&#x27;</span>;</span><br><span class="line"><span class="comment">// handwritten function objects</span></span><br><span class="line">std::function&lt;<span class="type">void</span>(<span class="type">int</span>)&gt; f = printer&#123;&#125;;</span><br><span class="line"><span class="built_in">f</span>(<span class="number">1234</span>);</span><br></pre></td></tr></table></figure>
+
+<p><code>std::function</code>甚至可以为空，并任意重新绑定：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">add</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">sub</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span>;</span><br><span class="line"><span class="comment">//////////////</span></span><br><span class="line">std::function&lt;<span class="type">int</span>(<span class="type">int</span>, <span class="type">int</span>)&gt; f;	<span class="comment">// &lt;- empty</span></span><br><span class="line">f = add;						<span class="comment">// &lt;- `add`</span></span><br><span class="line">f = sub;						<span class="comment">// &lt;- `add`</span></span><br><span class="line">f = <span class="literal">nullptr</span>;					<span class="comment">// &lt;- empty again</span></span><br></pre></td></tr></table></figure>
+
+<p><code>std::function</code> 也可以直接储存在容器等数据结构中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">button</span> &#123;</span><br><span class="line">    std::vector&lt;std::function&lt;<span class="type">void</span>()&gt;&gt; on_click;</span><br><span class="line">	<span class="comment">// ...</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">/////////////</span></span><br><span class="line">button b;</span><br><span class="line">b += [] &#123; <span class="built_in">open_modal</span>(<span class="number">1</span>); &#125;;</span><br><span class="line">b += [] &#123; std::cout&lt;&lt;<span class="string">&quot;opening modal ...\n&quot;</span>; &#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Run-Time Overhead</p>
+<ul>
+<li><code>std::function</code> is <strong>not</strong> a zero-cost abstraction<ul>
+<li>Invoking the stored object requires indirection</li>
+<li>Can dynamically allocate if the stored object is big</li>
+<li>Hard to inline&#x2F;optimize</li>
+</ul>
+</li>
+<li><a target="_blank" rel="noopener" href="https://godbolt.org/g/i9vyyP">https://godbolt.org/g/i9vyyP</a></li>
+</ul>
+</blockquote>
+<h4 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h4><ul>
+<li>Understood that functions can be stored in variables using function pointers</li>
+<li>Learned that the hand-written function objects can be easily stored as theirtype is known</li>
+<li>Learned that closures must be stored with <code>auto</code> as their type is “anonymous”</li>
+<li>Understood that stateless closures can be implicitly converted to functionpointers</li>
+<li>Studied that the unary operator <code>+</code> can be used to explicitly produce functionpointers from stateless lambda expressions</li>
+<li>Learned about the Standard Library provides two concepts: <code>Function0bject</code> and <code>Callable</code></li>
+<li>Understood that <code>Callable</code> is more general as it includes member functionpointers and member data pointers</li>
+<li><code>std::invoke</code> can be used to invoke any <code>Callable</code> object</li>
+<li>Looked at many Standard Library utilities that accept <code>Callable</code> objects for genericity</li>
+<li><code>std::function</code> is a general-purpose polymorphic <code>Callable</code> wrapperlt supports copyable <code>Callable</code> objects</li>
+<li>lt uses type erasure and can potentially allocate memory</li>
+<li>lt is copyable, can be stored in containers, can be “empty” , and can bearbitrarily rebound to other <code>Callable</code> objects</li>
+</ul>
+<p><strong>Guideline</strong></p>
+<ul>
+<li>Never use <code>std::function</code> unless you need type erasure</li>
+<li>Use <code>auto</code> and templates instead - they can refer to arbitrary Callable&#96; objects without type erasure</li>
+<li>Use <code>std::function</code> when you need flexibility at run-time or need to store <code>Callable</code> objects with the same signature but different types homogeneously</li>
+</ul>
+<h3 id="5-3-Passing-Functions-to-Functions"><a href="#5-3-Passing-Functions-to-Functions" class="headerlink" title="5.3 Passing Functions to Functions"></a>5.3 Passing Functions to Functions</h3><h2 id="Mastering-Lambdas"><a href="#Mastering-Lambdas" class="headerlink" title="Mastering Lambdas"></a>Mastering Lambdas</h2><h3 id="Lambdas-and-the-Standard-Library"><a href="#Lambdas-and-the-Standard-Library" class="headerlink" title="Lambdas and the Standard Library"></a>Lambdas and the Standard Library</h3><h3 id="Lambdas-as-Local-Functions"><a href="#Lambdas-as-Local-Functions" class="headerlink" title="Lambdas as Local Functions"></a>Lambdas as Local Functions</h3><h3 id="Safer-Interfaces-with-Higher-Order-Function"><a href="#Safer-Interfaces-with-Higher-Order-Function" class="headerlink" title="Safer Interfaces with Higher-Order Function"></a>Safer Interfaces with Higher-Order Function</h3><h2 id="Programming-at-Compile-Time"><a href="#Programming-at-Compile-Time" class="headerlink" title="Programming at Compile-Time"></a>Programming at Compile-Time</h2><h3 id="Comstant-Expressions"><a href="#Comstant-Expressions" class="headerlink" title="Comstant Expressions"></a>Comstant Expressions</h3><h3 id="constexpr-in-The-Standard-Library"><a href="#constexpr-in-The-Standard-Library" class="headerlink" title="constexpr in The Standard Library"></a><code>constexpr</code> in The Standard Library</h3><h3 id="Exceptions-in-constexpr-Functions"><a href="#Exceptions-in-constexpr-Functions" class="headerlink" title="Exceptions in constexpr Functions"></a>Exceptions in <code>constexpr</code> Functions</h3><h2 id="Computations-on-Type"><a href="#Computations-on-Type" class="headerlink" title="Computations on Type"></a>Computations on Type</h2><h3 id="Metafunctions"><a href="#Metafunctions" class="headerlink" title="Metafunctions"></a>Metafunctions</h3><h3 id="Metaprogramming-Utilities-in-the-Standard-Library"><a href="#Metaprogramming-Utilities-in-the-Standard-Library" class="headerlink" title="Metaprogramming Utilities in the Standard Library"></a>Metaprogramming Utilities in the Standard Library</h3><h3 id="Example-Creating-a-Compile-Time-Set-Data-Structure"><a href="#Example-Creating-a-Compile-Time-Set-Data-Structure" class="headerlink" title="Example: Creating a Compile-Time Set Data Structure"></a>Example: Creating a Compile-Time Set Data Structure</h3><hr>
+<table>
+<thead>
+<tr>
+<th>E</th>
+<th>C</th>
+<th>E</th>
+<th>C</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>type manipulation</td>
+<td>类型转换</td>
+<td>paradigms</td>
+<td>范式</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+
+    
+    </div>
+    <script>chords.replace()</script>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2020/11/11/coding/MasteringCPPStandardLibraryFeatures/" data-id="cm9v3m2oz009of6ojcqk42jc1" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/11/22/comment/refrain/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/11/09/CG/thegibook/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">《全局光照技术》札记</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  
+  
+    
+      <script src="https://giscus.app/client.js"
+              data-repo="timrockefeller/timrockefeller.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE2Mjk2MzY="
+              data-category-id="DIC_kwDOCjrcRM4CUVZS"
+              data-mapping="pathname"
+              data-strict="-1"
+              data-reactions-enabled="0"
+              data-emit-metadata="-1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="zh-CN"
+              data-loading="lazy"
+              crossorigin="anonymous" 
+              async>
+      </script>
+
+    
+  
+
+
+</section>
+      
+        
+<aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recent</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="title">【踩坑记录】如何在 MacOS (Unix) 上运行 EraTW</a></p>
+              <p class="item-date"><time datetime="2025-01-23T00:00:00.000Z" itemprop="datePublished">2025-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="title">ECS &amp; Hierarchies</a></p>
+              <p class="item-date"><time datetime="2024-02-05T00:00:00.000Z" itemprop="datePublished">2024-02-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/02/coding/ECS/ECS_storage/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/02/coding/ECS/ECS_storage/" class="title">ECS 储存数据的方式</a></p>
+              <p class="item-date"><time datetime="2024-02-02T00:00:00.000Z" itemprop="datePublished">2024-02-02</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/12/06/bio/canning_or_willing/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a></p>
+              <p class="item-title"><a href="/2023/12/06/bio/canning_or_willing/" class="title">能做和会做</a></p>
+              <p class="item-date"><time datetime="2023-12-06T00:00:00.000Z" itemprop="datePublished">2023-12-06</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/11/17/coding/constly-const-ptr/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2023/11/17/coding/constly-const-ptr/" class="title">Constly Const Pointer</a></p>
+              <p class="item-date"><time datetime="2023-11-17T00:00:00.000Z" itemprop="datePublished">2023-11-17</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 15px;">ECS</a> <a href="/tags/Era/" style="font-size: 10px;">Era</a> <a href="/tags/Game/" style="font-size: 10px;">Game</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 11.67px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://blog.dashjay.com" target="_blank">DashJay</a>
+          </li>
+        
+          <li>
+            <a href="https://measureds.github.io" target="_blank">Measureds</a>
+          </li>
+        
+          <li>
+            <a href="https://zanbuffet.github.io" target="_blank">Zanbuffet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme mod from <a href="#">Icarus</a><br>
+      
+        <!-- <script src="https://api.quq.cat/hitokoto"></script>
+<div id="hitokoto"><script defer>hitokoto()</script></div> -->
+<p id="hitokoto">:D 获取中...</p>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+      
+    </div>
+  </div>
+</footer>
+
+    
+
+
+  
+    
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
+  
+  
+    
+<script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
+  
+  
+  
+  
+  
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+  </div>
+</body>
+</html>

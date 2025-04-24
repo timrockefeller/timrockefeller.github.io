@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <title>TFG|已知物体空间位置估计 | 外野 - wryyyyyyyyyY!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="TensorFlow又出了一个好玩的开源库：Graphics，主要解决从渲染器最终渲染结果逆推出各Mesh的Transform和Rotation。本文为官方提供的入门项目Object pose estimation的阅读笔记，代码均摘自源文件中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TFG|已知物体空间位置估计">
+<meta property="og:url" content="http://blog.iik.moe/2019/07/29/CG/01_Object_pose_estimation/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="TensorFlow又出了一个好玩的开源库：Graphics，主要解决从渲染器最终渲染结果逆推出各Mesh的Transform和Rotation。本文为官方提供的入门项目Object pose estimation的阅读笔记，代码均摘自源文件中。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://miao.su/images/2017/06/04/Konachan.com-240841anthropomorphismemperor_penguin_kemono_friendsgentoo_penguin_kemono_friendskemono_friendsnyoronyororoyal_penguin_kemono_friends00d36.jpg">
+<meta property="article:published_time" content="2019-07-29T22:40:00.000Z">
+<meta property="article:modified_time" content="2025-04-24T08:25:47.949Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="CG">
+<meta property="article:tag" content="ML">
+<meta property="article:tag" content="Graphics">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miao.su/images/2017/06/04/Konachan.com-240841anthropomorphismemperor_penguin_kemono_friendsgentoo_penguin_kemono_friendskemono_friendsnyoronyororoyal_penguin_kemono_friends00d36.jpg">
+  
+  
+  
+
+  
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
+  
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/csshake/1.5.2/csshake.min.css">
+
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  <script src="/js/chord.js"></script>
+  
+  
+    
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/css/lightgallery.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
+  
+  
+  
+  
+  
+  
+    <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f1fb63876cc310548f153f32652bc624";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+  
+
+
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        
+        <span class="site-title">外野</span>
+      </a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">目录</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+        
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="/image/avatar.jpg" />
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form>
+
+</div>
+
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">目录</a></td>
+        
+          <td><a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/image/avatar.jpg" />
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        79
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        48
+        <span>tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://twitter.com/kitekii_" target="_blank" title="twitter" class=tooltip >
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class=tooltip >
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class=tooltip >
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://steamcommunity.com/id/6hi/" target="_blank" title="steam" class=tooltip >
+                <i class="fa fa-steam"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
+  </div>
+  
+  
+</aside>
+
+      
+      <section id="main"><article id="post-CG/01_Object_pose_estimation" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <!-- <div class="background"></div> -->
+      
+      <!-- <script>
+        ;!(function($) {
+          var max = 99;
+          var index = Math.floor(Math.random() * max) + 1;
+          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
+        })(jQuery)
+      </script> -->
+      
+    
+    
+      
+	
+		<img src="https://miao.su/images/2017/06/04/Konachan.com-240841anthropomorphismemperor_penguin_kemono_friendsgentoo_penguin_kemono_friendskemono_friendsnyoronyororoyal_penguin_kemono_friends00d36.jpg" class="article-banner" />
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      TFG|已知物体空间位置估计
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2019/07/29/CG/01_Object_pose_estimation/">
+      <time datetime="2019-07-29T22:40:00.000Z" itemprop="datePublished">2019-07-29</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/CG/" rel="tag">CG</a>, <a class="tag-link-link" href="/tags/Graphics/" rel="tag">Graphics</a>, <a class="tag-link-link" href="/tags/ML/" rel="tag">ML</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <p>TensorFlow又出了一个好玩的开源库：<a target="_blank" rel="noopener" href="https://github.com/tensorflow/graphics">Graphics</a>，主要解决从渲染器最终渲染结果逆推出各Mesh的Transform和Rotation。本文为官方提供的入门项目<a target="_blank" rel="noopener" href="https://colab.research.google.com/github/tensorflow/graphics/blob/master/tensorflow_graphics/notebooks/6dof_alignment.ipynb">Object pose estimation</a>的阅读笔记，代码均摘自源文件中。</p>
+<span id="more"></span>
+
+<h3 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h3><p><img src="https://camo.githubusercontent.com/c2fbb02e0867c4281970a0397833f736b0440a73/68747470733a2f2f73746f726167652e676f6f676c65617069732e636f6d2f74656e736f72666c6f772d67726170686963732f6769742f726561646d652f63765f67726170686963732e6a7067"></p>
+<p>上图真是简洁易懂，其中模型可高度自定义，如这个教程将使用全连接。这里官方推荐使用Colab进行学习，一个不需要在本地配置环境的在线编辑器，有着支持深度学习的性能。</p>
+<h3 id="Object-pose-alignment"><a href="#Object-pose-alignment" class="headerlink" title="Object pose alignment"></a>Object pose alignment</h3><p>对一个三维物体的分析是很多产业的基础技术，诸如虚拟、增强现实，它们需要响应用户对物体各项参数的修改（如通过旋钮修改物体大小）。下面这个例子将介绍如何使用TensorFlow&#x2F;Graphics库对物体的旋转角、位移进行估计。</p>
+<p><img src="https://i.loli.net/2019/07/29/5d3ee06be90f183495.jpg"></p>
+<blockquote>
+<p>本文不可避免地会出现生硬翻译与心血来潮的句子，请见谅。</p>
+</blockquote>
+<p>本文将介绍两种方式：</p>
+<ul>
+<li><strong>机器学习</strong>：使用一个简单的神经网络进行深度学习。</li>
+<li><strong>数学优化</strong></li>
+</ul>
+<p>输入数据为一个表示顶点(Vec3)的有序数组，输出为7位数组（原来还没到图像啊，某种意义上十分简单了，运算量也不是很大）。</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>通过pip简单地安装需要的包。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">pip install tensorflow_graphics</span></span><br></pre></td></tr></table></figure>
+
+<p><em>待补充：如何安装GPU版本的TensorFlow&#x2F;Graphics</em></p>
+<p>接下来我们将所需要的包全部导入，同时加载一个简单的3D模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> absolute_import</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="keyword">from</span> __future__ <span class="keyword">import</span> print_function</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> tensorflow <span class="keyword">import</span> keras</span><br><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.geometry.transformation <span class="keyword">import</span> quaternion</span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.math <span class="keyword">import</span> vector</span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.notebooks <span class="keyword">import</span> threejs_visualization</span><br><span class="line"><span class="keyword">from</span> tensorflow_graphics.notebooks.resources <span class="keyword">import</span> tfg_simplified_logo</span><br><span class="line"></span><br><span class="line">tf.enable_eager_execution()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Loads the Tensorflow Graphics simplified logo.</span></span><br><span class="line">vertices = tfg_simplified_logo.mesh[<span class="string">&#x27;vertices&#x27;</span>].astype(np.float32)</span><br><span class="line">faces = tfg_simplified_logo.mesh[<span class="string">&#x27;faces&#x27;</span>]</span><br><span class="line">num_vertices = vertices.shape[<span class="number">0</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-深度学习方法"><a href="#1-深度学习方法" class="headerlink" title="1.深度学习方法"></a>1.深度学习方法</h3><h4 id="定义模型"><a href="#定义模型" class="headerlink" title="定义模型"></a>定义模型</h4><p>通过3D模型我们可以知道所有的顶点相对位置信息，籍此我们需要一个可以预测<strong>旋转角</strong>（用四元数表示）与<strong>位移</strong>（三维向量）的网。以下代码创建了一个仅3层的<strong>全连接网络</strong>，同时定义了<strong>损失函数</strong>。<em>注意：这个网络未经优化，优化模型并不是本文涵盖的内容。</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Constructs the model.</span></span><br><span class="line">model = keras.Sequential()</span><br><span class="line">model.add(layers.Flatten(input_shape=(num_vertices, <span class="number">3</span>)))</span><br><span class="line">model.add(layers.Dense(<span class="number">64</span>, activation=tf.nn.tanh))</span><br><span class="line">model.add(layers.Dense(<span class="number">64</span>, activation=tf.nn.relu))</span><br><span class="line">model.add(layers.Dense(<span class="number">7</span>))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">pose_estimation_loss</span>(<span class="params">y_true, y_pred</span>):</span><br><span class="line">  <span class="string">&quot;&quot;&quot;Pose estimation loss used for training.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  This loss measures the average of squared distance between some vertices</span></span><br><span class="line"><span class="string">  of the mesh in &#x27;rest pose&#x27; and the transformed mesh to which the predicted</span></span><br><span class="line"><span class="string">  inverse pose is applied. Comparing this loss with a regular L2 loss on the</span></span><br><span class="line"><span class="string">  quaternion and translation values is left as exercise to the interested</span></span><br><span class="line"><span class="string">  reader.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Args:</span></span><br><span class="line"><span class="string">    y_true: The ground-truth value.</span></span><br><span class="line"><span class="string">    y_pred: The prediction we want to evaluate the loss for.</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  Returns:</span></span><br><span class="line"><span class="string">    A scalar value containing the loss described in the description above.</span></span><br><span class="line"><span class="string">  &quot;&quot;&quot;</span></span><br><span class="line">  <span class="comment"># y_true.shape : (batch, 7)</span></span><br><span class="line">  y_true_q, y_true_t = tf.split(y_true, (<span class="number">4</span>, <span class="number">3</span>), axis=-<span class="number">1</span>)</span><br><span class="line">  <span class="comment"># y_pred.shape : (batch, 7)</span></span><br><span class="line">  y_pred_q, y_pred_t = tf.split(y_pred, (<span class="number">4</span>, <span class="number">3</span>), axis=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># vertices.shape: (num_vertices, 3)</span></span><br><span class="line">  <span class="comment"># corners.shape:(num_vertices, 1, 3)</span></span><br><span class="line">  corners = tf.expand_dims(vertices, axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># transformed_corners.shape: (num_vertices, batch, 3)</span></span><br><span class="line">  <span class="comment"># q and t shapes get pre-pre-padded with 1&#x27;s following standard broadcast rules.</span></span><br><span class="line">  transformed_corners = quaternion.rotate(corners, y_pred_q) + y_pred_t</span><br><span class="line"></span><br><span class="line">  <span class="comment"># recovered_corners.shape: (num_vertices, batch, 3)</span></span><br><span class="line">  recovered_corners = quaternion.rotate(transformed_corners - y_true_t,</span><br><span class="line">                                        quaternion.inverse(y_true_q))</span><br><span class="line"></span><br><span class="line">  <span class="comment"># vertex_error.shape: (num_vertices, batch)</span></span><br><span class="line">  vertex_error = tf.reduce_sum((recovered_corners - corners)**<span class="number">2</span>, axis=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> tf.reduce_mean(vertex_error)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">optimizer = keras.optimizers.Adam()</span><br><span class="line">model.<span class="built_in">compile</span>(loss=pose_estimation_loss, optimizer=optimizer)</span><br><span class="line">model.summary()</span><br></pre></td></tr></table></figure>
+
+<p>损失函数：</p>
+<ul>
+<li>拆分输出项：将<code>(,7)</code>拆分为<code>(,4)</code>和<code>(,3)</code></li>
+<li>用预测值对3D模型形变</li>
+<li>用正确值还原对3D模型的形变</li>
+<li>求出所有顶点偏移距离的平方（二阶范数）和</li>
+<li>返回单个batch的error<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1aedef9187c0">平均值</a></li>
+</ul>
+<p>优化器：<strong>Adam</strong></p>
+<h4 id="生成数据集"><a href="#生成数据集" class="headerlink" title="生成数据集"></a>生成数据集</h4><p>定义好了模型，我们便需要大量数据集去训练它。在每一个数据中，我们定义一个对3D模型的旋转、位移变化。值得注意的是，这些变化都可逆，以便损失函数的计算。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">generate_training_data</span>(<span class="params">num_samples</span>):</span><br><span class="line">  <span class="comment"># random_angles.shape: (num_samples, 3)</span></span><br><span class="line">  random_angles = np.random.uniform(-np.pi, np.pi,</span><br><span class="line">                                    (num_samples, <span class="number">3</span>)).astype(np.float32)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># random_quaternion.shape: (num_samples, 4)</span></span><br><span class="line">  random_quaternion = quaternion.from_euler(random_angles)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># random_translation.shape: (num_samples, 3)</span></span><br><span class="line">  random_translation = np.random.uniform(-<span class="number">2.0</span>, <span class="number">2.0</span>,</span><br><span class="line">                                         (num_samples, <span class="number">3</span>)).astype(np.float32)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># data.shape : (num_samples, num_vertices, 3)</span></span><br><span class="line">  data = quaternion.rotate(vertices[tf.newaxis, :, :],</span><br><span class="line">                           random_quaternion[:, tf.newaxis, :]</span><br><span class="line">                          ) + random_translation[:, tf.newaxis, :]</span><br><span class="line"></span><br><span class="line">  <span class="comment"># target.shape : (num_samples, 4+3)</span></span><br><span class="line">  target = tf.concat((random_quaternion, random_translation), axis=-<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> np.array(data), np.array(target)</span><br></pre></td></tr></table></figure>
+
+<p>上面这个函数可以帮助我们创建有限个数的训练集。</p>
+<p>注释：<code>quaternion</code>可以帮助我们从普通角转换为欧拉角，同时可以对一个3D对象进行旋转操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">num_samples = <span class="number">10000</span></span><br><span class="line"></span><br><span class="line">data, target = generate_training_data(num_samples)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(data.shape)   <span class="comment"># (num_samples, num_vertices, 3): the vertices</span></span><br><span class="line"><span class="built_in">print</span>(target.shape)  <span class="comment"># (num_samples, 4+3): the quaternion and translation</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="训练"><a href="#训练" class="headerlink" title="训练"></a>训练</h4><p>终于，我们可以开始训练了！</p>
+<p>以下代码定义回调类，输出训练中的细节信息，包括进度、损失等：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Callback allowing to display the progression of the training task.</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">ProgressTracker</span>(keras.callbacks.Callback):</span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, num_epochs, step=<span class="number">5</span></span>):</span><br><span class="line">    <span class="variable language_">self</span>.num_epochs = num_epochs</span><br><span class="line">    <span class="variable language_">self</span>.current_epoch = <span class="number">0.</span></span><br><span class="line">    <span class="variable language_">self</span>.step = step</span><br><span class="line">    <span class="variable language_">self</span>.last_percentage_report = <span class="number">0</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">on_epoch_end</span>(<span class="params">self, batch, logs=&#123;&#125;</span>):</span><br><span class="line">    <span class="variable language_">self</span>.current_epoch += <span class="number">1.</span></span><br><span class="line">    training_percentage = <span class="built_in">int</span>(<span class="variable language_">self</span>.current_epoch * <span class="number">100.0</span> / <span class="variable language_">self</span>.num_epochs)</span><br><span class="line">    <span class="keyword">if</span> training_percentage - <span class="variable language_">self</span>.last_percentage_report &gt;= <span class="variable language_">self</span>.step:</span><br><span class="line">      <span class="built_in">print</span>(<span class="string">&#x27;Training &#x27;</span> + <span class="built_in">str</span>(</span><br><span class="line">          training_percentage) + <span class="string">&#x27;% complete. Training loss: &#x27;</span> + <span class="built_in">str</span>(</span><br><span class="line">              logs.get(<span class="string">&#x27;loss&#x27;</span>)) + <span class="string">&#x27; | Validation loss: &#x27;</span> + <span class="built_in">str</span>(</span><br><span class="line">                  logs.get(<span class="string">&#x27;val_loss&#x27;</span>)))</span><br><span class="line">      <span class="variable language_">self</span>.last_percentage_report = training_percentage</span><br></pre></td></tr></table></figure>
+
+<p>在训练达到拟合点附近时，我们需要减小学习速率(Learning Rate, LR)，便需要以下回调函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">reduce_lr_callback = keras.callbacks.ReduceLROnPlateau(</span><br><span class="line">    monitor=<span class="string">&#x27;val_loss&#x27;</span>,</span><br><span class="line">    factor=<span class="number">0.5</span>,</span><br><span class="line">    patience=<span class="number">10</span>,</span><br><span class="line">    verbose=<span class="number">0</span>,</span><br><span class="line">    mode=<span class="string">&#x27;auto&#x27;</span>,</span><br><span class="line">    min_delta=<span class="number">0.0001</span>,</span><br><span class="line">    cooldown=<span class="number">0</span>,</span><br><span class="line">    min_lr=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+<p>加入这两个回调函数并开始训练：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># google internal 1</span></span><br><span class="line"><span class="comment"># Everything is now in place to train.</span></span><br><span class="line">EPOCHS = <span class="number">100</span></span><br><span class="line">pt = ProgressTracker(EPOCHS)</span><br><span class="line">history = model.fit(</span><br><span class="line">    data,</span><br><span class="line">    target,</span><br><span class="line">    epochs=EPOCHS,</span><br><span class="line">    validation_split=<span class="number">0.2</span>,</span><br><span class="line">    verbose=<span class="number">0</span>,</span><br><span class="line">    batch_size=<span class="number">32</span>,</span><br><span class="line">    callbacks=[reduce_lr_callback, pt])</span><br><span class="line"></span><br><span class="line">plt.plot(history.history[<span class="string">&#x27;loss&#x27;</span>])</span><br><span class="line">plt.plot(history.history[<span class="string">&#x27;val_loss&#x27;</span>])</span><br><span class="line">plt.ylim([<span class="number">0</span>, <span class="number">1</span>])</span><br><span class="line">plt.legend([<span class="string">&#x27;loss&#x27;</span>, <span class="string">&#x27;val loss&#x27;</span>], loc=<span class="string">&#x27;upper left&#x27;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&#x27;Train epoch&#x27;</span>)</span><br><span class="line">_ = plt.ylabel(<span class="string">&#x27;Error [mean square distance]&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2019/07/29/5d3ef701abf8324403.png"></p>
+<p>这样一来我们便得到了一个训练完成的模型。</p>
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>现在网络已经训练好并可以使用了！最终显示的结果将由两幅图像组成：前者包含了物体初始模型（淡柠色）和随机旋转平移的对象（淡密色），以便清晰地观察两者不同之处；后者同样显示了初始状态下的物体，也有应用神经网络预测变换的模型。希望这两个物体重合率高一些（叹气）。</p>
+<p><strong>注意</strong>：多次使用不同的验证数据进行测试时，可能会出现物体大小不一致的情况，这是因为四元数表示的物体旋转同时也包括了缩放角。如果想要固定比例，需要将四元数<strong>归一化</strong>。为达成这个条件，可以在模型中或损失函数中添加约束。</p>
+<p>我们从创建一个便于应用变化的函数开始：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Defines the loss function to be optimized.</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">transform_points</span>(<span class="params">target_points, quaternion_variable, translation_variable</span>):</span><br><span class="line">  <span class="keyword">return</span> quaternion.rotate(target_points,</span><br><span class="line">                           quaternion_variable) + translation_variable</span><br></pre></td></tr></table></figure>
+
+<p>借助<code>threejs</code>库来显示这几个3D模型：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Viewer</span>(<span class="title class_ inherited__">object</span>):</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, my_vertices</span>):</span><br><span class="line">    my_vertices = np.asarray(my_vertices)</span><br><span class="line">    context = threejs_visualization.build_context()</span><br><span class="line">    light1 = context.THREE.PointLight.new_object(<span class="number">0x808080</span>)</span><br><span class="line">    light1.position.<span class="built_in">set</span>(<span class="number">10.</span>, <span class="number">10.</span>, <span class="number">10.</span>)</span><br><span class="line">    light2 = context.THREE.AmbientLight.new_object(<span class="number">0x808080</span>)</span><br><span class="line">    lights = (light1, light2)</span><br><span class="line"></span><br><span class="line">    material = context.THREE.MeshLambertMaterial.new_object(&#123;</span><br><span class="line">        <span class="string">&#x27;color&#x27;</span>: <span class="number">0xfffacd</span>,</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    material_deformed = context.THREE.MeshLambertMaterial.new_object(&#123;</span><br><span class="line">        <span class="string">&#x27;color&#x27;</span>: <span class="number">0xf0fff0</span>,</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    camera = threejs_visualization.build_perspective_camera(</span><br><span class="line">        field_of_view=<span class="number">30</span>, position=(<span class="number">10.0</span>, <span class="number">10.0</span>, <span class="number">10.0</span>))</span><br><span class="line"></span><br><span class="line">    mesh = &#123;<span class="string">&#x27;vertices&#x27;</span>: vertices, <span class="string">&#x27;faces&#x27;</span>: faces, <span class="string">&#x27;material&#x27;</span>: material&#125;</span><br><span class="line">    transformed_mesh = &#123;</span><br><span class="line">        <span class="string">&#x27;vertices&#x27;</span>: my_vertices,</span><br><span class="line">        <span class="string">&#x27;faces&#x27;</span>: faces,</span><br><span class="line">        <span class="string">&#x27;material&#x27;</span>: material_deformed</span><br><span class="line">    &#125;</span><br><span class="line">    geometries = threejs_visualization.triangular_mesh_renderer(</span><br><span class="line">        [mesh, transformed_mesh],</span><br><span class="line">        lights=lights,</span><br><span class="line">        camera=camera,</span><br><span class="line">        width=<span class="number">400</span>,</span><br><span class="line">        height=<span class="number">400</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">self</span>.geometries = geometries</span><br><span class="line"></span><br><span class="line">  <span class="keyword">def</span> <span class="title function_">update</span>(<span class="params">self, transformed_points</span>):</span><br><span class="line">    <span class="variable language_">self</span>.geometries[<span class="number">1</span>].getAttribute(<span class="string">&#x27;position&#x27;</span>).copyArray(</span><br><span class="line">        transformed_points.numpy().ravel().tolist())</span><br><span class="line">    <span class="variable language_">self</span>.geometries[<span class="number">1</span>].getAttribute(<span class="string">&#x27;position&#x27;</span>).needsUpdate = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<p>定义随机变化的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">get_random_transform</span>():</span><br><span class="line">  <span class="comment"># Forms a random translation</span></span><br><span class="line">  <span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;translation_variable&#x27;</span>):</span><br><span class="line">    random_translation = tf.Variable(</span><br><span class="line">        np.random.uniform(-<span class="number">2.0</span>, <span class="number">2.0</span>, (<span class="number">3</span>,)), dtype=tf.float32)</span><br><span class="line"></span><br><span class="line">  <span class="comment"># Forms a random quaternion</span></span><br><span class="line">  hi = np.pi</span><br><span class="line">  lo = -hi</span><br><span class="line">  random_angles = np.random.uniform(lo, hi, (<span class="number">3</span>,)).astype(np.float32)</span><br><span class="line">  <span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;rotation_variable&#x27;</span>):</span><br><span class="line">    random_quaternion = tf.Variable(quaternion.from_euler(random_angles))</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> random_quaternion, random_translation</span><br></pre></td></tr></table></figure>
+
+<p>预测并显示该3D模型:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">random_quaternion, random_translation = get_random_transform()</span><br><span class="line"></span><br><span class="line">initial_orientation = transform_points(vertices, random_quaternion,</span><br><span class="line">                                       random_translation).numpy()</span><br><span class="line">viewer = Viewer(initial_orientation)</span><br><span class="line"></span><br><span class="line">predicted_transformation = model.predict(initial_orientation[tf.newaxis, :, :])</span><br><span class="line"></span><br><span class="line">predicted_inverse_q = quaternion.inverse(predicted_transformation[<span class="number">0</span>, <span class="number">0</span>:<span class="number">4</span>])</span><br><span class="line">predicted_inverse_t = -predicted_transformation[<span class="number">0</span>, <span class="number">4</span>:]</span><br><span class="line"></span><br><span class="line">predicted_aligned = quaternion.rotate(initial_orientation + predicted_inverse_t,</span><br><span class="line">                                      predicted_inverse_q)</span><br><span class="line"></span><br><span class="line">viewer = Viewer(predicted_aligned)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.loli.net/2019/07/29/5d3f0a274af1d42038.jpg"></p>
+<h3 id="2-Mathematical-optimization"><a href="#2-Mathematical-optimization" class="headerlink" title="2. Mathematical optimization"></a>2. Mathematical optimization</h3><p>Here the problem is tackled using mathematical optimization, which is another traditional way to approach the problem of object pose estimation. Given correspondences between the object in ‘rest pose’ (pastel lemon color) and its rotated and translated counter part (pastel honeydew color), the problem can be formulated as a minimization problem. The loss function can for instance be defined as the sum of Euclidean distances between the corresponding points using the current estimate of the rotation and translation of the transformed object. One can then compute the derivative of the rotation and translation parameters with respect to this loss function, and follow the gradient direction until convergence. The following cell closely follows that procedure, and uses gradient descent to align the two objects. It is worth noting that although the results are good, there are more efficient ways to solve this specific problem. The interested reader is referred to the Kabsch algorithm for further details.</p>
+<p><strong>Note</strong>: press play multiple times to sample different test cases.</p>
+<p>Define the <code>loss</code> and <code>gradient</code> functions:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">loss</span>(<span class="params">target_points, quaternion_variable, translation_variable</span>):</span><br><span class="line">  transformed_points = transform_points(target_points, quaternion_variable,</span><br><span class="line">                                        translation_variable)</span><br><span class="line">  error = (vertices - transformed_points) / num_vertices</span><br><span class="line">  <span class="keyword">return</span> vector.dot(error, error)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">gradient_loss</span>(<span class="params">target_points, quaternion, translation</span>):</span><br><span class="line">  <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> tape:</span><br><span class="line">    loss_value = loss(target_points, quaternion, translation)</span><br><span class="line">  <span class="keyword">return</span> tape.gradient(loss_value, [quaternion, translation])</span><br></pre></td></tr></table></figure>
+
+<p>Create the optimizer.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">learning_rate = <span class="number">0.05</span></span><br><span class="line"><span class="keyword">with</span> tf.name_scope(<span class="string">&#x27;optimization&#x27;</span>):</span><br><span class="line">  optimizer = tf.train.AdamOptimizer(learning_rate)</span><br></pre></td></tr></table></figure>
+
+<p>Initialize the random transformation, run the optimization and animate the result.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">random_quaternion, random_translation = get_random_transform()</span><br><span class="line"></span><br><span class="line">transformed_points = transform_points(vertices, random_quaternion,</span><br><span class="line">                                      random_translation)</span><br><span class="line"></span><br><span class="line">viewer = Viewer(transformed_points)</span><br><span class="line"></span><br><span class="line">nb_iterations = <span class="number">100</span></span><br><span class="line"><span class="keyword">for</span> it <span class="keyword">in</span> <span class="built_in">range</span>(nb_iterations):</span><br><span class="line">  gradients_loss = gradient_loss(vertices, random_quaternion,</span><br><span class="line">                                 random_translation)</span><br><span class="line">  optimizer.apply_gradients(</span><br><span class="line">      <span class="built_in">zip</span>(gradients_loss, (random_quaternion, random_translation)))</span><br><span class="line">  transformed_points = transform_points(vertices, random_quaternion,</span><br><span class="line">                                        random_translation)</span><br><span class="line"></span><br><span class="line">  viewer.update(transformed_points)</span><br><span class="line">  time.sleep(<span class="number">0.1</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h3><p>这是一个非常简单的深度学习模型，不过需要在预处理阶段处理很多额外的内容。加油吧！</p>
+
+    
+    </div>
+    <script>chords.replace()</script>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2019/07/29/CG/01_Object_pose_estimation/" data-id="cm9v3m2lk0007f6oj1tcw2m4p" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/07/30/CG/02_Camera_calibration/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          TFG|镜头校准
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/07/29/bio/190729/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">论当代Kitekii</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  
+  
+    
+      <script src="https://giscus.app/client.js"
+              data-repo="timrockefeller/timrockefeller.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE2Mjk2MzY="
+              data-category-id="DIC_kwDOCjrcRM4CUVZS"
+              data-mapping="pathname"
+              data-strict="-1"
+              data-reactions-enabled="0"
+              data-emit-metadata="-1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="zh-CN"
+              data-loading="lazy"
+              crossorigin="anonymous" 
+              async>
+      </script>
+
+    
+  
+
+
+</section>
+      
+        
+<aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recent</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="title">【踩坑记录】如何在 MacOS (Unix) 上运行 EraTW</a></p>
+              <p class="item-date"><time datetime="2025-01-23T00:00:00.000Z" itemprop="datePublished">2025-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="title">ECS &amp; Hierarchies</a></p>
+              <p class="item-date"><time datetime="2024-02-05T00:00:00.000Z" itemprop="datePublished">2024-02-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/02/coding/ECS/ECS_storage/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/02/coding/ECS/ECS_storage/" class="title">ECS 储存数据的方式</a></p>
+              <p class="item-date"><time datetime="2024-02-02T00:00:00.000Z" itemprop="datePublished">2024-02-02</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/12/06/bio/canning_or_willing/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a></p>
+              <p class="item-title"><a href="/2023/12/06/bio/canning_or_willing/" class="title">能做和会做</a></p>
+              <p class="item-date"><time datetime="2023-12-06T00:00:00.000Z" itemprop="datePublished">2023-12-06</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/11/17/coding/constly-const-ptr/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2023/11/17/coding/constly-const-ptr/" class="title">Constly Const Pointer</a></p>
+              <p class="item-date"><time datetime="2023-11-17T00:00:00.000Z" itemprop="datePublished">2023-11-17</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 15px;">ECS</a> <a href="/tags/Era/" style="font-size: 10px;">Era</a> <a href="/tags/Game/" style="font-size: 10px;">Game</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 11.67px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://blog.dashjay.com" target="_blank">DashJay</a>
+          </li>
+        
+          <li>
+            <a href="https://measureds.github.io" target="_blank">Measureds</a>
+          </li>
+        
+          <li>
+            <a href="https://zanbuffet.github.io" target="_blank">Zanbuffet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme mod from <a href="#">Icarus</a><br>
+      
+        <!-- <script src="https://api.quq.cat/hitokoto"></script>
+<div id="hitokoto"><script defer>hitokoto()</script></div> -->
+<p id="hitokoto">:D 获取中...</p>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+      
+    </div>
+  </div>
+</footer>
+
+    
+
+
+  
+    
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
+  
+  
+    
+<script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
+  
+  
+  
+  
+  
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+  </div>
+</body>
+</html>

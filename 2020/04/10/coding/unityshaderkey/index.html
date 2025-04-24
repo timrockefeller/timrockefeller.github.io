@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Unity Shader 超常用魔法目录 | 外野 - wryyyyyyyyyY!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="Unity Shader速写金手指，从古至今，讳莫如深！绝赞收集中！">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unity Shader 超常用魔法目录">
+<meta property="og:url" content="http://blog.iik.moe/2020/04/10/coding/unityshaderkey/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="Unity Shader速写金手指，从古至今，讳莫如深！绝赞收集中！">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/15/JiMoFI.th.png">
+<meta property="article:published_time" content="2020-04-10T12:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-24T08:25:47.972Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="CG">
+<meta property="article:tag" content="shader">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/04/15/JiMoFI.th.png">
+  
+  
+  
+
+  
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
+  
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/csshake/1.5.2/csshake.min.css">
+
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  <script src="/js/chord.js"></script>
+  
+  
+    
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/css/lightgallery.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
+  
+  
+  
+  
+  
+  
+    <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f1fb63876cc310548f153f32652bc624";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+  
+
+
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        
+        <span class="site-title">外野</span>
+      </a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">目录</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+        
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="/image/avatar.jpg" />
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form>
+
+</div>
+
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">目录</a></td>
+        
+          <td><a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/image/avatar.jpg" />
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        79
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        48
+        <span>tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://twitter.com/kitekii_" target="_blank" title="twitter" class=tooltip >
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class=tooltip >
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class=tooltip >
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://steamcommunity.com/id/6hi/" target="_blank" title="steam" class=tooltip >
+                <i class="fa fa-steam"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
+  </div>
+  
+  
+</aside>
+
+      
+      <section id="main"><article id="post-coding/unityshaderkey" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <!-- <div class="background"></div> -->
+      
+      <!-- <script>
+        ;!(function($) {
+          var max = 99;
+          var index = Math.floor(Math.random() * max) + 1;
+          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
+        })(jQuery)
+      </script> -->
+      
+    
+    
+      
+	
+		<img src="https://s1.ax1x.com/2020/04/15/JiMoFI.png" class="article-banner" />
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Unity Shader 超常用魔法目录
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/04/10/coding/unityshaderkey/">
+      <time datetime="2020-04-10T12:00:00.000Z" itemprop="datePublished">2020-04-10</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/CG/" rel="tag">CG</a>, <a class="tag-link-link" href="/tags/shader/" rel="tag">shader</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <p>Unity Shader速写金手指，从古至今，讳莫如深！<strong>绝赞收集中</strong>！</p>
+<span id="more"></span>
+
+<h3 id="内置包含文件"><a href="#内置包含文件" class="headerlink" title="内置包含文件"></a>内置包含文件</h3><p>Unity中有类似于C++的包含文件.cginc，在编写Shader时我们可以使用<code>#include</code>指令把这些文件包含进来<br>这样我们就可以使用Unity为我们提供的一些非常好用的函数、宏和变量。</p>
+<p>例如：<code>#include&quot;UnityCG.cginc&quot;</code></p>
+<p>包含文件的位置：根目录\Editor\Data\CGIncludes</p>
+<h4 id="Unity中常用包含文件"><a href="#Unity中常用包含文件" class="headerlink" title="Unity中常用包含文件"></a>Unity中常用包含文件</h4><ul>
+<li><strong>UnityCG.cginc</strong>: 包含最常用的帮助函数、宏和结构体</li>
+<li><strong>UnityShaderVariables.cginc</strong>: 在编译Shader时，会被自动包含进来，包含了许多内置的全局变量，如UNITY_MATRIX_MVP</li>
+<li><strong>Ligghting.cginc</strong>: 包含了各种内置光照模型，如果编写SurfaceShader的话，会被自动包含进来</li>
+<li><strong>HLSLSurport.cginc</strong>: 在编译Shader时，会被自动包含进来，声明了很多跨平台编译的宏和定义</li>
+</ul>
+<h4 id="UnityShader中常用的结构体"><a href="#UnityShader中常用的结构体" class="headerlink" title="UnityShader中常用的结构体"></a>UnityShader中常用的结构体</h4><table>
+<thead>
+<tr>
+<th>Struct Name</th>
+<th>Discription</th>
+<th>Included Arguments</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>appdata_base</td>
+<td>vert input</td>
+<td>float4 vertex : POSITION;<br/>float3 normal : NORMAL;<br/>float4 texcoord : TEXCOORD0;</td>
+</tr>
+<tr>
+<td>appdata_tan</td>
+<td>vert input</td>
+<td>float4 vertex : POSITION;<br/>float4 tangent : TANGENT;<br/>float3 normal : NORMAL;<br/>float4 texcoord : TEXCOORD0;</td>
+</tr>
+<tr>
+<td>appdata_full</td>
+<td>vert input</td>
+<td>float4 vertex : POSITION;<br/>float4 tangent : TANGENT;<br/>float3 normal : NORMAL;<br/>float4 texcoord : TEXCOORD0;<br/>float4 texcoord1 : TEXCOORD1;<br/>float4 texcoord2 : TEXCOORD2;<br/>float4 texcoord3 : TEXCOORD3;<br/>    #if defined(SHADER_API_XBOX360)<br/>half4 texcoord4 : TEXCOORD4;<br/>half4 texcoord5 : TEXCOORD5;<br/>    #endif<br/>fixed4 color : COLOR;</td>
+</tr>
+<tr>
+<td>appdata_img</td>
+<td>vert input</td>
+<td>float4 vertex : POSITION;<br/>half2 texcoord : TEXCOORD0;</td>
+</tr>
+<tr>
+<td>v2f_img</td>
+<td>vert output</td>
+<td>float4 pos : SV_POSITION;&#x2F;&#x2F;裁剪空间中的位置<br/>half2 uv : TEXCOORD0;</td>
+</tr>
+</tbody></table>
+<h4 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h4><table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Discription</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>float3 WorldSpaceViewDir(float4 v)</td>
+<td>输入一个模型顶点坐标，得到世界空间中从该点到摄像机的观察方向</td>
+</tr>
+<tr>
+<td>float3 ObjSpaceViewDir(float4 v)</td>
+<td>输入一个模型顶点坐标，得到模型空间中从该点到摄像机的观察方向</td>
+</tr>
+<tr>
+<td>float3 WorldSpaceLightDir(float4 v)</td>
+<td>输入一个模型顶点坐标，得到世界空间中从该点到光源的光照方向（方向没有归一化，且只可用于前向渲染）</td>
+</tr>
+<tr>
+<td>float3 ObjSpaceLightDir(float4 v)</td>
+<td>输入一个模型顶点坐标，得到模型空间中从该点到光源的光照方向（方向没有归一化，且只可用于前向渲染）</td>
+</tr>
+<tr>
+<td>float3 UnityObjectToWorldNormal(float3 norm)</td>
+<td>将法线从模型空间转换到世界空间</td>
+</tr>
+<tr>
+<td>float3 UnityObjectToWorldDir(in float3 dir)</td>
+<td>把方向矢量从模型空间转换到世界空间</td>
+</tr>
+<tr>
+<td>float3 UnityWorldToObjectDir(float3 dir)</td>
+<td>把方向矢量从世界空间转换到模型空间</td>
+</tr>
+</tbody></table>
+<h4 id="内置变量"><a href="#内置变量" class="headerlink" title="内置变量"></a>内置变量</h4><table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Discription</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>UNITY_MATRIX_MVP</td>
+<td>当前模型观察投影矩阵，用于将模型顶点&#x2F;方向矢量从模型空间转换到裁剪空间</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_MV</td>
+<td>当前模型观察矩阵，用于将模型顶点&#x2F;方向矢量从模型空间转换到观察空间</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_V</td>
+<td>当前观察矩阵，用于将顶点&#x2F;方向矢量从世界空间变换到观察空间</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_P</td>
+<td>当前投影矩阵，用于将顶点&#x2F;方向矢量从观察空间变换到裁剪空间</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_VP</td>
+<td>当前观察投影矩阵，用于将顶点&#x2F;方向矢量从世界空间变换到裁剪空间</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_T_MV</td>
+<td>UNITY_MATRIX_MV转置矩阵</td>
+</tr>
+<tr>
+<td>UNITY_MATRIX_IT_MV</td>
+<td>UNITY_MATRIX_MV逆转置矩阵，可将法线矢量从模型空间转换到观察空间</td>
+</tr>
+<tr>
+<td>_Object2World</td>
+<td>当前模型的矩阵，用于将模型顶点&#x2F;方向矢量从模型空间转换到世界空间</td>
+</tr>
+<tr>
+<td>_World2Object</td>
+<td>_Object2World逆矩阵，用于将模型顶点&#x2F;方向矢量从世界空间转换到模型空间</td>
+</tr>
+</tbody></table>
+<p>另：Unity还提供了能够访问<strong>时间、光照、雾效和环境光</strong>等目的的变量。这些内置变量大多在<code>UnityShaderVariables.cginc</code>中，跟光照有关的还定义在<code>Lighting.cginc </code>和<code>AutoLight.cginc</code>中。</p>
+<h4 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h4><ol>
+<li><code>uint CreateShader(enum type)</code> : 创建空的shader object;<br> type: VERTEX_SHADER, </li>
+<li><code>void ShaderSource(uint shader, sizeicount, const **string, const int *length)</code>：加载shader源码进shader object；可能多个字符串 </li>
+<li><code>void CompileShader(uint shader)</code>：编译shader object；<br> shader object有状态 表示编译结果</li>
+<li><code>void DeleteShader( uint shader )</code>：删除 shader object;</li>
+<li><code>void ShaderBinary( sizei count, const uint *shaders, enum binaryformat, const void *binary, sizei length )</code>: 加载预编译过的shader 二进制串；</li>
+<li><code>uint CreateProgram( void )</code>：创建空的program object， programe object组织多个shader object，成为executable;</li>
+<li><code>void AttachShader( uint program, uint shader )</code>：关联shader object和program object；</li>
+<li><code>void DetachShader( uint program, uint shader )</code>：解除关联； </li>
+<li><code>void LinkProgram( uint program )</code>：program object准备执行，其关联的shader object必须编译正确且符合限制条件；</li>
+<li><code>void UseProgram( uint program )</code>：执行program object；</li>
+<li><code>void ProgramParameteri( uint program, enum pname, int value )</code>： 设置program object的参数；</li>
+<li><code>void DeleteProgram( uint program )</code>：删除program object；</li>
+<li>shader变量的qualifier:<br>默认：无修饰符，普通变量读写， 与外界无连接；<br>const：常量 const vec3 zAxis &#x3D; vec3(0.0, 0.0, 1.0);<br>attribute: 申明传给vertex shader的变量；只读；不能为array或struct；attribute vec4 position;<br>uniform: 表明整个图元处理中值相同；只读； uniform vec4 lightPos;<br>varying: 被差值；读写； varying vec3 normal;<br>in, out, inout;</li>
+</ol>
+<h4 id="变量精度："><a href="#变量精度：" class="headerlink" title="变量精度："></a>变量精度：</h4><ul>
+<li>highp</li>
+<li>mediump</li>
+<li>lowp</li>
+</ul>
+<h4 id="SL内置变量："><a href="#SL内置变量：" class="headerlink" title="SL内置变量："></a>SL内置变量：</h4><ul>
+<li><p><strong>gl_Position</strong>: 用于vertex shader, 写顶点位置；被图元收集、裁剪等固定操作功能所使用；<br>其内部声明是：highp vec4 gl_Position; </p>
+</li>
+<li><p><strong>gl_PointSize</strong>: 用于vertex shader, 写光栅化后的点大小，像素个数；<br>其内部声明是：mediump float gl_Position; </p>
+</li>
+<li><p><strong>gl_FragColor</strong>: 用于Fragment shader，写fragment color；被后续的固定管线使用；<br>mediump vec4 gl_FragColor; </p>
+</li>
+<li><p><strong>gl_FragData</strong>: 用于Fragment shader，是个数组，写gl_FragData[n] 为data n；被后续的固定管线使用；<code>mediump vec4 gl_FragData[gl_MaxDrawBuffers];</code></p>
+<p>gl_FragColor和gl_FragData是互斥的，不会同时写入； </p>
+</li>
+<li><p><strong>gl_FragCoord</strong>: 用于Fragment shader,只读， Fragment相对于窗口的坐标位置 x,y,z,1&#x2F;w; 这个是固定管线图元差值后产生的；z 是深度值; mediump vec4 gl_FragCoord; </p>
+</li>
+<li><p><strong>gl_FrontFacing</strong>: 用于判断 fragment是否属于 front-facing primitive；只读； </p>
+</li>
+<li><p><strong>gl_PointCoord</strong>: 仅用于 point primitive; mediump vec2 gl_PointCoord;</p>
+</li>
+</ul>
+<h4 id="SL内置常量"><a href="#SL内置常量" class="headerlink" title="SL内置常量"></a>SL内置常量</h4><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> mediump <span class="type">int</span> gl_MaxVertexAttribs = <span class="number">8</span>; </span><br><span class="line"><span class="type">const</span> mediump <span class="type">int</span> gl_MaxVertexUniformVectors = <span class="number">128</span>; </span><br><span class="line"><span class="type">const</span> mediump <span class="type">int</span> gl_MaxVaryingVectors = <span class="number">8</span>; </span><br><span class="line"><span class="type">const</span> mediump <span class="type">int</span> gl_MaxVertexTextureImageUnits = <span class="number">0</span>; </span><br><span class="line"><span class="type">const</span> mediump <span class="type">int</span> gl_MaxCombinedTextureImageUnits = <span class="number">8</span>; </span><br><span class="line"><span class="type">const</span> mediump <span class="type">int</span> gl_MaxTextureImageUnits = <span class="number">8</span>; </span><br><span class="line"><span class="type">const</span> mediump <span class="type">int</span> gl_MaxFragmentUnitformVectors = <span class="number">16</span>; </span><br><span class="line"><span class="type">const</span> mediump <span class="type">int</span> gl_MaxDrawBuffers = <span class="number">1</span>; </span><br></pre></td></tr></table></figure>
+<h4 id="SL内置数学函数"><a href="#SL内置数学函数" class="headerlink" title="SL内置数学函数"></a>SL内置数学函数</h4><p>一般默认都用弧度<br>radians(degree): 角度变弧度；<br>degrees(radian): 弧度变角度；<br>sin(angle), cos(angle), tan(angle)；<br>asin(x): arc sine, 返回弧度 [-PI&#x2F;2, PI&#x2F;2]；<br>acos(x): arc cosine,返回弧度 [0, PI]；<br>atan(y, x): arc tangent, 返回弧度 [-PI, PI]；<br>atan(y&#x2F;x): arc tangent, 返回弧度 [-PI&#x2F;2, PI&#x2F;2]；</p>
+<p>pow(x, y): x的y次方；<br>exp(x): 指数, log(x)；<br>exp2(x): 2的x次方， log2(x)；<br>sqrt(x): x的根号； inversesqrt(x): x根号的倒数；</p>
+<p>abs(x): 绝对值；<br>sign(x): 符号, 1, 0 或 -1；</p>
+<p>sign(x)或者Sign(x)叫做符号函数，在数学和计算机运算中，其功能是取某个数的符号(正或负：<br>当x&gt;0，sign(x)&#x3D;1，<br>当x&#x3D;0，sign(x)&#x3D;0，<br>当x&lt;0， sign(x)&#x3D;-1；<br>floor(x): 底部取整；<br>ceil(x): 顶部取整；<br>fract(x): 取小数部分；<br>mod(x, y): 取模， <code>x - y*floor(x/y)</code>；<br>min(x, y): 取最小值；<br>max(x, y): 取最大值；<br>clamp(x, min, max):  min(max(x, min), max)；<br>mix(x, y, a): x, y的线性混叠， <code>x(1-a) + y*a</code>；<br>step(edge, x)；<br>smoothstep(edge0, edge1, x): threshod  smooth transition时使用：<br>edge0&lt;&#x3D;edge0时为0.0， x&gt;&#x3D;edge1时为1.0；</p>
+<p>length(x): 向量长度；<br>distance(p0, p1): 两点距离， <code>length(p0-p1)</code>；<br>dot(x, y): 点积，各分量分别相乘 后 相加；<br>cross(x, y): 差积，<code>x[1]*y[2]-y[1]*x[2], x[2]*y[0] - y[2]*x[0], x[0]*y[1] - y[0]*x[1]</code>；<br>normalize(x): 归一化， length(x)&#x3D;1；<br>faceforward(N, I, Nref): 若dot(Nref, I)&lt; 0则N, 否则 -N；<br>reflect(I, N): I的反射方向， I -2*dot(N, I)*N, N必须先归一化；<br>refract(I, N, eta): 折射，<code>k=1.0-eta*eta*(1.0 - dot(N, I) * dot(N, I))</code>，<br>若k&lt;0.0则0.0，否则 <code>eta*I - (eta*dot(N, I)+sqrt(k))*N</code>；</p>
+<p>matrixCompMult(matX, matY): 矩阵相乘, 每个分量 自行相乘， 即<code>r*[j] = x[j]*y[j]</code>;<br>矩阵线性相乘，直接用<code>*</code>；</p>
+<p>lessThan(vecX, vecY): 向量 每个分量比较 x &lt; y；<br>lessThanEqual(vecX, vecY): 向量 每个分量比较 x&lt;&#x3D;y；<br>greaterThan(vecX, vecY): 向量 每个分量比较 x&gt;y；<br>greaterThanEqual(vecX, vecY): 向量 每个分量比较 x&gt;&#x3D;y；<br>equal(vecX, vecY): 向量 每个分量比较 x&#x3D;&#x3D;y；<br>notEqual(vecX, vexY): 向量 每个分量比较 x!&#x3D;y；<br>any(bvecX): 只要有一个分量是true， 则true；<br>all(bvecX): 所有分量是true， 则true；<br>not(bvecX): 所有分量取反；</p>
+<p>texture2D(sampler2D, coord): texture lookup；<br>texture2D(sampler2D, coord, bias): LOD bias, mip-mapped texture；<br>texture2DProj(sampler2D, coord)；<br>texture2DProj(sampler2D, coord, bias)；<br>texture2DLod(sampler2D, coord, lod)；<br>texture2DProjLod(sampler2D, coord, lod)；<br>textureCube(samplerCube, coord)；<br>textureCube(samplerCube, coord, bias)；<br>textureCubeLod(samplerCube, coord, lod)。</p>
+
+    
+    </div>
+    <script>chords.replace()</script>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2020/04/10/coding/unityshaderkey/" data-id="cm9v3m2mt0038f6oj3yjo57wr" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/04/12/notes/SoftwareEngineering/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          软件工程
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/04/01/bio/TBC/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">四月成分表</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  
+  
+    
+      <script src="https://giscus.app/client.js"
+              data-repo="timrockefeller/timrockefeller.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE2Mjk2MzY="
+              data-category-id="DIC_kwDOCjrcRM4CUVZS"
+              data-mapping="pathname"
+              data-strict="-1"
+              data-reactions-enabled="0"
+              data-emit-metadata="-1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="zh-CN"
+              data-loading="lazy"
+              crossorigin="anonymous" 
+              async>
+      </script>
+
+    
+  
+
+
+</section>
+      
+        
+<aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recent</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="title">【踩坑记录】如何在 MacOS (Unix) 上运行 EraTW</a></p>
+              <p class="item-date"><time datetime="2025-01-23T00:00:00.000Z" itemprop="datePublished">2025-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="title">ECS &amp; Hierarchies</a></p>
+              <p class="item-date"><time datetime="2024-02-05T00:00:00.000Z" itemprop="datePublished">2024-02-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/02/coding/ECS/ECS_storage/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/02/coding/ECS/ECS_storage/" class="title">ECS 储存数据的方式</a></p>
+              <p class="item-date"><time datetime="2024-02-02T00:00:00.000Z" itemprop="datePublished">2024-02-02</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/12/06/bio/canning_or_willing/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a></p>
+              <p class="item-title"><a href="/2023/12/06/bio/canning_or_willing/" class="title">能做和会做</a></p>
+              <p class="item-date"><time datetime="2023-12-06T00:00:00.000Z" itemprop="datePublished">2023-12-06</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/11/17/coding/constly-const-ptr/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2023/11/17/coding/constly-const-ptr/" class="title">Constly Const Pointer</a></p>
+              <p class="item-date"><time datetime="2023-11-17T00:00:00.000Z" itemprop="datePublished">2023-11-17</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 15px;">ECS</a> <a href="/tags/Era/" style="font-size: 10px;">Era</a> <a href="/tags/Game/" style="font-size: 10px;">Game</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 11.67px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://blog.dashjay.com" target="_blank">DashJay</a>
+          </li>
+        
+          <li>
+            <a href="https://measureds.github.io" target="_blank">Measureds</a>
+          </li>
+        
+          <li>
+            <a href="https://zanbuffet.github.io" target="_blank">Zanbuffet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme mod from <a href="#">Icarus</a><br>
+      
+        <!-- <script src="https://api.quq.cat/hitokoto"></script>
+<div id="hitokoto"><script defer>hitokoto()</script></div> -->
+<p id="hitokoto">:D 获取中...</p>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+      
+    </div>
+  </div>
+</footer>
+
+    
+
+
+  
+    
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
+  
+  
+    
+<script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
+  
+  
+  
+  
+  
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+  </div>
+</body>
+</html>

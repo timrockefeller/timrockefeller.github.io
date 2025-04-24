@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Tic Tac Toe “我也不知道是什么”算法 | 外野 - wryyyyyyyyyY!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="为了巩固类、数组等知识，下来一个Assignment，定睛一看，居然是个四子棋！没想到人在江湖，也会遇上如此困难之题，随缘写个备注以防自己忘记。 完整代码已上传至 timrockefeller&#x2F;ExplotionEuler。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tic Tac Toe “我也不知道是什么”算法">
+<meta property="og:url" content="http://blog.iik.moe/2018/05/22/JavaS/TicTacToe/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="为了巩固类、数组等知识，下来一个Assignment，定睛一看，居然是个四子棋！没想到人在江湖，也会遇上如此困难之题，随缘写个备注以防自己忘记。 完整代码已上传至 timrockefeller&#x2F;ExplotionEuler。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-05-22T22:39:00.000Z">
+<meta property="article:modified_time" content="2025-04-24T08:25:47.970Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+
+  
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
+  
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/csshake/1.5.2/csshake.min.css">
+
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  <script src="/js/chord.js"></script>
+  
+  
+    
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/css/lightgallery.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
+  
+  
+  
+  
+  
+  
+    <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f1fb63876cc310548f153f32652bc624";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+  
+
+
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        
+        <span class="site-title">外野</span>
+      </a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">目录</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+        
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="/image/avatar.jpg" />
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form>
+
+</div>
+
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">目录</a></td>
+        
+          <td><a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/image/avatar.jpg" />
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        79
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        48
+        <span>tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://twitter.com/kitekii_" target="_blank" title="twitter" class=tooltip >
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class=tooltip >
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class=tooltip >
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://steamcommunity.com/id/6hi/" target="_blank" title="steam" class=tooltip >
+                <i class="fa fa-steam"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
+  </div>
+  
+  
+</aside>
+
+      
+      <section id="main"><article id="post-JavaS/TicTacToe" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <!-- <div class="background"></div> -->
+      
+      <!-- <script>
+        ;!(function($) {
+          var max = 99;
+          var index = Math.floor(Math.random() * max) + 1;
+          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
+        })(jQuery)
+      </script> -->
+      
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Tic Tac Toe “我也不知道是什么”算法
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2018/05/22/JavaS/TicTacToe/">
+      <time datetime="2018-05-22T22:39:00.000Z" itemprop="datePublished">2018-05-22</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/java/" rel="tag">java</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <p>为了巩固类、数组等知识，下来一个Assignment，定睛一看，居然是个四子棋！没想到人在江湖，也会遇上如此困难之题，随缘写个备注以防自己忘记。</p>
+<p>完整代码已上传至 <a target="_blank" rel="noopener" href="https://github.com/timrockefeller/ExplotionEuler/blob/master/src/TicTacToe.java">timrockefeller&#x2F;ExplotionEuler</a>。</p>
+<span id="more"></span>
+
+<hr>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=411500393&auto=0&height=66"></iframe>
+
+
+<p>这次我请到了我在崔斯特姆遇见的朋友，Millie桑！（欢呼、鼓掌）</p>
+<p>Millie: <em>大家好嘿，我是Millie，今天呢很高兴见到大家耶！</em></p>
+<p>对于这个棋局，你怎么看呢？</p>
+<p>Millie: <em>什么棋局？</em></p>
+<p>那个啥、井字棋啊。</p>
+<p>Millie: <em>噢那个我没输过诶~</em></p>
+<p>巧了我也没输过。回归正题，Millie你就坐旁边看就好了。</p>
+<p>Millie: <em>这么没人权吗quq？是你让我过来的诶、</em></p>
+<p>导演开始吧。</p>
+<hr>
+<h2 id="构建棋盘"><a href="#构建棋盘" class="headerlink" title="构建棋盘"></a>构建棋盘</h2><p>棋盘就用3*3数组表示吧，数组类型可以记为枚举<strong>ChessType</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">enum</span> <span class="title class_">ChessType</span>&#123;</span><br><span class="line">    CROSS,</span><br><span class="line">    CIRCLE,</span><br><span class="line">    BLANK,</span><br><span class="line">    NULL</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里分为四种：<strong>叉、圈、空、未知</strong>。这个“未知”只是用于检测是否越界来着，棋盘之外便是<strong>虚空</strong>。</p>
+<p>接着我们需要写第一个类：<strong>Board</strong>，它需要完成存储、读写、判断、输出图形这些功能。让Miilie带我们看看这个类的组成部分：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//嗨嗨，我是Millie~~电视台终于转到我这里了</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Board</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Board</span> <span class="params">()</span>;<span class="comment">//构造函数，创建一个map被ChessType.BLANK填满的新地图。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Board</span> <span class="params">(ChessType[][] _map)</span>;<span class="comment">//构造函数，创建一个和传入_map完全相同的复制。</span></span><br><span class="line">    <span class="keyword">private</span> ChessType[][] map;<span class="comment">//地图保存的地方，用[x][y]获取。</span></span><br><span class="line">    <span class="keyword">public</span> ChessType <span class="title function_">getBoard</span><span class="params">(Position pos)</span>;<span class="comment">//检验是否越界，返回这个点的ChessType，越界则返回ChessType.NULL。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">setBoard</span><span class="params">(Position pos,ChessType type)</span>;<span class="comment">//将pos位置的棋子设置为type，检测非空、不越界。成功就返回True~</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBoardF</span><span class="params">(Position pos,ChessType type)</span>;<span class="comment">//全称是setBoard Force！或者FFF，反正就是强行设置的意思啦~</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">drawBoard</span><span class="params">()</span>;<span class="comment">//画画画~画棋盘，怎么好看怎么画，疯狂println。</span></span><br><span class="line">    <span class="keyword">private</span> String <span class="title function_">gs</span><span class="params">(ChessType t)</span>;<span class="comment">//为了drawBoard服务，把t变成圈圈○或叉叉×。</span></span><br><span class="line">    <span class="keyword">public</span> ChessType <span class="title function_">judge</span><span class="params">()</span>;<span class="comment">//JUDGE~~!!会返回到底谁连成一条线了！没有的话就返回ChessType.BLANK。</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isFull</span><span class="params">()</span>;<span class="comment">//棋盘是不是满了？被……灌满了❤？</span></span><br><span class="line">    <span class="keyword">public</span> Board <span class="title function_">clone</span><span class="params">()</span>;<span class="comment">//返回一个复制体，用到上面的重载构造函数~</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Millie: <em>细节就不放了，其中的Position类：</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Position</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Position</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.x=<span class="number">0</span>;<span class="built_in">this</span>.y=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Position</span><span class="params">(<span class="type">int</span> x, <span class="type">int</span> y)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.x = x;<span class="built_in">this</span>.y = y;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> x;<span class="comment">//坐标x</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> y;<span class="comment">//坐标y</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>超简单的，传入pos等变量的时候直接 <code>new Position(x,y)</code> 就好了，当然开发大型游戏的时候它就不能叫Position了，而是<strong>Vector2</strong>(二维向量)，相关函数在<a target="_blank" rel="noopener" href="https://github.com/timrockefeller/MizuhaPiC/blob/v0.0/Vector2.h">MizuhaPic</a>这个写了一半<del>（没有，没有一半，连1%都没有）</del>的游戏引擎里出现过。</p>
+<p>Millie: <em>这个类在后面经常被用到，不停地被克隆，是这个作业、呸游戏的重要成员。以及MizuhaPic怕是要弃坑了。</em></p>
+<p>棋盘有了，我们还需要玩家。玩家分为两类：<strong>人</strong>和<strong>电脑</strong>。他们都可以继承于同一个抽象类：<strong>Player</strong>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title class_">Player</span>&#123;</span><br><span class="line">    <span class="comment">//工作流程是：</span></span><br><span class="line">    <span class="comment">// 1. 轮到玩家了</span></span><br><span class="line">    <span class="comment">// 2. onTurn()执行并把hand调整到想要落子的地方</span></span><br><span class="line">    <span class="comment">// 3. 外面函数把这hand给落下去</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title function_">onTurn</span><span class="params">(Board b)</span>;<span class="comment">//这就是那个函数，每次回合开始都需要调用这个函数</span></span><br><span class="line">    <span class="keyword">public</span> Position hand;<span class="comment">//临时存放准备落子位置</span></span><br><span class="line">    <span class="keyword">public</span> ChessType type;<span class="comment">//确定玩家是叉♂叉还是圈♀圈</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>人类玩家就可以用<code>new Scanner().NextInt()</code>来获取棋子位置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Player_Human</span> <span class="keyword">extends</span> <span class="title class_">Player</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Player_Human</span><span class="params">(ChessType _type)</span>&#123;<span class="comment">//构造函数呗</span></span><br><span class="line">        <span class="built_in">this</span>.type= _type; <span class="built_in">this</span>.hand = <span class="keyword">new</span> <span class="title class_">Position</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onTurn</span><span class="params">(Board b)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.readInput();<span class="comment">//直接跳到下面去了……</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">readInput</span><span class="params">()</span>&#123;<span class="comment">//从上面跳水下来</span></span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">input</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span> (System.in);<span class="comment">//垃圾话</span></span><br><span class="line">        System.out.print(<span class="string">&quot;input x and y (1-3): &quot;</span>);<span class="comment">//垃圾话2</span></span><br><span class="line">        <span class="built_in">this</span>.hand.x = input.nextInt() - <span class="number">1</span>;<span class="comment">//输入棋子位置x</span></span><br><span class="line">        <span class="built_in">this</span>.hand.y = input.nextInt() - <span class="number">1</span>;<span class="comment">//输入棋子位置y</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那么我们准备好了玩家、棋盘，就需要找个房间来玩，于是我们的老大<strong>Game</strong>类就来了。同样让Millie为我们解说。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Game</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Game</span><span class="params">()</span>;<span class="comment">//构造函数，运行的时候顺便new几个player，可以选择一波~ 最后`this.run()`走起！</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> round;<span class="comment">//回合数</span></span><br><span class="line">    <span class="keyword">private</span> Board board;<span class="comment">//棋盘咯？</span></span><br><span class="line">    <span class="keyword">private</span> Player[] players = <span class="keyword">new</span> <span class="title class_">Player</span>[<span class="number">2</span>];<span class="comment">//两位玩家的凉席</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> turn;<span class="comment">//谁的回合？你的？p，我的。</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> gaming;<span class="comment">//配合run()函数的使用，判断时候游戏结束。</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">nextTurn</span><span class="params">()</span>;<span class="comment">//轮到下个玩家啦~</span></span><br><span class="line">    <span class="keyword">private</span> ChessType <span class="title function_">getTurnType</span><span class="params">(<span class="type">int</span> _turn)</span>;<span class="comment">//把数字0、1变成ChessType</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>;<span class="comment">//新的游戏~里面有个while(this.gaming)，来结束游戏。</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">gameEnd</span><span class="params">(ChessType type)</span>;<span class="comment">//赢啦~说些什么~</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">retry</span><span class="params">()</span>;<span class="comment">//老板，再来一局！！</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>巧妙的是这个类只用生成一个对象，也就是传说中的游戏开发设计模式里的<strong>单例模式</strong>，应该吧。<br>很棒，一个完整的TicTacToe游戏就完成啦，好好玩玩吧~</p>
+<hr>
+<p><em>以下是未知代码，谨慎阅读！</em></p>
+<p>Millie: <em>在设计机器人的时候，根本不知道怎么写，好难受、好难受，硬憋憋出一个不明效果的回溯方法。具体就是：检测所有的可走路径<strong>Class.Way</strong>，保存在**ArrayList<Ways>**里面，虽然有胜率、败率等权值，但是找不到一个合适的算法解析它们……不管了先来看吧(&gt;^ω^&lt;)</em></p>
+<p>Millie: <em>在那之前我们需要准备两个类，一个是路径Way，一个是节点Node。</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Node</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Node</span><span class="params">()</span>&#123;<span class="built_in">this</span>.p= <span class="keyword">new</span> <span class="title class_">Position</span>(<span class="number">0</span>,<span class="number">0</span>);&#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Node</span><span class="params">(Position pos,<span class="type">int</span> i)</span>&#123;<span class="built_in">this</span>.p=pos;<span class="built_in">this</span>.inspire=i;&#125;</span><br><span class="line">    <span class="keyword">public</span> Position p;<span class="comment">//节点位置</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> inspire;<span class="comment">//启发值，应该是这么叫的？</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Way</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Way</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.step = <span class="keyword">new</span> <span class="title class_">Node</span>();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Way</span><span class="params">(Node s)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.step = <span class="keyword">new</span> <span class="title class_">Node</span>(<span class="keyword">new</span> <span class="title class_">Position</span>(s.p.x, s.p.y), s.inspire);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> stats;<span class="comment">// ==0:draw , &gt;0:win , &lt;0:lose</span></span><br><span class="line">    <span class="keyword">public</span> Node step;<span class="comment">//原来是ArrayList&lt;Node&gt;，但迷茫了。</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Way <span class="title function_">clone</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Way</span>(<span class="built_in">this</span>.step);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Millie: <em>好的！结束！我写不懂了……接下来就是战争迷雾模式</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Player_PC</span> <span class="keyword">extends</span> <span class="title class_">Player</span>&#123;<span class="comment">//同样是继承于Player之下，你怎么就这么鬼畜呢？？</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Player_PC</span> <span class="params">(ChessType _type)</span>;<span class="comment">//构造函数，功能大致和Human相同</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">onTurn</span><span class="params">(Board b)</span>;<span class="comment">//有必胜走必胜，有必输走必输，两个都没有就刷nextStop()。</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ChessType <span class="title function_">getOppoType</span><span class="params">(ChessType _type)</span>;<span class="comment">//小工具，获得对手方。（圈变叉、叉变圈）</span></span><br><span class="line">    <span class="keyword">private</span> ArrayList&lt;Way&gt; ways;<span class="comment">//保存那几个路径</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">nextStop</span><span class="params">(Board b,Way way,<span class="type">int</span> depth,ChessType inType)</span>;<span class="comment">//一个回溯递归算法，确实能测量步数启发值和胜率，但是结果还是很诡异。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Millie: <em>仔细看看那个nextStop()：</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">nextStop</span><span class="params">(Board b, Way way, <span class="type">int</span> depth, ChessType inType)</span>&#123;</span><br><span class="line">    <span class="type">boolean</span> <span class="variable">newWay</span> <span class="operator">=</span> <span class="literal">false</span>;<span class="comment">//是否需要创建一条新路</span></span><br><span class="line">    <span class="type">boolean</span> <span class="variable">full</span> <span class="operator">=</span> <span class="literal">true</span>;<span class="comment">//全下满了？</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">x</span> <span class="operator">=</span> <span class="number">0</span>; x&lt;<span class="number">3</span>;x++)&#123;<span class="comment">//遍历</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">y</span> <span class="operator">=</span> <span class="number">0</span>; y&lt;<span class="number">3</span>;y++)&#123;<span class="comment">//又遍历</span></span><br><span class="line">            <span class="keyword">if</span>(b.getBoard(<span class="keyword">new</span> <span class="title class_">Position</span>(x,y))==ChessType.BLANK)&#123;<span class="comment">//如果可以落子</span></span><br><span class="line">                full = <span class="literal">false</span>;<span class="comment">//可以落子说明还没满啦~~</span></span><br><span class="line">                Way _way;<span class="comment">//新指针，用于各种传递</span></span><br><span class="line">                <span class="keyword">if</span> ( newWay ) &#123;<span class="comment">//第二次循环就会是true</span></span><br><span class="line">                    _way = way.clone();<span class="comment">//克隆一条路</span></span><br><span class="line">                    <span class="built_in">this</span>.ways.add(_way);<span class="comment">//并把它添加到路的集合</span></span><br><span class="line">                &#125; <span class="keyword">else</span> &#123; </span><br><span class="line">                    newWay = <span class="literal">true</span>;<span class="comment">//第一次不是新路，第二次就是了</span></span><br><span class="line">                    _way = way; <span class="comment">//第一次，很朴素，一条大路走到底</span></span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(depth==<span class="number">0</span>)<span class="comment">//如果是这条路的第一步</span></span><br><span class="line">                     _way.step=<span class="keyword">new</span> <span class="title class_">Node</span>(<span class="keyword">new</span> <span class="title class_">Position</span>(x, y), depth);<span class="comment">//那你就是这回合接下来要走的那一步</span></span><br><span class="line">                b.setBoardF(<span class="keyword">new</span> <span class="title class_">Position</span>(x, y), inType);<span class="comment">//走一波，落子！！</span></span><br><span class="line">                ChessType wms=b.judge();<span class="comment">//看看谁赢了</span></span><br><span class="line">                <span class="keyword">if</span>(!b.isFull())<span class="comment">//如果还没满</span></span><br><span class="line">                    <span class="built_in">this</span>.nextStop(b.clone(), _way, depth+(wms==ChessType.BLANK?<span class="number">1</span>:<span class="number">0</span>), getOppoType(inType));<span class="comment">//接着走（为了概率相同）</span></span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(wms != ChessType.BLANK)<span class="comment">//满了好说，看看这样走谁会赢</span></span><br><span class="line">                    _way.stats=wms==<span class="built_in">this</span>.type?(<span class="number">10</span>-depth):(depth-<span class="number">10</span>);<span class="comment">//谁赢谁加分</span></span><br><span class="line">                b.setBoardF(<span class="keyword">new</span> <span class="title class_">Position</span>(x,y),ChessType.BLANK);<span class="comment">//恢复棋盘，接着循环~~</span></span><br><span class="line">            &#125;<span class="comment">//♪(^∇^*)</span></span><br><span class="line">        &#125;<span class="comment">//\(^o^)/~</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Millie: <em>问题是有，但是不知道在哪里quq，难受</em></p>
+<p>Millie: <em>再您妈的见。</em></p>
+
+    
+    </div>
+    <script>chords.replace()</script>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2018/05/22/JavaS/TicTacToe/" data-id="cm9v3m2lw000xf6oj77ok32me" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/10/06/oldblog/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96%E6%95%B0%E4%BD%8D%E6%9D%BF%E5%8E%8B%E6%84%9F%E4%BF%A1%E6%81%AF%EF%BC%9Fwindows%20API%E4%BC%BC%E4%B9%8E%E5%8F%AF%E8%A7%A3%EF%BC%8Cjs%E5%B0%B1%E5%88%AB%E6%83%B3%E4%BA%86/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          如何获取数位板压感信息？windows API似乎可解，js就别想了
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/05/14/oldblog/%E8%BF%99%E5%8D%8A%E5%B9%B4%E6%97%B6%E9%97%B4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">这半年时间</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  
+  
+    
+      <script src="https://giscus.app/client.js"
+              data-repo="timrockefeller/timrockefeller.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE2Mjk2MzY="
+              data-category-id="DIC_kwDOCjrcRM4CUVZS"
+              data-mapping="pathname"
+              data-strict="-1"
+              data-reactions-enabled="0"
+              data-emit-metadata="-1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="zh-CN"
+              data-loading="lazy"
+              crossorigin="anonymous" 
+              async>
+      </script>
+
+    
+  
+
+
+</section>
+      
+        
+<aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recent</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="title">【踩坑记录】如何在 MacOS (Unix) 上运行 EraTW</a></p>
+              <p class="item-date"><time datetime="2025-01-23T00:00:00.000Z" itemprop="datePublished">2025-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="title">ECS &amp; Hierarchies</a></p>
+              <p class="item-date"><time datetime="2024-02-05T00:00:00.000Z" itemprop="datePublished">2024-02-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/02/coding/ECS/ECS_storage/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/02/coding/ECS/ECS_storage/" class="title">ECS 储存数据的方式</a></p>
+              <p class="item-date"><time datetime="2024-02-02T00:00:00.000Z" itemprop="datePublished">2024-02-02</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/12/06/bio/canning_or_willing/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a></p>
+              <p class="item-title"><a href="/2023/12/06/bio/canning_or_willing/" class="title">能做和会做</a></p>
+              <p class="item-date"><time datetime="2023-12-06T00:00:00.000Z" itemprop="datePublished">2023-12-06</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/11/17/coding/constly-const-ptr/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2023/11/17/coding/constly-const-ptr/" class="title">Constly Const Pointer</a></p>
+              <p class="item-date"><time datetime="2023-11-17T00:00:00.000Z" itemprop="datePublished">2023-11-17</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 15px;">ECS</a> <a href="/tags/Era/" style="font-size: 10px;">Era</a> <a href="/tags/Game/" style="font-size: 10px;">Game</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 11.67px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://blog.dashjay.com" target="_blank">DashJay</a>
+          </li>
+        
+          <li>
+            <a href="https://measureds.github.io" target="_blank">Measureds</a>
+          </li>
+        
+          <li>
+            <a href="https://zanbuffet.github.io" target="_blank">Zanbuffet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme mod from <a href="#">Icarus</a><br>
+      
+        <!-- <script src="https://api.quq.cat/hitokoto"></script>
+<div id="hitokoto"><script defer>hitokoto()</script></div> -->
+<p id="hitokoto">:D 获取中...</p>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+      
+    </div>
+  </div>
+</footer>
+
+    
+
+
+  
+    
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
+  
+  
+    
+<script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
+  
+  
+  
+  
+  
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+  </div>
+</body>
+</html>

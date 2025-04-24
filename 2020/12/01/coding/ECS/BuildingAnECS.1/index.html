@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <title>手撕ECS #1: Types, Hierarchies and Prefabs | 外野 - wryyyyyyyyyY!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="原文链接：Building an ECS #1: Types, Hierarchies and Prefabs  Entity Index首先来看几个概念：  Entities 是运行时中独一无二的“东西”，通常与一个独一无二的整数标示。 Type（或 Archetype）来区分 Entity 所拥有组件列表的异同，通常用一个数组标示。比如一个 FPS 游戏中 Player 对象拥有两个组件，分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手撕ECS #1: Types, Hierarchies and Prefabs">
+<meta property="og:url" content="http://blog.iik.moe/2020/12/01/coding/ECS/BuildingAnECS.1/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="原文链接：Building an ECS #1: Types, Hierarchies and Prefabs  Entity Index首先来看几个概念：  Entities 是运行时中独一无二的“东西”，通常与一个独一无二的整数标示。 Type（或 Archetype）来区分 Entity 所拥有组件列表的异同，通常用一个数组标示。比如一个 FPS 游戏中 Player 对象拥有两个组件，分">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2020/12/09/Cry7zqbtpWHVGYE.jpg">
+<meta property="article:published_time" content="2020-12-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-24T08:25:47.971Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="ECS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/09/Cry7zqbtpWHVGYE.jpg">
+  
+  
+  
+
+  
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
+  
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/csshake/1.5.2/csshake.min.css">
+
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  <script src="/js/chord.js"></script>
+  
+  
+    
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/css/lightgallery.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
+  
+  
+  
+  
+  
+  
+    <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f1fb63876cc310548f153f32652bc624";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+  
+
+
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        
+        <span class="site-title">外野</span>
+      </a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">目录</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+        
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="/image/avatar.jpg" />
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form>
+
+</div>
+
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">目录</a></td>
+        
+          <td><a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/image/avatar.jpg" />
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        79
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        48
+        <span>tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://twitter.com/kitekii_" target="_blank" title="twitter" class=tooltip >
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class=tooltip >
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class=tooltip >
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://steamcommunity.com/id/6hi/" target="_blank" title="steam" class=tooltip >
+                <i class="fa fa-steam"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
+  </div>
+  
+  
+</aside>
+
+      
+      <section id="main"><article id="post-coding/ECS/BuildingAnECS.1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <!-- <div class="background"></div> -->
+      
+      <!-- <script>
+        ;!(function($) {
+          var max = 99;
+          var index = Math.floor(Math.random() * max) + 1;
+          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
+        })(jQuery)
+      </script> -->
+      
+    
+    
+      
+	
+		<img src="https://i.loli.net/2020/12/09/Cry7zqbtpWHVGYE.jpg" class="article-banner" />
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      手撕ECS #1: Types, Hierarchies and Prefabs
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/12/01/coding/ECS/BuildingAnECS.1/">
+      <time datetime="2020-12-01T00:00:00.000Z" itemprop="datePublished">2020-12-01</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/C/" rel="tag">C++</a>, <a class="tag-link-link" href="/tags/ECS/" rel="tag">ECS</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://ajmmertens.medium.com/building-an-ecs-1-types-hierarchies-and-prefabs-9f07666a1e9d">Building an ECS #1: Types, Hierarchies and Prefabs</a></p>
+</blockquote>
+<h2 id="Entity-Index"><a href="#Entity-Index" class="headerlink" title="Entity Index"></a>Entity Index</h2><p>首先来看几个概念：</p>
+<ul>
+<li><strong>Entities</strong> 是运行时中独一无二的“东西”，通常与一个独一无二的整数标示。</li>
+<li><strong>Type</strong>（或 <strong>Archetype</strong>）来区分 Entity 所拥有组件列表的异同，通常用一个数组标示。比如一个 FPS 游戏中 Player 对象拥有两个组件，分别是“位置”和“血量”，则它的 Type 就是<code>[Position, Health]</code>。</li>
+</ul>
+<p>我们可以通过这两个概念来构造 ECS 中最基础的数据结构，即 <strong>Entity Index</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> EntityId = <span class="type">uint64_t</span>;</span><br><span class="line"><span class="keyword">using</span> ComponentId = EntityId;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> Type = std::vector&lt;ComponentId&gt;;</span><br><span class="line">std::unordered_map&lt;EntityId, Type&gt; entityIndex;</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>EntityId</code> 我们可以很容易获取该 Entity 所拥有的<strong>组件列表</strong>，那么实现一个 <code>HasComponent</code> 便易如反掌：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">bool</span> <span class="title">HasComponent</span><span class="params">(EntityId entity, ComponentId component)</span> </span>&#123;</span><br><span class="line">    vector&lt;ComponentId&gt;&amp; type = entityIndex[entity];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> c : type) &#123;</span><br><span class="line">        <span class="keyword">if</span> (c == component) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>针对 C++ 的特性，在添加组件时可以用模板的形式绑定就再好不过了：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Player.<span class="built_in">add</span>&lt;Position&gt;();</span><br><span class="line">Player.<span class="built_in">add</span>&lt;Health&gt;();</span><br></pre></td></tr></table></figure>
+
+<p>在这两个 <code>add</code> 操作之后，<code>entityIndex</code> 中就应该包含一项绑定 <code>Player</code> 与 <code>[Position, Health]</code> 的数组元素。当然，是以 <code>ComponentId</code>，即 <code>uint64_t</code> 的形式定义的，例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ComponentId Position_id = <span class="number">1</span>;</span><br><span class="line">ComponentId Health_id = <span class="number">2</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如此一来，Player 这一 Entity 的 <strong>Type</strong> 便成了 <code>[1, 2]</code>。<span id="more"></span></p>
+<p>ECS 其中一种实现方法 <a target="_blank" rel="noopener" href="https://github.com/SanderMertens/flecs">SanderMertens&#x2F;Flecs</a> 提供了一种思路：由于 Entity 与 Component 均使用整形作为 id，可以将它俩统一存入 EntityIndex。虽然这样会降低些许可读性，但在实际开发时，考虑某个 Entity 拥有哪些组件也将会造成同样的问题。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    EcsComponent: [EcsComponent, EcsId],</span><br><span class="line">    EcsId: [EcsComponent, EcsId],</span><br><span class="line">    Position: [EcsComponent, EcsId],</span><br><span class="line">    Health: [EcsComponent, EcsID],</span><br><span class="line">    Player: [EcsId, Position, Health]</span><br><span class="line">&#125;;</span><br><span class="line">&#123;   <span class="comment">// Convert to digital params:</span></span><br><span class="line">    <span class="number">1</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">2</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">10</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">20</span>: [<span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">    <span class="number">30</span>: [<span class="number">2</span>, <span class="number">10</span>, <span class="number">20</span>]</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>“One of the biggest implications of this design is that we can add entities to entities” – Ajmmertens.</p>
+</blockquote>
+<h2 id="Hierarchies"><a href="#Hierarchies" class="headerlink" title="Hierarchies"></a>Hierarchies</h2><p>上文已阐述了 Entity 与 Component 的储存方式，当我们将若干 Entity 载入场景中时，需要一个不可或缺的功能：Entity 层级。按照之前 Entity Index 的实现，我们可以将父节点以 Component 的形式绑定至 Entity 中：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    Parent: []</span><br><span class="line">    Child1: [Parent]</span><br><span class="line">    Child2: [Parent]</span><br><span class="line">    Child3: [Parent]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然这个写法是有问题的，我们无法区分 <code>std::vector&lt;uint_64&gt;</code> 中哪些是父对象，哪些是子对象：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Player: [Position, Health, MyPlatoon]</span><br></pre></td></tr></table></figure>
+
+<p>这时可以使用**类型标注(Type Flag)**来对数组元素进行标注，以描述其在数组中的作用。下例使用了一个 <code>CHILDOF</code> 标注修饰 <code>MyPlatoon</code>，令其成为 <code>Player</code> 的父对象。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Player: [Position, Health, CHILDOF | MyPlatoon]</span><br></pre></td></tr></table></figure>
+
+<p>只需要进行一次或运算便能得到父对象：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Type type = entity_index[Player];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">auto</span> el : type) &#123;</span><br><span class="line">    <span class="keyword">if</span> (el &amp; CHILDOF) &#123;</span><br><span class="line">        <span class="comment">// ... element is a parent</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// ... element is not a parent</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>层级可谓游戏设计中极为常用的功能，牺牲一些内存来储存层级信息优大于劣。当然现在我们只谈到了如何储存方式，如何在系统中运作就是另外一个浩大工程了。</p>
+<h2 id="Prefab"><a href="#Prefab" class="headerlink" title="Prefab"></a>Prefab</h2><p><strong>重用对象</strong>，又称<strong>预设</strong>(Prefab)这看起来很复杂的功能在游戏开发中也不可或缺。在 Flecs 中将对象扩展了一位信息用作声明实例间的关系，显式定义为<code>INSTANCEOF</code>。利用这一位信息再添加一些结合语义，就能使对象共用一组 Component。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    Base<span class="punctuation">:</span> <span class="punctuation">[</span>Color<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    InstanceA<span class="punctuation">:</span> Position<span class="punctuation">,</span> INSTANCEOF| Base<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">	InstanceB<span class="punctuation">:</span> Position<span class="punctuation">,</span> INSTANCEOF| Base<span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"><span class="comment">// `InstanceA` and `InstanceB` both share all components from `Base`</span></span><br></pre></td></tr></table></figure>
+
+<p>当我们想获取 <code>InstanceA</code> 或 <code>InstanceB</code> 的 <code>Color</code> 组件时，实际上获取到的是 <code>Base</code> 的 <code>Color</code>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">InstanceA.<span class="built_in">get</span>&lt;Color&gt;(); <span class="comment">// returns Base.Color</span></span><br></pre></td></tr></table></figure>
+
+<p>这里说的<strong>共用组件</strong>(shared component)对应<strong>拥有组件</strong>(owned component)。下面看一段 Flecs 的应用代码，观察如何在 API 上去调用：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> BlueSquare = flecs::<span class="built_in">entity</span>()</span><br><span class="line">    .<span class="built_in">set</span>&lt;Color&gt;(&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>&#125;)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Square&gt;(&#123;<span class="number">50</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> SquareA = flecs::<span class="built_in">entity</span>()</span><br><span class="line">    .<span class="built_in">add_instanceof</span>(BlueSquare)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Position&gt;(&#123;<span class="number">10</span>, <span class="number">20</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> SquareB = flecs::<span class="built_in">entity</span>()</span><br><span class="line">    .<span class="built_in">add_instanceof</span>(BlueSquare)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Position&gt;(&#123;<span class="number">30</span>, <span class="number">40</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>将会生成如下 entity index：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    BlueSquare<span class="punctuation">:</span> <span class="punctuation">[</span>Color<span class="punctuation">,</span> Square<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    SquareA<span class="punctuation">:</span> <span class="punctuation">[</span>INSTANCEOF| BlueSquare<span class="punctuation">,</span> Position<span class="punctuation">]</span></span><br><span class="line">    SquareB<span class="punctuation">:</span> <span class="punctuation">[</span>INSTANCEOF| BlueSquare<span class="punctuation">,</span> Position<span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>继续优化：假设 <code>SquareA</code> 想要更新自己的 <code>Color</code> 而不去影响其他 <code>BlueSquare</code> 实例，便需要一个<strong>复写</strong>(override)的功能。就结论来说我们可以增加两条规则：</p>
+<ul>
+<li>Adding a component to an instance will <strong>override</strong> the base</li>
+<li>When overriding a <strong>shared component</strong>, the value of the base will be <strong>copied</strong> to the instance</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> BlueSquare = flecs::<span class="built_in">entity</span>()</span><br><span class="line">    .<span class="built_in">set</span>&lt;Color&gt;(&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>&#125;)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Square&gt;(&#123;<span class="number">50</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> SquareA = flecs::<span class="built_in">entity</span>()</span><br><span class="line">    .<span class="built_in">add_instanceof</span>(BlueSquare)</span><br><span class="line">    .<span class="built_in">add</span>&lt;Color&gt;()</span><br><span class="line">    .<span class="built_in">set</span>&lt;Position&gt;(&#123;<span class="number">10</span>, <span class="number">20</span>&#125;);</span><br><span class="line"><span class="comment">// Code for SquareB ...</span></span><br></pre></td></tr></table></figure>
+
+<p>注意第 6 行并没有为 <code>Color</code> 组件赋初值。根据规则 2 的定义，新增的 <code>Color</code> 组件内容将<strong>拷贝</strong>于<code>BlueSquare</code>。执行完上面的代码后将得到：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    BlueSquare<span class="punctuation">:</span> <span class="punctuation">[</span>Color<span class="punctuation">,</span> Square<span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">    SquareA<span class="punctuation">:</span> <span class="punctuation">[</span>INSTANCEOF | BlueSquare<span class="punctuation">,</span> Color<span class="punctuation">,</span> Position<span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>功能虽然有了，但每次创建实例时都需要将 <code>Color</code> 重新 <code>add</code> 着实麻烦。我们可以定义一个特殊的 Archetype 来代替这个操作：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> BlueSquarePrefab = flecs::<span class="built_in">entity</span>()</span><br><span class="line">    .<span class="built_in">set</span>&lt;Color&gt;(&#123;<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>&#125;)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Square&gt;(&#123;<span class="number">50</span>&#125;);</span><br><span class="line"><span class="keyword">auto</span> BlueSquare = flecs::<span class="built_in">type</span>()</span><br><span class="line">    .<span class="built_in">add_instanceof</span>(BlueSquarePrefab)</span><br><span class="line">    .<span class="built_in">add</span>&lt;Color&gt;();</span><br><span class="line"><span class="keyword">auto</span> SquareA = flecs::<span class="built_in">entity</span>()</span><br><span class="line">    .<span class="built_in">add</span>(BlueSquare)</span><br><span class="line">    .<span class="built_in">set</span>&lt;Position&gt;(&#123;<span class="number">10</span>, <span class="number">20</span>&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>层级与实例均使用了 EntityId 中的一位来用于标识，即使是如此简单的数据结构，却能实现一个较为复杂的行为。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// Entities, types and entity index</span><br><span class="line">using EntityId = uint64_t;</span><br><span class="line">using Type = vector&lt;EntityId&gt;;</span><br><span class="line">unordered_map&lt;EntityId, Type&gt; entity_index;// Type flags</span><br><span class="line">const EntityId INSTANCEOF = 1 &lt;&lt; 63;</span><br><span class="line">const EntityId CHILDOF = 1 &lt;&lt; 62;</span><br></pre></td></tr></table></figure>
+
+<p>希望这篇文章能给你提供一些关于如何设计 ECS 的灵感~</p>
+
+    
+    </div>
+    <script>chords.replace()</script>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2020/12/01/coding/ECS/BuildingAnECS.1/" data-id="cm9v3m2nq005nf6ojc1g9341k" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/12/28/coding/ECS/BuildingAnECS.2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          手撕ECS #2: Archetypes and Vectorization
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/11/22/comment/refrain/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  
+  
+    
+      <script src="https://giscus.app/client.js"
+              data-repo="timrockefeller/timrockefeller.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE2Mjk2MzY="
+              data-category-id="DIC_kwDOCjrcRM4CUVZS"
+              data-mapping="pathname"
+              data-strict="-1"
+              data-reactions-enabled="0"
+              data-emit-metadata="-1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="zh-CN"
+              data-loading="lazy"
+              crossorigin="anonymous" 
+              async>
+      </script>
+
+    
+  
+
+
+</section>
+      
+        
+<aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recent</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="title">【踩坑记录】如何在 MacOS (Unix) 上运行 EraTW</a></p>
+              <p class="item-date"><time datetime="2025-01-23T00:00:00.000Z" itemprop="datePublished">2025-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="title">ECS &amp; Hierarchies</a></p>
+              <p class="item-date"><time datetime="2024-02-05T00:00:00.000Z" itemprop="datePublished">2024-02-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/02/coding/ECS/ECS_storage/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/02/coding/ECS/ECS_storage/" class="title">ECS 储存数据的方式</a></p>
+              <p class="item-date"><time datetime="2024-02-02T00:00:00.000Z" itemprop="datePublished">2024-02-02</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/12/06/bio/canning_or_willing/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a></p>
+              <p class="item-title"><a href="/2023/12/06/bio/canning_or_willing/" class="title">能做和会做</a></p>
+              <p class="item-date"><time datetime="2023-12-06T00:00:00.000Z" itemprop="datePublished">2023-12-06</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/11/17/coding/constly-const-ptr/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2023/11/17/coding/constly-const-ptr/" class="title">Constly Const Pointer</a></p>
+              <p class="item-date"><time datetime="2023-11-17T00:00:00.000Z" itemprop="datePublished">2023-11-17</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 15px;">ECS</a> <a href="/tags/Era/" style="font-size: 10px;">Era</a> <a href="/tags/Game/" style="font-size: 10px;">Game</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 11.67px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://blog.dashjay.com" target="_blank">DashJay</a>
+          </li>
+        
+          <li>
+            <a href="https://measureds.github.io" target="_blank">Measureds</a>
+          </li>
+        
+          <li>
+            <a href="https://zanbuffet.github.io" target="_blank">Zanbuffet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme mod from <a href="#">Icarus</a><br>
+      
+        <!-- <script src="https://api.quq.cat/hitokoto"></script>
+<div id="hitokoto"><script defer>hitokoto()</script></div> -->
+<p id="hitokoto">:D 获取中...</p>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+      
+    </div>
+  </div>
+</footer>
+
+    
+
+
+  
+    
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
+  
+  
+    
+<script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
+  
+  
+  
+  
+  
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Rust规则书 | 外野 - wryyyyyyyyyY!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="看过一遍 Rust 的语法，如果其他语言也能按照这种思路去写，其实也可以很安全。 本文会简单梳理一下所有权、Trait、生命周期，以重新构建脑内代码思维模式。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rust规则书">
+<meta property="og:url" content="http://blog.iik.moe/2023/11/01/Rust/Rust_Basics/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="看过一遍 Rust 的语法，如果其他语言也能按照这种思路去写，其实也可以很安全。 本文会简单梳理一下所有权、Trait、生命周期，以重新构建脑内代码思维模式。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-11-01T00:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-24T08:25:47.970Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="rust">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+
+  
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
+  
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/csshake/1.5.2/csshake.min.css">
+
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  <script src="/js/chord.js"></script>
+  
+  
+    
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/css/lightgallery.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
+  
+  
+  
+  
+  
+  
+    <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f1fb63876cc310548f153f32652bc624";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+  
+
+
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        
+        <span class="site-title">外野</span>
+      </a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">目录</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+        
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="/image/avatar.jpg" />
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form>
+
+</div>
+
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">目录</a></td>
+        
+          <td><a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/image/avatar.jpg" />
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        79
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        48
+        <span>tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://twitter.com/kitekii_" target="_blank" title="twitter" class=tooltip >
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class=tooltip >
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class=tooltip >
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://steamcommunity.com/id/6hi/" target="_blank" title="steam" class=tooltip >
+                <i class="fa fa-steam"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
+  </div>
+  
+  
+</aside>
+
+      
+      <section id="main"><article id="post-Rust/Rust_Basics" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <!-- <div class="background"></div> -->
+      
+      <!-- <script>
+        ;!(function($) {
+          var max = 99;
+          var index = Math.floor(Math.random() * max) + 1;
+          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
+        })(jQuery)
+      </script> -->
+      
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Rust规则书
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2023/11/01/Rust/Rust_Basics/">
+      <time datetime="2023-11-01T00:00:00.000Z" itemprop="datePublished">2023-11-01</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/rust/" rel="tag">rust</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <p>看过一遍 Rust 的语法，如果其他语言也能按照这种思路去写，其实也可以很安全。</p>
+<p>本文会简单梳理一下所有权、Trait、生命周期，以重新构建脑内代码思维模式。</p>
+<span id="more"></span>
+
+<h2 id="所有权"><a href="#所有权" class="headerlink" title="所有权"></a>所有权</h2><p><strong>所有权</strong>(Ownership)是 Rust 最独特的特征，它让 Rust 无需 GC 就可以保证内存安全。</p>
+<p>访问<strong>堆内存</strong>中的数据要比访问<strong>栈内存</strong>中的数据慢，因为要使用指针寻址。对于现代的处理器来说，由于缓存的缘故，如果指令在内存中跳转的次数越少，那么速度就越快。</p>
+<ul>
+<li>如果数据存放的距离比较近，那么处理器的速度就会快一些（stack 上）</li>
+<li>如果数据存放的距离比较远，那么处理速度就会慢一些（heap 上）<ul>
+<li>在 heap 上分配大量的空间也是需要时间的</li>
+</ul>
+</li>
+</ul>
+<p>所有权解决的问题：</p>
+<ul>
+<li>跟踪代码的哪些部分正在使用 heap 的哪些数据</li>
+<li>最小化 heap 上重复数据量</li>
+<li>清理 heap 上未使用的数据以避免空间不足</li>
+</ul>
+<h3 id="所有权规则"><a href="#所有权规则" class="headerlink" title="所有权规则"></a>所有权规则</h3><ul>
+<li>每一个值都有一个变量，这个变量是该值的所有者</li>
+<li>每个值同时只能有一个所有者</li>
+<li>当所有者超出作用域时，该值被删除</li>
+</ul>
+<h3 id="默认的移动"><a href="#默认的移动" class="headerlink" title="默认的移动"></a>默认的移动</h3><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">s1</span> = <span class="type">String</span>::<span class="title function_ invoke__">from</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line"><span class="keyword">let</span> <span class="variable">s2</span> = s1;</span><br></pre></td></tr></table></figure>
+
+<p>这里展现一个移动语义，<code>s1</code> 在移动给 <code>s2</code> 后便失效了。</p>
+<p>从设计角度看，其实是 <code>String</code> 类型没有实现 <code>Copy</code> Trait。</p>
+<ul>
+<li><code>Copy</code> Trait 用于给栈对象定义默认拷贝行为（隐式）</li>
+<li><code>Clone</code> &#x2F; <code>Drop</code> Trait 用于给堆对象定义深拷贝行为</li>
+</ul>
+<p>如果一个类型实现了 <code>Copy</code>，那么旧的变量在赋值后仍然可用。</p>
+<p>如果一个类型或者该类型的一部分实现了  <code>Drop</code> ，那么 Rust 不会允许让它再去实现 <code>Copy</code> 了。</p>
+<blockquote>
+<p>任何简单标量的组合类型都可以是 Copy 的<br>任何需要分配内存或某种资源的都不是 Copy 的<br>一些拥有 Copy trait 的类型：</p>
+<ul>
+<li>所有整数、浮点类型 <code>u32</code> <code>f64</code></li>
+<li>bool</li>
+<li>char</li>
+<li>tuple 成员都是 Copy 的 <code>(i32,i32)</code></li>
+</ul>
+</blockquote>
+<h3 id="所有权与函数"><a href="#所有权与函数" class="headerlink" title="所有权与函数"></a>所有权与函数</h3><p>在语义上，将值传递给函数和把值赋给变量是类似的：将值传递给函数将发生<strong>移动</strong>或<strong>复制</strong>。</p>
+<h3 id="引用和借用"><a href="#引用和借用" class="headerlink" title="引用和借用"></a>引用和借用</h3><p><code>&amp;</code> 符号就表示<strong>引用</strong>：允许你引用某些值而不取得其所有权（默认不可变）。</p>
+<p>把引用作为<strong>函数参数</strong>这个行为叫做<strong>借用</strong>。</p>
+<p>可变引用有一个重要的限制：在一个作用域内，对某一块数据，只能有一个可变的引用。</p>
+<p>这样做的好处是可以在编译时防止<strong>数据竞争</strong></p>
+<p>以下三种行为会发生数据竞争：</p>
+<ul>
+<li>两个或多个指针同时访问同一个数据</li>
+<li>至少有一个指针用于写入数据</li>
+<li>没有使用任何机制来同步对数据的访问</li>
+</ul>
+<p>可以通过创建新的作用域，来允许非同时的创建多个可变引用</p>
+<p>另一个限制：可变引用与不可变引用不可共存，但多个不可变引用可以共存。</p>
+<p><strong>悬空引用</strong> Dangling References</p>
+<p>一个指针引用了内存中的某个地址，但是这块内存可能已经被释放或分配给其他人使用</p>
+<p>在 Rust 里，编译器可以保证引用永远都不是悬空引用。</p>
+<ul>
+<li>如果你引用了某些数据，编译器将保证在引用离开作用域之前数据都有效。</li>
+</ul>
+<p><strong>切片</strong> Slice</p>
+<p>特殊的引用。特殊的，字符串切片被定义为 <code>&amp;str</code>。</p>
+<h2 id="Trait"><a href="#Trait" class="headerlink" title="Trait"></a>Trait</h2><p>泛型：提高代码<strong>泛用</strong>的能力</p>
+<p>泛型是具体类型或其他属性的抽象代替：你编写的代码不是最终的代码，而是一种<strong>模板</strong>，里面有一些”占位符”。编译器在编译期将占位符替换为具体的类型。</p>
+<p>例如 <code>fn largest&lt;T&gt;(list: &amp;[T]) -&gt; T &#123; ... &#125;</code>。</p>
+<p>为 struct 或 enum 实现方法的时候，可以在定义中使用泛型</p>
+<ul>
+<li>把 T 放在 impl 关键字后，表示在类型 T 上实现方法</li>
+<li><code>impl&lt;T&gt; Point&lt;T&gt;</code></li>
+<li>针对具体类型则不需要加上 T</li>
+<li><code>impl Point&lt;i32&gt;</code></li>
+</ul>
+<p>泛型无运行时性能消耗。执行单态化后，仅增加指令数。</p>
+<p>带约束实现 Trait：默认给所有匹配的泛型，添加指定 Trait。</p>
+<p><code>impl &lt;T: Display&gt; ToString for T &#123;...&#125;</code></p>
+<h2 id="Lifetime"><a href="#Lifetime" class="headerlink" title="Lifetime"></a>Lifetime</h2><p>Rust 的每个引用都有自己的生命周期。<br>生命周期：引用保持有效的作用域。<br>大多数情况：生命周期是隐式的、可被推断的<br>当引用的生命周期可能以不同的方式互相关联的时候，需要<strong>手动标注生命周期</strong>。</p>
+<p>生命周期主要目标：避免指针悬空。</p>
+<p>错误例：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="variable">r</span>;</span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">let</span> <span class="variable">x</span> = <span class="number">5</span>;</span><br><span class="line">	r = &amp;x; <span class="comment">// error</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_ invoke__">foo</span>(r);</span><br></pre></td></tr></table></figure>
+
+<p>Rust 编译器的借用检查器：比较作用域来判断所有的借用是否合法。</p>
+<h3 id="函数泛型生命周期"><a href="#函数泛型生命周期" class="headerlink" title="函数泛型生命周期"></a>函数泛型生命周期</h3><p>在函数内有多个借用时需要标注。</p>
+<p><code>fn longest&lt;&#39;a&gt;(x: &amp;&#39;a str, y: &amp;&#39;a str) -&gt;&amp;&#39;a str &#123;...&#125;</code></p>
+<p>生命周期标注语法</p>
+<ul>
+<li>生命周期的标注不会改变引用的生命周期长度（因为是调用处去匹配，而非函数自适应）</li>
+<li>当指定了泛型生命周期参数，函数可以接受带有任何生命周期的引用</li>
+<li>生命周期的标注：描述了多个引用的生命周期之间的关系，但不影响传入的生命周期</li>
+</ul>
+<p>规则：</p>
+<ul>
+<li>以 <code>&#39;</code> 开头</li>
+<li>通常全小写且非常短</li>
+<li>很多人使用 <code>&#39;a</code></li>
+<li>在引用的符号 <code>&amp;</code> 后</li>
+<li>使用空格将标注和引用类型分开</li>
+</ul>
+<p>几个例子：</p>
+<ul>
+<li><code>&amp;i32</code></li>
+<li><code>&amp;&#39;a i32</code></li>
+<li><code>&amp;&#39;a mut i32</code></li>
+</ul>
+<p>多个引用生命周期的情况就跟泛型一样需要特化。只有使用者匹配了函数的生命周期条件，才能使用函数。<br>相同生命周期取最短。</p>
+<h3 id="结构体生命周期"><a href="#结构体生命周期" class="headerlink" title="结构体生命周期"></a>结构体生命周期</h3><p>在结构体内储存有引用时需要标注。</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">StrRef</span>&lt;<span class="symbol">&#x27;a</span>&gt; &#123;</span><br><span class="line">	<span class="keyword">ref</span>:&amp;<span class="symbol">&#x27;a</span> <span class="type">str</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="生命周期的省略"><a href="#生命周期的省略" class="headerlink" title="生命周期的省略"></a>生命周期的省略</h3><ul>
+<li>每个引用都有生命周期</li>
+<li>需要为使用生命周期的函数或 struct 指定生命周期参数</li>
+</ul>
+<p>Rust  <code>v1.1</code> 的时代，需要显式为所有引用添加生命周期。</p>
+<p>在 Rust 引用分析中所编入的模式成为<strong>生命周期省略规则</strong></p>
+<ul>
+<li>这些规则无需开发者来遵守</li>
+<li>是一些特殊情况，由编译器来考虑</li>
+<li>如果你的代码符合这些情况，那么就无需显式标注生命周期</li>
+</ul>
+<p>生命周期省略规则不会提供完整的判断：</p>
+<ul>
+<li>如果应用规则后，引用的生命周期仍然模糊不清，则直接编译错误</li>
+<li>解决办法：添加生命周期标注，表明引用间的相互关系</li>
+</ul>
+<p>定义：</p>
+<ul>
+<li>输入生命周期:：函数&#x2F;方法的参数</li>
+<li>输出生命周期：函数&#x2F;方法的返回值</li>
+</ul>
+<p><strong>编译器使用 3 个规则在没有显式标注生命周期的情况下，来确定生命周期</strong></p>
+<ol>
+<li>每个引用类型的参数都有自己的生命周期</li>
+<li>如果只有 1 个输入生命周期参数，那么该生命周期被赋给所有的输出生命周期</li>
+<li>如果有多个输入生命周期参数，但其中一个时 <code>&amp;self</code> 或 <code>&amp;mut self</code>（即成员函数），那么 <code>self</code> 的生命周期会被赋给所有的输出生命周期</li>
+</ol>
+<p>如果编译器应用完 3 个规则之后，仍然有无法确定的生命周期引用，则直接编译错误</p>
+<p>这些规则适用于 <code>fn</code> 与 <code>impl</code> 块。</p>
+<h3 id="静态生命周期"><a href="#静态生命周期" class="headerlink" title="静态生命周期"></a>静态生命周期</h3><p><code>&#39;static</code></p>
+
+    
+    </div>
+    <script>chords.replace()</script>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2023/11/01/Rust/Rust_Basics/" data-id="cm9v3m2m6001of6ojd3145vhv" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2023/11/17/coding/constly-const-ptr/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Constly Const Pointer
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2023/06/06/coding/ECS/readingentt/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">entt.1 组合遍历</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  
+  
+    
+      <script src="https://giscus.app/client.js"
+              data-repo="timrockefeller/timrockefeller.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE2Mjk2MzY="
+              data-category-id="DIC_kwDOCjrcRM4CUVZS"
+              data-mapping="pathname"
+              data-strict="-1"
+              data-reactions-enabled="0"
+              data-emit-metadata="-1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="zh-CN"
+              data-loading="lazy"
+              crossorigin="anonymous" 
+              async>
+      </script>
+
+    
+  
+
+
+</section>
+      
+        
+<aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recent</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="title">【踩坑记录】如何在 MacOS (Unix) 上运行 EraTW</a></p>
+              <p class="item-date"><time datetime="2025-01-23T00:00:00.000Z" itemprop="datePublished">2025-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="title">ECS &amp; Hierarchies</a></p>
+              <p class="item-date"><time datetime="2024-02-05T00:00:00.000Z" itemprop="datePublished">2024-02-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/02/coding/ECS/ECS_storage/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/02/coding/ECS/ECS_storage/" class="title">ECS 储存数据的方式</a></p>
+              <p class="item-date"><time datetime="2024-02-02T00:00:00.000Z" itemprop="datePublished">2024-02-02</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/12/06/bio/canning_or_willing/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a></p>
+              <p class="item-title"><a href="/2023/12/06/bio/canning_or_willing/" class="title">能做和会做</a></p>
+              <p class="item-date"><time datetime="2023-12-06T00:00:00.000Z" itemprop="datePublished">2023-12-06</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/11/17/coding/constly-const-ptr/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2023/11/17/coding/constly-const-ptr/" class="title">Constly Const Pointer</a></p>
+              <p class="item-date"><time datetime="2023-11-17T00:00:00.000Z" itemprop="datePublished">2023-11-17</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 15px;">ECS</a> <a href="/tags/Era/" style="font-size: 10px;">Era</a> <a href="/tags/Game/" style="font-size: 10px;">Game</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 11.67px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://blog.dashjay.com" target="_blank">DashJay</a>
+          </li>
+        
+          <li>
+            <a href="https://measureds.github.io" target="_blank">Measureds</a>
+          </li>
+        
+          <li>
+            <a href="https://zanbuffet.github.io" target="_blank">Zanbuffet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme mod from <a href="#">Icarus</a><br>
+      
+        <!-- <script src="https://api.quq.cat/hitokoto"></script>
+<div id="hitokoto"><script defer>hitokoto()</script></div> -->
+<p id="hitokoto">:D 获取中...</p>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+      
+    </div>
+  </div>
+</footer>
+
+    
+
+
+  
+    
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
+  
+  
+    
+<script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
+  
+  
+  
+  
+  
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+  </div>
+</body>
+</html>

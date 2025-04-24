@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <title>手撕ECS #2: Archetypes and Vectorization | 外野 - wryyyyyyyyyY!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="原文链接：Building an ECS #2: Archetypes and Vectorization  上回说到如何访问 Entity 所拥有的 Components，这一章将会探索如何储存 Component 数据。久闻 ECS 以高性能自称，来看看它到底有何能耐。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手撕ECS #2: Archetypes and Vectorization">
+<meta property="og:url" content="http://blog.iik.moe/2020/12/28/coding/ECS/BuildingAnECS.2/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="原文链接：Building an ECS #2: Archetypes and Vectorization  上回说到如何访问 Entity 所拥有的 Components，这一章将会探索如何储存 Component 数据。久闻 ECS 以高性能自称，来看看它到底有何能耐。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.loli.net/2020/12/09/QDmhs8JEvOqLFg9.jpg">
+<meta property="article:published_time" content="2020-12-28T00:14:51.000Z">
+<meta property="article:modified_time" content="2025-04-24T08:25:47.971Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2020/12/09/QDmhs8JEvOqLFg9.jpg">
+  
+  
+  
+
+  
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
+  
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/csshake/1.5.2/csshake.min.css">
+
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  <script src="/js/chord.js"></script>
+  
+  
+    
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/css/lightgallery.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
+  
+  
+  
+  
+  
+  
+    <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f1fb63876cc310548f153f32652bc624";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+  
+
+
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        
+        <span class="site-title">外野</span>
+      </a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">目录</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+        
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="/image/avatar.jpg" />
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form>
+
+</div>
+
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">目录</a></td>
+        
+          <td><a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/image/avatar.jpg" />
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        79
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        48
+        <span>tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://twitter.com/kitekii_" target="_blank" title="twitter" class=tooltip >
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class=tooltip >
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class=tooltip >
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://steamcommunity.com/id/6hi/" target="_blank" title="steam" class=tooltip >
+                <i class="fa fa-steam"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
+  </div>
+  
+  
+</aside>
+
+      
+      <section id="main"><article id="post-coding/ECS/BuildingAnECS.2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <!-- <div class="background"></div> -->
+      
+      <!-- <script>
+        ;!(function($) {
+          var max = 99;
+          var index = Math.floor(Math.random() * max) + 1;
+          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
+        })(jQuery)
+      </script> -->
+      
+    
+    
+      
+	
+		<img src="https://i.loli.net/2020/12/09/QDmhs8JEvOqLFg9.jpg" class="article-banner" />
+	
+
+
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      手撕ECS #2: Archetypes and Vectorization
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2020/12/28/coding/ECS/BuildingAnECS.2/">
+      <time datetime="2020-12-28T00:14:51.000Z" itemprop="datePublished">2020-12-28</time>
+    </a>
+  </div>
+
+
+            
+  <div class="article-category">
+    <i class="fa fa-folder"></i>
+      <a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a>
+  </div>
+
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/C/" rel="tag">C++</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <blockquote>
+<p>原文链接：<a target="_blank" rel="noopener" href="https://ajmmertens.medium.com/building-an-ecs-2-archetypes-and-vectorization-fe21690805f9">Building an ECS #2: Archetypes and Vectorization</a></p>
+</blockquote>
+<p>上回说到如何访问 Entity 所拥有的 Components，这一章将会探索如何储存 Component 数据。久闻 ECS 以<strong>高性能</strong>自称，来看看它到底有何能耐。<span id="more"></span></p>
+<h2 id="性能杀手锏：序列化储存数据"><a href="#性能杀手锏：序列化储存数据" class="headerlink" title="性能杀手锏：序列化储存数据"></a>性能杀手锏：序列化储存数据</h2><p>经验之谈，如果想让运行速度变快，用<strong>数组</strong>就完事了。背后的理论在计算机架构课本中，由于内存对齐、换页等因素，内存顺序读取总是要比随机读取快不少。详细可以观看 <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=rX0ItVEVjHc">Data-Oriented Design and C++</a>。</p>
+<p>内存连续状的数组具有一个强大的特性，就是可被**向量化(Vectorization)**，即可以被 CPU 使用 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/SIMD">SIMD</a> 系列指令同时读写。一个好的向量化代码运行效率可以加速至 2 倍、甚至 16 倍。</p>
+<p>在构建 ECS 时，我们当然希望能够同时使用**快速串流(fast streaming)<strong>和</strong>矢量化(vectorization)*<em>的特性。为了实现这一点，我们不能仅仅局限于在数组中存储数据，还需要令数组连续，</em>即要求其不包含任何未使用的元素，并且存储在单个内存块中*。只要一个数组有一个空位，都会影响到我们利用 SIMD 优化运算。</p>
+<h2 id="ABC-问题"><a href="#ABC-问题" class="headerlink" title="ABC 问题"></a>ABC 问题</h2><p>不幸的是，将所有数据完美地存储在<strong>连续</strong>数组中并非易事。</p>
+<p>至于何出此言，来举个栗：假设有个应用含有 3 个实体，并且每个实体都有组件 <code>A</code>，我们可以像这样储存它们：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">A a[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p>我们可以通过实体的 <strong>id</strong> 来获取对应的组件数据，如 <code>a[2]</code> 返回 id 为 2 的 <code>A</code> 组件数据。此时再规定 3 个实体中的<strong>2 个</strong>拥有组件 <code>B</code>，该如何设计这个组件的储存方式呢？一种直观的方式是直接创建一个与 <code>A</code> <strong>等长</strong>的数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B b[<span class="number">3</span>];</span><br></pre></td></tr></table></figure>
+
+<p>这样做虽然简单，但是此时只有 2 个实体拥有组件 <code>B</code>，我们无法保证 id 对应的储存方式能使 <code>B</code> 连续！（有可能是 id &#x3D; 0 与 id &#x3D; 2 拥有 <code>B</code>）应该怎么解决呢？</p>
+<p>让我们从定义出发，先定义一个长度为 2 的连续的 <code>B</code> 数组：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">B b[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
+
+<p>且定义一个特殊情况：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>: [A B]</span><br><span class="line"><span class="number">1</span>: [A  ]</span><br><span class="line"><span class="number">2</span>: [A B]</span><br></pre></td></tr></table></figure>
+
+<p>显然很难满足 <code>A</code>、<code>B</code> 的连续。这里介绍一个 trick，即对实体 id 做一次映射，使其在内存中变换一下位置： </p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>: [A B]</span><br><span class="line"><span class="number">2</span>: [A B]</span><br><span class="line"><span class="number">1</span>: [A  ]</span><br></pre></td></tr></table></figure>
+
+<p>可以发现这回两个数组都连续了。<strong>为了一个并行运算的可能，完全值得我们牺牲一部分性能用于实体 id 映射。</strong>这种模式可以支持我们设计非常多的组件搭配，比如再加一个仅拥有组件 <code>B </code> 的实体，这种方法仍然奏效：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span>: [  B]</span><br><span class="line"><span class="number">0</span>: [A B]</span><br><span class="line"><span class="number">2</span>: [A B]</span><br><span class="line"><span class="number">1</span>: [A  ]</span><br></pre></td></tr></table></figure>
+
+<p>那么问题解决了吗? 非常不幸：没有。让我们看看如果我们在这之上加入另一个组件会发生什么:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>: [  B  ]</span><br><span class="line"><span class="number">1</span>: [  B C]</span><br><span class="line"><span class="number">2</span>: [A B C]</span><br><span class="line"><span class="number">3</span>: [A B  ]</span><br><span class="line"><span class="number">4</span>: [A    ]</span><br><span class="line"><span class="number">5</span>: [A   C]</span><br><span class="line"><span class="number">6</span>: [    C]</span><br></pre></td></tr></table></figure>
+
+<p>上述这种情况不可能使 <code>A</code>、<code>B</code>、<code>C</code> 均连续（你可以试试hhh）。那有人问了：我们在煎水作冰吗？别慌，追求并行虽不可亵玩，却仍可近观。</p>
+<h2 id="原型为何物？"><a href="#原型为何物？" class="headerlink" title="原型为何物？"></a>原型为何物？</h2><p>让我们重新构建数据结构，尝试另一种方法：创建以 <strong>Component 列表</strong>为类型的若干数组。比如下例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Type [A]</span></span><br><span class="line">A a[<span class="number">2</span>];</span><br><span class="line"><span class="comment">// Type [A, B]</span></span><br><span class="line">A a[<span class="number">2</span>];</span><br><span class="line">B b[<span class="number">2</span>];</span><br><span class="line"><span class="comment">// Type [A, C]</span></span><br><span class="line">A a[<span class="number">2</span>];</span><br><span class="line">C c[<span class="number">2</span>];</span><br></pre></td></tr></table></figure>
+
+<p>在 entity index 中对应的数据为：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0</span>: [A]</span><br><span class="line"><span class="number">1</span>: [A]</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>: [A B]</span><br><span class="line"><span class="number">3</span>: [A B]</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>: [A C]</span><br><span class="line"><span class="number">5</span>: [A C]</span><br></pre></td></tr></table></figure>
+
+<p>这里设计的三个数组均符合我们之前所声明的条件，且仅当遍历所有实例的 <code>A</code> 组件时有一些额外的性能开销。如此一来可以直接利用向量化特性，来执行类似如下仅涉及 <code>A</code> 与 <code>B</code> 的逻辑：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i ++) &#123;</span><br><span class="line">    a[i] += b[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种存储数据的方法通常被称为<strong>原型(Archetypes)<strong>。ECS 框架在内部将具有</strong>相同组件组合的所有实体</strong>组合在一组打包的数组中，即<strong>原型</strong>。原型通常在一个<strong>组件组合</strong>首次出现在程序中时自动创建。</p>
+<p>原型方法不仅能提高并行效率，还能方便我们使用<strong>系统(System)<strong>匹配符合的实体。假设我们拥有 1000 个包含 <code>[A, B]</code> 的实体与 1000 个包含 <code>[A, C]</code> 的实体，当我们创建一个需要匹配 <code>[A, B] </code>的系统时，就只需要遍历</strong>原型列表</strong>（而非所有 2000 个实例）来定位匹配的实例。</p>
+<p>下面就是一组描述原型的代码案例:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">ComponentArray</span> &#123;</span><br><span class="line">    <span class="type">void</span> *elements; <span class="comment">// vector&lt;T&gt;</span></span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Archetype</span> &#123;</span><br><span class="line">    Type type;</span><br><span class="line">    vector&lt;ComponentArray&gt; components;</span><br><span class="line">    <span class="type">int</span> length;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>我们无法提前得知原型中储存什么组件，故使用一个 <code>void</code> 指针来接受<strong>任意类型</strong>的组件。<code>type</code> 成员储存了原型的组件列表（详见上一章的 <code>Type</code> 定义）。为了简单，<code>components</code> 与 <code>type</code> 中的组件顺序保持一致。</p>
+<p>定义好数据结构，我们就可以继续讨论基于原型ECS结构中的几个典型操作了。</p>
+<h2 id="操作：获得实体与组件"><a href="#操作：获得实体与组件" class="headerlink" title="操作：获得实体与组件"></a>操作：获得实体与组件</h2><p>在能够顺序储存相同类型实体的数据结构基础上，我们仍需要定位到某一个实体。试着尝试修改上一章提及的 <code>entity inedx</code>，我们可以用一个名为<code>Record</code> 的数据结构替换原先的定义。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Record</span> &#123;</span><br><span class="line">    Archetype *archetype;</span><br><span class="line">    <span class="type">int</span> row;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">unordered_map&lt;EntityId, Record&gt; entity_index;</span><br></pre></td></tr></table></figure>
+
+<p><code>row</code> 是指实体对应的组件在 <code>Archetype::components</code> 中的位置。此时如果想获得 10 号实体的 <code>A</code> 组件，我们可以这样做：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Record&amp; r = entity_index[<span class="number">10</span>];</span><br><span class="line">Type&amp; type = r.archetype-&gt;type;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; type.<span class="built_in">size</span>(); i ++) &#123;</span><br><span class="line">    <span class="keyword">if</span> (type[i] == A) &#123;</span><br><span class="line">        <span class="keyword">return</span> r.archetype-&gt;components[i].elements[r.row];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这里简化了一些代码，比如不能用 <code>[]</code> 操作符直接获取 <code>elements</code> 对应地址内存，因为它被定义为 <code>void*</code>；类型比较时需要转换为 <code>typehash</code> 比较。但基本思路是这样的。</p>
+<p>我们还希望在迭代组件数组时能够访问我们的实体 ID。为此，我们可以简单地在原型中添加一个额外的数组。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Archetype</span> &#123;</span><br><span class="line">    Type type;</span><br><span class="line">    vector&lt;EntityId&gt; entity_ids; <span class="comment">// Entities stored in archetype</span></span><br><span class="line">    vector&lt;ComponentArray&gt; components;</span><br><span class="line">    <span class="type">int</span> length;</span><br><span class="line">    vector&lt;Edge&gt; edges;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>别看占用了一些空间，这些数据可以极大地加快组件的插入、删除和复制操作。</p>
+</blockquote>
+<h2 id="操作：添加、删除组件"><a href="#操作：添加、删除组件" class="headerlink" title="操作：添加、删除组件"></a>操作：添加、删除组件</h2><p>添加组件到一个实体上会改变它的类型，这意味着要将它从原先的 Archetype 移至另一个。但对于序列化加速来说，这么做还是值得的。</p>
+<p>我们举一个例子：为一个原型为<code>[A, B]</code> 的实体添加组件 <code>C</code>。首先我们需要找到目标原型，即 <code>[A, B, C]</code> ，详细操作我们下一节细谈。接着我们需要添加一列新内存，并将组件 <code>A</code> 与 <code>B</code> 的数据复制过去，最后将前原型中的实体删除。简单来说分为四步：</p>
+<ul>
+<li><strong>找到</strong>目标原型(Find destination archetype)</li>
+<li>在目标原型中<strong>插入</strong>该实体(Insert entity into component arrays of destination)</li>
+<li><strong>复制</strong>原有的组件数据(Copy overlapping components from source to destination)</li>
+<li>从原来的原型中<strong>移除</strong>实体(Remove entity from component arrays of source)</li>
+</ul>
+<p>移除组件的步骤也大致相同。</p>
+<h2 id="操作：获得或创建目标原型"><a href="#操作：获得或创建目标原型" class="headerlink" title="操作：获得或创建目标原型"></a>操作：获得或创建目标原型</h2><blockquote>
+<p>轮子场景中，仅需要本章内第一种方法，即顺序搜索</p>
+</blockquote>
+<p>An important factor in how well add &#x2F; remove operations perform is how fast an ECS framework can find an archetype. A simple approach would be to hash the component ids of an archetype, and then use a hash map to lookup an archetype:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> TypeHash = <span class="type">uint64_t</span>;</span><br><span class="line">unordered_map&lt;TypeHash, Archetype*&gt; type_index;</span><br></pre></td></tr></table></figure>
+
+<p>This approach is neither slow nor is it particularly fast:</p>
+<p>First we need to create our destination type. If we take our previous example where we add <code>C</code> to <code>[A, B]</code>, we need to create <code>[A, B, C]</code>. In our case, where a type is stored as a vector of component ids this is an O(n) operation (to avoid adding duplicates). Then we need to compute the hash, which is another O(n) operation, followed by a hash table lookup which is O(1) on average, and O(n) worst case.</p>
+<p>This seems like a lot of work for one of the most common ECS operations.</p>
+<p>A faster approach is to build a graph, where each archetype represents a node in the graph, and the components to add &#x2F; remove are the edges. Consider this example:</p>
+<p><img src="/archetypeeg.png" alt="An example archetype graph"></p>
+<p>Each arrow to the right represents an “add” operation, and each arrow to the left represents a “remove” operation. Now, to move from archetype <code>[A, B]</code> to <code>[A, B, C]</code> we simply follow the <code>C</code> edge, which is an O(1) operation. When we follow an edge that does not have an archetype yet, we create it.</p>
+<p>Let’s add the graph to our previous archetype data structure:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">Archetype</span>;<span class="keyword">struct</span> <span class="title class_">ComponentArray</span> &#123;</span><br><span class="line">    <span class="type">void</span> *elements; <span class="comment">// vector&lt;T&gt;</span></span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> &#123;</span><br><span class="line">    Archetype *add;    <span class="comment">// traverse right</span></span><br><span class="line">    Archetype *remove; <span class="comment">// traverse left</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Archetype</span> &#123;</span><br><span class="line">    Type type;</span><br><span class="line">    vector&lt;EntityId&gt; entity_ids;</span><br><span class="line">    vector&lt;ComponentArray&gt; components;</span><br><span class="line">    <span class="type">int</span> length;</span><br><span class="line">    vector&lt;Edge&gt; edges;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>We can now write this function to find our next archetype:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Archetype *node = root;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; type.<span class="built_in">size</span>(); i ++) &#123;</span><br><span class="line">   Edge *edge = &amp;node-&gt;edges[type[i]];</span><br><span class="line">   <span class="keyword">if</span> (!edge-&gt;add) &#123;</span><br><span class="line">       edge-&gt;add = <span class="built_in">create_archetype</span>(node, type[i]);</span><br><span class="line">   &#125;</span><br><span class="line">   </span><br><span class="line">   node = edge-&gt;add;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Note how we use a type to traverse the graph. If we only add a single component to an entity, the type will only contain a single element, but by writing the function this way, we can quickly traverse multiple nodes.</p>
+<h2 id="AoS-vs-SoA"><a href="#AoS-vs-SoA" class="headerlink" title="AoS vs. SoA"></a>AoS vs. SoA</h2><p>So far we assumed that an archetype stores an array per component. This is usually referred to as the “struct of arrays” (SoA) approach. The reason it is named like this is because the way data is stored resembles that of a struct with array members:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">SoA_Archetype</span> &#123;</span><br><span class="line">    A a[<span class="number">100</span>];</span><br><span class="line">    B b[<span class="number">100</span>];</span><br><span class="line">    C c[<span class="number">100</span>];</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>It turns out that SoA works really well in combination with ECS. This is because a system is usually not interested in all components of an entity, and the SoA approach lets us load only the arrays into the CPU cache that we need. There is another valid approach though which is called “array of structs” (AoS). AoS can be represented like this:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> <span class="title class_">EntityType</span> &#123;</span><br><span class="line">    A a;</span><br><span class="line">    B b;</span><br><span class="line">    C c;</span><br><span class="line">&#125;;</span><br><span class="line">EntityType AoS_ArcheType[<span class="number">100</span>];</span><br></pre></td></tr></table></figure>
+
+<p>This example stores the same data, but it is laid out differently in memory. The biggest difference between AoS and SoA is that with AoS, all data of an entity is loaded into the CPU cache. This may slow down applications when only iterating a few components. AoS can however perform better when randomly accessing components. Flecs uses the SoA approach.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Our ECS framework is starting to shape up nicely. Let’s combine the data structures of our archetype with those of the previous post:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Entities, types and entity index</span></span><br><span class="line"><span class="keyword">using</span> EntityId = <span class="type">uint64_t</span>;</span><br><span class="line"><span class="keyword">using</span> Type = vector&lt;EntityId&gt;;</span><br><span class="line">unordered_map&lt;EntityId, Type&gt; entity_index;<span class="comment">// Type flags</span></span><br><span class="line"><span class="type">const</span> EntityId INSTANCEOF = <span class="number">1</span> &lt;&lt; <span class="number">63</span>;</span><br><span class="line"><span class="type">const</span> EntityId CHILDOF = <span class="number">2</span> &lt;&lt; <span class="number">62</span>;<span class="comment">// Component data</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">ComponentArray</span> &#123;</span><br><span class="line">    <span class="type">void</span> *elements; <span class="comment">// vector&lt;T&gt;</span></span><br><span class="line">    <span class="type">int</span> size;</span><br><span class="line">&#125;;<span class="comment">// Archetype graph</span></span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Archetype</span>;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Edge</span> &#123;</span><br><span class="line">    Archetype *add;</span><br><span class="line">    Archetype *remove;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">struct</span> <span class="title class_">Archetype</span> &#123;</span><br><span class="line">    Type type;</span><br><span class="line">    vector&lt;EntityId&gt; entity_ids;</span><br><span class="line">    vector&lt;ComponentArray&gt; components;</span><br><span class="line">    <span class="type">int</span> length;</span><br><span class="line">    vector&lt;Edge&gt; edges;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>Archetypes are a popular approach that provide good general performance, but they are not the only way to implement an ECS. I hope this gave you some background on their pro’s and con’s.</p>
+<p>If you liked what you read, consider checking out the Flecs repository (<a target="_blank" rel="noopener" href="https://github.com/SanderMertens/flecs">https://github.com/SanderMertens/flecs</a>) and the Flecs <a target="_blank" rel="noopener" href="https://discord.gg/MRSAZqb">Discord channel</a>!</p>
+<p>推荐阅读：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/SanderMertens/ecs-faq">ECS FAQ</a></li>
+<li><a target="_blank" rel="noopener" href="https://skypjack.github.io/2019-02-14-ecs-baf-part-1/">ECS back &amp; forth</a></li>
+</ul>
+
+    
+    </div>
+    <script>chords.replace()</script>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2020/12/28/coding/ECS/BuildingAnECS.2/" data-id="cm9v3m2nr005pf6ojh70bhuat" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/01/01/bio/NewYear2021/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          新年新气象
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/12/01/coding/ECS/BuildingAnECS.1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">手撕ECS #1: Types, Hierarchies and Prefabs</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  
+  
+    
+      <script src="https://giscus.app/client.js"
+              data-repo="timrockefeller/timrockefeller.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE2Mjk2MzY="
+              data-category-id="DIC_kwDOCjrcRM4CUVZS"
+              data-mapping="pathname"
+              data-strict="-1"
+              data-reactions-enabled="0"
+              data-emit-metadata="-1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="zh-CN"
+              data-loading="lazy"
+              crossorigin="anonymous" 
+              async>
+      </script>
+
+    
+  
+
+
+</section>
+      
+        
+<aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recent</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="title">【踩坑记录】如何在 MacOS (Unix) 上运行 EraTW</a></p>
+              <p class="item-date"><time datetime="2025-01-23T00:00:00.000Z" itemprop="datePublished">2025-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="title">ECS &amp; Hierarchies</a></p>
+              <p class="item-date"><time datetime="2024-02-05T00:00:00.000Z" itemprop="datePublished">2024-02-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/02/coding/ECS/ECS_storage/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/02/coding/ECS/ECS_storage/" class="title">ECS 储存数据的方式</a></p>
+              <p class="item-date"><time datetime="2024-02-02T00:00:00.000Z" itemprop="datePublished">2024-02-02</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/12/06/bio/canning_or_willing/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a></p>
+              <p class="item-title"><a href="/2023/12/06/bio/canning_or_willing/" class="title">能做和会做</a></p>
+              <p class="item-date"><time datetime="2023-12-06T00:00:00.000Z" itemprop="datePublished">2023-12-06</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/11/17/coding/constly-const-ptr/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2023/11/17/coding/constly-const-ptr/" class="title">Constly Const Pointer</a></p>
+              <p class="item-date"><time datetime="2023-11-17T00:00:00.000Z" itemprop="datePublished">2023-11-17</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 15px;">ECS</a> <a href="/tags/Era/" style="font-size: 10px;">Era</a> <a href="/tags/Game/" style="font-size: 10px;">Game</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 11.67px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://blog.dashjay.com" target="_blank">DashJay</a>
+          </li>
+        
+          <li>
+            <a href="https://measureds.github.io" target="_blank">Measureds</a>
+          </li>
+        
+          <li>
+            <a href="https://zanbuffet.github.io" target="_blank">Zanbuffet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme mod from <a href="#">Icarus</a><br>
+      
+        <!-- <script src="https://api.quq.cat/hitokoto"></script>
+<div id="hitokoto"><script defer>hitokoto()</script></div> -->
+<p id="hitokoto">:D 获取中...</p>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+      
+    </div>
+  </div>
+</footer>
+
+    
+
+
+  
+    
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
+  
+  
+    
+<script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
+  
+  
+  
+  
+  
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+  </div>
+</body>
+</html>

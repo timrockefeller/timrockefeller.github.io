@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset="utf-8">
+  
+  <title>【熟肉】无人机相机采集图像序列的快速三维重建 | 外野 - wryyyyyyyyyY!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="description" content="原文标题：Rapid 3D Reconstruction for Image Sequence Acquired from UAV Camera 首发于：MDPI Yufu Qu *, Jianyu Huang and Xuan ZhangDepartment of Measurement Technology &amp; Instrument, School of Instrumentatio">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【熟肉】无人机相机采集图像序列的快速三维重建">
+<meta property="og:url" content="http://blog.iik.moe/2021/02/24/CG/translation.Rapid%203D%20Reconstruction%20for%20Image%20Sequence/index.html">
+<meta property="og:site_name" content="外野">
+<meta property="og:description" content="原文标题：Rapid 3D Reconstruction for Image Sequence Acquired from UAV Camera 首发于：MDPI Yufu Qu *, Jianyu Huang and Xuan ZhangDepartment of Measurement Technology &amp; Instrument, School of Instrumentatio">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-04-24T08:25:47.962Z">
+<meta property="article:author" content="Kitekii">
+<meta property="article:tag" content="paper">
+<meta name="twitter:card" content="summary">
+  
+  
+  
+
+  
+    <link rel="icon" href="/image/favicon.ico" />
+    <link rel="apple-touch-icon" href="/image/favicon.ico" />
+  
+  
+<script src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML.js"></script>
+
+  
+<link rel="stylesheet" href="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.css">
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/nprogress/0.2.0/nprogress.min.js"></script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      NProgress.start()
+      $(document).on('readystatechange', function () {
+        if (document.readyState === 'complete') NProgress.done()
+      })
+      var elements = $('img, script')
+      var loaded = 0
+      elements.on('load', function () {
+        if (loaded === elements.length) NProgress.done()
+        else {
+          var val = ++loaded / elements.length
+          NProgress.status > val ? NProgress.inc(val) : NProgress.set(val)
+        }
+      })
+    })
+  </script>
+
+  
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/csshake/1.5.2/csshake.min.css">
+
+  
+<link rel="stylesheet" href="/libs/open-sans/styles.css">
+
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/2.1.3/jquery.min.js"></script>
+
+  
+<script src="//lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/scrollReveal.js/3.3.6/scrollreveal.min.js"></script>
+
+  <script>
+    $(function() {
+      // Init ScrollReveal Animate
+      window.sr = new ScrollReveal();
+      window.sr.reveal('#profile', { viewFactor: 0, mobile: false });
+      window.sr.reveal('article, .timeline, .layout-wrap', {
+        reset: window.location.pathname === '/',
+        delay: 100,
+        useDelay: 'once',
+        viewFactor: 0
+      });
+      window.sr.reveal('#sidebar', { delay: 200, useDelay: 'once', viewFactor: 0 });
+    })
+  </script>
+  <script src="/js/chord.js"></script>
+  
+  
+    
+<link rel="stylesheet" href="//lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/css/lightgallery.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/css/justifiedGallery.min.css">
+
+  
+  
+  
+  
+  
+  
+    <script>
+  var _hmt = _hmt || [];
+  (function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?f1fb63876cc310548f153f32652bc624";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+
+  
+
+
+<!-- hexo injector head_end start --><style type="text/css">    span.mask:hover{color:#fff!important}</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo">
+        
+        <span class="site-title">外野</span>
+      </a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/archives">归档</a>
+        
+          <a class="main-nav-link" href="/categories">目录</a>
+        
+          <a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a>
+        
+          <a class="main-nav-link" href="/about">关于</a>
+        
+      </nav>
+      
+        
+        <nav id="sub-nav">
+          <div class="profile" id="profile-nav">
+            <a id="profile-anchor" href="javascript:;">
+              <img class="avatar" src="/image/avatar.jpg" />
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div>
+        </nav>
+      
+      <div id="search-form-wrap">
+
+  <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form>
+
+</div>
+
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+        
+          <td><a class="main-nav-link" href="/archives">归档</a></td>
+        
+          <td><a class="main-nav-link" href="/categories">目录</a></td>
+        
+          <td><a class="main-nav-link" target="_blank" rel="noopener" href="https://iik.moe">时间直角</a></td>
+        
+          <td><a class="main-nav-link" href="/about">关于</a></td>
+        
+        <td>
+          
+  <!-- <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><input type="hidden" name="sitesearch" value="http://blog.iik.moe"></form> -->
+
+
+        </td>
+      </tr>
+    </table>
+  </div>
+</header>
+
+    <div class="outer">
+      
+        
+
+<aside id="profile">
+  <div class="inner profile-inner">
+    <div class="base-info profile-block">
+      <img id="avatar" src="/image/avatar.jpg" />
+      <h2 id="name">Kitekii</h2>
+      <h3 id="title">Technic Artist</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>Shenzhen, China</span>
+      <span id="bio">Brain power up!!!</span>
+      <a id="follow" target="_blank" href="https://github.com/timrockefeller/">FOLLOW</a>
+    </div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        79
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        48
+        <span>tags</span>
+      </div>
+    </div>
+      
+      <div class="profile-block social-links">
+        <table>
+          <tr>
+            
+            
+            <td>
+              <a href="https://twitter.com/kitekii_" target="_blank" title="twitter" class=tooltip >
+                <i class="fa fa-twitter"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://weibo.com/6hyuu" target="_blank" title="weibo" class=tooltip >
+                <i class="fa fa-weibo"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://stackoverflow.com/users/11379560/kitekii" target="_blank" title="stack-overflow" class=tooltip >
+                <i class="fa fa-stack-overflow"></i>
+              </a>
+            </td>
+            
+            <td>
+              <a href="https://steamcommunity.com/id/6hi/" target="_blank" title="steam" class=tooltip >
+                <i class="fa fa-steam"></i>
+              </a>
+            </td>
+            
+          </tr>
+        </table>
+      </div>
+      
+  </div>
+  
+  
+</aside>
+
+      
+      <section id="main"><article id="post-CG/translation.Rapid 3D Reconstruction for Image Sequence" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <!-- <div class="background"></div> -->
+      
+      <!-- <script>
+        ;!(function($) {
+          var max = 99;
+          var index = Math.floor(Math.random() * max) + 1;
+          $('.background').css({ backgroundImage: 'url("/css/images/article/'+ index +'.png")', opacity: 0.5 });
+        })(jQuery)
+      </script> -->
+      
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【熟肉】无人机相机采集图像序列的快速三维重建
+    </h1>
+  
+
+
+        
+          <div class="article-meta">
+            
+  <div class="article-date">
+    <i class="fa fa-calendar"></i>
+    <a href="/2021/02/24/CG/translation.Rapid%203D%20Reconstruction%20for%20Image%20Sequence/">
+      <time datetime="2021-02-24T16:00:00.000Z" itemprop="datePublished">2021-02-24</time>
+    </a>
+  </div>
+
+
+            
+
+            
+  <div class="article-tag">
+    <i class="fa fa-tag"></i>
+    <a class="tag-link-link" href="/tags/paper/" rel="tag">paper</a>
+  </div>
+
+
+          </div>
+        
+      </header>
+    
+    
+
+    <div class="article-entry" itemprop="articleBody">
+    
+      
+      <blockquote>
+<p>原文标题：Rapid 3D Reconstruction for Image Sequence Acquired from UAV Camera</p>
+<p>首发于：<a target="_blank" rel="noopener" href="https://www.mdpi.com/1424-8220/18/1/225">MDPI</a></p>
+<p>Yufu Qu *, Jianyu Huang and Xuan Zhang<br>Department of Measurement Technology &amp; Instrument, School of Instrumentation Science &amp; Optoelectronics<br>Engineering, Beihang University, Beijing 100191, China; <a href="mailto:&#72;&#x6a;&#121;&#x34;&#52;&#x38;&#x40;&#x62;&#117;&#97;&#97;&#46;&#x65;&#x64;&#117;&#46;&#x63;&#x6e;">&#72;&#x6a;&#121;&#x34;&#52;&#x38;&#x40;&#x62;&#117;&#97;&#97;&#46;&#x65;&#x64;&#117;&#46;&#x63;&#x6e;</a> (J.H.);<br><a href="mailto:&#x7a;&#104;&#x61;&#110;&#103;&#120;&#117;&#97;&#x6e;&#x61;&#x6a;&#64;&#x62;&#117;&#x61;&#x61;&#46;&#101;&#x64;&#x75;&#x2e;&#x63;&#110;">&#x7a;&#104;&#x61;&#110;&#103;&#120;&#117;&#97;&#x6e;&#x61;&#x6a;&#64;&#x62;&#117;&#x61;&#x61;&#46;&#101;&#x64;&#x75;&#x2e;&#x63;&#110;</a> (X.Z.)</p>
+<p>Correspondence: <a href="mailto:&#x71;&#x79;&#x66;&#64;&#98;&#117;&#x61;&#x61;&#x2e;&#101;&#x75;&#x64;&#x2e;&#99;&#110;">&#x71;&#x79;&#x66;&#64;&#98;&#117;&#x61;&#x61;&#x2e;&#101;&#x75;&#x64;&#x2e;&#99;&#110;</a>; Tel.: +86-010-8231-7336<br>Received: 23 November 2017; Accepted: 11 January 2018; Published: 14 January 2018</p>
+</blockquote>
+<p><strong>摘要</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In order to reconstruct three-dimensional (3D) structures from an image sequence captured by unmanned aerial vehicles’ camera (UAVs) and improve the processing speed, we propose a rapid 3D reconstruction method that is based on an image queue, considering the continuity and relevance of UAV camera images.</span><br></pre></td></tr></table></figure>
+
+<p>为了加快无人机相机采集图像三维重建过程，我们提出了一种基于图像序列相关度的快速重建方法。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The proposed approach first compresses the feature points of each image into three principal component points by using the principal component analysis method. In order to select the key images suitable for 3D reconstruction, the principal component points are used to estimate the interrelationships between images.</span><br></pre></td></tr></table></figure>
+
+<p>该方法首先利用<strong>主成分分析法</strong>(Principal Components Analysis, PCA)将每幅图像的特征点压缩为 3 个主成分点。利用主成分点估计图像之间的相互关系，可以为选择<strong>适合三维重建的关键帧</strong>提供依据。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Second, these key images are inserted into a fixed-length image queue. The positions and orientations of the images are calculated, and the 3D coordinates of the feature points are estimated using weighted bundle adjustment. With this structural information, the depth maps of these images can be calculated.</span><br></pre></td></tr></table></figure>
+
+<p>其次，将这些关键帧插入到一个固定长度的图像队列中。计算图像的位置和方向，并使用<strong>加权束平差</strong>(weighted bundle adjustment)估计特征点的三维坐标。利用这些结构信息，可以计算出这些图像的深度图。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Next, we update the image queue by deleting some of the old images and inserting some new images into the queue, and a structural calculation of all the images can be performed by repeating the previous steps.</span><br></pre></td></tr></table></figure>
+
+<p>接着通过删除一些旧图像和插入一些新图像来更新图像队列，并重复前面的步骤对所有图像进行结构化计算。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Finally, a dense 3D point cloud can be obtained using the depth–map fusion method. The experimental results indicate that when the texture of the images is complex and the number of images exceeds 100, the proposed method can improve the calculation speed by more than a factor of four with almost no loss of precision.</span><br></pre></td></tr></table></figure>
+
+<p>最后利用深度图融合方法得到密集的三维点云。实验结果表明，当图像的纹理复杂且图像数量超过 100 时，该方法可以将计算速度提高 4 倍以上，几乎不损失精度。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Furthermore, as the number of images increases, the improvement in the calculation speed will become more noticeable.</span><br></pre></td></tr></table></figure>
+
+<p>此外，随着图像数量的增加，相较原方法计算速度也会明显地提高。</p>
+<blockquote>
+<p>Keywords: UAV camera; multi-view stereo; structure from motion; 3D reconstruction; point cloud</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="1-Introduction-概述"><a href="#1-Introduction-概述" class="headerlink" title="1. Introduction 概述"></a>1. Introduction 概述</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Because of the rapid development of the unmanned aerial vehicle (UAV) industry in recent years, civil UAVs have been used in agriculture, energy, environment, public safety, infrastructure, and other fields. By carrying a digital camera on a UAV, two-dimensional (2D) images can be obtained. However, as the requirements have grown and matured, 2D images have not been able to meet the requirements of many applications such as three-dimensional (3D) terrain and scene understanding.</span><br></pre></td></tr></table></figure>
+
+<p>由于近年来无人机产业飞速发展，民用无人机已经能被应用于农业、能源、环境、公共安全、基础设施等领域。而无人机所携带的数字摄像头也能摄取 2D 图像。然而，随着需求的增长和成熟，2D 图像已经不能满足对三维场景和地形理解等多种应用的需求。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Thus, there is an urgent need to reconstruct 3D structures from the 2D images collected from UAV camera. The study of the methods in which 3D structures are generated by 2D images is an important branch of computer vision. In this field, many researchers have proposed several methods and theories [1–17].</span><br></pre></td></tr></table></figure>
+
+<p>因此，从无人机摄像机采集的二维图像中重建三维结构成为了当务之急。利用二维图像生成三维结构的方法研究是计算机视觉的一个重要分支。在这一领域，许多研究者提出了几种方法和理论[1-17]。在这些理论和方法中，有三个最重要的类别，分别是 SLAM[1-3] ，SfM[4-14] 和 MVS[15-17] ，这些算法已经在许多实际应用中得到了实现。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">As the number of images and their resolution increase, the computational times of the algorithms will increase significantly, limiting them in some high-speed reconstruction applications.</span><br></pre></td></tr></table></figure>
+
+<p>而随着图像数量和分辨率的增加，算法需要的时间显著增加，这极大地限制了一些需要高速三维重建的应用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Two major contributions in this paper are methods of selecting key images selection and SfM calculation of sequence images. Key images selection is very important to the success of 3D reconstruction. </span><br></pre></td></tr></table></figure>
+
+<p>本文主要研究了序列图像中关键帧的选取方法和序列图像的 SfM 计算方法。关键帧的选择对于三维重建的成功至关重要。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In this paper, a fully automatic approach to key frames extraction without initial pose information is proposed. Principal Component Analysis (PCA) is used to analyze the correlation of features over frames to automate the key frame selection.</span><br></pre></td></tr></table></figure>
+
+<p>本文提出了一种无初始位姿信息的全自动关键帧提取方法。主成分分析法用于分析帧间特征之间的相关性，从而实现自动化的关键帧选择。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Considering the continuity of the images taken by UAV camera, this paper proposes a 3D reconstruction method based on an image queue. To ensure the smooth of two consecutive point cloud, an improved bundle-adjustment named weighted  is used in this paper.</span><br></pre></td></tr></table></figure>
+
+<p>考虑到无人机摄像机拍摄图像的连续性，提出一种基于图像队列的三维重建方法。为了保证连续两个点云的平滑，本文采用了一种改进的光束法平差(BA)方法——加权光束法平差(WBA)。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">After using a fixed-size image queue, the global structure calculation is divided into several local structure calculations, thus improving the speed of the algorithm with almost no loss of accuracy.</span><br></pre></td></tr></table></figure>
+
+<p>通过使用固定大小的图像队列，将全局结构计算分解为若干个子结构计算，从而提高了算法的速度，几乎不损失精度。</p>
+<h2 id="2-Literature-Review-相关工作"><a href="#2-Literature-Review-相关工作" class="headerlink" title="2. Literature Review 相关工作"></a>2. Literature Review 相关工作</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The general 3D reconstruction algorithm without a priori positions and orientation information can be roughly divided into two steps.</span><br></pre></td></tr></table></figure>
+
+<p>一般的无先验位置和方向信息的三维重建算法大致可分为两步。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The first step involves recovering the 3D structure of the scene and the camera motion from the images. The problem addressed in this step is generally referred to as the SfM problem. </span><br></pre></td></tr></table></figure>
+
+<p>第一步是从图像中恢复场景的三维结构和摄像机的运动。这个步骤中涉及的问题通常称为 SfM 问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The second step involves obtaining the 3D topography of the scene captured by the images. This step is usually completed by generating a dense point data cloud or mesh data cloud from multiple images. The problem addressed in this step is generally referred to as the MVS problem.</span><br></pre></td></tr></table></figure>
+
+<p>第二步是获得由图像捕获的场景的三维地形图。这一步通常通过从多幅图像生成一个密集点数据云或网格数据云来完成。此步骤中涉及的问题通常称为 MVS 问题。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">In addition, the research into Real-time simultaneous localization and mapping (SLAM) and 3D reconstruction of the environment have become popular over the past few years. Positions and orientations of monocular camera and sparse point map can be obtained from the images by using SLAM algorithm.</span><br></pre></td></tr></table></figure>
+
+<p>此外，在过去的几年中，实时即时定位与地图构建重建(SLAM)和环境三维重建的研究已经变得非常流行。利用 SLAM 算法可以从图像中获得单目相机和稀疏点地图的位置和方向。</p>
+<h3 id="2-1-SfM"><a href="#2-1-SfM" class="headerlink" title="2.1. SfM"></a>2.1. SfM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The SfM algorithm is used to obtain the structure of the 3D scene and the camera motion from the images of stationary objects. There are many similarities between SLAM and SfM. They both estimate the localizations and orientations of camera and sparse features. Nonlinear optimization is widely used in SLAM and SfM algorithms.</span><br></pre></td></tr></table></figure>
+
+<p>利用 SfM 算法可以从静止物体的图像中获取三维场景的结构和摄像机的运动。SLAM 和 SfM 有许多相似之处，即都给出了相机位置、方向与<strong>稀疏特征</strong>的估计。<strong>非线性优化</strong>也在 SLAM 和 SfM 算法中有着广泛的应用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Researchers have proposed improved algorithms for different situations based on early SfM algorithms [4–6]. A variety of SfM strategies have emerged, including incremental [7,8], hierarchical [9], and global [10–12] approaches. Among these methods, a very typical one was proposed by Snavely [13], who used it in the 3D reconstruction of real-world objects. With the help of feature point matching, bundle adjustment, and other technologies, Snavely completed the 3D reconstruction of objects by using images of famous landmarks and cities.</span><br></pre></td></tr></table></figure>
+
+<p>学者们基于早期 SfM 算法[4-6]提出了针对不同情况的改进算法，演化出各种 SfM 策略，包括渐进式[7,8]、分层式[9]和全局式[10-12]方法。在这些方法中，<em>Snavely</em> 提出了一种非常典型的方法[13]，并将其用于真实物体的三维重建：借助于特征点匹配、光束法平差等技术，并成功利用著名地标和城市的图像完成了重建。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The SfM algorithm is limited in many applications because of the time-consuming calculation. With the continuous development of computer hardware, multicore technologies, and GPU technologies, the SfM algorithm can now be used in several areas. There are several improved SfM methods such as the method proposed by Wu [8 , 14]. These methods can improve the speed of the structure calculation without loss of accuracy.</span><br></pre></td></tr></table></figure>
+
+<p>SfM 算法由于计算时间较长，在许多应用中受到限制。但随着计算机硬件、多线程技术和 GPU 技术的不断发展，SfM 算法已经可以应用于多个领域。现阶段有不少 SfM 方法的改进，例如 <em>Wu</em> 提出的方法[8,14]。这些方法在不损失精度的前提下，提高了结构计算的速度。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Among the incremental SfM, hierarchical SfM, and global SfM, the incremental SfM is the most popular strategy for the reconstruction of unordered images. Two important steps in incremental SfM are the feature point matching between images, and bundle adjustment. As the resolution and number of images increase, the number of matching points and parameters optimized by bundle adjustment will increase dramatically. This results in a significant increase in the computational complexity of the algorithm and will make it difficult to use it in many applications.</span><br></pre></td></tr></table></figure>
+
+<p>在前文提及的渐进式 SfM（又称增量 SfM）、层次式 SfM 和全局式 SfM 中，渐进式 SfM 是最常用的无序图像重建策略，其两个重要步骤是图像和光束法平差之间的<strong>特征点匹配</strong>。随着图像的分辨率和数量的增加，匹配点的数量和参数的优化光束法平差将大幅度增加，而这会导致该算法的计算复杂度显著增加，故难以在许多应用中使用。</p>
+<h3 id="2-2-MVS"><a href="#2-2-MVS" class="headerlink" title="2.2. MVS"></a>2.2. MVS</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">When the positions and orientations of the cameras are known, the MVS algorithm can reconstruct the 3D structure of a scene by using multiple-view images.</span><br></pre></td></tr></table></figure>
+
+<p>当摄像机的位置和方向已知时，MVS 算法可以利用多视点图像重建场景的三维结构。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">One of the most representative methods was proposed by Furukawa [15]. This method estimates the 3D coordinates of the initial points by matching the difference of Gaussians and Harris corner points between different images, followed by patch expansion, point filtering, and other processing. The patch-based matching method is used to match other pixels between images. After that, a dense point data cloud and mesh data cloud can be obtained.</span><br></pre></td></tr></table></figure>
+
+<p>最有代表性的方法之一是<em>ふるかわ</em>提出的多视点立体图构建[15]：通过匹配不同图像之间的<strong>高斯差</strong>(Difference of Gaussians)和<strong>哈里斯角点</strong>(Harris Corner Points)来估计初始点的三维坐标，接着进行分块展开、点滤波等其他处理，并采用基于分块的方法对图像中的其他像素进行匹配，即能得到密集点云与网格模型。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Inspired by Furukawa’s method, some researchers have proposed several 3D reconstruction algorithms [16-18] based on depth-map fusion. These algorithms can obtain reconstruction results with an even higher density and accuracy. The method proposed by Shen [16] is one of the most representative approaches. The important difference between this method and Furukawa’s method is that it uses the position and orientation information of the cameras as well as the coordinates of the sparse feature points generated from the structure calculation. The estimated depth maps are obtained from the mesh data generated by the sparse feature points. Then, after depth–map refinement and depth–map fusion, a dense 3D point data cloud can be obtained. An implementation of this method can be found in the open-source software openMVS [16].</span><br></pre></td></tr></table></figure>
+
+<p>受<em>ふるかわ</em>方法的启发，一些学者提出了几种基于深度图融合的三维重建算法[16-18]，可以以更高的密度和精度获得重建结果。其中 <em>Shen</em> 提出的方法[16]是最有代表性的方法之一。该方法与<em>ふるかわ</em>的方法的区别在于，它既利用了摄像机的位置、方向，同时考虑了计算生成的稀疏特征点的坐标。其方法通过稀疏特征点生成的网格数据，计算出一个深度图。接着进行深度图细化(refinement)和融合(fusion)，就能得到一个密集的三维点云。另外，开源项目 <em>openMVS</em> 为该方法的一个实现。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Furukawa’s approach relies heavily on the texture of the images.</span><br><span class="line">When processing weakly textured images, it is difficult for this method to generate a dense point cloud.</span><br><span class="line">In addition, the algorithm must repeat the patch expansion and point cloud filtering several times, resulting in a significant increase in the calculation time.</span><br><span class="line">Compared to Furukawa’s approach, Shen’s method directly generates a dense point cloud using depth-map fusion.</span><br><span class="line">This method can easily and rapidly obtain a dense point cloud.</span><br><span class="line">Considering the characteristics of the problems that must be addressed in this study, we use a method similar to Shen’s approach to generating a dense point data cloud.</span><br></pre></td></tr></table></figure>
+
+<p><em>ふるかわ</em>的方法十分依赖图像的纹理精度。在处理纹理模糊的图像时，这种方法很难生成密集点云。此外，该算法还需要多次进行<strong>补片扩展</strong>和<strong>点云滤波</strong>，从而大大增加了计算时间。与<em>ふるかわ</em>的方法相比，<em>Shen</em> 的方法使用深度图融合直接生成密集点云，且更加方便、快速。考虑到该研究中的问题特点，我们使用了一种类似于 <em>Shen</em> 的方法来生成一个密集点云。</p>
+<h3 id="2-3-SLAM"><a href="#2-3-SLAM" class="headerlink" title="2.3. SLAM"></a>2.3. SLAM</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SLAM mainly consists in the simultaneous estimation of the localization of the robot and the map of the environment. The map obtained by SLAM is often required to support other tasks. The popularity of SLAM is connected with the need for indoor applications of mobile robotics. As the UAV industry rises, SLAM algorithms are widely used in UAV applications.</span><br></pre></td></tr></table></figure>
+
+<p>SLAM，即同步定位与地图构建，被许多应用任务依赖，其热度与很多室内机器人的研究有关。而随着无人机产业的兴起，SLAM 更是得到了广泛的关注与应用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Early SLAM approaches are based on Extended Kalman Filters, Rao-Blackwellised Particle Filters, and maximum likelihood estimation. Without priors, MAP estimation reduces to maximum-likelihood estimation.</span><br></pre></td></tr></table></figure>
+
+<p>早期的 SLAM 方法基于<strong>扩展卡尔曼滤波</strong>(Extended Kalman Filters)、 <strong>Rao-Blackwellised 粒子滤波</strong>(Rao-Blackwellised Particle Filters)和<strong>最大似然估计</strong>(maximum likelihood estimation)。在没有先验信息的情况下，<strong>MAP 估计</strong>(MAP estimation)退化为最大似然估计。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Most SLAM algorithms are based on iterative nonlinear optimization [1,2]. The biggest problem of SLAM is that some algorithms are easily converging to a local minimum. It usually returns a completely wrong estimate. Convex relaxation is proposed by some authors to avoid convergence to local minima. These contributions include the work of  Liu et al. [3]. Kinds of improved SLAM algorithms have been proposed to adapt to different applications. Some of them are used for vision-based navigation and mapping.</span><br></pre></td></tr></table></figure>
+
+<p>大多数 SLAM 算法是基于<strong>迭代非线性优化</strong>[1,2]，然而其最大问题是部分算法很容易收敛至局部极小值，从而导致一个完全错误的结果。为了避免收敛到局部极小值，一些学者提出了<strong>凸松弛法</strong>(Convex relaxation)，例如 <em>Liu et al.</em> 的研究[3]，针对不同的应用场合，提出了多种改进的 SLAM 算法，其部分算法也能够用于基于视觉的导航和地图绘制。</p>
+<h2 id="3-Method-方法"><a href="#3-Method-方法" class="headerlink" title="3. Method 方法"></a>3. Method 方法</h2><h3 id="3-1-Algorithm-Principles-算法流程"><a href="#3-1-Algorithm-Principles-算法流程" class="headerlink" title="3.1. Algorithm Principles 算法流程"></a>3.1. Algorithm Principles 算法流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The first step of our method involves building a fixed-length image queue, selecting the key images from the video image sequence, and inserting them into the image queue until full. A structural calculation is then performed for the images of the queue. Next, the image queue is updated, several images are deleted from the front of the queue, and the same number of images is placed at the end of the queue. The structural calculation of the images in the queue is then repeated until all images are processed. On an independent thread, the depth maps of the images are calculated and saved in the depth-map set. Finally, all depth maps are fused to generate dense 3D point cloud data. Without the use of ground control points, the result of our method lost the accurate scale of the model. The algorithm flowchart is outlined in Figure 1.</span><br></pre></td></tr></table></figure>
+
+<p>第一步构建一个固定长度的帧队列，从视频帧序列中选择关键帧，并将它们插入到帧队列中直到上限。然后对队列的所有帧进行结构计算。接着更新图像队列：删除队列前面的几个图像，并在队列末尾放置相同数量的图像。然后重复队列中图像的结构计算，直到处理完所有图像。构建一个独立线程，来计算图像的深度图并将其保存在深度图集中。最后，将所有深度图融合生成密集的三维点据。由于没有使用地面控制点，方法得到的模型比例不准确。算法流程图如图 1 所示。</p>
+<p>![*图 1.* 算法流程图.](.&#x2F;translation.Rapid 3D Reconstruction for Image Sequence&#x2F;sensors-18-00225-g001.png)</p>
+<h3 id="3-2-Selecting-Key-Images-筛取关键图像"><a href="#3-2-Selecting-Key-Images-筛取关键图像" class="headerlink" title="3.2. Selecting Key Images 筛取关键图像"></a>3.2. Selecting Key Images 筛取关键图像</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">In order to complete the dense reconstruction of the point cloud and improve the computational speed, the key images (which are suitable for the structural calculation) must first be selected from a large number of UAV video images captured by a camera. </span><br><span class="line">The selected key images should have a good overlap of area for the captured scenes. </span><br></pre></td></tr></table></figure>
+
+<p>为了完成密集点云的重建并提高计算速度，首先需要从无人机摄像头采集的大量视频图像中选取适合结构计算的关键帧，选取的关键帧之间应具有明显的场景重叠区域。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">For two consecutive key images, they must meet the key image constraint (denoted as R (I_1, I_2 )) if they have a sufficient overlap area. In this study, we propose a method for directly selecting key images for reconstructing the UAV camera’s images (the GPS equipped on the UAV can only reach an accuracy on the order of meters; by using GPS information as a reference for the selection of key images, discontinuous images will form).</span><br></pre></td></tr></table></figure>
+
+<p>对于两个连续的关键帧，如果它们有足够多的重叠区域，则必须满足<strong>关键帧约束</strong>，记为 <code>R(I_1, I_2)</code>。本文提出了一种直接选取关键帧重建无人机摄像图像的方法（无人机上装备的 GPS 只能达到米级的精度，利用 GPS 信息作为关键图像选取的参考，就会形成不连续的图像）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The overlap area between images can be estimated by the correspondence between the feature points of the images. In order to reduce the computational complexity of feature point matching, we propose a method of compressing the feature points based on principal component analysis (PCA). It is assumed that the images used for reconstruction are rich in texture. Three principal component points (PCPs) can be generated from PCA, each reflecting the distribution of the feature points in different images. If the two images are captured almost at the same position, the PCPs of them almost coincide in the same place. Otherwise, the PCPs will move and be located in different positions on the image. </span><br></pre></td></tr></table></figure>
+
+<p>通过图像特征点之间的对应关系，可以估计图像之间的重叠区域。为了降低特征点匹配的计算复杂度，本文提出了一种基于主成分分析(PCA)的特征点压缩方法。假设用于重建的图像具有丰富的纹理信息，主成分分析法可以生成三个主成分点(PCPs)，而每个主成分点反映不同图像中特征点的分布情况。如果两幅图像在同一位置拍摄的，那么它们的主成分点必然重合在同一个地方，否则不然。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The process steps are as follows. First, we use the scale-invariant feature transform (SIFT) [19] feature detection algorithm to detect the feature points of each image (Figure 2a). There must be at least four feature points, and the centroid of these feature points can then be calculated as follows:</span><br></pre></td></tr></table></figure>
+
+<p>筛取的详细步骤如下。第一步利用尺度不变特征变换(SIFT) [19] 来检测每张图像的特征点（图 2a），通过选取 4 个特征点，则它们的质心由下公式计算：<br>$$<br>\overline{P} &#x3D; \frac{1}{n}\sum^n_{i&#x3D;1}{P_i},<br>P_i&#x3D;\left(\begin{array}{}x\y\end{array}\right)<br>$$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where P_i is the pixel coordinate of the feature point, and -p is the centroid. The following matrix is formed by the image coordinates of the feature points:</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>P_i</code> 为特征点的像素坐标，<code>\overline&#123;p&#125;</code> 为质心。则可以得到如下矩阵：<br>$$<br>A &#x3D; \begin{bmatrix}<br>(P_1 - \overline P)^T\<br>\vdots \<br>(P_n - \overline P)^T\<br>\end{bmatrix}<br>$$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Then, the singular value decomposition (SVD) of matrix A yields two principal component</span><br><span class="line">vectors. The principal component points (PCPs) are obtained from these vectors ( Equations (3) and (4) ). To compress a large number of feature points into three PCPs (Figure 2b),</span><br></pre></td></tr></table></figure>
+
+<p>矩阵 A 的奇异值分解(SVD)可以得到 2 个主分量向量，利用公式 (3)、(4) 可以压缩大量特征点至三个主成分点（图 2b）。<br>$$<br>U\sum{V^*}&#x3D;svd(A)<br>$$</p>
+<p>$$<br>p_{m1}&#x3D;\overline P, P_{m2} &#x3D; (V_1 + \overline P),p_{m3} &#x3D; (V_2 + \overline P)<br>$$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where pm1, pm2, and pm3 are the three PCPs, and V 1 and V 2 are the two vectors of V*. The PCPs can reflect the distribution of the feature points in the image. After that, by calculating the positional relationship of the corresponding PCPs between two consecutive images, we can estimate the overlap area between images.</span><br></pre></td></tr></table></figure>
+
+<p>其中<code>p_&#123;m1&#125;</code>、<code>p_&#123;m2&#125;</code>、<code>p_&#123;m3&#125;</code> 为三个主成分点，<code>V_1</code> 和 <code>V_2</code> 为 <code>V^*</code> 的两个向量。这些主成分点能够反映图像中特征点的分布情况。接着只需计算两幅连续帧之间相应的 PCP 位置关系，就能预测出帧之间的重叠区域。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The average displacement ( d_p ) between PCPs, as expressed in Equation (5), can be calculated as follows: d p reflects the relative displacement of feature points; when d_p &lt; D_l , it is likely that the two images are almost captured at the same position; and when d_p &gt; D_h , the overlap area of two images becomes too small. In this paper, we use 1/100 of the resolution as the value of D_l and 1/10 of the resolution as the value of D_h. When d p is within the certain range given in Equation (6), the two images will meet the key image constraint R ( I_1 , I_2 ) </span><br></pre></td></tr></table></figure>
+
+<p>如公式 (5) 所示，定义 <code>d_p</code> 为两帧 PCPs 的“距离”，反映特征点的相关度，并将 <code>d_p</code> 约束在两个阈值 <code>D_l</code>、<code>D_h</code> 之间。若 <code>d_p</code> &lt; <code>D_l</code>，则可以认为两帧拍摄点重合（又言之十分接近）；若 <code>d_p</code> &gt; <code>D_l</code>，则可以认为两帧重合部分太少了。本文<code>D_l</code> 取 1&#x2F;100，<code>D_h</code> 取 1&#x2F;10，当满足公式 (6) 时，则称两帧满足<strong>关键帧约束</strong> <code>R(I_1, I_2)</code>。<br>$$<br>d_p &#x3D; \frac {1}{3} \sum^3_{i&#x3D;1} {[(p_{1i}-p_{2i})^T\times (p_{1i}-p_{2i})]^{0.5}}<br>$$</p>
+<p>$$<br>R(I_1,I_2):D_l&lt;d_p&lt;D_h<br>$$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where p 1i is the ith PCP of the first image (I_1 ), and p 2i is that of the second image (I_2 ). The result is presented in Figure 2c. This is a method for estimating the overlap areas between images, and it is not necessary to calculate the actual correlation between the two images when selecting key images. Moreover, the algorithm is not time-consuming for either the calculation of the PCPs or the estimation of the distance between PCPs. Therefore, this method is suitable for quickly selecting key images from a UAV camera’s video image sequence.</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>p_1i</code> 为前一帧(<code>I_1</code>)第 i 个 PCP， <code>p_2i</code> 为后一帧(<code>I_2</code>)第 i 个 PCP（结果如图 2c）。得益于这种估计图像重叠区域的方法，在选择关键图像时不需要计算两图像之间的实际相关性。此外，无论是计算 PCP 还是估计 PCP 之间的“距离”，该算法都不耗时，因此也适用于无人机飞行时实时选取。</p>
+<p>![图 2. 特征点压缩. (a) 获取特征点. (b) 计算 PCPs. (c) 匹配 PCPs.](.&#x2F;translation.Rapid 3D Reconstruction for Image Sequence&#x2F;sensors-18-00225-g002.png)</p>
+<h3 id="3-3-Image-Queue-SfM-图像序列动态重建"><a href="#3-3-Image-Queue-SfM-图像序列动态重建" class="headerlink" title="3.3 Image Queue SfM 图像序列动态重建"></a>3.3 Image Queue SfM 图像序列动态重建</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">This study focuses on the 3D reconstruction of UAV camera’s images. Considering the continuity of UAV camera’s images, we propose a SfM calculation method based on an image queue. This method constructs a fixed-size image queue and places key images into the queue until full. Then, the structure of the images in the queue is computed, and the queue is updated with new images. Eventually, we will complete the structural calculation of all images by repeating the structural computation and queue update. The image queue SfM includes two steps. The first involves the SfM calculation of the images in the queue. The second involves updating the images in the image queue.</span><br></pre></td></tr></table></figure>
+
+<p>本文主要研究无人机相机图像的三维重建问题，故考虑到无人机摄像图像的连续性，我们提出了一种基于图像队列的 SfM 计算方法。该方法构造了一个定长的帧队列，并将关键帧放入队列直至上限。然后计算队列中图像的重建结构，并用新图像更新队列。最后，通过不断重复结构计算和队列更新，完成所有图像的计算并给出一个完整模型。图像序列 SfM 方法包括两个部分：一是对帧队列进行 SfM 计算方法，二是帧队列图像更新策略。</p>
+<h4 id="3-3-1-SfM-Calculation-for-the-Images-in-the-Queue"><a href="#3-3-1-SfM-Calculation-for-the-Images-in-the-Queue" class="headerlink" title="3.3.1 SfM Calculation for the Images in the Queue"></a>3.3.1 SfM Calculation for the Images in the Queue</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">We propose the use of the incremental SfM algorithm. The process is illustrated in Figure 3. The collection of all images used for the reconstruction is first recorded as set C. The total number of images in C is assumed to be N. The size of the initial fixed queue is m (it is preferred that any two images in the queue have overlapping areas, and m can be modified according to the requirements of the calculation speed. When m is chosen as a smaller number, the speed increases, but the precision decreases correspondingly). In order to keep the stability of the algorithm, the value of m is generally taken greater than 5, and k is less than half of m. Then, m key images are inserted into the image queue. All of the images in the image queue are recorded as C_q , and the structure of all of the images in C_q is calculated.</span><br></pre></td></tr></table></figure>
+
+<p>本文使用渐进式 SfM 算法（图 3），首先将所有用于重建的图像记为集合 C，图像总数为 N。定义一个定长队列，长度为 m，队列中任意两幅图像都应当有重合区域。m 的取值将影响运算速度，取值越小，速度越快，精度相应降低。为了保证算法稳定，一般 m 取值大于 5，且 k &lt; m&#x2F;2。在队列中插入 m 张关键帧，记队列中的图集为 C_q，接着计算该队列中对应的结构。</p>
+<p>![图 3. 帧队列 SfM 过程.](translation.Rapid 3D Reconstruction for Image Sequence&#x2F;sensors-18-00225-g003.png)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Considering the accuracy and speed of the algorithm, the SfM approach used in this study uses an incremental SfM algorithm [7]. The steps of the algorithm are summarized below.</span><br></pre></td></tr></table></figure>
+
+<p>考虑到算法的准确性和速读，本研究中使用渐进式 SfM 算法[7]，算法步骤如下。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. The SIFT [19] feature detection algorithm is used to detect the feature points on all images in the queue, and the correspondence of the feature points are then obtained by the feature point matching [20] between every two images in the queue.</span><br><span class="line">2. Two images are selected from the queue as the initial image pair using the method proposed in [21]. The fundamental matrix of the two images is obtained by the random sample consensus (RANSAC) method [22], and the essential matrix between the two images is then calculated when the intrinsic matrix (obtained by the calibration method proposed in [23]) is known. The first two terms of radial and tangential distortion parameters are also obtained and used for image rectification. After remapping the pixels onto new locations on the image based on distortion model, the image distortion caused by lens could be eliminated. Then, the positions and orientations of the images can be obtained by decomposing the essential matrix according to [24].</span><br><span class="line">3. According to the correspondence of the feature points in different images, the 3D coordinates of the feature points are obtained by triangulation (the feature points are denoted as P_i ( i = 1,...,t ) ).</span><br><span class="line">4. The parameters calculated in the previous steps are passed into the bundle adjustment [25] for nonlinear optimization [26].</span><br><span class="line">5. The structure of the initial image pair is calculated, and one of the coordinate systems of the cameras taking the image pair is set as the global coordinate system. The image of the queue that has completed the structure calculation is placed into the set C_SFM (C_SFM ⊂ C_q ).</span><br><span class="line">6. The new image ( I_new ) is placed into the set ( C_SFM ), and the structural calculation is performed. The new image must meet the following two conditions. First, there should be at least one image in C_SFM that has common feature points with I new . Second, at least six of these common feature points must be in P_i ( i = 1,...,t ) (in order to improve the stability of the algorithm, this study requires at least 15 common feature points). Finally, all of the parameters from the structure calculation are optimized by bundle adjustment.</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>使用 SIFT [19] 特征提取算法检测队列中所有图像的特征点，然后通过队列中每两幅图像之间的特征点匹配[20]获得特征点的对应关系。</li>
+<li>采用文献 [21] 中的方法，从队列中选取两张作为初始图像对，通过<a target="_blank" rel="noopener" href="https://www.cnblogs.com/xingshansi/p/6763668.html">随机抽样一致算法</a>(RANSAC)来获取基础矩阵(fundamental matrix)。接着在相机内参矩阵(intrinsic matrix)已知（[23] 校正方法）的情况，计算两帧间的本质矩阵(essential matrix)。此时，用于图像校正的<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39968410/article/details/111270895">径向、切向畸变参数</a>的前两项也能求出，对像素进行重映射就能消除由镜头引起的畸变。然后对本质矩阵进行分解 [24] 就能得到图像对应的位置和方向。</li>
+<li>根据特征点对应的关系，使用<strong>三角定位</strong>来获取该图像特征点的三维坐标（特征点标记为 <code>P_i</code>(i&#x3D;1,…,t)）。</li>
+<li>对前面步骤计算出的参数采用光束平差法[25]进行非线性优化[26]。</li>
+<li>计算出初始图像对所对应的结构，并选取一个图像的摄像机坐标作为全局坐标系原点。已完成计算的图像放入集合 <code>C_SFM</code>(<code>C_SFM</code>⊂<code>C_q</code>)。</li>
+<li>向集合 <code>C_SFM</code> 添加新图片 <code>I_new</code>，并计算结构（译：怎么又计算？）。这张新图片需要满足以下两个条件：第一，在<code>C_SFM</code>需要至少有一张图片与<code>I_new</code>有共同的特征点；第二，这些共同特征点至少要有 6 个在<code>P_i</code>中（为了实验数据稳定，本研究定义需要 15 个共同特征点）。最后，再使用光束平差法优化计算出的结构参数。</li>
+<li>重复第 6 步，直至队列中的所有图像计算完毕（<code>C_SFM</code>&#x3D;<code>C_q</code>）。</li>
+</ol>
+<h4 id="3-3-2-Updating-the-Image-Queue-更新图像队列"><a href="#3-3-2-Updating-the-Image-Queue-更新图像队列" class="headerlink" title="3.3.2. Updating the Image Queue 更新图像队列"></a>3.3.2. Updating the Image Queue 更新图像队列</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">After the above steps, the structural calculation of all of the images in C_q can be performed. In order to improve the speed of the structural calculation of all of the images in C, this study proposes an improved SfM calculation method; the structural calculation of the images is processed in the form of an image queue. Figure 4 illustrates the process of the algorithm. We delete k images at the front of the queue, save their structural information, and then place k new images at the tail of the queue; these k images are then recorded as a set C_k. The (m − k) images left in the queue are recorded as a set C_r ( C_q = C_r ∪ C_k ), so now C_SFM = C_r. </span><br></pre></td></tr></table></figure>
+
+<p>按上述步骤处理完 <code>C_q</code> 内所有图像后，需要更新该图像队列。采用图像队列这一方法，结合渐进式 SfM 算法，能有效提高重建计算速度。图 4 演示了该算法过程。</p>
+<p>首先删除队列中前 k 个图像并保存它们的结构信息，然后在队列尾部追加 k 个新图像，记该 k 个图像的集合为 <code>C_k</code>，而原先留在队列中的 m-k 个图像集合记为 <code>C_r</code>(<code>C_q</code>&#x3D;<code>C_r</code>∪<code>C_k</code>)，因而现在 <code>C_SFM</code>&#x3D;<code>C_r</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">The structure of the images in C r is known, and the structural information contains the coordinates of the 3D feature points (marked as P_r ). </span><br><span class="line">The corresponding image pixels of P_r are marked as a set U_r , and the projection relationship is expressed as P : P_r → U_r . </span><br><span class="line">Then, the pixels of the feature points (marked as U_k ) of the images in C_k are detected, and the pixels in U k and U r are matched. </span><br><span class="line">We obtain the correspondence M : U_rC ↔ U_kc ( U_rc ∈ U_r , U_kc ∈ U_k ) , and U_rC and U kc are the image pixels of the same object points (marked as P_c ) in different images from C_r and C_k , respectively, expressed as P : P_c → U_kc ,P_c → U_rc , where P_c is the control point. </span><br><span class="line">The projection matrix of the images in C_k can be estimated by the projection relationship between P_c and U_kc ; then, the positions and orientations of the cameras can be calculated. </span><br><span class="line">In contrast, P_c can be used in the later weighted bundle adjustment to ensure the continuity of the structure. </span><br><span class="line">Then, we repeat step 6 until C_SFM = C_q . </span><br><span class="line">Finally, the structure of all of the images can be calculated by repeating the following two procedures alternately: calculate the SfM of the images in the queue and update the image queue.</span><br></pre></td></tr></table></figure>
+
+<p>目前，<code>C_r</code>对应的结构已知，且其特征点（记为 <code>P_r</code>）的三维坐标也已知。记特征点 <code>P_r</code> 对应的图像像素集合为<code>U_r</code>，其映射关系记为 P:<code>P_r</code>→<code>U_r</code>。然后检测新图像（<code>C_k</code>）中的特征像素（记为<code>U_k</code>），并匹配<code>U_k</code>与<code>U_r</code>。我们可以得到一个点对应关系 M:<code>U_rc</code>↔<code>U_kc</code>(<code>U_rc</code>∈<code>U_r</code>, <code>U_kc</code>∈<code>U_k</code>)，分别对应相同的三维特征点<code>P_c</code>（也称控制点），将这个映射分别定义为P:<code>P_c</code>→<code>U_kc</code>, <code>P_c</code>→<code>U_rc</code>。</p>
+<p>利用 <code>P_c</code> 和 <code>U_kc</code> 之间的投影关系，估计出 <code>C_k</code> 中图像的投影矩阵，从而计算出摄像机的位置和方向。另外，<code>P_c</code> 可以通过后文提及的加权光束法平差来确保结构的连续性。接着继续重复上节的第 6 步直至<code>C_SFM</code>&#x3D;<code>C_q</code>。至此一轮图像更新完成，只需重复更新图像、队列计算就能得到所有图像的对应结构点云。</p>
+<p>![图 4. 更新图像队列(m&#x3D;5, k&#x3D;1).](.&#x2F;translation.Rapid 3D Reconstruction for Image Sequence&#x2F;sensors-18-00225-g004.webp)</p>
+<h4 id="3-3-3-Weighted-Bundle-Adjustment-加权光束法平差"><a href="#3-3-3-Weighted-Bundle-Adjustment-加权光束法平差" class="headerlink" title="3.3.3. Weighted Bundle Adjustment 加权光束法平差"></a>3.3.3. Weighted Bundle Adjustment 加权光束法平差</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">An important part of the SfM algorithm is bundle adjustment. </span><br><span class="line">Our method divides a large number of images into small groups of images in the form of an image queue. </span><br><span class="line">When calculating the structure by the queue, optimization of the bundle adjustment causes the parameters to reach the subregion optimum rather than the global optimum. </span><br><span class="line">Small differences in the parameters between the subregions will result in discontinuous structures. </span><br><span class="line">This problem can be addressed by using control points, which are the points connecting two sets of adjacent feature points of the image, as shown in Figure 5. </span><br><span class="line">When we use bundle adjustment to optimize the parameters, we must keep the control points unchanged or with as little change as possible. </span><br><span class="line">This is achieved by weighting the error term of the control points. </span><br><span class="line">After the first update of the image queue, the formula for the projection error of the bundle adjustment used in step 6 will be altered.</span><br></pre></td></tr></table></figure>
+
+<p>光束法平差是 SfM 算法的重要组成部分。我们的方法将大量图像以队列形式分割开来，这样容易使得光束法平差的优化结果陷入局部最优，继而导致全局不连续。</p>
+<p>这个问题可以通过加入控制点来解决，即<u>连接图像中两组相邻特征点的点</u>（如图 5）。当我们使用光束法平差来优化参数时，我们要尽可能保持控制点不变，只允许微小变动。而这可以通过加入加权控制点的误差项来实现。在图像队列的第一次更新之后，我们需要对第6步中使用的光束法平差的投影误差公式进行重写。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">For a single image, Equation (7) is the projection formula of the 3D point to the image pixel, and Equation (8) is the reprojection error formula:</span><br></pre></td></tr></table></figure>
+
+<p>对于单幅图像，公式(7)是三维点到图像像素的投影公式，公式(8)是重投影误差公式：<br>$$<br>\left(\begin{array}{}{v_i}^f\{u_i}^f\end{array}\right)<br>&#x3D;K[R,t]\left(\begin{array}{}p_i\1\end{array}\right)<br>&#x3D;f(R,T,P_i)<br>$$</p>
+<p>$$<br>e_{project}&#x3D;\sum^{n}_{i&#x3D;1}{\left{\left(\left(\begin{array}{}v_i\u_i\end{array}\right)-\left(\begin{array}{}{v_i}^f\{u_i}^f\end{array}\right)\right)^T<br>\times\left(\left(\begin{array}{}v_i\u_i\end{array}\right)-\left(\begin{array}{}{v_i}^f\{u_i}^f\end{array}\right)\right)\right}}<br>$$</p>
+<p>$$<br>e_{project}&#x3D;\sum^{n}<em>{i&#x3D;1}{\left{\left(\left(\begin{array}{}v_i\u_i\end{array}\right)-\left(\begin{array}{}{v_i}^f\{u_i}^f\end{array}\right)\right)^T<br>\times\left(\left(\begin{array}{}v_i\u_i\end{array}\right)-\left(\begin{array}{}{v_i}^f\{u_i}^f\end{array}\right)\right)\right}}<br>\+w_j\sum^c</em>{j&#x3D;1}{\left{\left(\left(\begin{array}{}v_j\u_j\end{array}\right)-\left(\begin{array}{}{v_j}^f\{u_j}^f\end{array}\right)\right)^T<br>\times\left(\left(\begin{array}{}v_j\u_j\end{array}\right)-\left(\begin{array}{}{v_j}^f\{u_j}^f\end{array}\right)\right)\right}}<br>$$</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">where K is the internal matrix of the camera, R and T are the external parameters, P i is the 3D feature point, (v_i,u_i)^T is the actual pixel coordinate of the feature point, and (v_i^f,u_i^f)^T is the pixel coordinate calculated from the structural parameters. The number of control points is k. The calculation of the bundle adjustment is a nonlinear least-squares problem. The structural parameters (R,T,P i ( i = 1,...,n )) can be optimized by minimizing e projrct after changing the value of the parameters.</span><br></pre></td></tr></table></figure>
+
+<p>其中 K 为相机内参矩阵，R和T是外参矩阵，P_i 是立体特征点，<code>(v_i,u_i)^T</code> 是特征点的实际像素坐标，<code>(v_i^f\\u_i^f)^T</code> 是根据结构参数计算出来的像素坐标。共有 k 个控制点。光束法平差的计算是一个非线性最小二乘问题。结构参数 (R,T,P_i) 则需要通过最小化 e_project 来取得最优。</p>
+<p>![图 5. 加权光束法平差.](translation.Rapid 3D Reconstruction for Image Sequence&#x2F;sensors-18-00225-g005.webp)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">The difference between the weighted bundle adjustment and the bundle adjustment is the weight of the control points’ projection error. The weight is w_j (after an experimental comparison, a value of 20 is suitable for w j ). Equation (9) is the reprojection error formula of the weighted bundle adjustment.</span><br></pre></td></tr></table></figure>
+
+<p>加权光束法平差和光束法平差的区别在于控制点投影误差的权重，即 <code>w_j</code>（经过对比实验，取值 20 较适合本实验）。公式 (9) 是加权光束法平差的重投影误差公式。</p>
+<h4 id="3-3-4-MVS"><a href="#3-3-4-MVS" class="headerlink" title="3.3.4. MVS"></a>3.3.4. MVS</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">For the dense reconstruction of the object, considering the characteristics of the problem addressed in this study, we use the method based on depth-map fusion to obtain the dense point cloud. The method is similar to that proposed in [16]. The algorithm first obtains the feature points in the structure calculated by the SfM. By using Delaunay triangulation, we can obtain the mesh data from the 3D feature points. Then, the mesh is used as an outline of the object, which is projected onto the plane of the images to obtain the estimated depth maps. The depth maps are optimized and corrected using the pixel matching algorithm based on the patch. Finally, dense point cloud data can be obtained by fusing these depth maps.</span><br></pre></td></tr></table></figure>
+
+<p>考虑到本文研究问题的特点，我们准备采用基于深度图融合的方法获取稠密点云。方法与文献 [16] 相似，首先获取由 SfM 计算出的结构中的特征点，通过 <strong>Delaunay 三角剖分</strong>，我们可以从 3d 特征点获得网格数据。然后将该网格投影到对应的原图上，以获得近似的深度图。之后利用基于<strong>分片的像素匹配算法</strong>对深度图进行优化和校正，于是我们就可以获得稠密点云。</p>
+<h2 id="4-Experiments-实验"><a href="#4-Experiments-实验" class="headerlink" title="4. Experiments 实验"></a>4. Experiments 实验</h2><h3 id="4-1-Data-Sets"><a href="#4-1-Data-Sets" class="headerlink" title="4.1. Data Sets"></a>4.1. Data Sets</h3><h3 id="4-2-Precision-Evaluation"><a href="#4-2-Precision-Evaluation" class="headerlink" title="4.2. Precision Evaluation"></a>4.2. Precision Evaluation</h3><h3 id="4-3-Speed-Evaluation"><a href="#4-3-Speed-Evaluation" class="headerlink" title="4.3. Speed Evaluation"></a>4.3. Speed Evaluation</h3><h3 id="4-4-Results"><a href="#4-4-Results" class="headerlink" title="4.4. Results"></a>4.4. Results</h3><h2 id="5-Conclusions-结论"><a href="#5-Conclusions-结论" class="headerlink" title="5. Conclusions 结论"></a>5. Conclusions 结论</h2><h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li>Polok, L.; Ila, V.; Solony, M.; Smrz, P.; Zemcik, P. Incremental Block Cholesky Factorization for Nonlinear<br>Least Squares in Robotics. Robot. Sci. Syst. 2013, 46, 172–178.</li>
+<li>Kaess, M.; Johannsson, H.; Roberts, R.; Ila, V.; Leonard, J.J.; Dellaert, F. iSAM2: Incremental smoothing and<br>mapping using the Bayes tree. Int. J. Robot. Res. 2012, 31, 216–235. [CrossRef]</li>
+<li>Liu, M.; Huang, S.; Dissanayake, G.; Wang, H. A convex optimization based approach for pose SLAM<br>problems. In Proceedings of the IEEE&#x2F;RSJ International Conference on Intelligent Robots and Systems,<br>Vilamoura-Algarve, Portugal, 7–12 October 2012; pp. 1898–1903.</li>
+<li>Beardsley, P.A.; Torr, P.H.S.; Zisserman, A. 3D model acquisition from extended image sequences.<br>In Proceedings of the European Conference on Computer Vision, Cambridge, UK, 14–18 April 1996;<br>pp. 683–695.</li>
+<li>Mohr, R.; Veillon, F.; Quan, L. Relative 3-D reconstruction using multiple uncalibrated images. Int. J.<br>Robot. Res. 1995, 14, 619–632. [CrossRef]</li>
+<li>Dellaert, F.; Seitz, S.M.; Thorpe, C.E.; Thrun, S. Structure from motion without correspondence.<br>In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition, Hilton Head Island,<br>SC, USA, 15 June 2000; Volume 552, pp. 557–564.</li>
+<li>Moulon, P.; Monasse, P.; Marlet, R. Adaptive structure from motion with a contrario model estimation.<br>In Proceedings of the Asian Conference on Computer Vision, Daejeon, Korea, 5–9 November 2012;<br>pp. 257–270.</li>
+<li>Wu, C. Towards linear-time incremental structure from motion. In Proceedings of the International<br>Conference on 3DTV-Conference, Aberdeen, UK, 29 June–1 July 2013; pp. 127–134.</li>
+<li>Gherardi, R.; Farenzena, M.; Fusiello, A. Improving the efficiency of hierarchical structure-and-motion.<br>In Proceedings of the Computer Vision and Pattern Recognition, San Francisco, CA, USA, 13–18 June 2010;</li>
+<li>Moulon, P.; Monasse, P.; Marlet, R. Global fusion of relative motions for robust, accurate and scalable<br>structure from motion. In Proceedings of the IEEE International Conference on Computer Vision, Portland,<br>OR, USA, 23–28 June 2013; pp. 3248–3255.</li>
+<li>Crandall, D.J.; Owens, A.; Snavely, N.; Huttenlocher, D.P. SfM with MRFs: Discrete-continuous optimization<br>for large-scale structure from motion. IEEE Trans. Pattern Anal. Mach. Intell. 2013 , 35, 2841–2853. [CrossRef]<br>[PubMed]</li>
+<li>Sweeney, C.; Sattler, T.; Höllerer, T.; Turk, M. Optimizing the viewing graph for structure-from-motion.<br>In Proceedings of the IEEE International Conference on Computer Vision, Los Alamitos, CA, USA,<br>7–13 December 2015; pp. 801–809.</li>
+<li>Snavely, N.; Simon, I.; Goesele, M.; Szeliski, R.; Seitz, S.M. Scene reconstruction and visualization from<br>community photo collections. Proc. IEEE 2010, 98, 1370–1390. [CrossRef]</li>
+<li>Wu, C.; Agarwal, S.; Curless, B.; Seitz, S.M. Multicore bundle adjustment. In Proceedings of the Computer<br>Vision and Pattern Recognition, Colorado Springs, CO, USA, 20–25 June 2011; pp. 3057–3064.</li>
+<li>Furukawa, Y.; Ponce, J. Accurate, dense, and robust multiview stereopsis. IEEE Trans. Pattern Anal.<br>Mach. Intell. 2010, 32, 1362–1376. [CrossRef] [PubMed]</li>
+<li>Shen, S. Accurate multiple view 3D reconstruction using patch-based stereo for large-scale scenes. IEEE Trans.<br>Image Process. 2013, 22, 1901–1914. [CrossRef] [PubMed]<br>Sensors 2018, 18, 225 20 of 20</li>
+<li>Li, J.; Li, E.; Chen, Y.; Xu, L. Bundled depth-map merging for multi-view stereo. In Proceedings of the<br>Computer Vision and Pattern Recognition, San Francisco, CA, USA, 13–18 June 2010; pp. 2769–2776.</li>
+<li>Schönberger, J.L.; Zheng, E.; Frahm, J.M.; Pollefeys, M. Pixelwise View Selection for Unstructured Multi-View<br>Stereo; Springer International Publishing: New York, NY, USA, 2016.</li>
+<li>Lowe, D.G. Distinctive image features from scale-invariant keypoints. Int. J. Comput. Vis. 2004 , 60, 91–110.<br>[CrossRef]</li>
+<li>Moulon, P.; Monasse, P. Unordered feature tracking made fast and easy. In Proceedings of the European<br>Conference on Visual Media Production, London, UK, 5–6 December 2012.</li>
+<li>Moisan, L.; Moulon, P.; Monasse, P. Automatic homographic registration of a pair of images, with a contrario<br>elimination of outliers. Image Process. Line 2012, 2, 329–352. [CrossRef]</li>
+<li>Fischler, M.A.; Bolles, R.C. Random sample consensus: A paradigm for model fitting with applications to<br>image analysis and automated cartography. Read. Comput. Vis. 1987, 24, 726–740.</li>
+<li>Zhang, Z. A flexible new technique for camera calibration. IEEE Trans. Pattern Anal. Mach. Intell. 2000 , 22,<br>1330–1334. [CrossRef]</li>
+<li>Hartley, R.; Zisserman, A. Multiple View Geometry in Computer Vision, 2nd ed.; Cambridge University Press:<br>Cambridge, UK, 2003.</li>
+<li>Triggs, B.; Mclauchlan, P.F.; Hartley, R.I.; Fitzgibbon, A.W. Bundle adjustment—A modern synthesis.<br>In Proceedings of the International Workshop on Vision Algorithms: Theory and Practice, Corfu, Greece,<br>21–22 September 1999; pp. 298–372.</li>
+<li>Ceres Solver. Available online: <a target="_blank" rel="noopener" href="http://ceres-solver.org/">http://ceres-solver.org</a> (accessed on 14 January 2018).</li>
+<li>Sølund, T.; Buch, A.G.; Krüger, N.; Aanæs, H. A large-scale 3D object recognition dataset. In Proceedings<br>of the Fourth International Conference on 3D Vision, Stanford, CA, USA, 25–28 October 2016; pp. 73–82.<br>Available online: <a target="_blank" rel="noopener" href="http://roboimagedata.compute.dtu.dk/">http://roboimagedata.compute.dtu.dk</a> (accessed on 14 January 2018).</li>
+<li>Jensen, R.; Dahl, A.; Vogiatzis, G.; Tola, E. Large scale multi-view stereopsis evaluation. In Proceedings of<br>the Computer Vision and Pattern Recognition, Columbus, OH, USA, 23–28 June 2014; pp. 406–413.</li>
+<li>Pierrot Deseilligny, M.; Clery, I. Apero, an Open Source Bundle Adjusment Software for Automatic<br>Calibration and Orientation of Set of Images. In Proceedings of the ISPRS—International Archives of<br>the Photogrammetry, Remote Sensing and Spatial Information Sciences XXXVIII-5&#x2F;W16, Trento, Italy,<br>2–4 March 2012; pp. 269–276.</li>
+<li>Galland, O.; Bertelsen, H.S.; Guldstrand, F.; Girod, L.; Johannessen, R.F.; Bjugger, F.; Burchardt, S.; Mair, K.<br>Application of open-source photogrammetric software MicMac for monitoring surface deformation in<br>laboratory models. J. Geophys. Res. Solid Earth 2016, 121, 2852–2872. [CrossRef]</li>
+<li>Rupnik, E.; Daakir, M.; Deseilligny, M.P. MicMac—A free, open-source solution for photogrammetry.<br>Open Geosp. Data Softw. Stand. 2017, 2, 14. [CrossRef]</li>
+<li>Cloud Compare. Available online: <a target="_blank" rel="noopener" href="http://www.cloudcompare.org/">http://www.cloudcompare.org</a> (accessed on 14 January 2018).</li>
+</ol>
+
+    
+    </div>
+    <script>chords.replace()</script>
+    <footer class="article-footer">
+      
+      <div class="share-container">
+  
+  
+  
+</div>
+
+  <a data-url="http://blog.iik.moe/2021/02/24/CG/translation.Rapid%203D%20Reconstruction%20for%20Image%20Sequence/" data-id="cm9v3m2p2009vf6oj7d2t5kj0" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+<script>
+  (function ($) {
+    // Prevent duplicate binding
+    if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+      __SHARE_BUTTON_BINDED__ = true;
+    } else {
+      return;
+    }
+    $('body').on('click', function() {
+      $('.article-share-box.on').removeClass('on');
+    }).on('click', '.article-share-link', function(e) {
+      e.stopPropagation();
+
+      var $this = $(this),
+        url = $this.attr('data-url'),
+        encodedUrl = encodeURIComponent(url),
+        id = 'article-share-box-' + $this.attr('data-id'),
+        offset = $this.offset(),
+        box;
+
+      if ($('#' + id).length) {
+        box = $('#' + id);
+        if (box.hasClass('on')){
+          box.removeClass('on');
+          return;
+        }
+      } else {
+        var html = [
+          '<div id="' + id + '" class="article-share-box">',
+            '<input class="article-share-input" value="' + url + '">',
+            '<div class="article-share-links">',
+              '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+              '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+              '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+              '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+            '</div>',
+          '</div>'
+        ].join('');
+
+        box = $(html);
+
+        $('body').append(box);
+      }
+
+      $('.article-share-box.on').hide();
+
+      box.css({
+        top: offset.top + 25,
+        left: offset.left
+      }).addClass('on');
+
+    }).on('click', '.article-share-box', function (e) {
+      e.stopPropagation();
+    }).on('click', '.article-share-box-input', function () {
+      $(this).select();
+    }).on('click', '.article-share-box-link', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+    });
+  })(jQuery);
+</script>
+
+
+
+      
+  
+
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/02/25/coding/DisassemblyIntro/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          观逆向：还是得学会汇编
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2021/01/19/coding/TemplatesAndCommonUse/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【西加加】模板虽奇，难如上青天</div>
+    </a>
+  
+</nav>
+
+
+  
+</article>
+
+
+  
+  
+    
+      <script src="https://giscus.app/client.js"
+              data-repo="timrockefeller/timrockefeller.github.io"
+              data-repo-id="MDEwOlJlcG9zaXRvcnkxNzE2Mjk2MzY="
+              data-category-id="DIC_kwDOCjrcRM4CUVZS"
+              data-mapping="pathname"
+              data-strict="-1"
+              data-reactions-enabled="0"
+              data-emit-metadata="-1"
+              data-input-position="top"
+              data-theme="light"
+              data-lang="zh-CN"
+              data-loading="lazy"
+              crossorigin="anonymous" 
+              async>
+      </script>
+
+    
+  
+
+
+</section>
+      
+        
+<aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">recent</h3>
+    <div class="widget">
+      <ul id="recent-post" class="">
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2025/01/23/coding/Running_Emuera_On_MacOS/" class="title">【踩坑记录】如何在 MacOS (Unix) 上运行 EraTW</a></p>
+              <p class="item-date"><time datetime="2025-01-23T00:00:00.000Z" itemprop="datePublished">2025-01-23</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/05/coding/ECS/Ecs_and_Hierarchies/" class="title">ECS &amp; Hierarchies</a></p>
+              <p class="item-date"><time datetime="2024-02-05T00:00:00.000Z" itemprop="datePublished">2024-02-05</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2024/02/02/coding/ECS/ECS_storage/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2024/02/02/coding/ECS/ECS_storage/" class="title">ECS 储存数据的方式</a></p>
+              <p class="item-date"><time datetime="2024-02-02T00:00:00.000Z" itemprop="datePublished">2024-02-02</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/12/06/bio/canning_or_willing/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a></p>
+              <p class="item-title"><a href="/2023/12/06/bio/canning_or_willing/" class="title">能做和会做</a></p>
+              <p class="item-date"><time datetime="2023-12-06T00:00:00.000Z" itemprop="datePublished">2023-12-06</time></p>
+            </div>
+          </li>
+        
+          <li>
+            
+            <div class="item-thumbnail">
+              <a href="/2023/11/17/coding/constly-const-ptr/" class="thumbnail">
+  
+  
+    <span class="thumbnail-image thumbnail-none"></span>
+  
+</a>
+
+            </div>
+            
+            <div class="item-inner">
+              <p class="item-category"><a class="article-category-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a></p>
+              <p class="item-title"><a href="/2023/11/17/coding/constly-const-ptr/" class="title">Constly Const Pointer</a></p>
+              <p class="item-date"><time datetime="2023-11-17T00:00:00.000Z" itemprop="datePublished">2023-11-17</time></p>
+            </div>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%86%99%E7%94%9F%E6%9E%B6/">写生架</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%97%A5%E8%AE%B0%E6%9C%AC/">日记本</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%AD%E8%AE%B0%E9%98%81/">札记阁</a><span class="category-list-count">7</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AF%AD%E6%B3%95%E7%B3%96/">语法糖</a><span class="category-list-count">48</span></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">tag cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/C/" style="font-size: 18.33px;">C++</a> <a href="/tags/CG/" style="font-size: 20px;">CG</a> <a href="/tags/CMake/" style="font-size: 10px;">CMake</a> <a href="/tags/CV/" style="font-size: 10px;">CV</a> <a href="/tags/ECS/" style="font-size: 15px;">ECS</a> <a href="/tags/Era/" style="font-size: 10px;">Era</a> <a href="/tags/Game/" style="font-size: 10px;">Game</a> <a href="/tags/Graphics/" style="font-size: 11.67px;">Graphics</a> <a href="/tags/Keras/" style="font-size: 11.67px;">Keras</a> <a href="/tags/ML/" style="font-size: 15px;">ML</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/OpenGL/" style="font-size: 13.33px;">OpenGL</a> <a href="/tags/OpengGL/" style="font-size: 10px;">OpengGL</a> <a href="/tags/SFM/" style="font-size: 10px;">SFM</a> <a href="/tags/Shader/" style="font-size: 13.33px;">Shader</a> <a href="/tags/Tutor/" style="font-size: 10px;">Tutor</a> <a href="/tags/Unity/" style="font-size: 11.67px;">Unity</a> <a href="/tags/anime/" style="font-size: 11.67px;">anime</a> <a href="/tags/cmake/" style="font-size: 11.67px;">cmake</a> <a href="/tags/database/" style="font-size: 10px;">database</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/hexo/" style="font-size: 11.67px;">hexo</a> <a href="/tags/illustrate/" style="font-size: 11.67px;">illustrate</a> <a href="/tags/init/" style="font-size: 13.33px;">init</a> <a href="/tags/java/" style="font-size: 16.67px;">java</a> <a href="/tags/lua/" style="font-size: 10px;">lua</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/opencv/" style="font-size: 10px;">opencv</a> <a href="/tags/oracle/" style="font-size: 15px;">oracle</a> <a href="/tags/paper/" style="font-size: 10px;">paper</a> <a href="/tags/rust/" style="font-size: 11.67px;">rust</a> <a href="/tags/shader/" style="font-size: 10px;">shader</a> <a href="/tags/sklearn/" style="font-size: 10px;">sklearn</a> <a href="/tags/tomcat/" style="font-size: 10px;">tomcat</a> <a href="/tags/wacom/" style="font-size: 10px;">wacom</a> <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">学习笔记</a> <a href="/tags/%E5%B0%8F%E4%BD%9C%E6%96%87/" style="font-size: 10px;">小作文</a> <a href="/tags/%E6%AF%95%E8%AE%BE/" style="font-size: 10px;">毕设</a> <a href="/tags/%E6%B1%82%E8%81%8C/" style="font-size: 10px;">求职</a> <a href="/tags/%E6%B8%B8%E6%88%8F/" style="font-size: 10px;">游戏</a> <a href="/tags/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/" style="font-size: 10px;">游戏开发</a> <a href="/tags/%E7%90%90%E4%BA%8B/" style="font-size: 15px;">琐事</a> <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" style="font-size: 18.33px;">碎碎念</a> <a href="/tags/%E8%89%BA%E7%B1%BB/" style="font-size: 11.67px;">艺类</a> <a href="/tags/%E8%AF%BE%E4%B8%9A/" style="font-size: 10px;">课业</a> <a href="/tags/%E8%B4%AD%E7%89%A9%E6%B8%85%E5%8D%95/" style="font-size: 10px;">购物清单</a> <a href="/tags/%E9%80%86%E5%90%91/" style="font-size: 10px;">逆向</a> <a href="/tags/%E9%AB%98%E8%80%83-list/" style="font-size: 10px;">高考 list</a>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap widget-list">
+    <h3 class="widget-title">links</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="https://blog.dashjay.com" target="_blank">DashJay</a>
+          </li>
+        
+          <li>
+            <a href="https://measureds.github.io" target="_blank">Measureds</a>
+          </li>
+        
+          <li>
+            <a href="https://zanbuffet.github.io" target="_blank">Zanbuffet</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+
+  
+</aside>
+<div id="toTop" class="fa fa-angle-up"></div>
+
+
+      
+    </div>
+    <footer id="footer">
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2025 Made with <i class="fa fa-heart throb" style="color: #d43f57;"></i> by Kitekii<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>. Theme mod from <a href="#">Icarus</a><br>
+      
+        <!-- <script src="https://api.quq.cat/hitokoto"></script>
+<div id="hitokoto"><script defer>hitokoto()</script></div> -->
+<p id="hitokoto">:D 获取中...</p>
+<script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+      
+    </div>
+  </div>
+</footer>
+
+    
+
+
+  
+    
+<script src="//lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/lightgallery/1.6.0/js/lightgallery-all.min.js"></script>
+
+  
+  
+    
+<script src="//lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/justifiedGallery/3.6.3/js/jquery.justifiedGallery.min.js"></script>
+
+  
+  
+  
+  
+  
+
+
+
+<!-- Custom Scripts -->
+
+<script src="/js/main.js"></script>
+
+
+  </div>
+</body>
+</html>
